@@ -1,0 +1,15 @@
+This document highlights the design process and definitions in order to avoid confusion and procede successfully.
+
+The design for this site is driven by the conceptual hierarchy as follows:
+
+1:Use-Case
+	2:Interface
+		3:Data
+		3:Data Relationships
+			4:Data Objects
+				5:Business Logic
+				
+Glossary of Terms:
+
+<u>Use Case</u> - A use case is defined as a document that describes the process one will take to utilize a functionality of the site. The level of detail can be high or low, but it should be driven purely by a single process.
+				
