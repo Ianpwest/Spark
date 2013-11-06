@@ -12,3 +12,9 @@ The design for this site is driven by the conceptual hierarchy as follows:
 Glossary of Terms:
 
 Use Case - A use case is defined as a document that describes the process one will take to utilize a functionality of the site. The level of detail can be high or low, but it should be driven purely by a single process.
+
+Interface - An interface for design purposes is defined as anything that a user can use to interact with the website directly or indirectly. 
+
+Pages - A page is a well defined section of the website that hosts information, partial views, and various forms of interfaces. These have a well defined, clear objectives that are separate from other pages. These objects should be layered directly below the main application window and populate its content.
+
+Partial Views - A Partial View is an interface that serves the purpose of objectifying data and allowing dynamic page content building.
