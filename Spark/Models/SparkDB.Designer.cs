@@ -115,16 +115,18 @@ namespace Spark.Models
         /// Create a new accounts object.
         /// </summary>
         /// <param name="pK">Initial value of the PK property.</param>
-        /// <param name="userName">Initial value of the UserName property.</param>
-        /// <param name="password">Initial value of the Password property.</param>
+        /// <param name="strUserName">Initial value of the strUserName property.</param>
+        /// <param name="strPassword">Initial value of the strPassword property.</param>
         /// <param name="bIsActivated">Initial value of the bIsActivated property.</param>
-        public static accounts Createaccounts(global::System.Int32 pK, global::System.String userName, global::System.String password, global::System.Boolean bIsActivated)
+        /// <param name="strSalt">Initial value of the strSalt property.</param>
+        public static accounts Createaccounts(global::System.Int32 pK, global::System.String strUserName, global::System.String strPassword, global::System.Boolean bIsActivated, global::System.String strSalt)
         {
             accounts accounts = new accounts();
             accounts.PK = pK;
-            accounts.UserName = userName;
-            accounts.Password = password;
+            accounts.strUserName = strUserName;
+            accounts.strPassword = strPassword;
             accounts.bIsActivated = bIsActivated;
+            accounts.strSalt = strSalt;
             return accounts;
         }
 
@@ -164,48 +166,48 @@ namespace Spark.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String UserName
+        public global::System.String strUserName
         {
             get
             {
-                return _UserName;
+                return _strUserName;
             }
             set
             {
-                OnUserNameChanging(value);
-                ReportPropertyChanging("UserName");
-                _UserName = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("UserName");
-                OnUserNameChanged();
+                OnstrUserNameChanging(value);
+                ReportPropertyChanging("strUserName");
+                _strUserName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("strUserName");
+                OnstrUserNameChanged();
             }
         }
-        private global::System.String _UserName;
-        partial void OnUserNameChanging(global::System.String value);
-        partial void OnUserNameChanged();
+        private global::System.String _strUserName;
+        partial void OnstrUserNameChanging(global::System.String value);
+        partial void OnstrUserNameChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Password
+        public global::System.String strPassword
         {
             get
             {
-                return _Password;
+                return _strPassword;
             }
             set
             {
-                OnPasswordChanging(value);
-                ReportPropertyChanging("Password");
-                _Password = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Password");
-                OnPasswordChanged();
+                OnstrPasswordChanging(value);
+                ReportPropertyChanging("strPassword");
+                _strPassword = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("strPassword");
+                OnstrPasswordChanged();
             }
         }
-        private global::System.String _Password;
-        partial void OnPasswordChanging(global::System.String value);
-        partial void OnPasswordChanged();
+        private global::System.String _strPassword;
+        partial void OnstrPasswordChanging(global::System.String value);
+        partial void OnstrPasswordChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -230,6 +232,30 @@ namespace Spark.Models
         private global::System.Boolean _bIsActivated;
         partial void OnbIsActivatedChanging(global::System.Boolean value);
         partial void OnbIsActivatedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String strSalt
+        {
+            get
+            {
+                return _strSalt;
+            }
+            set
+            {
+                OnstrSaltChanging(value);
+                ReportPropertyChanging("strSalt");
+                _strSalt = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("strSalt");
+                OnstrSaltChanged();
+            }
+        }
+        private global::System.String _strSalt;
+        partial void OnstrSaltChanging(global::System.String value);
+        partial void OnstrSaltChanged();
 
         #endregion
 

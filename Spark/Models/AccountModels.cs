@@ -69,6 +69,8 @@ namespace Spark.Models
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
+
+        public bool bFailedLogin = false;
     }
 
     public class RegisterModel
@@ -87,6 +89,8 @@ namespace Spark.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public bool bFailedRegister = false;
     }
 
     public class ExternalLogin
