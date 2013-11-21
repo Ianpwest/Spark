@@ -4,36 +4,779 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="sparkdbModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="sparkdbModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="sparkdbModelStoreContainer">
           <EntitySet Name="accounts" EntityType="sparkdbModel.Store.accounts" store:Type="Tables" Schema="sparkdb" />
+          <EntitySet Name="categories" EntityType="sparkdbModel.Store.categories" store:Type="Tables" Schema="sparkdb" />
+          <EntitySet Name="cities" EntityType="sparkdbModel.Store.cities" store:Type="Tables" Schema="sparkdb" />
+          <EntitySet Name="comments" EntityType="sparkdbModel.Store.comments" store:Type="Tables" Schema="sparkdb" />
+          <EntitySet Name="countries" EntityType="sparkdbModel.Store.countries" store:Type="Tables" Schema="sparkdb" />
+          <EntitySet Name="educationlevels" EntityType="sparkdbModel.Store.educationlevels" store:Type="Tables" Schema="sparkdb" />
+          <EntitySet Name="genders" EntityType="sparkdbModel.Store.genders" store:Type="Tables" Schema="sparkdb" />
+          <EntitySet Name="politicalideologies" EntityType="sparkdbModel.Store.politicalideologies" store:Type="Tables" Schema="sparkdb" />
+          <EntitySet Name="profiles" EntityType="sparkdbModel.Store.profiles" store:Type="Tables" Schema="sparkdb" />
+          <EntitySet Name="religions" EntityType="sparkdbModel.Store.religions" store:Type="Tables" Schema="sparkdb" />
+          <EntitySet Name="sparkinterestvotes" EntityType="sparkdbModel.Store.sparkinterestvotes" store:Type="Tables" Schema="sparkdb" />
+          <EntitySet Name="sparks" EntityType="sparkdbModel.Store.sparks" store:Type="Tables" Schema="sparkdb" />
+          <EntitySet Name="statesprovidences" EntityType="sparkdbModel.Store.statesprovidences" store:Type="Tables" Schema="sparkdb" />
+          <AssociationSet Name="FK_sparkinterestvotes_profiles" Association="sparkdbModel.Store.FK_sparkinterestvotes_profiles">
+            <End Role="profiles" EntitySet="profiles" />
+            <End Role="sparkinterestvotes" EntitySet="sparkinterestvotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sparkinterestvotes_sparks" Association="sparkdbModel.Store.FK_sparkinterestvotes_sparks">
+            <End Role="sparks" EntitySet="sparks" />
+            <End Role="sparkinterestvotes" EntitySet="sparkinterestvotes" />
+          </AssociationSet>
+          <AssociationSet Name="FKAccounts" Association="sparkdbModel.Store.FKAccounts">
+            <End Role="accounts" EntitySet="accounts" />
+            <End Role="profiles" EntitySet="profiles" />
+          </AssociationSet>
+          <AssociationSet Name="FKCities" Association="sparkdbModel.Store.FKCities">
+            <End Role="cities" EntitySet="cities" />
+            <End Role="profiles" EntitySet="profiles" />
+          </AssociationSet>
+          <AssociationSet Name="FKCommentsParent" Association="sparkdbModel.Store.FKCommentsParent">
+            <End Role="comments" EntitySet="comments" />
+            <End Role="comments1" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="FKCountries" Association="sparkdbModel.Store.FKCountries">
+            <End Role="countries" EntitySet="countries" />
+            <End Role="statesprovidences" EntitySet="statesprovidences" />
+          </AssociationSet>
+          <AssociationSet Name="FKEducationalLevels" Association="sparkdbModel.Store.FKEducationalLevels">
+            <End Role="educationlevels" EntitySet="educationlevels" />
+            <End Role="profiles" EntitySet="profiles" />
+          </AssociationSet>
+          <AssociationSet Name="FKGenders" Association="sparkdbModel.Store.FKGenders">
+            <End Role="genders" EntitySet="genders" />
+            <End Role="profiles" EntitySet="profiles" />
+          </AssociationSet>
+          <AssociationSet Name="FKPoliticalIdeologies" Association="sparkdbModel.Store.FKPoliticalIdeologies">
+            <End Role="politicalideologies" EntitySet="politicalideologies" />
+            <End Role="profiles" EntitySet="profiles" />
+          </AssociationSet>
+          <AssociationSet Name="FKProfiles" Association="sparkdbModel.Store.FKProfiles">
+            <End Role="profiles" EntitySet="profiles" />
+            <End Role="comments" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="FKProfilesCreatedBy" Association="sparkdbModel.Store.FKProfilesCreatedBy">
+            <End Role="profiles" EntitySet="profiles" />
+            <End Role="sparks" EntitySet="sparks" />
+          </AssociationSet>
+          <AssociationSet Name="FKReligions" Association="sparkdbModel.Store.FKReligions">
+            <End Role="religions" EntitySet="religions" />
+            <End Role="profiles" EntitySet="profiles" />
+          </AssociationSet>
+          <AssociationSet Name="FKSparks" Association="sparkdbModel.Store.FKSparks">
+            <End Role="sparks" EntitySet="sparks" />
+            <End Role="comments" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="FKStatesProvidences" Association="sparkdbModel.Store.FKStatesProvidences">
+            <End Role="statesprovidences" EntitySet="statesprovidences" />
+            <End Role="cities" EntitySet="cities" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="accounts">
           <Key>
             <PropertyRef Name="PK" />
           </Key>
           <Property Name="PK" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="strUserName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="strPassword" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="strSalt" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="bIsActivated" Type="bit" Nullable="false" />
         </EntityType>
-      </Schema>
-    </edmx:StorageModels>
+        <EntityType Name="categories">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="strName" Type="varchar" Nullable="false" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="cities">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="FKStatesProvidences" Type="int" Nullable="false" />
+          <Property Name="strName" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="comments">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="FKSparks" Type="int" Nullable="false" />
+          <Property Name="FKProfiles" Type="int" Nullable="false" />
+          <Property Name="FKCommentsParent" Type="int" />
+          <Property Name="strComment" Type="varchar" MaxLength="800" />
+        </EntityType>
+        <EntityType Name="countries">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="strName" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="educationlevels">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="strName" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="genders">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="strName" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="politicalideologies">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="strName" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="profiles">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="FKAccounts" Type="int" Nullable="false" />
+          <Property Name="strEmail" Type="varchar" MaxLength="100" />
+          <Property Name="strFirstName" Type="varchar" MaxLength="100" />
+          <Property Name="strMiddleName" Type="varchar" MaxLength="100" />
+          <Property Name="strLastName" Type="varchar" MaxLength="100" />
+          <Property Name="strProfilePicturePath" Type="varchar" MaxLength="250" />
+          <Property Name="dDateOfBirth" Type="date" />
+          <Property Name="FKGenders" Type="int" />
+          <Property Name="strStatus" Type="varchar" MaxLength="250" />
+          <Property Name="FKReligions" Type="int" />
+          <Property Name="FKPoliticalIdeologies" Type="int" />
+          <Property Name="nIncome" Type="int" />
+          <Property Name="FKEducationLevels" Type="int" />
+          <Property Name="FKCities" Type="int" />
+        </EntityType>
+        <EntityType Name="religions">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="strName" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="sparkinterestvotes">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="FKSparks" Type="int" Nullable="false" />
+          <Property Name="bIsUpVote" Type="binary" Nullable="false" MaxLength="1" />
+          <Property Name="FKProfiles" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sparks">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="strImagePath" Type="varchar" MaxLength="200" />
+          <Property Name="strTopic" Type="varchar" Nullable="false" MaxLength="250" />
+          <Property Name="strDescription" Type="varchar" Nullable="false" MaxLength="1500" />
+          <Property Name="FKProfilesCreatedBy" Type="int" Nullable="false" />
+          <Property Name="dDateCreated" Type="datetime" Nullable="false" />
+          <Property Name="dDateModified" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="statesprovidences">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="FKCountries" Type="int" Nullable="false" />
+          <Property Name="strName" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_sparkinterestvotes_profiles">
+          <End Role="profiles" Type="sparkdbModel.Store.profiles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="sparkinterestvotes" Type="sparkdbModel.Store.sparkinterestvotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="profiles">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="sparkinterestvotes">
+              <PropertyRef Name="FKProfiles" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sparkinterestvotes_sparks">
+          <End Role="sparks" Type="sparkdbModel.Store.sparks" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="sparkinterestvotes" Type="sparkdbModel.Store.sparkinterestvotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sparks">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="sparkinterestvotes">
+              <PropertyRef Name="FKSparks" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKAccounts">
+          <End Role="accounts" Type="sparkdbModel.Store.accounts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="profiles" Type="sparkdbModel.Store.profiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accounts">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="profiles">
+              <PropertyRef Name="FKAccounts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCities">
+          <End Role="cities" Type="sparkdbModel.Store.cities" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="profiles" Type="sparkdbModel.Store.profiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cities">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="profiles">
+              <PropertyRef Name="FKCities" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCommentsParent">
+          <End Role="comments" Type="sparkdbModel.Store.comments" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="comments1" Type="sparkdbModel.Store.comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comments">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="comments1">
+              <PropertyRef Name="FKCommentsParent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCountries">
+          <End Role="countries" Type="sparkdbModel.Store.countries" Multiplicity="1" />
+          <End Role="statesprovidences" Type="sparkdbModel.Store.statesprovidences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="countries">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="statesprovidences">
+              <PropertyRef Name="FKCountries" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKEducationalLevels">
+          <End Role="educationlevels" Type="sparkdbModel.Store.educationlevels" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="profiles" Type="sparkdbModel.Store.profiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="educationlevels">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="profiles">
+              <PropertyRef Name="FKEducationLevels" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKGenders">
+          <End Role="genders" Type="sparkdbModel.Store.genders" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="profiles" Type="sparkdbModel.Store.profiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="genders">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="profiles">
+              <PropertyRef Name="FKGenders" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKPoliticalIdeologies">
+          <End Role="politicalideologies" Type="sparkdbModel.Store.politicalideologies" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="profiles" Type="sparkdbModel.Store.profiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="politicalideologies">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="profiles">
+              <PropertyRef Name="FKPoliticalIdeologies" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKProfiles">
+          <End Role="profiles" Type="sparkdbModel.Store.profiles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="comments" Type="sparkdbModel.Store.comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="profiles">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="comments">
+              <PropertyRef Name="FKProfiles" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKProfilesCreatedBy">
+          <End Role="profiles" Type="sparkdbModel.Store.profiles" Multiplicity="1" />
+          <End Role="sparks" Type="sparkdbModel.Store.sparks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="profiles">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="sparks">
+              <PropertyRef Name="FKProfilesCreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKReligions">
+          <End Role="religions" Type="sparkdbModel.Store.religions" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="profiles" Type="sparkdbModel.Store.profiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="religions">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="profiles">
+              <PropertyRef Name="FKReligions" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKSparks">
+          <End Role="sparks" Type="sparkdbModel.Store.sparks" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="comments" Type="sparkdbModel.Store.comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sparks">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="comments">
+              <PropertyRef Name="FKSparks" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKStatesProvidences">
+          <End Role="statesprovidences" Type="sparkdbModel.Store.statesprovidences" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="cities" Type="sparkdbModel.Store.cities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="statesprovidences">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="cities">
+              <PropertyRef Name="FKStatesProvidences" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="sparkdbModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="sparkdbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="accounts" EntityType="sparkdbModel.accounts" />
+          <EntitySet Name="categories" EntityType="sparkdbModel.categories" />
+          <EntitySet Name="cities" EntityType="sparkdbModel.cities" />
+          <EntitySet Name="comments" EntityType="sparkdbModel.comments" />
+          <EntitySet Name="countries" EntityType="sparkdbModel.countries" />
+          <EntitySet Name="educationlevels" EntityType="sparkdbModel.educationlevels" />
+          <EntitySet Name="genders" EntityType="sparkdbModel.genders" />
+          <EntitySet Name="politicalideologies" EntityType="sparkdbModel.politicalideologies" />
+          <EntitySet Name="profiles" EntityType="sparkdbModel.profiles" />
+          <EntitySet Name="religions" EntityType="sparkdbModel.religions" />
+          <EntitySet Name="sparkinterestvotes" EntityType="sparkdbModel.sparkinterestvotes" />
+          <EntitySet Name="sparks" EntityType="sparkdbModel.sparks" />
+          <EntitySet Name="statesprovidences" EntityType="sparkdbModel.statesprovidences" />
+          <AssociationSet Name="FKAccounts" Association="sparkdbModel.FKAccounts">
+            <End Role="accounts" EntitySet="accounts" />
+            <End Role="profiles" EntitySet="profiles" />
+          </AssociationSet>
+          <AssociationSet Name="FKCities" Association="sparkdbModel.FKCities">
+            <End Role="cities" EntitySet="cities" />
+            <End Role="profiles" EntitySet="profiles" />
+          </AssociationSet>
+          <AssociationSet Name="FKStatesProvidences" Association="sparkdbModel.FKStatesProvidences">
+            <End Role="statesprovidences" EntitySet="statesprovidences" />
+            <End Role="cities" EntitySet="cities" />
+          </AssociationSet>
+          <AssociationSet Name="FKCommentsParent" Association="sparkdbModel.FKCommentsParent">
+            <End Role="comments" EntitySet="comments" />
+            <End Role="comments1" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="FKProfiles" Association="sparkdbModel.FKProfiles">
+            <End Role="profiles" EntitySet="profiles" />
+            <End Role="comments" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="FKSparks" Association="sparkdbModel.FKSparks">
+            <End Role="sparks" EntitySet="sparks" />
+            <End Role="comments" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="FKCountries" Association="sparkdbModel.FKCountries">
+            <End Role="countries" EntitySet="countries" />
+            <End Role="statesprovidences" EntitySet="statesprovidences" />
+          </AssociationSet>
+          <AssociationSet Name="FKEducationalLevels" Association="sparkdbModel.FKEducationalLevels">
+            <End Role="educationlevels" EntitySet="educationlevels" />
+            <End Role="profiles" EntitySet="profiles" />
+          </AssociationSet>
+          <AssociationSet Name="FKGenders" Association="sparkdbModel.FKGenders">
+            <End Role="genders" EntitySet="genders" />
+            <End Role="profiles" EntitySet="profiles" />
+          </AssociationSet>
+          <AssociationSet Name="FKPoliticalIdeologies" Association="sparkdbModel.FKPoliticalIdeologies">
+            <End Role="politicalideologies" EntitySet="politicalideologies" />
+            <End Role="profiles" EntitySet="profiles" />
+          </AssociationSet>
+          <AssociationSet Name="FKProfilesCreatedBy" Association="sparkdbModel.FKProfilesCreatedBy">
+            <End Role="profiles" EntitySet="profiles" />
+            <End Role="sparks" EntitySet="sparks" />
+          </AssociationSet>
+          <AssociationSet Name="FKReligions" Association="sparkdbModel.FKReligions">
+            <End Role="religions" EntitySet="religions" />
+            <End Role="profiles" EntitySet="profiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sparkinterestvotes_profiles" Association="sparkdbModel.FK_sparkinterestvotes_profiles">
+            <End Role="profiles" EntitySet="profiles" />
+            <End Role="sparkinterestvotes" EntitySet="sparkinterestvotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sparkinterestvotes_sparks" Association="sparkdbModel.FK_sparkinterestvotes_sparks">
+            <End Role="sparks" EntitySet="sparks" />
+            <End Role="sparkinterestvotes" EntitySet="sparkinterestvotes" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="accounts">
           <Key>
             <PropertyRef Name="PK" />
           </Key>
           <Property Name="PK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="bIsActivated" Type="Boolean" Nullable="false" />
+          <Property Type="String" Name="strUserName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="strPassword" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="strSalt" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="profiles" Relationship="sparkdbModel.FKAccounts" FromRole="accounts" ToRole="profiles" />
         </EntityType>
+        <EntityType Name="categories">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Type="Int32" Name="PK" Nullable="false" />
+          <Property Type="String" Name="strName" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="cities">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Type="Int32" Name="PK" Nullable="false" />
+          <Property Type="Int32" Name="FKStatesProvidences" Nullable="false" />
+          <Property Type="String" Name="strName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="profiles" Relationship="sparkdbModel.FKCities" FromRole="cities" ToRole="profiles" />
+          <NavigationProperty Name="statesprovidences" Relationship="sparkdbModel.FKStatesProvidences" FromRole="cities" ToRole="statesprovidences" />
+        </EntityType>
+        <EntityType Name="comments">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Type="Int32" Name="PK" Nullable="false" />
+          <Property Type="Int32" Name="FKSparks" Nullable="false" />
+          <Property Type="Int32" Name="FKProfiles" Nullable="false" />
+          <Property Type="Int32" Name="FKCommentsParent" />
+          <Property Type="String" Name="strComment" MaxLength="800" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="comments1" Relationship="sparkdbModel.FKCommentsParent" FromRole="comments" ToRole="comments1" />
+          <NavigationProperty Name="comments2" Relationship="sparkdbModel.FKCommentsParent" FromRole="comments1" ToRole="comments" />
+          <NavigationProperty Name="profiles" Relationship="sparkdbModel.FKProfiles" FromRole="comments" ToRole="profiles" />
+          <NavigationProperty Name="sparks" Relationship="sparkdbModel.FKSparks" FromRole="comments" ToRole="sparks" />
+        </EntityType>
+        <EntityType Name="countries">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Type="Int32" Name="PK" Nullable="false" />
+          <Property Type="String" Name="strName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="statesprovidences" Relationship="sparkdbModel.FKCountries" FromRole="countries" ToRole="statesprovidences" />
+        </EntityType>
+        <EntityType Name="educationlevels">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Type="Int32" Name="PK" Nullable="false" />
+          <Property Type="String" Name="strName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="profiles" Relationship="sparkdbModel.FKEducationalLevels" FromRole="educationlevels" ToRole="profiles" />
+        </EntityType>
+        <EntityType Name="genders">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Type="Int32" Name="PK" Nullable="false" />
+          <Property Type="String" Name="strName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="profiles" Relationship="sparkdbModel.FKGenders" FromRole="genders" ToRole="profiles" />
+        </EntityType>
+        <EntityType Name="politicalideologies">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Type="Int32" Name="PK" Nullable="false" />
+          <Property Type="String" Name="strName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="profiles" Relationship="sparkdbModel.FKPoliticalIdeologies" FromRole="politicalideologies" ToRole="profiles" />
+        </EntityType>
+        <EntityType Name="profiles">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Type="Int32" Name="PK" Nullable="false" />
+          <Property Type="Int32" Name="FKAccounts" Nullable="false" />
+          <Property Type="String" Name="strEmail" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="strFirstName" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="strMiddleName" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="strLastName" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="strProfilePicturePath" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="dDateOfBirth" />
+          <Property Type="Int32" Name="FKGenders" />
+          <Property Type="String" Name="strStatus" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="FKReligions" />
+          <Property Type="Int32" Name="FKPoliticalIdeologies" />
+          <Property Type="Int32" Name="nIncome" />
+          <Property Type="Int32" Name="FKEducationLevels" />
+          <Property Type="Int32" Name="FKCities" />
+          <NavigationProperty Name="accounts" Relationship="sparkdbModel.FKAccounts" FromRole="profiles" ToRole="accounts" />
+          <NavigationProperty Name="cities" Relationship="sparkdbModel.FKCities" FromRole="profiles" ToRole="cities" />
+          <NavigationProperty Name="comments" Relationship="sparkdbModel.FKProfiles" FromRole="profiles" ToRole="comments" />
+          <NavigationProperty Name="educationlevels" Relationship="sparkdbModel.FKEducationalLevels" FromRole="profiles" ToRole="educationlevels" />
+          <NavigationProperty Name="genders" Relationship="sparkdbModel.FKGenders" FromRole="profiles" ToRole="genders" />
+          <NavigationProperty Name="politicalideologies" Relationship="sparkdbModel.FKPoliticalIdeologies" FromRole="profiles" ToRole="politicalideologies" />
+          <NavigationProperty Name="sparks" Relationship="sparkdbModel.FKProfilesCreatedBy" FromRole="profiles" ToRole="sparks" />
+          <NavigationProperty Name="religions" Relationship="sparkdbModel.FKReligions" FromRole="profiles" ToRole="religions" />
+          <NavigationProperty Name="sparkinterestvotes" Relationship="sparkdbModel.FK_sparkinterestvotes_profiles" FromRole="profiles" ToRole="sparkinterestvotes" />
+        </EntityType>
+        <EntityType Name="religions">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Type="Int32" Name="PK" Nullable="false" />
+          <Property Type="String" Name="strName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="profiles" Relationship="sparkdbModel.FKReligions" FromRole="religions" ToRole="profiles" />
+        </EntityType>
+        <EntityType Name="sparkinterestvotes">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Type="Int32" Name="PK" Nullable="false" />
+          <Property Type="Int32" Name="FKSparks" Nullable="false" />
+          <Property Type="Binary" Name="bIsUpVote" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Type="Int32" Name="FKProfiles" Nullable="false" />
+          <NavigationProperty Name="profiles" Relationship="sparkdbModel.FK_sparkinterestvotes_profiles" FromRole="sparkinterestvotes" ToRole="profiles" />
+          <NavigationProperty Name="sparks" Relationship="sparkdbModel.FK_sparkinterestvotes_sparks" FromRole="sparkinterestvotes" ToRole="sparks" />
+        </EntityType>
+        <EntityType Name="sparks">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Type="Int32" Name="PK" Nullable="false" />
+          <Property Type="String" Name="strImagePath" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="strTopic" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="strDescription" Nullable="false" MaxLength="1500" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="FKProfilesCreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="dDateCreated" Nullable="false" />
+          <Property Type="DateTime" Name="dDateModified" Nullable="false" />
+          <NavigationProperty Name="comments" Relationship="sparkdbModel.FKSparks" FromRole="sparks" ToRole="comments" />
+          <NavigationProperty Name="profiles" Relationship="sparkdbModel.FKProfilesCreatedBy" FromRole="sparks" ToRole="profiles" />
+          <NavigationProperty Name="sparkinterestvotes" Relationship="sparkdbModel.FK_sparkinterestvotes_sparks" FromRole="sparks" ToRole="sparkinterestvotes" />
+        </EntityType>
+        <EntityType Name="statesprovidences">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Type="Int32" Name="PK" Nullable="false" />
+          <Property Type="Int32" Name="FKCountries" Nullable="false" />
+          <Property Type="String" Name="strName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="cities" Relationship="sparkdbModel.FKStatesProvidences" FromRole="statesprovidences" ToRole="cities" />
+          <NavigationProperty Name="countries" Relationship="sparkdbModel.FKCountries" FromRole="statesprovidences" ToRole="countries" />
+        </EntityType>
+        <Association Name="FKAccounts">
+          <End Type="sparkdbModel.accounts" Role="accounts" Multiplicity="1" />
+          <End Type="sparkdbModel.profiles" Role="profiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accounts">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="profiles">
+              <PropertyRef Name="FKAccounts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCities">
+          <End Type="sparkdbModel.cities" Role="cities" Multiplicity="0..1" />
+          <End Type="sparkdbModel.profiles" Role="profiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cities">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="profiles">
+              <PropertyRef Name="FKCities" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKStatesProvidences">
+          <End Type="sparkdbModel.statesprovidences" Role="statesprovidences" Multiplicity="1" />
+          <End Type="sparkdbModel.cities" Role="cities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="statesprovidences">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="cities">
+              <PropertyRef Name="FKStatesProvidences" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCommentsParent">
+          <End Type="sparkdbModel.comments" Role="comments" Multiplicity="0..1" />
+          <End Type="sparkdbModel.comments" Role="comments1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comments">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="comments1">
+              <PropertyRef Name="FKCommentsParent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKProfiles">
+          <End Type="sparkdbModel.profiles" Role="profiles" Multiplicity="1" />
+          <End Type="sparkdbModel.comments" Role="comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="profiles">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="comments">
+              <PropertyRef Name="FKProfiles" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKSparks">
+          <End Type="sparkdbModel.sparks" Role="sparks" Multiplicity="1" />
+          <End Type="sparkdbModel.comments" Role="comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sparks">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="comments">
+              <PropertyRef Name="FKSparks" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCountries">
+          <End Type="sparkdbModel.countries" Role="countries" Multiplicity="1" />
+          <End Type="sparkdbModel.statesprovidences" Role="statesprovidences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="countries">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="statesprovidences">
+              <PropertyRef Name="FKCountries" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKEducationalLevels">
+          <End Type="sparkdbModel.educationlevels" Role="educationlevels" Multiplicity="0..1" />
+          <End Type="sparkdbModel.profiles" Role="profiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="educationlevels">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="profiles">
+              <PropertyRef Name="FKEducationLevels" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKGenders">
+          <End Type="sparkdbModel.genders" Role="genders" Multiplicity="0..1" />
+          <End Type="sparkdbModel.profiles" Role="profiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="genders">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="profiles">
+              <PropertyRef Name="FKGenders" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKPoliticalIdeologies">
+          <End Type="sparkdbModel.politicalideologies" Role="politicalideologies" Multiplicity="0..1" />
+          <End Type="sparkdbModel.profiles" Role="profiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="politicalideologies">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="profiles">
+              <PropertyRef Name="FKPoliticalIdeologies" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKProfilesCreatedBy">
+          <End Type="sparkdbModel.profiles" Role="profiles" Multiplicity="1" />
+          <End Type="sparkdbModel.sparks" Role="sparks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="profiles">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="sparks">
+              <PropertyRef Name="FKProfilesCreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKReligions">
+          <End Type="sparkdbModel.religions" Role="religions" Multiplicity="0..1" />
+          <End Type="sparkdbModel.profiles" Role="profiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="religions">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="profiles">
+              <PropertyRef Name="FKReligions" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sparkinterestvotes_profiles">
+          <End Type="sparkdbModel.profiles" Role="profiles" Multiplicity="1" />
+          <End Type="sparkdbModel.sparkinterestvotes" Role="sparkinterestvotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="profiles">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="sparkinterestvotes">
+              <PropertyRef Name="FKProfiles" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sparkinterestvotes_sparks">
+          <End Type="sparkdbModel.sparks" Role="sparks" Multiplicity="1" />
+          <End Type="sparkdbModel.sparkinterestvotes" Role="sparkinterestvotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sparks">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="sparkinterestvotes">
+              <PropertyRef Name="FKSparks" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -43,10 +786,132 @@
           <EntitySetMapping Name="accounts">
             <EntityTypeMapping TypeName="sparkdbModel.accounts">
               <MappingFragment StoreEntitySet="accounts">
+                <ScalarProperty Name="strSalt" ColumnName="strSalt" />
+                <ScalarProperty Name="strPassword" ColumnName="strPassword" />
+                <ScalarProperty Name="strUserName" ColumnName="strUserName" />
                 <ScalarProperty Name="PK" ColumnName="PK" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="bIsActivated" ColumnName="bIsActivated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="categories">
+            <EntityTypeMapping TypeName="sparkdbModel.categories">
+              <MappingFragment StoreEntitySet="categories">
+                <ScalarProperty Name="strName" ColumnName="strName" />
+                <ScalarProperty Name="PK" ColumnName="PK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cities">
+            <EntityTypeMapping TypeName="sparkdbModel.cities">
+              <MappingFragment StoreEntitySet="cities">
+                <ScalarProperty Name="strName" ColumnName="strName" />
+                <ScalarProperty Name="FKStatesProvidences" ColumnName="FKStatesProvidences" />
+                <ScalarProperty Name="PK" ColumnName="PK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comments">
+            <EntityTypeMapping TypeName="sparkdbModel.comments">
+              <MappingFragment StoreEntitySet="comments">
+                <ScalarProperty Name="strComment" ColumnName="strComment" />
+                <ScalarProperty Name="FKCommentsParent" ColumnName="FKCommentsParent" />
+                <ScalarProperty Name="FKProfiles" ColumnName="FKProfiles" />
+                <ScalarProperty Name="FKSparks" ColumnName="FKSparks" />
+                <ScalarProperty Name="PK" ColumnName="PK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="countries">
+            <EntityTypeMapping TypeName="sparkdbModel.countries">
+              <MappingFragment StoreEntitySet="countries">
+                <ScalarProperty Name="strName" ColumnName="strName" />
+                <ScalarProperty Name="PK" ColumnName="PK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="educationlevels">
+            <EntityTypeMapping TypeName="sparkdbModel.educationlevels">
+              <MappingFragment StoreEntitySet="educationlevels">
+                <ScalarProperty Name="strName" ColumnName="strName" />
+                <ScalarProperty Name="PK" ColumnName="PK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="genders">
+            <EntityTypeMapping TypeName="sparkdbModel.genders">
+              <MappingFragment StoreEntitySet="genders">
+                <ScalarProperty Name="strName" ColumnName="strName" />
+                <ScalarProperty Name="PK" ColumnName="PK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="politicalideologies">
+            <EntityTypeMapping TypeName="sparkdbModel.politicalideologies">
+              <MappingFragment StoreEntitySet="politicalideologies">
+                <ScalarProperty Name="strName" ColumnName="strName" />
+                <ScalarProperty Name="PK" ColumnName="PK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="profiles">
+            <EntityTypeMapping TypeName="sparkdbModel.profiles">
+              <MappingFragment StoreEntitySet="profiles">
+                <ScalarProperty Name="FKCities" ColumnName="FKCities" />
+                <ScalarProperty Name="FKEducationLevels" ColumnName="FKEducationLevels" />
+                <ScalarProperty Name="nIncome" ColumnName="nIncome" />
+                <ScalarProperty Name="FKPoliticalIdeologies" ColumnName="FKPoliticalIdeologies" />
+                <ScalarProperty Name="FKReligions" ColumnName="FKReligions" />
+                <ScalarProperty Name="strStatus" ColumnName="strStatus" />
+                <ScalarProperty Name="FKGenders" ColumnName="FKGenders" />
+                <ScalarProperty Name="dDateOfBirth" ColumnName="dDateOfBirth" />
+                <ScalarProperty Name="strProfilePicturePath" ColumnName="strProfilePicturePath" />
+                <ScalarProperty Name="strLastName" ColumnName="strLastName" />
+                <ScalarProperty Name="strMiddleName" ColumnName="strMiddleName" />
+                <ScalarProperty Name="strFirstName" ColumnName="strFirstName" />
+                <ScalarProperty Name="strEmail" ColumnName="strEmail" />
+                <ScalarProperty Name="FKAccounts" ColumnName="FKAccounts" />
+                <ScalarProperty Name="PK" ColumnName="PK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="religions">
+            <EntityTypeMapping TypeName="sparkdbModel.religions">
+              <MappingFragment StoreEntitySet="religions">
+                <ScalarProperty Name="strName" ColumnName="strName" />
+                <ScalarProperty Name="PK" ColumnName="PK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sparkinterestvotes">
+            <EntityTypeMapping TypeName="sparkdbModel.sparkinterestvotes">
+              <MappingFragment StoreEntitySet="sparkinterestvotes">
+                <ScalarProperty Name="FKProfiles" ColumnName="FKProfiles" />
+                <ScalarProperty Name="bIsUpVote" ColumnName="bIsUpVote" />
+                <ScalarProperty Name="FKSparks" ColumnName="FKSparks" />
+                <ScalarProperty Name="PK" ColumnName="PK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sparks">
+            <EntityTypeMapping TypeName="sparkdbModel.sparks">
+              <MappingFragment StoreEntitySet="sparks">
+                <ScalarProperty Name="dDateModified" ColumnName="dDateModified" />
+                <ScalarProperty Name="dDateCreated" ColumnName="dDateCreated" />
+                <ScalarProperty Name="FKProfilesCreatedBy" ColumnName="FKProfilesCreatedBy" />
+                <ScalarProperty Name="strDescription" ColumnName="strDescription" />
+                <ScalarProperty Name="strTopic" ColumnName="strTopic" />
+                <ScalarProperty Name="strImagePath" ColumnName="strImagePath" />
+                <ScalarProperty Name="PK" ColumnName="PK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="statesprovidences">
+            <EntityTypeMapping TypeName="sparkdbModel.statesprovidences">
+              <MappingFragment StoreEntitySet="statesprovidences">
+                <ScalarProperty Name="strName" ColumnName="strName" />
+                <ScalarProperty Name="FKCountries" ColumnName="FKCountries" />
+                <ScalarProperty Name="PK" ColumnName="PK" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -64,14 +929,98 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="SparkDB">
-        <EntityTypeShape EntityType="sparkdbModel.accounts" Width="1.5" PointX="0.75" PointY="0.75" Height="1.787985026041667" IsExpanded="true" />
+        <EntityTypeShape EntityType="sparkdbModel.accounts" Width="1.5" PointX="8.375" PointY="0.75" Height="2.172587890625" IsExpanded="true" />
+        <EntityTypeShape EntityType="sparkdbModel.categories" Width="1.5" PointX="15" PointY="4.625" Height="1.4033821614583335" />
+        <EntityTypeShape EntityType="sparkdbModel.cities" Width="1.5" PointX="8.25" PointY="3.75" Height="1.9802864583333331" />
+        <EntityTypeShape EntityType="sparkdbModel.comments" Width="1.5" PointX="14.875" PointY="1" Height="2.7494921874999996" />
+        <EntityTypeShape EntityType="sparkdbModel.countries" Width="1.5" PointX="4.5" PointY="3.75" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="sparkdbModel.educationlevels" Width="1.5" PointX="8.625" PointY="7.5" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="sparkdbModel.genders" Width="1.5" PointX="11.875" PointY="7.5" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="sparkdbModel.politicalideologies" Width="1.5" PointX="13.5" PointY="7.5" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="sparkdbModel.profiles" Width="1.5" PointX="10.5" PointY="0.75" Height="3.9033007812499996" />
+        <EntityTypeShape EntityType="sparkdbModel.religions" Width="1.5" PointX="10.25" PointY="7.5" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="sparkdbModel.sparkinterestvotes" Width="1.5" PointX="12.75" PointY="4.75" Height="2.1725878906249996" />
+        <EntityTypeShape EntityType="sparkdbModel.sparks" Width="1.5" PointX="12.875" PointY="0.5" Height="2.9417936197916656" />
+        <EntityTypeShape EntityType="sparkdbModel.statesprovidences" Width="1.5" PointX="6.375" PointY="3.75" Height="1.9802864583333388" />
+        <AssociationConnector Association="sparkdbModel.FKAccounts" >
+          <ConnectorPoint PointX="9.875" PointY="1.8362939453124998" />
+          <ConnectorPoint PointX="10.5" PointY="1.8362939453124998" />
+        </AssociationConnector>
+        <AssociationConnector Association="sparkdbModel.FKCities" >
+          <ConnectorPoint PointX="9.75" PointY="4.201650390625" />
+          <ConnectorPoint PointX="9.9479166666666661" PointY="4.2016503906249989" />
+          <ConnectorPoint PointX="10.114583333333334" PointY="4.201650390625" />
+          <ConnectorPoint PointX="10.5" PointY="4.201650390625" />
+        </AssociationConnector>
+        <AssociationConnector Association="sparkdbModel.FKStatesProvidences" >
+          <ConnectorPoint PointX="7.875" PointY="4.7401432291666667" />
+          <ConnectorPoint PointX="8.25" PointY="4.7401432291666667" />
+        </AssociationConnector>
+        <AssociationConnector Association="sparkdbModel.FKCommentsParent" >
+          <ConnectorPoint PointX="15.406923076923077" PointY="3.7494921874999996" />
+          <ConnectorPoint PointX="15.406923076923077" PointY="3.9994921874999996" />
+          <ConnectorPoint PointX="15.853461538461538" PointY="3.9994921874999996" />
+          <ConnectorPoint PointX="15.853461538461538" PointY="3.7494921874999996" />
+        </AssociationConnector>
+        <AssociationConnector Association="sparkdbModel.FKProfiles" >
+          <ConnectorPoint PointX="12" PointY="3.6268929036458326" />
+          <ConnectorPoint PointX="13.479166666666666" PointY="3.6268929036458322" />
+          <ConnectorPoint PointX="13.645833333333334" PointY="3.6268929036458326" />
+          <ConnectorPoint PointX="14.875" PointY="3.6268929036458326" />
+        </AssociationConnector>
+        <AssociationConnector Association="sparkdbModel.FKSparks" >
+          <ConnectorPoint PointX="14.375" PointY="2.2208968098958328" />
+          <ConnectorPoint PointX="14.875" PointY="2.2208968098958328" />
+        </AssociationConnector>
+        <AssociationConnector Association="sparkdbModel.FKCountries" >
+          <ConnectorPoint PointX="6" PointY="4.547841796875" />
+          <ConnectorPoint PointX="6.375" PointY="4.547841796875" />
+        </AssociationConnector>
+        <AssociationConnector Association="sparkdbModel.FKEducationalLevels" >
+          <ConnectorPoint PointX="10.03125" PointY="7.5" />
+          <ConnectorPoint PointX="10.03125" PointY="3.3362939453125" />
+          <ConnectorPoint PointX="10.5" PointY="3.3362939453125" />
+        </AssociationConnector>
+        <AssociationConnector Association="sparkdbModel.FKGenders" >
+          <ConnectorPoint PointX="12.3750025" PointY="7.5" />
+          <ConnectorPoint PointX="12.3750025" PointY="4.1713493424479093" />
+          <ConnectorPoint PointX="12" PointY="4.1713493424479093" />
+        </AssociationConnector>
+        <AssociationConnector Association="sparkdbModel.FKPoliticalIdeologies" >
+          <ConnectorPoint PointX="14.625" PointY="7.5" />
+          <ConnectorPoint PointX="14.625" PointY="4.4435775618489481" />
+          <ConnectorPoint PointX="13.645833333333334" PointY="4.4435775618489473" />
+          <ConnectorPoint PointX="13.479166666666666" PointY="4.4435775618489481" />
+          <ConnectorPoint PointX="12.864583333333334" PointY="4.4435775618489473" />
+          <ConnectorPoint PointX="12.697916666666666" PointY="4.4435775618489481" />
+          <ConnectorPoint PointX="12.458335833333335" PointY="4.4435775618489473" />
+          <ConnectorPoint PointX="12.291669166666667" PointY="4.4435775618489481" />
+          <ConnectorPoint PointX="12" PointY="4.4435775618489481" />
+        </AssociationConnector>
+        <AssociationConnector Association="sparkdbModel.FKProfilesCreatedBy" >
+          <ConnectorPoint PointX="12" PointY="2.0958968098958328" />
+          <ConnectorPoint PointX="12.875" PointY="2.0958968098958328" />
+        </AssociationConnector>
+        <AssociationConnector Association="sparkdbModel.FKReligions" >
+          <ConnectorPoint PointX="11.125" PointY="7.5" />
+          <ConnectorPoint PointX="11.125" PointY="4.65330078125" />
+        </AssociationConnector>
+        <AssociationConnector Association="sparkdbModel.FK_sparkinterestvotes_profiles" >
+          <ConnectorPoint PointX="12" PointY="3.899121123046871" />
+          <ConnectorPoint PointX="12.78125" PointY="3.899121123046871" />
+          <ConnectorPoint PointX="12.78125" PointY="4.75" />
+        </AssociationConnector>
+        <AssociationConnector Association="sparkdbModel.FK_sparkinterestvotes_sparks" >
+          <ConnectorPoint PointX="13.5625" PointY="3.4417936197916656" />
+          <ConnectorPoint PointX="13.5625" PointY="4.75" />
+        </AssociationConnector>
       </Diagram>
     </Diagrams>
   </Designer>
