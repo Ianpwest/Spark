@@ -5,7 +5,17 @@
 
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
-    <h2>Create a new account.</h2>
+
+    @{
+    if(Model.bFailedRegister)
+    {
+        <h2>Failed to register! What do we do here?</h2>
+    }
+    else
+    {
+        <h2>Create a new account.</h2>
+    }
+}
 </hgroup>
 
 @using (Html.BeginForm()) {
@@ -27,6 +37,7 @@
                 @Html.LabelFor(m => m.ConfirmPassword)
                 @Html.PasswordFor(m => m.ConfirmPassword)
             </li>
+
         </ol>
         <input type="submit" value="Register" />
     </fieldset>
