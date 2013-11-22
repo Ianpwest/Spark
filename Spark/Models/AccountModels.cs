@@ -70,7 +70,15 @@ namespace Spark.Models
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
 
+        /// <summary>
+        /// If the user fails login
+        /// </summary>
         public bool bFailedLogin = false;
+
+        /// <summary>
+        /// If the user is activated. Used to store in cookie for user.
+        /// </summary>
+        public bool bIsActivated = false;
     }
 
     public class RegisterModel

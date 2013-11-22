@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Spark.Models;
 
 namespace Spark.Classes
 {
@@ -35,25 +36,30 @@ namespace Spark.Classes
         //}
 
 
-        public static bool VerifyAccount(string strUserName, string strPassword)
+        public static bool VerifyAccount(LoginModel lm)
         {
             bool bExists = false;
 
             //Get the salt for this user
             string strSaltResult = (from r in m_db.accounts
-                                   where r.strUserName == strUserName
+                                   where r.strUserName == lm.UserName
                                    select r.strSalt).FirstOrDefault();
 
             //Get the hash for this user given what they typed for their password and their salt
-            string strHashToCheck = Utilities.GetHashPassword(strPassword, strSaltResult);
+            string strHashToCheck = Utilities.GetHashPassword(lm.Password, strSaltResult);
 
-            int results = (from r in m_db.accounts
-                           where r.strUserName == strUserName
+            //See if there is a user with this username and password; return 
+            var result =   from r in m_db.accounts
+                           where r.strUserName == lm.UserName
                            && r.strPassword == strHashToCheck
-                           select r).Count();
-
-            if (results != 0)
+                           select r.bIsActivated;
+            
+            //We have a user
+            if (result.Count() > 0)
+            {
+                lm.bIsActivated = result.FirstOrDefault();
                 return true;
+            }
 
             return bExists;
         }

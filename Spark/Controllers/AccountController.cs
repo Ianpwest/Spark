@@ -33,15 +33,20 @@ namespace Spark.Controllers
         [HttpPost]
         public ActionResult Login(Spark.Models.LoginModel lm)
         {
-            if (DatabaseInterface.VerifyAccount(lm.UserName, lm.Password))
+            if (DatabaseInterface.VerifyAccount(lm))
             {
                 FormsAuthentication.SetAuthCookie(lm.UserName, lm.RememberMe);
+                var useractivatedCookie = new HttpCookie("activated", lm.bIsActivated.ToString());
+                useractivatedCookie.Expires = DateTime.Now.AddYears(1);
 
+                Response.Cookies.Set(useractivatedCookie);
+                
                 return RedirectToAction("Index", "Home");
             }
 
             //Failed to login
             lm.bFailedLogin = true;
+
             return View(lm);
         }
 
