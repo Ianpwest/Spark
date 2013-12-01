@@ -33,6 +33,21 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("sparkdbModel", "FKReligions", "religions", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Spark.Models.religions), "profiles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.profiles), true)]
 [assembly: EdmRelationshipAttribute("sparkdbModel", "FK_sparkinterestvotes_profiles", "profiles", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.profiles), "sparkinterestvotes", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.sparkinterestvotes), true)]
 [assembly: EdmRelationshipAttribute("sparkdbModel", "FK_sparkinterestvotes_sparks", "sparks", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.sparks), "sparkinterestvotes", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.sparkinterestvotes), true)]
+[assembly: EdmRelationshipAttribute("sparkdbModel", "FK_transactions_accounts", "accounts", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.accounts), "transactions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.transactions), true)]
+[assembly: EdmRelationshipAttribute("sparkdbModel", "FK__categories", "categories", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.categories), "sparks_categories", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.sparks_categories), true)]
+[assembly: EdmRelationshipAttribute("sparkdbModel", "FK__categories_2", "categories", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.categories), "sparks_categories", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.sparks_categories), true)]
+[assembly: EdmRelationshipAttribute("sparkdbModel", "FK__categories_3", "categories", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.categories), "sparks_categories", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.sparks_categories), true)]
+[assembly: EdmRelationshipAttribute("sparkdbModel", "FK_influencegains_profiles", "profiles", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.profiles), "influencegains", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.influencegains), true)]
+[assembly: EdmRelationshipAttribute("sparkdbModel", "FK_influencegains_profiles_2", "profiles", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.profiles), "influencegains", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.influencegains), true)]
+[assembly: EdmRelationshipAttribute("sparkdbModel", "FK_influencegains_subjectmatters", "subjectmatters", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.subjectmatters), "influencegains", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.influencegains), true)]
+[assembly: EdmRelationshipAttribute("sparkdbModel", "FK__sparks", "sparks", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.sparks), "sparks_categories", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.sparks_categories), true)]
+[assembly: EdmRelationshipAttribute("sparkdbModel", "FK_sparks_subjectmatters", "subjectmatters", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.subjectmatters), "sparks", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.sparks), true)]
+[assembly: EdmRelationshipAttribute("sparkdbModel", "FK_transactions_transactionstates", "transactionstates", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.transactionstates), "transactions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.transactions), true)]
+[assembly: EdmRelationshipAttribute("sparkdbModel", "FK_transactions_transactiontypes", "transactiontypes", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.transactiontypes), "transactions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.transactions), true)]
+[assembly: EdmRelationshipAttribute("sparkdbModel", "FK__comments", "comments", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.comments), "commentvotes", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.commentvotes), true)]
+[assembly: EdmRelationshipAttribute("sparkdbModel", "FK_Heat_comments", "comments", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.comments), "heat", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.heat), true)]
+[assembly: EdmRelationshipAttribute("sparkdbModel", "FK__profiles", "profiles", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.profiles), "commentvotes", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.commentvotes), true)]
+[assembly: EdmRelationshipAttribute("sparkdbModel", "FK_Heat_profiles", "profiles", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.profiles), "heat", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.heat), true)]
 
 #endregion
 
@@ -291,6 +306,134 @@ namespace Spark.Models
             }
         }
         private ObjectSet<statesprovidences> _statesprovidences;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<influencegains> influencegains
+        {
+            get
+            {
+                if ((_influencegains == null))
+                {
+                    _influencegains = base.CreateObjectSet<influencegains>("influencegains");
+                }
+                return _influencegains;
+            }
+        }
+        private ObjectSet<influencegains> _influencegains;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<sparks_categories> sparks_categories
+        {
+            get
+            {
+                if ((_sparks_categories == null))
+                {
+                    _sparks_categories = base.CreateObjectSet<sparks_categories>("sparks_categories");
+                }
+                return _sparks_categories;
+            }
+        }
+        private ObjectSet<sparks_categories> _sparks_categories;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<subjectmatters> subjectmatters
+        {
+            get
+            {
+                if ((_subjectmatters == null))
+                {
+                    _subjectmatters = base.CreateObjectSet<subjectmatters>("subjectmatters");
+                }
+                return _subjectmatters;
+            }
+        }
+        private ObjectSet<subjectmatters> _subjectmatters;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<transactions> transactions
+        {
+            get
+            {
+                if ((_transactions == null))
+                {
+                    _transactions = base.CreateObjectSet<transactions>("transactions");
+                }
+                return _transactions;
+            }
+        }
+        private ObjectSet<transactions> _transactions;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<transactionstates> transactionstates
+        {
+            get
+            {
+                if ((_transactionstates == null))
+                {
+                    _transactionstates = base.CreateObjectSet<transactionstates>("transactionstates");
+                }
+                return _transactionstates;
+            }
+        }
+        private ObjectSet<transactionstates> _transactionstates;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<transactiontypes> transactiontypes
+        {
+            get
+            {
+                if ((_transactiontypes == null))
+                {
+                    _transactiontypes = base.CreateObjectSet<transactiontypes>("transactiontypes");
+                }
+                return _transactiontypes;
+            }
+        }
+        private ObjectSet<transactiontypes> _transactiontypes;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<commentvotes> commentvotes
+        {
+            get
+            {
+                if ((_commentvotes == null))
+                {
+                    _commentvotes = base.CreateObjectSet<commentvotes>("commentvotes");
+                }
+                return _commentvotes;
+            }
+        }
+        private ObjectSet<commentvotes> _commentvotes;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<heat> heat
+        {
+            get
+            {
+                if ((_heat == null))
+                {
+                    _heat = base.CreateObjectSet<heat>("heat");
+                }
+                return _heat;
+            }
+        }
+        private ObjectSet<heat> _heat;
 
         #endregion
 
@@ -398,6 +541,70 @@ namespace Spark.Models
         public void AddTostatesprovidences(statesprovidences statesprovidences)
         {
             base.AddObject("statesprovidences", statesprovidences);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the influencegains EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToinfluencegains(influencegains influencegains)
+        {
+            base.AddObject("influencegains", influencegains);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the sparks_categories EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTosparks_categories(sparks_categories sparks_categories)
+        {
+            base.AddObject("sparks_categories", sparks_categories);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the subjectmatters EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTosubjectmatters(subjectmatters subjectmatters)
+        {
+            base.AddObject("subjectmatters", subjectmatters);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the transactions EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTotransactions(transactions transactions)
+        {
+            base.AddObject("transactions", transactions);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the transactionstates EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTotransactionstates(transactionstates transactionstates)
+        {
+            base.AddObject("transactionstates", transactionstates);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the transactiontypes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTotransactiontypes(transactiontypes transactiontypes)
+        {
+            base.AddObject("transactiontypes", transactiontypes);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the commentvotes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTocommentvotes(commentvotes commentvotes)
+        {
+            base.AddObject("commentvotes", commentvotes);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the heat EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToheat(heat heat)
+        {
+            base.AddObject("heat", heat);
         }
 
         #endregion
@@ -590,6 +797,28 @@ namespace Spark.Models
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK_transactions_accounts", "transactions")]
+        public EntityCollection<transactions> transactions
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<transactions>("sparkdbModel.FK_transactions_accounts", "transactions");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<transactions>("sparkdbModel.FK_transactions_accounts", "transactions", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -676,6 +905,76 @@ namespace Spark.Models
         #endregion
 
     
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK__categories", "sparks_categories")]
+        public EntityCollection<sparks_categories> sparks_categories
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<sparks_categories>("sparkdbModel.FK__categories", "sparks_categories");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<sparks_categories>("sparkdbModel.FK__categories", "sparks_categories", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK__categories_2", "sparks_categories")]
+        public EntityCollection<sparks_categories> sparks_categories1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<sparks_categories>("sparkdbModel.FK__categories_2", "sparks_categories");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<sparks_categories>("sparkdbModel.FK__categories_2", "sparks_categories", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK__categories_3", "sparks_categories")]
+        public EntityCollection<sparks_categories> sparks_categories2
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<sparks_categories>("sparkdbModel.FK__categories_3", "sparks_categories");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<sparks_categories>("sparkdbModel.FK__categories_3", "sparks_categories", value);
+                }
+            }
+        }
+
+        #endregion
+
     }
     
     /// <summary>
@@ -1143,6 +1442,265 @@ namespace Spark.Models
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK__comments", "commentvotes")]
+        public EntityCollection<commentvotes> commentvotes
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<commentvotes>("sparkdbModel.FK__comments", "commentvotes");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<commentvotes>("sparkdbModel.FK__comments", "commentvotes", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK_Heat_comments", "heat")]
+        public EntityCollection<heat> heat
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<heat>("sparkdbModel.FK_Heat_comments", "heat");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<heat>("sparkdbModel.FK_Heat_comments", "heat", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="sparkdbModel", Name="commentvotes")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class commentvotes : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new commentvotes object.
+        /// </summary>
+        /// <param name="pK">Initial value of the PK property.</param>
+        /// <param name="fKComments">Initial value of the FKComments property.</param>
+        /// <param name="fKProfiles">Initial value of the FKProfiles property.</param>
+        /// <param name="bIsUpVote">Initial value of the bIsUpVote property.</param>
+        public static commentvotes Createcommentvotes(global::System.Int32 pK, global::System.Int32 fKComments, global::System.Int32 fKProfiles, global::System.Boolean bIsUpVote)
+        {
+            commentvotes commentvotes = new commentvotes();
+            commentvotes.PK = pK;
+            commentvotes.FKComments = fKComments;
+            commentvotes.FKProfiles = fKProfiles;
+            commentvotes.bIsUpVote = bIsUpVote;
+            return commentvotes;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 PK
+        {
+            get
+            {
+                return _PK;
+            }
+            set
+            {
+                if (_PK != value)
+                {
+                    OnPKChanging(value);
+                    ReportPropertyChanging("PK");
+                    _PK = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("PK");
+                    OnPKChanged();
+                }
+            }
+        }
+        private global::System.Int32 _PK;
+        partial void OnPKChanging(global::System.Int32 value);
+        partial void OnPKChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 FKComments
+        {
+            get
+            {
+                return _FKComments;
+            }
+            set
+            {
+                OnFKCommentsChanging(value);
+                ReportPropertyChanging("FKComments");
+                _FKComments = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FKComments");
+                OnFKCommentsChanged();
+            }
+        }
+        private global::System.Int32 _FKComments;
+        partial void OnFKCommentsChanging(global::System.Int32 value);
+        partial void OnFKCommentsChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 FKProfiles
+        {
+            get
+            {
+                return _FKProfiles;
+            }
+            set
+            {
+                OnFKProfilesChanging(value);
+                ReportPropertyChanging("FKProfiles");
+                _FKProfiles = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FKProfiles");
+                OnFKProfilesChanged();
+            }
+        }
+        private global::System.Int32 _FKProfiles;
+        partial void OnFKProfilesChanging(global::System.Int32 value);
+        partial void OnFKProfilesChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean bIsUpVote
+        {
+            get
+            {
+                return _bIsUpVote;
+            }
+            set
+            {
+                OnbIsUpVoteChanging(value);
+                ReportPropertyChanging("bIsUpVote");
+                _bIsUpVote = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("bIsUpVote");
+                OnbIsUpVoteChanged();
+            }
+        }
+        private global::System.Boolean _bIsUpVote;
+        partial void OnbIsUpVoteChanging(global::System.Boolean value);
+        partial void OnbIsUpVoteChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK__comments", "comments")]
+        public comments comments
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<comments>("sparkdbModel.FK__comments", "comments").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<comments>("sparkdbModel.FK__comments", "comments").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<comments> commentsReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<comments>("sparkdbModel.FK__comments", "comments");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<comments>("sparkdbModel.FK__comments", "comments", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK__profiles", "profiles")]
+        public profiles profiles
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<profiles>("sparkdbModel.FK__profiles", "profiles").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<profiles>("sparkdbModel.FK__profiles", "profiles").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<profiles> profilesReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<profiles>("sparkdbModel.FK__profiles", "profiles");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<profiles>("sparkdbModel.FK__profiles", "profiles", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -1467,6 +2025,526 @@ namespace Spark.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<profiles>("sparkdbModel.FKGenders", "profiles", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="sparkdbModel", Name="heat")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class heat : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new heat object.
+        /// </summary>
+        /// <param name="pK">Initial value of the PK property.</param>
+        /// <param name="fKComments">Initial value of the FKComments property.</param>
+        /// <param name="fKProfiles">Initial value of the FKProfiles property.</param>
+        /// <param name="bIsPositive">Initial value of the bIsPositive property.</param>
+        /// <param name="nHeatAmount">Initial value of the nHeatAmount property.</param>
+        public static heat Createheat(global::System.Int32 pK, global::System.Int32 fKComments, global::System.Int32 fKProfiles, global::System.Boolean bIsPositive, global::System.Int32 nHeatAmount)
+        {
+            heat heat = new heat();
+            heat.PK = pK;
+            heat.FKComments = fKComments;
+            heat.FKProfiles = fKProfiles;
+            heat.bIsPositive = bIsPositive;
+            heat.nHeatAmount = nHeatAmount;
+            return heat;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 PK
+        {
+            get
+            {
+                return _PK;
+            }
+            set
+            {
+                if (_PK != value)
+                {
+                    OnPKChanging(value);
+                    ReportPropertyChanging("PK");
+                    _PK = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("PK");
+                    OnPKChanged();
+                }
+            }
+        }
+        private global::System.Int32 _PK;
+        partial void OnPKChanging(global::System.Int32 value);
+        partial void OnPKChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 FKComments
+        {
+            get
+            {
+                return _FKComments;
+            }
+            set
+            {
+                OnFKCommentsChanging(value);
+                ReportPropertyChanging("FKComments");
+                _FKComments = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FKComments");
+                OnFKCommentsChanged();
+            }
+        }
+        private global::System.Int32 _FKComments;
+        partial void OnFKCommentsChanging(global::System.Int32 value);
+        partial void OnFKCommentsChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 FKProfiles
+        {
+            get
+            {
+                return _FKProfiles;
+            }
+            set
+            {
+                OnFKProfilesChanging(value);
+                ReportPropertyChanging("FKProfiles");
+                _FKProfiles = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FKProfiles");
+                OnFKProfilesChanged();
+            }
+        }
+        private global::System.Int32 _FKProfiles;
+        partial void OnFKProfilesChanging(global::System.Int32 value);
+        partial void OnFKProfilesChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean bIsPositive
+        {
+            get
+            {
+                return _bIsPositive;
+            }
+            set
+            {
+                OnbIsPositiveChanging(value);
+                ReportPropertyChanging("bIsPositive");
+                _bIsPositive = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("bIsPositive");
+                OnbIsPositiveChanged();
+            }
+        }
+        private global::System.Boolean _bIsPositive;
+        partial void OnbIsPositiveChanging(global::System.Boolean value);
+        partial void OnbIsPositiveChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 nHeatAmount
+        {
+            get
+            {
+                return _nHeatAmount;
+            }
+            set
+            {
+                OnnHeatAmountChanging(value);
+                ReportPropertyChanging("nHeatAmount");
+                _nHeatAmount = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("nHeatAmount");
+                OnnHeatAmountChanged();
+            }
+        }
+        private global::System.Int32 _nHeatAmount;
+        partial void OnnHeatAmountChanging(global::System.Int32 value);
+        partial void OnnHeatAmountChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK_Heat_comments", "comments")]
+        public comments comments
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<comments>("sparkdbModel.FK_Heat_comments", "comments").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<comments>("sparkdbModel.FK_Heat_comments", "comments").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<comments> commentsReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<comments>("sparkdbModel.FK_Heat_comments", "comments");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<comments>("sparkdbModel.FK_Heat_comments", "comments", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK_Heat_profiles", "profiles")]
+        public profiles profiles
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<profiles>("sparkdbModel.FK_Heat_profiles", "profiles").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<profiles>("sparkdbModel.FK_Heat_profiles", "profiles").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<profiles> profilesReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<profiles>("sparkdbModel.FK_Heat_profiles", "profiles");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<profiles>("sparkdbModel.FK_Heat_profiles", "profiles", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="sparkdbModel", Name="influencegains")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class influencegains : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new influencegains object.
+        /// </summary>
+        /// <param name="pK">Initial value of the PK property.</param>
+        /// <param name="bIsPositive">Initial value of the bIsPositive property.</param>
+        /// <param name="fKProfilesContributor">Initial value of the FKProfilesContributor property.</param>
+        /// <param name="fKProfilesReceived">Initial value of the FKProfilesReceived property.</param>
+        /// <param name="fKSubjectMatters">Initial value of the FKSubjectMatters property.</param>
+        public static influencegains Createinfluencegains(global::System.Int32 pK, global::System.Boolean bIsPositive, global::System.Int32 fKProfilesContributor, global::System.Int32 fKProfilesReceived, global::System.Int32 fKSubjectMatters)
+        {
+            influencegains influencegains = new influencegains();
+            influencegains.PK = pK;
+            influencegains.bIsPositive = bIsPositive;
+            influencegains.FKProfilesContributor = fKProfilesContributor;
+            influencegains.FKProfilesReceived = fKProfilesReceived;
+            influencegains.FKSubjectMatters = fKSubjectMatters;
+            return influencegains;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 PK
+        {
+            get
+            {
+                return _PK;
+            }
+            set
+            {
+                if (_PK != value)
+                {
+                    OnPKChanging(value);
+                    ReportPropertyChanging("PK");
+                    _PK = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("PK");
+                    OnPKChanged();
+                }
+            }
+        }
+        private global::System.Int32 _PK;
+        partial void OnPKChanging(global::System.Int32 value);
+        partial void OnPKChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean bIsPositive
+        {
+            get
+            {
+                return _bIsPositive;
+            }
+            set
+            {
+                OnbIsPositiveChanging(value);
+                ReportPropertyChanging("bIsPositive");
+                _bIsPositive = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("bIsPositive");
+                OnbIsPositiveChanged();
+            }
+        }
+        private global::System.Boolean _bIsPositive;
+        partial void OnbIsPositiveChanging(global::System.Boolean value);
+        partial void OnbIsPositiveChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 FKProfilesContributor
+        {
+            get
+            {
+                return _FKProfilesContributor;
+            }
+            set
+            {
+                OnFKProfilesContributorChanging(value);
+                ReportPropertyChanging("FKProfilesContributor");
+                _FKProfilesContributor = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FKProfilesContributor");
+                OnFKProfilesContributorChanged();
+            }
+        }
+        private global::System.Int32 _FKProfilesContributor;
+        partial void OnFKProfilesContributorChanging(global::System.Int32 value);
+        partial void OnFKProfilesContributorChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 FKProfilesReceived
+        {
+            get
+            {
+                return _FKProfilesReceived;
+            }
+            set
+            {
+                OnFKProfilesReceivedChanging(value);
+                ReportPropertyChanging("FKProfilesReceived");
+                _FKProfilesReceived = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FKProfilesReceived");
+                OnFKProfilesReceivedChanged();
+            }
+        }
+        private global::System.Int32 _FKProfilesReceived;
+        partial void OnFKProfilesReceivedChanging(global::System.Int32 value);
+        partial void OnFKProfilesReceivedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 FKSubjectMatters
+        {
+            get
+            {
+                return _FKSubjectMatters;
+            }
+            set
+            {
+                OnFKSubjectMattersChanging(value);
+                ReportPropertyChanging("FKSubjectMatters");
+                _FKSubjectMatters = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FKSubjectMatters");
+                OnFKSubjectMattersChanged();
+            }
+        }
+        private global::System.Int32 _FKSubjectMatters;
+        partial void OnFKSubjectMattersChanging(global::System.Int32 value);
+        partial void OnFKSubjectMattersChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK_influencegains_profiles", "profiles")]
+        public profiles profiles
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<profiles>("sparkdbModel.FK_influencegains_profiles", "profiles").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<profiles>("sparkdbModel.FK_influencegains_profiles", "profiles").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<profiles> profilesReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<profiles>("sparkdbModel.FK_influencegains_profiles", "profiles");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<profiles>("sparkdbModel.FK_influencegains_profiles", "profiles", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK_influencegains_profiles_2", "profiles")]
+        public profiles profiles1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<profiles>("sparkdbModel.FK_influencegains_profiles_2", "profiles").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<profiles>("sparkdbModel.FK_influencegains_profiles_2", "profiles").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<profiles> profiles1Reference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<profiles>("sparkdbModel.FK_influencegains_profiles_2", "profiles");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<profiles>("sparkdbModel.FK_influencegains_profiles_2", "profiles", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK_influencegains_subjectmatters", "subjectmatters")]
+        public subjectmatters subjectmatters
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<subjectmatters>("sparkdbModel.FK_influencegains_subjectmatters", "subjectmatters").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<subjectmatters>("sparkdbModel.FK_influencegains_subjectmatters", "subjectmatters").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<subjectmatters> subjectmattersReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<subjectmatters>("sparkdbModel.FK_influencegains_subjectmatters", "subjectmatters");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<subjectmatters>("sparkdbModel.FK_influencegains_subjectmatters", "subjectmatters", value);
                 }
             }
         }
@@ -2272,6 +3350,94 @@ namespace Spark.Models
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK_influencegains_profiles", "influencegains")]
+        public EntityCollection<influencegains> influencegains
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<influencegains>("sparkdbModel.FK_influencegains_profiles", "influencegains");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<influencegains>("sparkdbModel.FK_influencegains_profiles", "influencegains", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK_influencegains_profiles_2", "influencegains")]
+        public EntityCollection<influencegains> influencegains1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<influencegains>("sparkdbModel.FK_influencegains_profiles_2", "influencegains");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<influencegains>("sparkdbModel.FK_influencegains_profiles_2", "influencegains", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK__profiles", "commentvotes")]
+        public EntityCollection<commentvotes> commentvotes
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<commentvotes>("sparkdbModel.FK__profiles", "commentvotes");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<commentvotes>("sparkdbModel.FK__profiles", "commentvotes", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK_Heat_profiles", "heat")]
+        public EntityCollection<heat> heat
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<heat>("sparkdbModel.FK_Heat_profiles", "heat");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<heat>("sparkdbModel.FK_Heat_profiles", "heat", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -2403,7 +3569,7 @@ namespace Spark.Models
         /// <param name="fKSparks">Initial value of the FKSparks property.</param>
         /// <param name="bIsUpVote">Initial value of the bIsUpVote property.</param>
         /// <param name="fKProfiles">Initial value of the FKProfiles property.</param>
-        public static sparkinterestvotes Createsparkinterestvotes(global::System.Int32 pK, global::System.Int32 fKSparks, global::System.Byte[] bIsUpVote, global::System.Int32 fKProfiles)
+        public static sparkinterestvotes Createsparkinterestvotes(global::System.Int32 pK, global::System.Int32 fKSparks, global::System.Boolean bIsUpVote, global::System.Int32 fKProfiles)
         {
             sparkinterestvotes sparkinterestvotes = new sparkinterestvotes();
             sparkinterestvotes.PK = pK;
@@ -2473,23 +3639,23 @@ namespace Spark.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Byte[] bIsUpVote
+        public global::System.Boolean bIsUpVote
         {
             get
             {
-                return StructuralObject.GetValidValue(_bIsUpVote);
+                return _bIsUpVote;
             }
             set
             {
                 OnbIsUpVoteChanging(value);
                 ReportPropertyChanging("bIsUpVote");
-                _bIsUpVote = StructuralObject.SetValidValue(value, false);
+                _bIsUpVote = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("bIsUpVote");
                 OnbIsUpVoteChanged();
             }
         }
-        private global::System.Byte[] _bIsUpVote;
-        partial void OnbIsUpVoteChanging(global::System.Byte[] value);
+        private global::System.Boolean _bIsUpVote;
+        partial void OnbIsUpVoteChanging(global::System.Boolean value);
         partial void OnbIsUpVoteChanged();
     
         /// <summary>
@@ -2620,7 +3786,8 @@ namespace Spark.Models
         /// <param name="fKProfilesCreatedBy">Initial value of the FKProfilesCreatedBy property.</param>
         /// <param name="dDateCreated">Initial value of the dDateCreated property.</param>
         /// <param name="dDateModified">Initial value of the dDateModified property.</param>
-        public static sparks Createsparks(global::System.Int32 pK, global::System.String strTopic, global::System.String strDescription, global::System.Int32 fKProfilesCreatedBy, global::System.DateTime dDateCreated, global::System.DateTime dDateModified)
+        /// <param name="fKSubjectMatters">Initial value of the FKSubjectMatters property.</param>
+        public static sparks Createsparks(global::System.Int32 pK, global::System.String strTopic, global::System.String strDescription, global::System.Int32 fKProfilesCreatedBy, global::System.DateTime dDateCreated, global::System.DateTime dDateModified, global::System.Int32 fKSubjectMatters)
         {
             sparks sparks = new sparks();
             sparks.PK = pK;
@@ -2629,6 +3796,7 @@ namespace Spark.Models
             sparks.FKProfilesCreatedBy = fKProfilesCreatedBy;
             sparks.dDateCreated = dDateCreated;
             sparks.dDateModified = dDateModified;
+            sparks.FKSubjectMatters = fKSubjectMatters;
             return sparks;
         }
 
@@ -2806,6 +3974,30 @@ namespace Spark.Models
         private global::System.DateTime _dDateModified;
         partial void OndDateModifiedChanging(global::System.DateTime value);
         partial void OndDateModifiedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 FKSubjectMatters
+        {
+            get
+            {
+                return _FKSubjectMatters;
+            }
+            set
+            {
+                OnFKSubjectMattersChanging(value);
+                ReportPropertyChanging("FKSubjectMatters");
+                _FKSubjectMatters = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FKSubjectMatters");
+                OnFKSubjectMattersChanged();
+            }
+        }
+        private global::System.Int32 _FKSubjectMatters;
+        partial void OnFKSubjectMattersChanging(global::System.Int32 value);
+        partial void OnFKSubjectMattersChanged();
 
         #endregion
 
@@ -2890,6 +4082,383 @@ namespace Spark.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<sparkinterestvotes>("sparkdbModel.FK_sparkinterestvotes_sparks", "sparkinterestvotes", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK__sparks", "sparks_categories")]
+        public EntityCollection<sparks_categories> sparks_categories
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<sparks_categories>("sparkdbModel.FK__sparks", "sparks_categories");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<sparks_categories>("sparkdbModel.FK__sparks", "sparks_categories", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK_sparks_subjectmatters", "subjectmatters")]
+        public subjectmatters subjectmatters
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<subjectmatters>("sparkdbModel.FK_sparks_subjectmatters", "subjectmatters").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<subjectmatters>("sparkdbModel.FK_sparks_subjectmatters", "subjectmatters").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<subjectmatters> subjectmattersReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<subjectmatters>("sparkdbModel.FK_sparks_subjectmatters", "subjectmatters");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<subjectmatters>("sparkdbModel.FK_sparks_subjectmatters", "subjectmatters", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="sparkdbModel", Name="sparks_categories")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class sparks_categories : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new sparks_categories object.
+        /// </summary>
+        /// <param name="pK">Initial value of the PK property.</param>
+        /// <param name="fKSparks">Initial value of the FKSparks property.</param>
+        /// <param name="fKCategories1">Initial value of the FKCategories1 property.</param>
+        /// <param name="fKCategories2">Initial value of the FKCategories2 property.</param>
+        /// <param name="fKCategories3">Initial value of the FKCategories3 property.</param>
+        public static sparks_categories Createsparks_categories(global::System.Int32 pK, global::System.Int32 fKSparks, global::System.Int32 fKCategories1, global::System.Int32 fKCategories2, global::System.Int32 fKCategories3)
+        {
+            sparks_categories sparks_categories = new sparks_categories();
+            sparks_categories.PK = pK;
+            sparks_categories.FKSparks = fKSparks;
+            sparks_categories.FKCategories1 = fKCategories1;
+            sparks_categories.FKCategories2 = fKCategories2;
+            sparks_categories.FKCategories3 = fKCategories3;
+            return sparks_categories;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 PK
+        {
+            get
+            {
+                return _PK;
+            }
+            set
+            {
+                if (_PK != value)
+                {
+                    OnPKChanging(value);
+                    ReportPropertyChanging("PK");
+                    _PK = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("PK");
+                    OnPKChanged();
+                }
+            }
+        }
+        private global::System.Int32 _PK;
+        partial void OnPKChanging(global::System.Int32 value);
+        partial void OnPKChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 FKSparks
+        {
+            get
+            {
+                return _FKSparks;
+            }
+            set
+            {
+                OnFKSparksChanging(value);
+                ReportPropertyChanging("FKSparks");
+                _FKSparks = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FKSparks");
+                OnFKSparksChanged();
+            }
+        }
+        private global::System.Int32 _FKSparks;
+        partial void OnFKSparksChanging(global::System.Int32 value);
+        partial void OnFKSparksChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 FKCategories1
+        {
+            get
+            {
+                return _FKCategories1;
+            }
+            set
+            {
+                OnFKCategories1Changing(value);
+                ReportPropertyChanging("FKCategories1");
+                _FKCategories1 = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FKCategories1");
+                OnFKCategories1Changed();
+            }
+        }
+        private global::System.Int32 _FKCategories1;
+        partial void OnFKCategories1Changing(global::System.Int32 value);
+        partial void OnFKCategories1Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 FKCategories2
+        {
+            get
+            {
+                return _FKCategories2;
+            }
+            set
+            {
+                OnFKCategories2Changing(value);
+                ReportPropertyChanging("FKCategories2");
+                _FKCategories2 = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FKCategories2");
+                OnFKCategories2Changed();
+            }
+        }
+        private global::System.Int32 _FKCategories2;
+        partial void OnFKCategories2Changing(global::System.Int32 value);
+        partial void OnFKCategories2Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 FKCategories3
+        {
+            get
+            {
+                return _FKCategories3;
+            }
+            set
+            {
+                OnFKCategories3Changing(value);
+                ReportPropertyChanging("FKCategories3");
+                _FKCategories3 = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FKCategories3");
+                OnFKCategories3Changed();
+            }
+        }
+        private global::System.Int32 _FKCategories3;
+        partial void OnFKCategories3Changing(global::System.Int32 value);
+        partial void OnFKCategories3Changed();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK__categories", "categories")]
+        public categories categories
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<categories>("sparkdbModel.FK__categories", "categories").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<categories>("sparkdbModel.FK__categories", "categories").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<categories> categoriesReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<categories>("sparkdbModel.FK__categories", "categories");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<categories>("sparkdbModel.FK__categories", "categories", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK__categories_2", "categories")]
+        public categories categories1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<categories>("sparkdbModel.FK__categories_2", "categories").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<categories>("sparkdbModel.FK__categories_2", "categories").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<categories> categories1Reference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<categories>("sparkdbModel.FK__categories_2", "categories");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<categories>("sparkdbModel.FK__categories_2", "categories", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK__categories_3", "categories")]
+        public categories categories2
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<categories>("sparkdbModel.FK__categories_3", "categories").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<categories>("sparkdbModel.FK__categories_3", "categories").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<categories> categories2Reference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<categories>("sparkdbModel.FK__categories_3", "categories");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<categories>("sparkdbModel.FK__categories_3", "categories", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK__sparks", "sparks")]
+        public sparks sparks
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<sparks>("sparkdbModel.FK__sparks", "sparks").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<sparks>("sparkdbModel.FK__sparks", "sparks").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<sparks> sparksReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<sparks>("sparkdbModel.FK__sparks", "sparks");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<sparks>("sparkdbModel.FK__sparks", "sparks", value);
                 }
             }
         }
@@ -3063,6 +4632,686 @@ namespace Spark.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<countries>("sparkdbModel.FKCountries", "countries", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="sparkdbModel", Name="subjectmatters")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class subjectmatters : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new subjectmatters object.
+        /// </summary>
+        /// <param name="pK">Initial value of the PK property.</param>
+        /// <param name="strName">Initial value of the strName property.</param>
+        public static subjectmatters Createsubjectmatters(global::System.Int32 pK, global::System.String strName)
+        {
+            subjectmatters subjectmatters = new subjectmatters();
+            subjectmatters.PK = pK;
+            subjectmatters.strName = strName;
+            return subjectmatters;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 PK
+        {
+            get
+            {
+                return _PK;
+            }
+            set
+            {
+                if (_PK != value)
+                {
+                    OnPKChanging(value);
+                    ReportPropertyChanging("PK");
+                    _PK = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("PK");
+                    OnPKChanged();
+                }
+            }
+        }
+        private global::System.Int32 _PK;
+        partial void OnPKChanging(global::System.Int32 value);
+        partial void OnPKChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String strName
+        {
+            get
+            {
+                return _strName;
+            }
+            set
+            {
+                OnstrNameChanging(value);
+                ReportPropertyChanging("strName");
+                _strName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("strName");
+                OnstrNameChanged();
+            }
+        }
+        private global::System.String _strName;
+        partial void OnstrNameChanging(global::System.String value);
+        partial void OnstrNameChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK_influencegains_subjectmatters", "influencegains")]
+        public EntityCollection<influencegains> influencegains
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<influencegains>("sparkdbModel.FK_influencegains_subjectmatters", "influencegains");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<influencegains>("sparkdbModel.FK_influencegains_subjectmatters", "influencegains", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK_sparks_subjectmatters", "sparks")]
+        public EntityCollection<sparks> sparks
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<sparks>("sparkdbModel.FK_sparks_subjectmatters", "sparks");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<sparks>("sparkdbModel.FK_sparks_subjectmatters", "sparks", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="sparkdbModel", Name="transactions")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class transactions : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new transactions object.
+        /// </summary>
+        /// <param name="pK">Initial value of the PK property.</param>
+        /// <param name="fKAccountsBuyer">Initial value of the FKAccountsBuyer property.</param>
+        /// <param name="fKTransactionTypes">Initial value of the FKTransactionTypes property.</param>
+        /// <param name="nAmount">Initial value of the nAmount property.</param>
+        /// <param name="dDateCreated">Initial value of the dDateCreated property.</param>
+        /// <param name="dDateModified">Initial value of the dDateModified property.</param>
+        /// <param name="fKTransactionStates">Initial value of the FKTransactionStates property.</param>
+        public static transactions Createtransactions(global::System.Int32 pK, global::System.Int32 fKAccountsBuyer, global::System.Int32 fKTransactionTypes, global::System.Int32 nAmount, global::System.DateTime dDateCreated, global::System.DateTime dDateModified, global::System.Int32 fKTransactionStates)
+        {
+            transactions transactions = new transactions();
+            transactions.PK = pK;
+            transactions.FKAccountsBuyer = fKAccountsBuyer;
+            transactions.FKTransactionTypes = fKTransactionTypes;
+            transactions.nAmount = nAmount;
+            transactions.dDateCreated = dDateCreated;
+            transactions.dDateModified = dDateModified;
+            transactions.FKTransactionStates = fKTransactionStates;
+            return transactions;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 PK
+        {
+            get
+            {
+                return _PK;
+            }
+            set
+            {
+                if (_PK != value)
+                {
+                    OnPKChanging(value);
+                    ReportPropertyChanging("PK");
+                    _PK = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("PK");
+                    OnPKChanged();
+                }
+            }
+        }
+        private global::System.Int32 _PK;
+        partial void OnPKChanging(global::System.Int32 value);
+        partial void OnPKChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 FKAccountsBuyer
+        {
+            get
+            {
+                return _FKAccountsBuyer;
+            }
+            set
+            {
+                OnFKAccountsBuyerChanging(value);
+                ReportPropertyChanging("FKAccountsBuyer");
+                _FKAccountsBuyer = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FKAccountsBuyer");
+                OnFKAccountsBuyerChanged();
+            }
+        }
+        private global::System.Int32 _FKAccountsBuyer;
+        partial void OnFKAccountsBuyerChanging(global::System.Int32 value);
+        partial void OnFKAccountsBuyerChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 FKTransactionTypes
+        {
+            get
+            {
+                return _FKTransactionTypes;
+            }
+            set
+            {
+                OnFKTransactionTypesChanging(value);
+                ReportPropertyChanging("FKTransactionTypes");
+                _FKTransactionTypes = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FKTransactionTypes");
+                OnFKTransactionTypesChanged();
+            }
+        }
+        private global::System.Int32 _FKTransactionTypes;
+        partial void OnFKTransactionTypesChanging(global::System.Int32 value);
+        partial void OnFKTransactionTypesChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 nAmount
+        {
+            get
+            {
+                return _nAmount;
+            }
+            set
+            {
+                OnnAmountChanging(value);
+                ReportPropertyChanging("nAmount");
+                _nAmount = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("nAmount");
+                OnnAmountChanged();
+            }
+        }
+        private global::System.Int32 _nAmount;
+        partial void OnnAmountChanging(global::System.Int32 value);
+        partial void OnnAmountChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime dDateCreated
+        {
+            get
+            {
+                return _dDateCreated;
+            }
+            set
+            {
+                OndDateCreatedChanging(value);
+                ReportPropertyChanging("dDateCreated");
+                _dDateCreated = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("dDateCreated");
+                OndDateCreatedChanged();
+            }
+        }
+        private global::System.DateTime _dDateCreated;
+        partial void OndDateCreatedChanging(global::System.DateTime value);
+        partial void OndDateCreatedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime dDateModified
+        {
+            get
+            {
+                return _dDateModified;
+            }
+            set
+            {
+                OndDateModifiedChanging(value);
+                ReportPropertyChanging("dDateModified");
+                _dDateModified = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("dDateModified");
+                OndDateModifiedChanged();
+            }
+        }
+        private global::System.DateTime _dDateModified;
+        partial void OndDateModifiedChanging(global::System.DateTime value);
+        partial void OndDateModifiedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 FKTransactionStates
+        {
+            get
+            {
+                return _FKTransactionStates;
+            }
+            set
+            {
+                OnFKTransactionStatesChanging(value);
+                ReportPropertyChanging("FKTransactionStates");
+                _FKTransactionStates = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FKTransactionStates");
+                OnFKTransactionStatesChanged();
+            }
+        }
+        private global::System.Int32 _FKTransactionStates;
+        partial void OnFKTransactionStatesChanging(global::System.Int32 value);
+        partial void OnFKTransactionStatesChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK_transactions_accounts", "accounts")]
+        public accounts accounts
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<accounts>("sparkdbModel.FK_transactions_accounts", "accounts").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<accounts>("sparkdbModel.FK_transactions_accounts", "accounts").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<accounts> accountsReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<accounts>("sparkdbModel.FK_transactions_accounts", "accounts");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<accounts>("sparkdbModel.FK_transactions_accounts", "accounts", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK_transactions_transactionstates", "transactionstates")]
+        public transactionstates transactionstates
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<transactionstates>("sparkdbModel.FK_transactions_transactionstates", "transactionstates").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<transactionstates>("sparkdbModel.FK_transactions_transactionstates", "transactionstates").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<transactionstates> transactionstatesReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<transactionstates>("sparkdbModel.FK_transactions_transactionstates", "transactionstates");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<transactionstates>("sparkdbModel.FK_transactions_transactionstates", "transactionstates", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK_transactions_transactiontypes", "transactiontypes")]
+        public transactiontypes transactiontypes
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<transactiontypes>("sparkdbModel.FK_transactions_transactiontypes", "transactiontypes").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<transactiontypes>("sparkdbModel.FK_transactions_transactiontypes", "transactiontypes").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<transactiontypes> transactiontypesReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<transactiontypes>("sparkdbModel.FK_transactions_transactiontypes", "transactiontypes");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<transactiontypes>("sparkdbModel.FK_transactions_transactiontypes", "transactiontypes", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="sparkdbModel", Name="transactionstates")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class transactionstates : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new transactionstates object.
+        /// </summary>
+        /// <param name="pK">Initial value of the PK property.</param>
+        /// <param name="strName">Initial value of the strName property.</param>
+        public static transactionstates Createtransactionstates(global::System.Int32 pK, global::System.String strName)
+        {
+            transactionstates transactionstates = new transactionstates();
+            transactionstates.PK = pK;
+            transactionstates.strName = strName;
+            return transactionstates;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 PK
+        {
+            get
+            {
+                return _PK;
+            }
+            set
+            {
+                if (_PK != value)
+                {
+                    OnPKChanging(value);
+                    ReportPropertyChanging("PK");
+                    _PK = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("PK");
+                    OnPKChanged();
+                }
+            }
+        }
+        private global::System.Int32 _PK;
+        partial void OnPKChanging(global::System.Int32 value);
+        partial void OnPKChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String strName
+        {
+            get
+            {
+                return _strName;
+            }
+            set
+            {
+                OnstrNameChanging(value);
+                ReportPropertyChanging("strName");
+                _strName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("strName");
+                OnstrNameChanged();
+            }
+        }
+        private global::System.String _strName;
+        partial void OnstrNameChanging(global::System.String value);
+        partial void OnstrNameChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK_transactions_transactionstates", "transactions")]
+        public EntityCollection<transactions> transactions
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<transactions>("sparkdbModel.FK_transactions_transactionstates", "transactions");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<transactions>("sparkdbModel.FK_transactions_transactionstates", "transactions", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="sparkdbModel", Name="transactiontypes")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class transactiontypes : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new transactiontypes object.
+        /// </summary>
+        /// <param name="pK">Initial value of the PK property.</param>
+        /// <param name="strName">Initial value of the strName property.</param>
+        public static transactiontypes Createtransactiontypes(global::System.Int32 pK, global::System.String strName)
+        {
+            transactiontypes transactiontypes = new transactiontypes();
+            transactiontypes.PK = pK;
+            transactiontypes.strName = strName;
+            return transactiontypes;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 PK
+        {
+            get
+            {
+                return _PK;
+            }
+            set
+            {
+                if (_PK != value)
+                {
+                    OnPKChanging(value);
+                    ReportPropertyChanging("PK");
+                    _PK = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("PK");
+                    OnPKChanged();
+                }
+            }
+        }
+        private global::System.Int32 _PK;
+        partial void OnPKChanging(global::System.Int32 value);
+        partial void OnPKChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String strName
+        {
+            get
+            {
+                return _strName;
+            }
+            set
+            {
+                OnstrNameChanging(value);
+                ReportPropertyChanging("strName");
+                _strName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("strName");
+                OnstrNameChanged();
+            }
+        }
+        private global::System.String _strName;
+        partial void OnstrNameChanging(global::System.String value);
+        partial void OnstrNameChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK_transactions_transactiontypes", "transactions")]
+        public EntityCollection<transactions> transactions
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<transactions>("sparkdbModel.FK_transactions_transactiontypes", "transactions");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<transactions>("sparkdbModel.FK_transactions_transactiontypes", "transactions", value);
                 }
             }
         }
