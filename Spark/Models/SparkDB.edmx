@@ -11,6 +11,7 @@
           <EntitySet Name="cities" EntityType="sparkdbModel.Store.cities" store:Type="Tables" Schema="sparkdb" />
           <EntitySet Name="comments" EntityType="sparkdbModel.Store.comments" store:Type="Tables" Schema="sparkdb" />
           <EntitySet Name="commentvotes" EntityType="sparkdbModel.Store.commentvotes" store:Type="Tables" Schema="sparkdb" />
+          <EntitySet Name="constants" EntityType="sparkdbModel.Store.constants" store:Type="Tables" Schema="sparkdb" />
           <EntitySet Name="countries" EntityType="sparkdbModel.Store.countries" store:Type="Tables" Schema="sparkdb" />
           <EntitySet Name="educationlevels" EntityType="sparkdbModel.Store.educationlevels" store:Type="Tables" Schema="sparkdb" />
           <EntitySet Name="genders" EntityType="sparkdbModel.Store.genders" store:Type="Tables" Schema="sparkdb" />
@@ -24,6 +25,7 @@
           <EntitySet Name="sparks_categories" EntityType="sparkdbModel.Store.sparks_categories" store:Type="Tables" Schema="sparkdb" />
           <EntitySet Name="statesprovidences" EntityType="sparkdbModel.Store.statesprovidences" store:Type="Tables" Schema="sparkdb" />
           <EntitySet Name="subjectmatters" EntityType="sparkdbModel.Store.subjectmatters" store:Type="Tables" Schema="sparkdb" />
+          <EntitySet Name="subjectmatterspreads" EntityType="sparkdbModel.Store.subjectmatterspreads" store:Type="Tables" Schema="sparkdb" />
           <EntitySet Name="transactions" EntityType="sparkdbModel.Store.transactions" store:Type="Tables" Schema="sparkdb" />
           <EntitySet Name="transactionstates" EntityType="sparkdbModel.Store.transactionstates" store:Type="Tables" Schema="sparkdb" />
           <EntitySet Name="transactiontypes" EntityType="sparkdbModel.Store.transactiontypes" store:Type="Tables" Schema="sparkdb" />
@@ -50,6 +52,14 @@
           <AssociationSet Name="FK__sparks" Association="sparkdbModel.Store.FK__sparks">
             <End Role="sparks" EntitySet="sparks" />
             <End Role="sparks_categories" EntitySet="sparks_categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__subjectmatters" Association="sparkdbModel.Store.FK__subjectmatters">
+            <End Role="subjectmatters" EntitySet="subjectmatters" />
+            <End Role="subjectmatterspreads" EntitySet="subjectmatterspreads" />
+          </AssociationSet>
+          <AssociationSet Name="FK__subjectmatters_2" Association="sparkdbModel.Store.FK__subjectmatters_2">
+            <End Role="subjectmatters" EntitySet="subjectmatters" />
+            <End Role="subjectmatterspreads" EntitySet="subjectmatterspreads" />
           </AssociationSet>
           <AssociationSet Name="FK_Heat_comments" Association="sparkdbModel.Store.FK_Heat_comments">
             <End Role="comments" EntitySet="comments" />
@@ -188,6 +198,14 @@
           <Property Name="FKProfiles" Type="int" Nullable="false" />
           <Property Name="bIsUpVote" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="constants">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="strKey" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="strValue" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
         <EntityType Name="countries">
           <Key>
             <PropertyRef Name="PK" />
@@ -310,6 +328,15 @@
           <Property Name="PK" Type="int" Nullable="false" />
           <Property Name="strName" Type="varchar" Nullable="false" MaxLength="100" />
         </EntityType>
+        <EntityType Name="subjectmatterspreads">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="FKSubjectMattersContributor" Type="int" Nullable="false" />
+          <Property Name="FKSubjectMattersSpread" Type="int" Nullable="false" />
+          <Property Name="nValue" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="transactions">
           <Key>
             <PropertyRef Name="PK" />
@@ -417,6 +444,34 @@
             </Principal>
             <Dependent Role="sparks_categories">
               <PropertyRef Name="FKSparks" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__subjectmatters">
+          <End Role="subjectmatters" Type="sparkdbModel.Store.subjectmatters" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="subjectmatterspreads" Type="sparkdbModel.Store.subjectmatterspreads" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subjectmatters">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="subjectmatterspreads">
+              <PropertyRef Name="FKSubjectMattersContributor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__subjectmatters_2">
+          <End Role="subjectmatters" Type="sparkdbModel.Store.subjectmatters" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="subjectmatterspreads" Type="sparkdbModel.Store.subjectmatterspreads" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subjectmatters">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="subjectmatterspreads">
+              <PropertyRef Name="FKSubjectMattersSpread" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -880,6 +935,16 @@
             <End Role="profiles" EntitySet="profiles" />
             <End Role="heat" EntitySet="heat" />
           </AssociationSet>
+          <EntitySet Name="constants" EntityType="sparkdbModel.constants" />
+          <EntitySet Name="subjectmatterspreads" EntityType="sparkdbModel.subjectmatterspreads" />
+          <AssociationSet Name="FK__subjectmatters" Association="sparkdbModel.FK__subjectmatters">
+            <End Role="subjectmatters" EntitySet="subjectmatters" />
+            <End Role="subjectmatterspreads" EntitySet="subjectmatterspreads" />
+          </AssociationSet>
+          <AssociationSet Name="FK__subjectmatters_2" Association="sparkdbModel.FK__subjectmatters_2">
+            <End Role="subjectmatters" EntitySet="subjectmatters" />
+            <End Role="subjectmatterspreads" EntitySet="subjectmatterspreads" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="accounts">
           <Key>
@@ -1244,6 +1309,8 @@
           <Property Type="String" Name="strName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="influencegains" Relationship="sparkdbModel.FK_influencegains_subjectmatters" FromRole="subjectmatters" ToRole="influencegains" />
           <NavigationProperty Name="sparks" Relationship="sparkdbModel.FK_sparks_subjectmatters" FromRole="subjectmatters" ToRole="sparks" />
+          <NavigationProperty Name="subjectmatterspreads" Relationship="sparkdbModel.FK__subjectmatters" FromRole="subjectmatters" ToRole="subjectmatterspreads" />
+          <NavigationProperty Name="subjectmatterspreads1" Relationship="sparkdbModel.FK__subjectmatters_2" FromRole="subjectmatters" ToRole="subjectmatterspreads" />
         </EntityType>
         <EntityType Name="transactions">
           <Key>
@@ -1479,6 +1546,49 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="constants">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Type="Int32" Name="PK" Nullable="false" />
+          <Property Type="String" Name="strKey" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="strValue" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="subjectmatterspreads">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Type="Int32" Name="PK" Nullable="false" />
+          <Property Type="Int32" Name="FKSubjectMattersContributor" Nullable="false" />
+          <Property Type="Int32" Name="FKSubjectMattersSpread" Nullable="false" />
+          <NavigationProperty Name="subjectmatters" Relationship="sparkdbModel.FK__subjectmatters" FromRole="subjectmatterspreads" ToRole="subjectmatters" />
+          <NavigationProperty Name="subjectmatters1" Relationship="sparkdbModel.FK__subjectmatters_2" FromRole="subjectmatterspreads" ToRole="subjectmatters" />
+          <Property Type="Int32" Name="nValue" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__subjectmatters">
+          <End Type="sparkdbModel.subjectmatters" Role="subjectmatters" Multiplicity="1" />
+          <End Type="sparkdbModel.subjectmatterspreads" Role="subjectmatterspreads" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subjectmatters">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="subjectmatterspreads">
+              <PropertyRef Name="FKSubjectMattersContributor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__subjectmatters_2">
+          <End Type="sparkdbModel.subjectmatters" Role="subjectmatters" Multiplicity="1" />
+          <End Type="sparkdbModel.subjectmatterspreads" Role="subjectmatterspreads" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subjectmatters">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="subjectmatterspreads">
+              <PropertyRef Name="FKSubjectMattersSpread" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1698,6 +1808,25 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="constants">
+            <EntityTypeMapping TypeName="sparkdbModel.constants">
+              <MappingFragment StoreEntitySet="constants">
+                <ScalarProperty Name="strValue" ColumnName="strValue" />
+                <ScalarProperty Name="strKey" ColumnName="strKey" />
+                <ScalarProperty Name="PK" ColumnName="PK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="subjectmatterspreads">
+            <EntityTypeMapping TypeName="sparkdbModel.subjectmatterspreads">
+              <MappingFragment StoreEntitySet="subjectmatterspreads">
+                <ScalarProperty Name="nValue" ColumnName="nValue" />
+                <ScalarProperty Name="FKSubjectMattersSpread" ColumnName="FKSubjectMattersSpread" />
+                <ScalarProperty Name="FKSubjectMattersContributor" ColumnName="FKSubjectMattersContributor" />
+                <ScalarProperty Name="PK" ColumnName="PK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1779,10 +1908,10 @@
         </AssociationConnector>
         <AssociationConnector Association="sparkdbModel.FKPoliticalIdeologies" >
           <ConnectorPoint PointX="14.5" PointY="7.5" />
-          <ConnectorPoint PointX="14.5" PointY="4.5577010677083338" />
-          <ConnectorPoint PointX="13.645833333333334" PointY="4.5577010677083329" />
-          <ConnectorPoint PointX="13.479166666666666" PointY="4.5577010677083338" />
-          <ConnectorPoint PointX="12" PointY="4.5577010677083338" />
+          <ConnectorPoint PointX="14.5" PointY="4.4710250130208262" />
+          <ConnectorPoint PointX="13.645833333333334" PointY="4.4710250130208253" />
+          <ConnectorPoint PointX="13.479166666666666" PointY="4.4710250130208262" />
+          <ConnectorPoint PointX="12" PointY="4.4710250130208262" />
         </AssociationConnector>
         <AssociationConnector Association="sparkdbModel.FKProfilesCreatedBy" >
           <ConnectorPoint PointX="12" PointY="2.3843489583333328" />
@@ -1845,8 +1974,8 @@
           <ConnectorPoint PointX="16.691074434901122" PointY="4.3712322574065716" />
           <ConnectorPoint PointX="16.808925565098878" PointY="4.2533811272088142" />
           <ConnectorPoint PointX="16.9375" PointY="4.1248066923076934" />
-          <ConnectorPoint PointX="16.9375" PointY="2.4065076442057336" />
-          <ConnectorPoint PointX="17.25" PointY="2.4065076442057336" />
+          <ConnectorPoint PointX="16.9375" PointY="2.5374743802998907" />
+          <ConnectorPoint PointX="17.25" PointY="2.5374743802998907" />
         </AssociationConnector>
         <AssociationConnector Association="sparkdbModel.FK__sparks" >
           <ConnectorPoint PointX="14.375" PointY="0.53125" />
@@ -1862,7 +1991,7 @@
           <ConnectorPoint PointX="18.84375" PointY="6.5" />
         </AssociationConnector>
         <AssociationConnector Association="sparkdbModel.FK_sparks_subjectmatters" >
-          <ConnectorPoint PointX="15" PointY="4.4999999999999991" />
+          <ConnectorPoint PointX="15" PointY="4.5" />
           <ConnectorPoint PointX="14.375" PointY="4.0186979166666656" />
         </AssociationConnector>
         <AssociationConnector Association="sparkdbModel.FK_transactions_transactionstates" >
@@ -1873,36 +2002,73 @@
           <ConnectorPoint PointX="5.625" PointY="2.8458968098958337" />
           <ConnectorPoint PointX="6.5" PointY="2.8458968098958337" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="sparkdbModel.commentvotes" Width="1.5" PointX="15.375" PointY="6.625" Height="2.172587890624996" />
-        <EntityTypeShape EntityType="sparkdbModel.heat" Width="1.5" PointX="15.375" PointY="9" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="sparkdbModel.commentvotes" Width="1.5" PointX="15.5" PointY="7.125" Height="2.172587890624996" />
+        <EntityTypeShape EntityType="sparkdbModel.heat" Width="1.5" PointX="15.5" PointY="9.5" Height="2.3648893229166674" />
         <AssociationConnector Association="sparkdbModel.FK__comments" >
-          <ConnectorPoint PointX="16.125" PointY="2.1371481073608409" />
-          <ConnectorPoint PointX="16.75" PointY="2.1371481073608409" />
-          <ConnectorPoint PointX="16.75" PointY="6.625" />
+          <ConnectorPoint PointX="16.125" PointY="3.1482847161916121" />
+          <ConnectorPoint PointX="16.75" PointY="3.1482847161916121" />
+          <ConnectorPoint PointX="16.75" PointY="7.125" />
         </AssociationConnector>
         <AssociationConnector Association="sparkdbModel.FK_Heat_comments" >
           <ConnectorPoint PointX="15.484376999999999" PointY="3.7590950520833331" />
-          <ConnectorPoint PointX="15.484376999999999" PointY="4.2499999999999991" />
-          <ConnectorPoint PointX="14.6875" PointY="4.2499999999999991" />
-          <ConnectorPoint PointX="14.6875" PointY="6.375" />
-          <ConnectorPoint PointX="15.125" PointY="6.375" />
-          <ConnectorPoint PointX="15.125" PointY="9.8712074960937528" />
-          <ConnectorPoint PointX="15.375" PointY="9.8712074960937528" />
+          <ConnectorPoint PointX="15.484376999999999" PointY="4.25" />
+          <ConnectorPoint PointX="14.6875" PointY="4.25" />
+          <ConnectorPoint PointX="14.6875" PointY="6.875" />
+          <ConnectorPoint PointX="15.25" PointY="6.875" />
+          <ConnectorPoint PointX="15.25" PointY="10.682444661458334" />
+          <ConnectorPoint PointX="15.5" PointY="10.682444661458334" />
         </AssociationConnector>
         <AssociationConnector Association="sparkdbModel.FK__profiles" >
-          <ConnectorPoint PointX="12" PointY="7.0691536458333326" />
-          <ConnectorPoint PointX="14.416666666666666" PointY="7.0691536458333317" />
-          <ConnectorPoint PointX="14.583333333333334" PointY="7.0691536458333326" />
-          <ConnectorPoint PointX="15.041666666666666" PointY="7.0691536458333317" />
-          <ConnectorPoint PointX="15.208333333333334" PointY="7.0691536458333326" />
-          <ConnectorPoint PointX="15.375" PointY="7.0691536458333326" />
+          <ConnectorPoint PointX="12" PointY="4.34375" />
+          <ConnectorPoint PointX="13.479166666666666" PointY="4.3437499999999991" />
+          <ConnectorPoint PointX="13.645833333333334" PointY="4.34375" />
+          <ConnectorPoint PointX="14.604166666666666" PointY="4.3437499999999991" />
+          <ConnectorPoint PointX="14.880433214298597" PointY="4.34375" />
+          <ConnectorPoint PointX="16.7187475" PointY="4.34375" />
+          <ConnectorPoint PointX="16.7187475" PointY="7.125" />
         </AssociationConnector>
         <AssociationConnector Association="sparkdbModel.FK_Heat_profiles" >
-          <ConnectorPoint PointX="11.257813375000001" PointY="7.1532194010416656" />
-          <ConnectorPoint PointX="11.257813375000001" PointY="7.4375" />
+          <ConnectorPoint PointX="11.322267968750001" PointY="7.1532194010416656" />
+          <ConnectorPoint PointX="11.322267968750001" PointY="7.4375" />
           <ConnectorPoint PointX="11.6875" PointY="7.4375" />
-          <ConnectorPoint PointX="11.6875" PointY="10.804918992187496" />
-          <ConnectorPoint PointX="15.375" PointY="10.804918992187496" />
+          <ConnectorPoint PointX="11.6875" PointY="10.059970330729172" />
+          <ConnectorPoint PointX="15.166666666666666" PointY="10.059970330729172" />
+          <ConnectorPoint PointX="15.333333333333334" PointY="10.059970330729172" />
+          <ConnectorPoint PointX="15.5" PointY="10.059970330729172" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="sparkdbModel.constants" Width="1.5" PointX="1.125" PointY="0.5" Height="1.5956835937500067" />
+        <EntityTypeShape EntityType="sparkdbModel.subjectmatterspreads" Width="1.5" PointX="19.125" PointY="3.25" Height="2.1725878906249996" />
+        <AssociationConnector Association="sparkdbModel.FK__subjectmatters" >
+          <ConnectorPoint PointX="16.5" PointY="5.7875543066406259" />
+          <ConnectorPoint PointX="16.635414166666667" PointY="5.787554306640625" />
+          <ConnectorPoint PointX="16.833333333333332" PointY="5.7875543066406259" />
+          <ConnectorPoint PointX="17.572916666666668" PointY="5.787554306640625" />
+          <ConnectorPoint PointX="17.739583333333332" PointY="5.7875543066406259" />
+          <ConnectorPoint PointX="17.979166666666668" PointY="5.787554306640625" />
+          <ConnectorPoint PointX="18.145833333333332" PointY="5.7875543066406259" />
+          <ConnectorPoint PointX="18.385416666666668" PointY="5.787554306640625" />
+          <ConnectorPoint PointX="18.552083333333332" PointY="5.7875543066406259" />
+          <ConnectorPoint PointX="18.760416666666668" PointY="5.787554306640625" />
+          <ConnectorPoint PointX="18.927083333333332" PointY="5.7875543066406259" />
+          <ConnectorPoint PointX="19.471351041666669" PointY="5.787554306640625" />
+          <ConnectorPoint PointX="19.638017708333333" PointY="5.7875543066406259" />
+          <ConnectorPoint PointX="20.04687375" PointY="5.7875543066406259" />
+          <ConnectorPoint PointX="20.04687375" PointY="5.422587890625" />
+        </AssociationConnector>
+        <AssociationConnector Association="sparkdbModel.FK__subjectmatters_2" >
+          <ConnectorPoint PointX="16.5" PointY="6.1437796533203128" />
+          <ConnectorPoint PointX="16.635414166666667" PointY="6.143779653320312" />
+          <ConnectorPoint PointX="16.833333333333332" PointY="6.1437796533203128" />
+          <ConnectorPoint PointX="17.572916666666668" PointY="6.143779653320312" />
+          <ConnectorPoint PointX="17.739583333333332" PointY="6.1437796533203128" />
+          <ConnectorPoint PointX="17.979166666666668" PointY="6.143779653320312" />
+          <ConnectorPoint PointX="18.145833333333332" PointY="6.1437796533203128" />
+          <ConnectorPoint PointX="18.385416666666668" PointY="6.143779653320312" />
+          <ConnectorPoint PointX="18.552083333333332" PointY="6.1437796533203128" />
+          <ConnectorPoint PointX="18.760416666666668" PointY="6.143779653320312" />
+          <ConnectorPoint PointX="18.927083333333332" PointY="6.1437796533203128" />
+          <ConnectorPoint PointX="19.554684375" PointY="6.1437796533203128" />
+          <ConnectorPoint PointX="19.554684375" PointY="5.422587890625" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>
