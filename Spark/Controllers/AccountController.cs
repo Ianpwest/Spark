@@ -83,7 +83,10 @@ namespace Spark.Controllers
             SendActivationEmail(rm.Email, rm.gActivationGUID.ToString());
 
             FormsAuthentication.SetAuthCookie(rm.UserName, false);
-            return RedirectToAction("Index", "Home");
+
+            //Tell the user to activate
+            ViewBag.Activated = "E-mail Sent";
+            return View("Activate");
         }
 
         //
