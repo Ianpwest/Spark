@@ -13,29 +13,11 @@ namespace Spark.Classes
         /// </summary>
         private static Spark.Models.sparkdbEntities m_db = new Models.sparkdbEntities();
 
-        ///// <summary>
-        ///// Gets all events in the database
-        ///// </summary>
-        ///// <returns>List of all events</returns>
-        //public static List<Models.events> GetAllEvents()
-        //{
-        //    List<Eventcity.Models.events> lstEvents = new List<Models.events>();
-
-        //    //Get all the events from the database
-        //    var results = from r in m_db.events
-        //                  select r;
-
-        //    //Add them to a list to pass to the view
-        //    foreach (Models.events ev in results)
-        //    {
-        //        lstEvents.Add(ev);
-
-        //    }
-
-        //    return lstEvents;
-        //}
-
-
+        /// <summary>
+        /// Verifies an account given a login model against the database
+        /// </summary>
+        /// <param name="lm">Login Model to verify</param>
+        /// <returns>Success</returns>
         public static bool VerifyAccount(LoginModel lm)
         {
             bool bExists = false;
@@ -64,6 +46,11 @@ namespace Spark.Classes
             return bExists;
         }
 
+        /// <summary>
+        /// Checks to see if an account exists given a username
+        /// </summary>
+        /// <param name="strUserName">username to check</param>
+        /// <returns>If account already exists</returns>
         public static bool AccountExists(string strUserName)
         {
             bool bExists = false;
@@ -78,6 +65,11 @@ namespace Spark.Classes
             return bExists;
         }
 
+        /// <summary>
+        /// Tries to register an account given a registration model
+        /// </summary>
+        /// <param name="rm">Register Model to register</param>
+        /// <returns>Success</returns>
         public static bool RegisterAccount(Spark.Models.RegisterModel rm)
         {
             //Create a new account model to add to the database with the given information
@@ -86,6 +78,8 @@ namespace Spark.Classes
             accountNew.strUserName = rm.UserName;
             accountNew.strSalt = Utilities.GetSalt();
             accountNew.strPassword = Utilities.Encrypt(accountNew.strSalt + rm.Password);
+            accountNew.gActivationGUID = rm.gActivationGUID.ToString();
+            accountNew.strEmail = rm.Email;
 
             try
             {
@@ -100,5 +94,55 @@ namespace Spark.Classes
             return true;
         }
 
+        /// <summary>
+        /// Checks the database to see if the user is activating with the guid that is
+        /// associated with their account.
+        /// </summary>
+        /// <param name="userGUID">Guid from email link</param>
+        public static bool ActivateAccount(string userGUID, string strUserName)
+        {
+            accounts result =  (from r in m_db.accounts
+                                where r.strUserName == strUserName
+                                select r).FirstOrDefault();
+
+            //User not found
+            if (result == null)
+                return false;
+
+            //Failed to provide the right activation token
+            if(result.gActivationGUID.ToString() != userGUID)
+                return false;
+
+            //Set the user to activated
+            result.bIsActivated = true;
+
+            try
+            {
+                m_db.SaveChanges();
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Gets an account given a username
+        /// </summary>
+        /// <param name="strUserName">username of account</param>
+        /// <returns>Account</returns>
+        public static accounts GetAccount(string strUserName)
+        {
+            accounts account = (from r in m_db.accounts
+                               where r.strUserName == strUserName
+                               select r).FirstOrDefault();
+
+            if (account == null)
+                return null;
+
+            return account;
+        }
     }
 }
