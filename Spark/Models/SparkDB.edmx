@@ -163,6 +163,8 @@
           <Property Name="strPassword" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="strSalt" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="bIsActivated" Type="bit" Nullable="false" />
+          <Property Name="strEmail" Type="varchar" MaxLength="100" />
+          <Property Name="gActivationGUID" Type="char" MaxLength="16" />
         </EntityType>
         <EntityType Name="categories">
           <Key>
@@ -957,6 +959,8 @@
           <Property Type="String" Name="strSalt" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="profiles" Relationship="sparkdbModel.FKAccounts" FromRole="accounts" ToRole="profiles" />
           <NavigationProperty Name="transactions" Relationship="sparkdbModel.FK_transactions_accounts" FromRole="accounts" ToRole="transactions" />
+          <Property Type="String" Name="strEmail" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="gActivationGUID" MaxLength="16" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="categories">
           <Key>
@@ -1598,6 +1602,8 @@
           <EntitySetMapping Name="accounts">
             <EntityTypeMapping TypeName="sparkdbModel.accounts">
               <MappingFragment StoreEntitySet="accounts">
+                <ScalarProperty Name="gActivationGUID" ColumnName="gActivationGUID" />
+                <ScalarProperty Name="strEmail" ColumnName="strEmail" />
                 <ScalarProperty Name="strSalt" ColumnName="strSalt" />
                 <ScalarProperty Name="strPassword" ColumnName="strPassword" />
                 <ScalarProperty Name="strUserName" ColumnName="strUserName" />
