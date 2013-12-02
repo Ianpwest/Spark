@@ -820,6 +820,54 @@ namespace Spark.Models
         private global::System.String _strSalt;
         partial void OnstrSaltChanging(global::System.String value);
         partial void OnstrSaltChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String strEmail
+        {
+            get
+            {
+                return _strEmail;
+            }
+            set
+            {
+                OnstrEmailChanging(value);
+                ReportPropertyChanging("strEmail");
+                _strEmail = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("strEmail");
+                OnstrEmailChanged();
+            }
+        }
+        private global::System.String _strEmail;
+        partial void OnstrEmailChanging(global::System.String value);
+        partial void OnstrEmailChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String gActivationGUID
+        {
+            get
+            {
+                return _gActivationGUID;
+            }
+            set
+            {
+                OngActivationGUIDChanging(value);
+                ReportPropertyChanging("gActivationGUID");
+                _gActivationGUID = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("gActivationGUID");
+                OngActivationGUIDChanged();
+            }
+        }
+        private global::System.String _gActivationGUID;
+        partial void OngActivationGUIDChanging(global::System.String value);
+        partial void OngActivationGUIDChanged();
 
         #endregion
 
