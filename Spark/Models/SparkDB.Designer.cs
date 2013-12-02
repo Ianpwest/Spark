@@ -2952,30 +2952,6 @@ namespace Spark.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String strEmail
-        {
-            get
-            {
-                return _strEmail;
-            }
-            set
-            {
-                OnstrEmailChanging(value);
-                ReportPropertyChanging("strEmail");
-                _strEmail = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("strEmail");
-                OnstrEmailChanged();
-            }
-        }
-        private global::System.String _strEmail;
-        partial void OnstrEmailChanging(global::System.String value);
-        partial void OnstrEmailChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
         public global::System.String strFirstName
         {
             get
