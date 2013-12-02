@@ -262,7 +262,6 @@
           </Key>
           <Property Name="PK" Type="int" Nullable="false" />
           <Property Name="FKAccounts" Type="int" Nullable="false" />
-          <Property Name="strEmail" Type="varchar" MaxLength="100" />
           <Property Name="strFirstName" Type="varchar" MaxLength="100" />
           <Property Name="strMiddleName" Type="varchar" MaxLength="100" />
           <Property Name="strLastName" Type="varchar" MaxLength="100" />
@@ -1036,7 +1035,6 @@
           </Key>
           <Property Type="Int32" Name="PK" Nullable="false" />
           <Property Type="Int32" Name="FKAccounts" Nullable="false" />
-          <Property Type="String" Name="strEmail" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="strFirstName" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="strMiddleName" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="strLastName" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -1687,7 +1685,6 @@
                 <ScalarProperty Name="strLastName" ColumnName="strLastName" />
                 <ScalarProperty Name="strMiddleName" ColumnName="strMiddleName" />
                 <ScalarProperty Name="strFirstName" ColumnName="strFirstName" />
-                <ScalarProperty Name="strEmail" ColumnName="strEmail" />
                 <ScalarProperty Name="FKAccounts" ColumnName="FKAccounts" />
                 <ScalarProperty Name="PK" ColumnName="PK" />
               </MappingFragment>
@@ -1862,14 +1859,14 @@
         <EntityTypeShape EntityType="sparkdbModel.educationlevels" Width="1.5" PointX="8.5" PointY="7.5" Height="1.5956835937499996" />
         <EntityTypeShape EntityType="sparkdbModel.genders" Width="1.5" PointX="11.75" PointY="7.5" Height="1.5956835937499996" />
         <EntityTypeShape EntityType="sparkdbModel.politicalideologies" Width="1.5" PointX="13.375" PointY="7.5" Height="1.5956835937499996" />
-        <EntityTypeShape EntityType="sparkdbModel.profiles" Width="1.5" PointX="10.5" PointY="0.75" Height="3.9033007812499996" />
+        <EntityTypeShape EntityType="sparkdbModel.profiles" Width="1.5" PointX="10.5" PointY="0.75" Height="6.2109179687499987" />
         <EntityTypeShape EntityType="sparkdbModel.religions" Width="1.5" PointX="10.125" PointY="7.5" Height="1.5956835937499996" />
         <EntityTypeShape EntityType="sparkdbModel.sparkinterestvotes" Width="1.5" PointX="12.75" PointY="4.75" Height="2.1725878906249996" />
         <EntityTypeShape EntityType="sparkdbModel.sparks" Width="1.5" PointX="12.875" PointY="0.5" Height="2.9417936197916656" />
         <EntityTypeShape EntityType="sparkdbModel.statesprovidences" Width="1.5" PointX="6.375" PointY="4" Height="1.9802864583333388" />
         <AssociationConnector Association="sparkdbModel.FKAccounts" >
-          <ConnectorPoint PointX="9.875" PointY="1.9324446614583331" />
-          <ConnectorPoint PointX="10.5" PointY="1.9324446614583331" />
+          <ConnectorPoint PointX="9.875" PointY="2.12474609375" />
+          <ConnectorPoint PointX="10.5" PointY="2.12474609375" />
         </AssociationConnector>
         <AssociationConnector Association="sparkdbModel.FKCities" >
           <ConnectorPoint PointX="9.75" PointY="4.9901432291666667" />
@@ -1886,13 +1883,13 @@
           <ConnectorPoint PointX="15.603461538461538" PointY="0.625" />
         </AssociationConnector>
         <AssociationConnector Association="sparkdbModel.FKProfiles" >
-          <ConnectorPoint PointX="12" PointY="4.1920450260416651" />
-          <ConnectorPoint PointX="13.479166666666666" PointY="4.1920450260416642" />
-          <ConnectorPoint PointX="13.645833333333334" PointY="4.1920450260416651" />
-          <ConnectorPoint PointX="14.51676842107636" PointY="4.1920450260416642" />
-          <ConnectorPoint PointX="14.683435087743028" PointY="4.1920450260416651" />
-          <ConnectorPoint PointX="14.78125" PointY="4.1920450260416651" />
-          <ConnectorPoint PointX="14.78125" PointY="3.7590950520833331" />
+          <ConnectorPoint PointX="12" PointY="4.1655989583333328" />
+          <ConnectorPoint PointX="13.479166666666666" PointY="4.1655989583333319" />
+          <ConnectorPoint PointX="13.645833333333334" PointY="4.1655989583333328" />
+          <ConnectorPoint PointX="14.482426595245824" PointY="4.1655989583333319" />
+          <ConnectorPoint PointX="14.649093261912492" PointY="4.1655989583333328" />
+          <ConnectorPoint PointX="14.84375" PointY="4.1655989583333328" />
+          <ConnectorPoint PointX="14.84375" PointY="3.7590950520833331" />
         </AssociationConnector>
         <AssociationConnector Association="sparkdbModel.FKSparks" >
           <ConnectorPoint PointX="14.375" PointY="2.1920475260416667" />
@@ -1904,28 +1901,28 @@
         </AssociationConnector>
         <AssociationConnector Association="sparkdbModel.FKEducationalLevels" >
           <ConnectorPoint PointX="10" PointY="7.5" />
-          <ConnectorPoint PointX="10.5" PointY="7.1532194010416656" />
+          <ConnectorPoint PointX="10.5" PointY="6.9609179687499987" />
         </AssociationConnector>
         <AssociationConnector Association="sparkdbModel.FKGenders" >
           <ConnectorPoint PointX="12.5" PointY="7.5" />
-          <ConnectorPoint PointX="12.5" PointY="7.3452194010416658" />
-          <ConnectorPoint PointX="11.660158687500001" PointY="7.3452194010416658" />
-          <ConnectorPoint PointX="11.660158687500001" PointY="7.1532194010416656" />
+          <ConnectorPoint PointX="12.5" PointY="7.2609179687499976" />
+          <ConnectorPoint PointX="11.6665069921875" PointY="7.2609179687499976" />
+          <ConnectorPoint PointX="11.6665069921875" PointY="6.9609179687499987" />
         </AssociationConnector>
         <AssociationConnector Association="sparkdbModel.FKPoliticalIdeologies" >
           <ConnectorPoint PointX="14.5" PointY="7.5" />
-          <ConnectorPoint PointX="14.5" PointY="4.4710250130208262" />
-          <ConnectorPoint PointX="13.645833333333334" PointY="4.4710250130208253" />
-          <ConnectorPoint PointX="13.479166666666666" PointY="4.4710250130208262" />
-          <ConnectorPoint PointX="12" PointY="4.4710250130208262" />
+          <ConnectorPoint PointX="14.5" PointY="4.515625" />
+          <ConnectorPoint PointX="13.645833333333334" PointY="4.5156249999999991" />
+          <ConnectorPoint PointX="13.479166666666666" PointY="4.515625" />
+          <ConnectorPoint PointX="12" PointY="4.515625" />
         </AssociationConnector>
         <AssociationConnector Association="sparkdbModel.FKProfilesCreatedBy" >
           <ConnectorPoint PointX="12" PointY="2.3843489583333328" />
           <ConnectorPoint PointX="12.875" PointY="2.3843489583333328" />
         </AssociationConnector>
         <AssociationConnector Association="sparkdbModel.FKReligions" >
-          <ConnectorPoint PointX="10.984377250000001" PointY="7.5" />
-          <ConnectorPoint PointX="10.984377250000001" PointY="7.1532194010416656" />
+          <ConnectorPoint PointX="10.854007492187499" PointY="7.5" />
+          <ConnectorPoint PointX="10.854007492187499" PointY="6.9609179687499987" />
         </AssociationConnector>
         <AssociationConnector Association="sparkdbModel.FK_sparkinterestvotes_profiles" >
           <ConnectorPoint PointX="12" PointY="5.8362939453125" />
@@ -1958,30 +1955,30 @@
           <ConnectorPoint PointX="17.65625" PointY="6.5" />
         </AssociationConnector>
         <AssociationConnector Association="sparkdbModel.FK_influencegains_profiles" >
-          <ConnectorPoint PointX="11.046873999999999" PointY="0.75" />
-          <ConnectorPoint PointX="11.046873999999999" PointY="0.25" />
-          <ConnectorPoint PointX="11.471355666666666" PointY="0.24999999999999942" />
-          <ConnectorPoint PointX="11.638022333333334" PointY="0.25" />
-          <ConnectorPoint PointX="16.625" PointY="0.25" />
-          <ConnectorPoint PointX="16.625" PointY="1.2540003665771491" />
-          <ConnectorPoint PointX="16.791666666666668" PointY="1.2540003665771484" />
-          <ConnectorPoint PointX="16.958333333333332" PointY="1.2540003665771491" />
-          <ConnectorPoint PointX="17.25" PointY="1.2540003665771491" />
+          <ConnectorPoint PointX="11.0781265" PointY="0.75" />
+          <ConnectorPoint PointX="11.0781265" PointY="0.25" />
+          <ConnectorPoint PointX="11.486981916666666" PointY="0.24999999999999942" />
+          <ConnectorPoint PointX="11.653648583333334" PointY="0.25" />
+          <ConnectorPoint PointX="16.75" PointY="0.25" />
+          <ConnectorPoint PointX="16.75" PointY="1.9035953776041694" />
+          <ConnectorPoint PointX="16.791666666666668" PointY="1.9035953776041685" />
+          <ConnectorPoint PointX="17.020833333333332" PointY="1.9035953776041694" />
+          <ConnectorPoint PointX="17.25" PointY="1.9035953776041694" />
         </AssociationConnector>
         <AssociationConnector Association="sparkdbModel.FK_influencegains_profiles_2" >
-          <ConnectorPoint PointX="11.554689" PointY="0.75" />
-          <ConnectorPoint PointX="11.554689" PointY="0.125" />
+          <ConnectorPoint PointX="11.57031525" PointY="0.75" />
+          <ConnectorPoint PointX="11.57031525" PointY="0.125" />
           <ConnectorPoint PointX="16.875" PointY="0.125" />
-          <ConnectorPoint PointX="16.875" PointY="1.8302540053914413" />
-          <ConnectorPoint PointX="17.25" PointY="1.8302540053914413" />
+          <ConnectorPoint PointX="16.875" PointY="2.5741450664062548" />
+          <ConnectorPoint PointX="17.25" PointY="2.5741450664062548" />
         </AssociationConnector>
         <AssociationConnector Association="sparkdbModel.FK_influencegains_subjectmatters" >
           <ConnectorPoint PointX="16.5" PointY="4.5623066923076925" />
-          <ConnectorPoint PointX="16.691074434901122" PointY="4.3712322574065716" />
-          <ConnectorPoint PointX="16.808925565098878" PointY="4.2533811272088142" />
+          <ConnectorPoint PointX="16.659824434901122" PointY="4.4024822574065716" />
+          <ConnectorPoint PointX="16.777675565098878" PointY="4.2846311272088142" />
           <ConnectorPoint PointX="16.9375" PointY="4.1248066923076934" />
-          <ConnectorPoint PointX="16.9375" PointY="2.5374743802998907" />
-          <ConnectorPoint PointX="17.25" PointY="2.5374743802998907" />
+          <ConnectorPoint PointX="16.9375" PointY="1.233045688802084" />
+          <ConnectorPoint PointX="17.25" PointY="1.233045688802084" />
         </AssociationConnector>
         <AssociationConnector Association="sparkdbModel.FK__sparks" >
           <ConnectorPoint PointX="14.375" PointY="0.53125" />
@@ -1989,9 +1986,7 @@
           <ConnectorPoint PointX="15.240256410256411" PointY="0.53125" />
           <ConnectorPoint PointX="15.520128205128204" PointY="0.53124999999999944" />
           <ConnectorPoint PointX="15.686794871794872" PointY="0.53125" />
-          <ConnectorPoint PointX="16.541666666666668" PointY="0.53124999999999944" />
-          <ConnectorPoint PointX="16.708333333333332" PointY="0.53125" />
-          <ConnectorPoint PointX="16.791666666666668" PointY="0.53124999999999944" />
+          <ConnectorPoint PointX="16.666666666666668" PointY="0.531249999999999" />
           <ConnectorPoint PointX="16.958333333333332" PointY="0.53125" />
           <ConnectorPoint PointX="18.84375" PointY="0.53125" />
           <ConnectorPoint PointX="18.84375" PointY="6.5" />
@@ -2011,70 +2006,72 @@
         <EntityTypeShape EntityType="sparkdbModel.commentvotes" Width="1.5" PointX="15.5" PointY="7.125" Height="2.172587890624996" />
         <EntityTypeShape EntityType="sparkdbModel.heat" Width="1.5" PointX="15.5" PointY="9.5" Height="2.3648893229166674" />
         <AssociationConnector Association="sparkdbModel.FK__comments" >
-          <ConnectorPoint PointX="16.125" PointY="3.1482847161916121" />
-          <ConnectorPoint PointX="16.75" PointY="3.1482847161916121" />
-          <ConnectorPoint PointX="16.75" PointY="7.125" />
+          <ConnectorPoint PointX="16.125" PointY="3.166620059244794" />
+          <ConnectorPoint PointX="16.71875" PointY="3.166620059244794" />
+          <ConnectorPoint PointX="16.71875" PointY="7.125" />
         </AssociationConnector>
         <AssociationConnector Association="sparkdbModel.FK_Heat_comments" >
-          <ConnectorPoint PointX="15.484376999999999" PointY="3.7590950520833331" />
-          <ConnectorPoint PointX="15.484376999999999" PointY="4.25" />
-          <ConnectorPoint PointX="14.6875" PointY="4.25" />
-          <ConnectorPoint PointX="14.6875" PointY="6.875" />
+          <ConnectorPoint PointX="15.500001999999999" PointY="3.7590950520833331" />
+          <ConnectorPoint PointX="15.500001999999999" PointY="4.25" />
+          <ConnectorPoint PointX="14.75" PointY="4.25" />
+          <ConnectorPoint PointX="14.75" PointY="6.875" />
           <ConnectorPoint PointX="15.25" PointY="6.875" />
-          <ConnectorPoint PointX="15.25" PointY="10.682444661458334" />
-          <ConnectorPoint PointX="15.5" PointY="10.682444661458334" />
+          <ConnectorPoint PointX="15.25" PointY="10.993681826822915" />
+          <ConnectorPoint PointX="15.5" PointY="10.993681826822915" />
         </AssociationConnector>
         <AssociationConnector Association="sparkdbModel.FK__profiles" >
           <ConnectorPoint PointX="12" PointY="4.34375" />
           <ConnectorPoint PointX="13.479166666666666" PointY="4.3437499999999991" />
           <ConnectorPoint PointX="13.645833333333334" PointY="4.34375" />
-          <ConnectorPoint PointX="14.604166666666666" PointY="4.3437499999999991" />
+          <ConnectorPoint PointX="14.666666666666666" PointY="4.3437499999999991" />
           <ConnectorPoint PointX="14.880433214298597" PointY="4.34375" />
-          <ConnectorPoint PointX="16.7187475" PointY="4.34375" />
-          <ConnectorPoint PointX="16.7187475" PointY="7.125" />
+          <ConnectorPoint PointX="16.635223358974361" PointY="4.3437499999999991" />
+          <ConnectorPoint PointX="16.802083333333332" PointY="4.34375" />
+          <ConnectorPoint PointX="16.8125" PointY="4.34375" />
+          <ConnectorPoint PointX="16.8125" PointY="7.125" />
         </AssociationConnector>
         <AssociationConnector Association="sparkdbModel.FK_Heat_profiles" >
-          <ConnectorPoint PointX="11.322267968750001" PointY="7.1532194010416656" />
-          <ConnectorPoint PointX="11.322267968750001" PointY="7.4375" />
+          <ConnectorPoint PointX="11.2602572421875" PointY="6.9609179687499987" />
+          <ConnectorPoint PointX="11.2602572421875" PointY="7.4375" />
           <ConnectorPoint PointX="11.6875" PointY="7.4375" />
-          <ConnectorPoint PointX="11.6875" PointY="10.059970330729172" />
-          <ConnectorPoint PointX="15.166666666666666" PointY="10.059970330729172" />
-          <ConnectorPoint PointX="15.333333333333334" PointY="10.059970330729172" />
-          <ConnectorPoint PointX="15.5" PointY="10.059970330729172" />
+          <ConnectorPoint PointX="11.6875" PointY="10.215588913411462" />
+          <ConnectorPoint PointX="15.166666666666666" PointY="10.215588913411462" />
+          <ConnectorPoint PointX="15.333333333333334" PointY="10.215588913411462" />
+          <ConnectorPoint PointX="15.5" PointY="10.215588913411462" />
         </AssociationConnector>
         <EntityTypeShape EntityType="sparkdbModel.constants" Width="1.5" PointX="1.125" PointY="0.5" Height="1.5956835937500067" />
-        <EntityTypeShape EntityType="sparkdbModel.subjectmatterspreads" Width="1.5" PointX="19.125" PointY="3.25" Height="2.1725878906249996" />
+        <EntityTypeShape EntityType="sparkdbModel.subjectmatterspreads" Width="1.5" PointX="19.125" PointY="3.25" Height="2.1725878906249996" IsExpanded="true" />
         <AssociationConnector Association="sparkdbModel.FK__subjectmatters" >
-          <ConnectorPoint PointX="16.5" PointY="5.7875543066406259" />
-          <ConnectorPoint PointX="16.635414166666667" PointY="5.787554306640625" />
-          <ConnectorPoint PointX="16.833333333333332" PointY="5.7875543066406259" />
-          <ConnectorPoint PointX="17.572916666666668" PointY="5.787554306640625" />
-          <ConnectorPoint PointX="17.739583333333332" PointY="5.7875543066406259" />
-          <ConnectorPoint PointX="17.979166666666668" PointY="5.787554306640625" />
-          <ConnectorPoint PointX="18.145833333333332" PointY="5.7875543066406259" />
-          <ConnectorPoint PointX="18.385416666666668" PointY="5.787554306640625" />
-          <ConnectorPoint PointX="18.552083333333332" PointY="5.7875543066406259" />
-          <ConnectorPoint PointX="18.760416666666668" PointY="5.787554306640625" />
-          <ConnectorPoint PointX="18.927083333333332" PointY="5.7875543066406259" />
-          <ConnectorPoint PointX="19.471351041666669" PointY="5.787554306640625" />
-          <ConnectorPoint PointX="19.638017708333333" PointY="5.7875543066406259" />
-          <ConnectorPoint PointX="20.04687375" PointY="5.7875543066406259" />
-          <ConnectorPoint PointX="20.04687375" PointY="5.422587890625" />
+          <ConnectorPoint PointX="16.5" PointY="5.7441059571024571" />
+          <ConnectorPoint PointX="16.635416666666668" PointY="5.7441059571024562" />
+          <ConnectorPoint PointX="16.895833333333332" PointY="5.7441059571024571" />
+          <ConnectorPoint PointX="17.572916666666668" PointY="5.7441059571024562" />
+          <ConnectorPoint PointX="17.739583333333332" PointY="5.7441059571024571" />
+          <ConnectorPoint PointX="17.979166666666668" PointY="5.7441059571024562" />
+          <ConnectorPoint PointX="18.145833333333332" PointY="5.7441059571024571" />
+          <ConnectorPoint PointX="18.385416666666668" PointY="5.7441059571024562" />
+          <ConnectorPoint PointX="18.552083333333332" PointY="5.7441059571024571" />
+          <ConnectorPoint PointX="18.760416666666668" PointY="5.7441059571024562" />
+          <ConnectorPoint PointX="18.927083333333332" PointY="5.7441059571024571" />
+          <ConnectorPoint PointX="19.504432281901042" PointY="5.7441059571024562" />
+          <ConnectorPoint PointX="19.671098948567707" PointY="5.7441059571024571" />
+          <ConnectorPoint PointX="20.113036230468751" PointY="5.7441059571024571" />
+          <ConnectorPoint PointX="20.113036230468751" PointY="5.422587890625" />
         </AssociationConnector>
         <AssociationConnector Association="sparkdbModel.FK__subjectmatters_2" >
-          <ConnectorPoint PointX="16.5" PointY="6.1437796533203128" />
-          <ConnectorPoint PointX="16.635414166666667" PointY="6.143779653320312" />
-          <ConnectorPoint PointX="16.833333333333332" PointY="6.1437796533203128" />
-          <ConnectorPoint PointX="17.572916666666668" PointY="6.143779653320312" />
-          <ConnectorPoint PointX="17.739583333333332" PointY="6.1437796533203128" />
-          <ConnectorPoint PointX="17.979166666666668" PointY="6.143779653320312" />
-          <ConnectorPoint PointX="18.145833333333332" PointY="6.1437796533203128" />
-          <ConnectorPoint PointX="18.385416666666668" PointY="6.143779653320312" />
-          <ConnectorPoint PointX="18.552083333333332" PointY="6.1437796533203128" />
-          <ConnectorPoint PointX="18.760416666666668" PointY="6.143779653320312" />
-          <ConnectorPoint PointX="18.927083333333332" PointY="6.1437796533203128" />
-          <ConnectorPoint PointX="19.554684375" PointY="6.1437796533203128" />
-          <ConnectorPoint PointX="19.554684375" PointY="5.422587890625" />
+          <ConnectorPoint PointX="16.5" PointY="6.1220554785512293" />
+          <ConnectorPoint PointX="16.635416666666668" PointY="6.1220554785512284" />
+          <ConnectorPoint PointX="16.895833333333332" PointY="6.1220554785512293" />
+          <ConnectorPoint PointX="17.572916666666668" PointY="6.1220554785512284" />
+          <ConnectorPoint PointX="17.739583333333332" PointY="6.1220554785512293" />
+          <ConnectorPoint PointX="17.979166666666668" PointY="6.1220554785512284" />
+          <ConnectorPoint PointX="18.145833333333332" PointY="6.1220554785512293" />
+          <ConnectorPoint PointX="18.385416666666668" PointY="6.1220554785512284" />
+          <ConnectorPoint PointX="18.552083333333332" PointY="6.1220554785512293" />
+          <ConnectorPoint PointX="18.760416666666668" PointY="6.1220554785512284" />
+          <ConnectorPoint PointX="18.927083333333332" PointY="6.1220554785512293" />
+          <ConnectorPoint PointX="19.587765615234375" PointY="6.1220554785512293" />
+          <ConnectorPoint PointX="19.587765615234375" PointY="5.422587890625" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>
