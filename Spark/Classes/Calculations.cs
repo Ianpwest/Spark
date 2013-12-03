@@ -178,7 +178,10 @@ namespace Spark.Classes
                     continue;
 
                 double dblOffset = 0;
-                TimeSpan tsToday = DateTime.Now - kvp.Key.dDateCreated;
+                if (kvp.Key.dDateCreated == null)
+                    continue;
+
+                TimeSpan tsToday = (TimeSpan)(DateTime.Now - kvp.Key.dDateCreated);
                 int nXValue = tsToday.Days;
 
                 dblOffset = Math.Pow(Math.E, nXValue - dblConstantShifter);

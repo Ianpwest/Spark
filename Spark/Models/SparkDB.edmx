@@ -160,8 +160,8 @@
           </Key>
           <Property Name="PK" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="strUserName" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="strPassword" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="strSalt" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="strPassword" Type="varchar" MaxLength="50" />
+          <Property Name="strSalt" Type="varchar" MaxLength="50" />
           <Property Name="bIsActivated" Type="bit" Nullable="false" />
           <Property Name="strEmail" Type="varchar" MaxLength="100" />
           <Property Name="gActivationGUID" Type="char" MaxLength="16" />
@@ -298,11 +298,11 @@
           <Property Name="PK" Type="int" Nullable="false" />
           <Property Name="FKSubjectMatters" Type="int" Nullable="false" />
           <Property Name="strImagePath" Type="varchar" MaxLength="200" />
-          <Property Name="strTopic" Type="varchar" Nullable="false" MaxLength="250" />
-          <Property Name="strDescription" Type="varchar" Nullable="false" MaxLength="1500" />
+          <Property Name="strTopic" Type="varchar" MaxLength="250" />
+          <Property Name="strDescription" Type="varchar" MaxLength="1500" />
           <Property Name="FKProfilesCreatedBy" Type="int" Nullable="false" />
-          <Property Name="dDateCreated" Type="datetime" Nullable="false" />
-          <Property Name="dDateModified" Type="datetime" Nullable="false" />
+          <Property Name="dDateCreated" Type="datetime" />
+          <Property Name="dDateModified" Type="datetime" />
         </EntityType>
         <EntityType Name="sparks_categories">
           <Key>
@@ -1085,12 +1085,12 @@
             <PropertyRef Name="PK" />
           </Key>
           <Property Type="Int32" Name="PK" Nullable="false" />
-          <Property Type="String" Name="strImagePath" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="strTopic" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="strDescription" Nullable="false" MaxLength="1500" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="strImagePath" MaxLength="200" FixedLength="false" Unicode="false" Nullable="true" />
+          <Property Type="String" Name="strTopic" MaxLength="250" FixedLength="false" Unicode="false" Nullable="true" />
+          <Property Type="String" Name="strDescription" Nullable="true" MaxLength="1500" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="FKProfilesCreatedBy" Nullable="false" />
-          <Property Type="DateTime" Name="dDateCreated" Nullable="false" />
-          <Property Type="DateTime" Name="dDateModified" Nullable="false" />
+          <Property Type="DateTime" Name="dDateCreated" Nullable="true" />
+          <Property Type="DateTime" Name="dDateModified" Nullable="true" />
           <NavigationProperty Name="comments" Relationship="sparkdbModel.FKSparks" FromRole="sparks" ToRole="comments" />
           <NavigationProperty Name="profiles" Relationship="sparkdbModel.FKProfilesCreatedBy" FromRole="sparks" ToRole="profiles" />
           <NavigationProperty Name="sparkinterestvotes" Relationship="sparkdbModel.FK_sparkinterestvotes_sparks" FromRole="sparks" ToRole="sparkinterestvotes" />

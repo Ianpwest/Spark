@@ -3964,21 +3964,13 @@ namespace Spark.Models
         /// Create a new sparks object.
         /// </summary>
         /// <param name="pK">Initial value of the PK property.</param>
-        /// <param name="strTopic">Initial value of the strTopic property.</param>
-        /// <param name="strDescription">Initial value of the strDescription property.</param>
         /// <param name="fKProfilesCreatedBy">Initial value of the FKProfilesCreatedBy property.</param>
-        /// <param name="dDateCreated">Initial value of the dDateCreated property.</param>
-        /// <param name="dDateModified">Initial value of the dDateModified property.</param>
         /// <param name="fKSubjectMatters">Initial value of the FKSubjectMatters property.</param>
-        public static sparks Createsparks(global::System.Int32 pK, global::System.String strTopic, global::System.String strDescription, global::System.Int32 fKProfilesCreatedBy, global::System.DateTime dDateCreated, global::System.DateTime dDateModified, global::System.Int32 fKSubjectMatters)
+        public static sparks Createsparks(global::System.Int32 pK, global::System.Int32 fKProfilesCreatedBy, global::System.Int32 fKSubjectMatters)
         {
             sparks sparks = new sparks();
             sparks.PK = pK;
-            sparks.strTopic = strTopic;
-            sparks.strDescription = strDescription;
             sparks.FKProfilesCreatedBy = fKProfilesCreatedBy;
-            sparks.dDateCreated = dDateCreated;
-            sparks.dDateModified = dDateModified;
             sparks.FKSubjectMatters = fKSubjectMatters;
             return sparks;
         }
@@ -4041,7 +4033,7 @@ namespace Spark.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String strTopic
         {
@@ -4053,7 +4045,7 @@ namespace Spark.Models
             {
                 OnstrTopicChanging(value);
                 ReportPropertyChanging("strTopic");
-                _strTopic = StructuralObject.SetValidValue(value, false);
+                _strTopic = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("strTopic");
                 OnstrTopicChanged();
             }
@@ -4065,7 +4057,7 @@ namespace Spark.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String strDescription
         {
@@ -4077,7 +4069,7 @@ namespace Spark.Models
             {
                 OnstrDescriptionChanging(value);
                 ReportPropertyChanging("strDescription");
-                _strDescription = StructuralObject.SetValidValue(value, false);
+                _strDescription = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("strDescription");
                 OnstrDescriptionChanged();
             }
@@ -4113,9 +4105,9 @@ namespace Spark.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.DateTime dDateCreated
+        public Nullable<global::System.DateTime> dDateCreated
         {
             get
             {
@@ -4130,16 +4122,16 @@ namespace Spark.Models
                 OndDateCreatedChanged();
             }
         }
-        private global::System.DateTime _dDateCreated;
-        partial void OndDateCreatedChanging(global::System.DateTime value);
+        private Nullable<global::System.DateTime> _dDateCreated;
+        partial void OndDateCreatedChanging(Nullable<global::System.DateTime> value);
         partial void OndDateCreatedChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.DateTime dDateModified
+        public Nullable<global::System.DateTime> dDateModified
         {
             get
             {
@@ -4154,8 +4146,8 @@ namespace Spark.Models
                 OndDateModifiedChanged();
             }
         }
-        private global::System.DateTime _dDateModified;
-        partial void OndDateModifiedChanging(global::System.DateTime value);
+        private Nullable<global::System.DateTime> _dDateModified;
+        partial void OndDateModifiedChanging(Nullable<global::System.DateTime> value);
         partial void OndDateModifiedChanged();
     
         /// <summary>

@@ -1,0 +1,83 @@
+﻿@model Spark.Models.sparks
+
+@{
+    ViewBag.Title = "SparkCreate";
+}
+
+<h2>SparkCreate</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>sparks</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.strImagePath)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.strImagePath)
+            @Html.ValidationMessageFor(model => model.strImagePath)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.strTopic)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.strTopic)
+            @Html.ValidationMessageFor(model => model.strTopic)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.strDescription)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.strDescription)
+            @Html.ValidationMessageFor(model => model.strDescription)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FKProfilesCreatedBy)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FKProfilesCreatedBy)
+            @Html.ValidationMessageFor(model => model.FKProfilesCreatedBy)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.dDateCreated)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.dDateCreated)
+            @Html.ValidationMessageFor(model => model.dDateCreated)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.dDateModified)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.dDateModified)
+            @Html.ValidationMessageFor(model => model.dDateModified)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FKSubjectMatters)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FKSubjectMatters)
+            @Html.ValidationMessageFor(model => model.FKSubjectMatters)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -144,5 +144,26 @@ namespace Spark.Classes
 
             return account;
         }
+
+        internal static void CreateSpark(sparks sparkModel)
+        {
+            // Do stuff
+            sparks sparkNew = new sparks();
+
+            sparkNew.strImagePath = sparkModel.strImagePath;
+            sparkNew.strDescription = sparkModel.strDescription;
+            sparkNew.strTopic = sparkModel.strTopic;
+            sparkNew.FKSubjectMatters = sparkModel.FKSubjectMatters;
+            sparkNew.FKProfilesCreatedBy = sparkModel.FKProfilesCreatedBy;
+            try
+            {
+                m_db.AddTosparks(sparkNew);
+                m_db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                // log ex.
+            }
+        }
     }
 }
