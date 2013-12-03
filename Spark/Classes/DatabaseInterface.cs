@@ -66,6 +66,25 @@ namespace Spark.Classes
         }
 
         /// <summary>
+        /// Adds an account to the database
+        /// </summary>
+        /// <param name="account">Account to add</param>
+        /// <returns>Success</returns>
+        public static bool AddAccount(accounts account)
+        {
+            try
+            {
+                m_db.accounts.AddObject(account);
+                m_db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Tries to register an account given a registration model
         /// </summary>
         /// <param name="rm">Register Model to register</param>

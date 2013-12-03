@@ -34,6 +34,10 @@ namespace Spark.Models
         [Display(Name = "User name")]
         public string UserName { get; set; }
 
+        [Required]
+        [Display(Name = "E-mail")]
+        public string Email { get; set; }
+
         public string ExternalLoginData { get; set; }
     }
 

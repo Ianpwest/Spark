@@ -8,9 +8,14 @@ using Spark.Models;
 using System.Web.Security;
 using System.Net.Mail;
 using System.Net;
+using Microsoft.Web.WebPages.OAuth;
+using WebMatrix.WebData;
+using DotNetOpenAuth.AspNet;
+using Spark.Filters;
 
 namespace Spark.Controllers
 {
+    [InitializeSimpleMembership]
     public class AccountController : Controller
     {
         //
@@ -147,5 +152,197 @@ namespace Spark.Controllers
             ViewBag.Activated = "E-mail Sent";
             return View("Activate");
         }
+
+        #region External Login
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult ExternalLogin(string provider, string returnUrl)
+        {
+            //Address to return to on success
+            returnUrl = "/Home";
+            return new ExternalLoginResult(provider, Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
+        }
+
+        //
+        // GET: /Account/ExternalLoginCallback
+
+        [AllowAnonymous]
+        public ActionResult ExternalLoginCallback(string returnUrl)
+        {
+            AuthenticationResult result = OAuthWebSecurity.VerifyAuthentication(Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
+
+            string strUserName = result.UserName;
+            if (result.Provider == "google" && strUserName.Contains('@'))
+                strUserName = strUserName.Substring(0, strUserName.IndexOf('@'));
+
+            if (!result.IsSuccessful)
+            {
+                return RedirectToAction("ExternalLoginFailure");
+            }
+
+            if (DatabaseInterface.AccountExists(strUserName))
+            {
+                FormsAuthentication.SetAuthCookie(strUserName, true);
+
+                //Check to see if the user is activated. If yes set the cookie.
+                var useractivatedCookie = new HttpCookie("activated", "True");
+                useractivatedCookie.Expires = DateTime.Now.AddYears(1);
+                Response.Cookies.Set(useractivatedCookie);
+
+                return RedirectToLocal(returnUrl);
+            }
+
+            else
+            {
+                // User is new, ask for their desired membership name
+                string loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
+                ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
+                ViewBag.ReturnUrl = returnUrl;
+
+                //If using google instead of using full email address use only first part before @ and send the full name as
+                //an email
+                if (result.Provider == "google")
+                {
+                    return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = strUserName, Email = result.UserName, ExternalLoginData = loginData });
+                }
+
+                return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = strUserName, ExternalLoginData = loginData });
+            }
+        }
+
+        //
+        // POST: /Account/ExternalLoginConfirmation
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult ExternalLoginConfirmation(RegisterExternalLoginModel model, string returnUrl)
+        {
+            string provider = null;
+            string providerUserId = null;
+
+            if (User.Identity.IsAuthenticated || !OAuthWebSecurity.TryDeserializeProviderUserId(model.ExternalLoginData, out provider, out providerUserId))
+            {
+                return RedirectToAction("Manage");
+            }
+
+            if (ModelState.IsValid)
+            {
+                // Insert a new user into the database
+                using (UsersContext db = new UsersContext())
+                {
+                    string strUserName = model.UserName;
+
+                    //Check the user name as the first part of the email
+                    if (provider == "google" && strUserName.Contains('@'))
+                        strUserName = strUserName.Substring(0, strUserName.IndexOf('@'));
+
+                    // Check if user already exists
+                    if (!DatabaseInterface.AccountExists(model.UserName))
+                    {
+                        // Insert into the accounts table
+                        accounts account = new accounts { strUserName = model.UserName, strEmail = model.Email, bIsActivated = true };
+                        DatabaseInterface.AddAccount(account);
+
+                        OAuthWebSecurity.Login(provider, providerUserId, createPersistentCookie: false);
+
+                        FormsAuthentication.SetAuthCookie(account.strUserName, true);
+
+                        //Check to see if the user is activated. If yes set the cookie.
+                        var useractivatedCookie = new HttpCookie("activated", "True");
+                        useractivatedCookie.Expires = DateTime.Now.AddYears(1);
+                        Response.Cookies.Set(useractivatedCookie);
+
+                        return RedirectToLocal(returnUrl);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("UserName", "User name already exists. Please enter a different user name.");
+                    }
+                }
+            }
+
+            ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(provider).DisplayName;
+            ViewBag.ReturnUrl = returnUrl;
+            return View(model);
+        }
+
+        //
+        // GET: /Account/ExternalLoginFailure
+
+        [AllowAnonymous]
+        public ActionResult ExternalLoginFailure()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        [ChildActionOnly]
+        public ActionResult ExternalLoginsList(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return PartialView("_ExternalLoginsListPartial", OAuthWebSecurity.RegisteredClientData);
+        }
+
+        [ChildActionOnly]
+        public ActionResult RemoveExternalLogins()
+        {
+            ICollection<OAuthAccount> accounts = OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name);
+            List<ExternalLogin> externalLogins = new List<ExternalLogin>();
+            foreach (OAuthAccount account in accounts)
+            {
+                AuthenticationClientData clientData = OAuthWebSecurity.GetOAuthClientData(account.Provider);
+
+                externalLogins.Add(new ExternalLogin
+                {
+                    Provider = account.Provider,
+                    ProviderDisplayName = clientData.DisplayName,
+                    ProviderUserId = account.ProviderUserId,
+                });
+            }
+
+            ViewBag.ShowRemoveButton = externalLogins.Count > 1 || OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+            return PartialView("_RemoveExternalLoginsPartial", externalLogins);
+        }
+
+        private ActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        public enum ManageMessageId
+        {
+            ChangePasswordSuccess,
+            SetPasswordSuccess,
+            RemoveLoginSuccess,
+        }
+
+        internal class ExternalLoginResult : ActionResult
+        {
+            public ExternalLoginResult(string provider, string returnUrl)
+            {
+                Provider = provider;
+                ReturnUrl = returnUrl;
+            }
+
+            public string Provider { get; private set; }
+            public string ReturnUrl { get; private set; }
+
+            public override void ExecuteResult(ControllerContext context)
+            {
+                OAuthWebSecurity.RequestAuthentication(Provider, ReturnUrl);
+            }
+        }
+
+        #endregion
     }
 }
