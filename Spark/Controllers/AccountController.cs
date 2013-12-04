@@ -15,7 +15,6 @@ using Spark.Filters;
 
 namespace Spark.Controllers
 {
-    [InitializeSimpleMembership]
     public class AccountController : Controller
     {
         //
