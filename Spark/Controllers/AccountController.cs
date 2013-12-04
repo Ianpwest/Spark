@@ -11,7 +11,6 @@ using System.Net;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using DotNetOpenAuth.AspNet;
-using Spark.Filters;
 
 namespace Spark.Controllers
 {
