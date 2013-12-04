@@ -229,37 +229,35 @@ namespace Spark.Controllers
             if (ModelState.IsValid)
             {
                 // Insert a new user into the database
-                using (UsersContext db = new UsersContext())
+                string strUserName = model.UserName;
+
+                //Check the user name as the first part of the email
+                if (provider == "google" && strUserName.Contains('@'))
+                    strUserName = strUserName.Substring(0, strUserName.IndexOf('@'));
+
+                // Check if user already exists
+                if (!DatabaseInterface.AccountExists(model.UserName))
                 {
-                    string strUserName = model.UserName;
+                    // Insert into the accounts table
+                    accounts account = new accounts { strUserName = model.UserName, strEmail = model.Email, bIsActivated = true };
+                    DatabaseInterface.AddAccount(account);
 
-                    //Check the user name as the first part of the email
-                    if (provider == "google" && strUserName.Contains('@'))
-                        strUserName = strUserName.Substring(0, strUserName.IndexOf('@'));
+                    //OAuthWebSecurity.Login(provider, providerUserId, createPersistentCookie: false);
 
-                    // Check if user already exists
-                    if (!DatabaseInterface.AccountExists(model.UserName))
-                    {
-                        // Insert into the accounts table
-                        accounts account = new accounts { strUserName = model.UserName, strEmail = model.Email, bIsActivated = true };
-                        DatabaseInterface.AddAccount(account);
+                    FormsAuthentication.SetAuthCookie(account.strUserName, true);
 
-                        OAuthWebSecurity.Login(provider, providerUserId, createPersistentCookie: false);
+                    //Check to see if the user is activated. If yes set the cookie.
+                    var useractivatedCookie = new HttpCookie("activated", "True");
+                    useractivatedCookie.Expires = DateTime.Now.AddYears(1);
+                    Response.Cookies.Set(useractivatedCookie);
 
-                        FormsAuthentication.SetAuthCookie(account.strUserName, true);
-
-                        //Check to see if the user is activated. If yes set the cookie.
-                        var useractivatedCookie = new HttpCookie("activated", "True");
-                        useractivatedCookie.Expires = DateTime.Now.AddYears(1);
-                        Response.Cookies.Set(useractivatedCookie);
-
-                        return RedirectToLocal(returnUrl);
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("UserName", "User name already exists. Please enter a different user name.");
-                    }
+                    return RedirectToLocal(returnUrl);
                 }
+                else
+                {
+                    ModelState.AddModelError("UserName", "User name already exists. Please enter a different user name.");
+                }
+                
             }
 
             ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(provider).DisplayName;

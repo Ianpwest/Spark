@@ -17,7 +17,7 @@ namespace Spark.Classes
         /// Used to calculate a particular user's total influence.
         /// </summary>
         /// <returns></returns>
-        public static double Influence(UserProfile userCurrent, sparkdbEntities dbModel, int nSubjectMatterId)
+        public static double Influence(accounts userCurrent, sparkdbEntities dbModel, int nSubjectMatterId)
         {
             double dblInfluence = 0;
 
@@ -28,16 +28,16 @@ namespace Spark.Classes
             return dblInfluence;
         }
 
-        private static double GetBaseInfluence(UserProfile userCurrent, sparkdbEntities dbModel, int nSubjectMatterId)
+        private static double GetBaseInfluence(accounts userCurrent, sparkdbEntities dbModel, int nSubjectMatterId)
         {
             double dblBase = 0;
 
             // Returns the number of positive votes minus the number of negative votes from the gains table to get the absolute scale.
             dblBase  = (from influencegains influencegain in dbModel.influencegains
-                        where influencegain.FKProfilesReceived == userCurrent.UserId && influencegain.bIsPositive == true && influencegain.FKSubjectMatters == nSubjectMatterId
+                        where influencegain.FKProfilesReceived == userCurrent.PK && influencegain.bIsPositive == true && influencegain.FKSubjectMatters == nSubjectMatterId
                         select influencegain).Count() -
                         (from influencegains influencegain in dbModel.influencegains
-                        where influencegain.FKProfilesReceived == userCurrent.UserId && influencegain.bIsPositive == false && influencegain.FKSubjectMatters == nSubjectMatterId
+                        where influencegain.FKProfilesReceived == userCurrent.PK && influencegain.bIsPositive == false && influencegain.FKSubjectMatters == nSubjectMatterId
                         select influencegain).Count();
 
             double nConstant = 1;
@@ -49,13 +49,13 @@ namespace Spark.Classes
             return dblBase;
         }
 
-        private static double GetUserAddons(UserProfile userCurrent, sparkdbEntities dbModel, int nSubjectMatterId)
+        private static double GetUserAddons(accounts userCurrent, sparkdbEntities dbModel, int nSubjectMatterId)
         {
             double dblUserAddon = 0;
 
             // Queries for all of the userIds of people who contributed to the initial user's influence in the gains table.
             IEnumerable<int> qryAllContributors = from influencegains influence in dbModel.influencegains
-                                                  where influence.FKProfilesReceived == userCurrent.UserId
+                                                  where influence.FKProfilesReceived == userCurrent.PK
                                                   select influence.FKProfilesContributor;
             
             // Attempts to determine the constant to use for userAddon values.
@@ -67,13 +67,13 @@ namespace Spark.Classes
             {
                 // Finds the base influence value for each of the users who contributed to the current user's influence.
                 // Multiplies the base value found by a constant, then adds it to the running total.
-                dblUserAddon += (GetBaseInfluence(new UserProfile() { UserId = n, UserName = string.Empty }, dbModel, nSubjectMatterId) * nConstant) ;
+                dblUserAddon += (GetBaseInfluence(new accounts() { PK = n, strUserName = string.Empty }, dbModel, nSubjectMatterId) * nConstant) ;
             }
             
             return dblUserAddon;
         }
 
-        private static double GetSpread(UserProfile userCurrent, sparkdbEntities dbModel, int nSubjectMatterId)
+        private static double GetSpread(accounts userCurrent, sparkdbEntities dbModel, int nSubjectMatterId)
         {
             double dblSpread = 0;
 
