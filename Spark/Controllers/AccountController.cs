@@ -18,14 +18,11 @@ namespace Spark.Controllers
     {
         //
         // GET: /Account/
-
         public ActionResult Index()
         {
             return View();
         }
 
-
-        //
         // GET: /Login/
         public ActionResult Login()
         {
@@ -41,6 +38,7 @@ namespace Spark.Controllers
             //Verify the account exists with the given information
             if (DatabaseInterface.VerifyAccount(lm))
             {
+                //Set the authorization cookie with the username
                 FormsAuthentication.SetAuthCookie(lm.UserName, lm.RememberMe);
                
                 //Check to see if the user is activated. If yes set the cookie.
@@ -83,8 +81,11 @@ namespace Spark.Controllers
                 return View(rm);
             }
 
+            //Sends an email for the user to verify that they have a valid email address before they 
+            //are allowed to contribute to the site.
             SendActivationEmail(rm.Email, rm.gActivationGUID.ToString());
 
+            //Set authorization cookie
             FormsAuthentication.SetAuthCookie(rm.UserName, false);
 
             //Tell the user to activate
@@ -92,9 +93,7 @@ namespace Spark.Controllers
             return View("Activate");
         }
 
-        //
         // GET: /Account/LogOff
-
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
@@ -118,10 +117,17 @@ namespace Spark.Controllers
             useractivatedCookie.Expires = DateTime.Now.AddYears(1);
             Response.Cookies.Set(useractivatedCookie);
 
+            //Use the viewbag to let the view know which html to display
             ViewBag.Activated = "True";
             return View();
         }
 
+        /// <summary>
+        /// Method to send an email from our gmail account. Credentials are inside this method for 
+        /// the account.
+        /// </summary>
+        /// <param name="strEmail">E-mail to send to</param>
+        /// <param name="strActivationGUID">Guid to send the user to activate against</param>
         private void SendActivationEmail(string strEmail, string strActivationGUID)
         {
             //Successfully registered
@@ -136,6 +142,10 @@ namespace Spark.Controllers
                         "Please click the link below to activate your account: \r\n\r\n http://localhost:51415/Account/Activate?user=" + strActivationGUID);
         }
 
+        /// <summary>
+        /// Method to resend the activation e-mail if the user did not receive it.
+        /// </summary>
+        /// <returns>View notifying the user</returns>
         public ActionResult ResendActivationEmail()
         {
             accounts account = DatabaseInterface.GetAccount(User.Identity.Name);
@@ -163,15 +173,16 @@ namespace Spark.Controllers
             return new ExternalLoginResult(provider, Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
         }
 
-        //
         // GET: /Account/ExternalLoginCallback
-
         [AllowAnonymous]
         public ActionResult ExternalLoginCallback(string returnUrl)
         {
             AuthenticationResult result = OAuthWebSecurity.VerifyAuthentication(Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
 
             string strUserName = result.UserName;
+
+            //We don't want their email address to be their default username so we extract the first part of their email to 
+            //provide as a default. This only apples to google logins fb defaults fine.
             if (result.Provider == "google" && strUserName.Contains('@'))
                 strUserName = strUserName.Substring(0, strUserName.IndexOf('@'));
 
@@ -179,7 +190,7 @@ namespace Spark.Controllers
             {
                 return RedirectToAction("ExternalLoginFailure");
             }
-
+            //This user already has an account registered with us, go ahead and log them in
             if (DatabaseInterface.AccountExists(strUserName))
             {
                 FormsAuthentication.SetAuthCookie(strUserName, true);
@@ -191,7 +202,7 @@ namespace Spark.Controllers
 
                 return RedirectToLocal(returnUrl);
             }
-
+            //The user has authenticated with the external provider but does not have an account registered with us.
             else
             {
                 // User is new, ask for their desired membership name
@@ -241,8 +252,6 @@ namespace Spark.Controllers
                     // Insert into the accounts table
                     accounts account = new accounts { strUserName = model.UserName, strEmail = model.Email, bIsActivated = true };
                     DatabaseInterface.AddAccount(account);
-
-                    //OAuthWebSecurity.Login(provider, providerUserId, createPersistentCookie: false);
 
                     FormsAuthentication.SetAuthCookie(account.strUserName, true);
 
