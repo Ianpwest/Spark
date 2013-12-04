@@ -370,7 +370,7 @@
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>51415</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://rufio-pc:51415/</IISUrl>
+          <IISUrl>http://localhost:51415/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
