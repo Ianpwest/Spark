@@ -51,12 +51,31 @@ namespace Spark.Classes
         /// </summary>
         /// <param name="strUserName">username to check</param>
         /// <returns>If account already exists</returns>
-        public static bool AccountExists(string strUserName)
+        public static bool AccountUsernameExists(string strUserName)
         {
             bool bExists = false;
 
             int results = (from r in m_db.accounts
                            where r.strUserName == strUserName
+                           select r).Count();
+
+            if (results != 0)
+                return true;
+
+            return bExists;
+        }
+
+        /// <summary>
+        /// Checks to see if an account exists given a email
+        /// </summary>
+        /// <param name="strUserName">username to check</param>
+        /// <returns>If account already exists</returns>
+        public static bool AccountEmailExists(string strEmail)
+        {
+            bool bExists = false;
+
+            int results = (from r in m_db.accounts
+                           where r.strEmail == strEmail
                            select r).Count();
 
             if (results != 0)

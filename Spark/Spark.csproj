@@ -173,6 +173,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\AccountRetrieval.cs" />
     <Compile Include="Models\SparkDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -351,6 +352,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Spark\SparkCreate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\AccountRetrieval.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

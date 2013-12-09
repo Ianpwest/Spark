@@ -68,9 +68,20 @@ namespace Spark.Controllers
         public ActionResult Register(Models.RegisterModel rm)
         {
             //Check to see if the account name is already in use
-            if (DatabaseInterface.AccountExists(rm.UserName))
+            if (DatabaseInterface.AccountUsernameExists(rm.UserName))
             {
                 rm.bFailedRegister = true;
+
+                ViewBag.Status = "Username has already been taken.";
+                return View(rm);
+            }
+
+            //Check to see if the email is already in use
+            if (DatabaseInterface.AccountEmailExists(rm.Email))
+            {
+                rm.bFailedRegister = true;
+
+                ViewBag.Status = "Email has already been registered.";
                 return View(rm);
             }
 
@@ -91,6 +102,17 @@ namespace Spark.Controllers
             //Tell the user to activate
             ViewBag.Activated = "E-mail Sent";
             return View("Activate");
+        }
+
+        public ActionResult AccountRetrieval()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AccountRetrieval(Spark.Models.AccountRetrieval ar)
+        {
+            return View();
         }
 
         // GET: /Account/LogOff
@@ -191,7 +213,7 @@ namespace Spark.Controllers
                 return RedirectToAction("ExternalLoginFailure");
             }
             //This user already has an account registered with us, go ahead and log them in
-            if (DatabaseInterface.AccountExists(strUserName))
+            if (DatabaseInterface.AccountUsernameExists(strUserName))
             {
                 FormsAuthentication.SetAuthCookie(strUserName, true);
 
@@ -247,7 +269,7 @@ namespace Spark.Controllers
                     strUserName = strUserName.Substring(0, strUserName.IndexOf('@'));
 
                 // Check if user already exists
-                if (!DatabaseInterface.AccountExists(model.UserName))
+                if (!DatabaseInterface.AccountUsernameExists(model.UserName))
                 {
                     // Insert into the accounts table
                     accounts account = new accounts { strUserName = model.UserName, strEmail = model.Email, bIsActivated = true };

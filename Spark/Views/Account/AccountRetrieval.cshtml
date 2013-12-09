@@ -1,0 +1,27 @@
+﻿@model Spark.Models.AccountRetrieval
+
+@{
+    ViewBag.Title = "AccountRetrieval";
+}
+
+<h2>Account Retrieval</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Log in Form</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email)
+                @Html.ValidationMessageFor(m => m.Email)
+            </li>
+           
+        </ol>
+        <input type="submit" value="Retrieve" />
+    </fieldset>
+}
+    

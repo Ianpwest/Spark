@@ -7,13 +7,9 @@
     <h1>@ViewBag.Title.</h1>
 
     @{
-    if(Model.bFailedRegister)
+    if(@ViewBag.Status != null)
     {
-        <h2>Failed to register! What do we do here?</h2>
-    }
-    else
-    {
-        <h2>Create a new account.</h2>
+        <h2>@ViewBag.Status</h2>
     }
 }
 </hgroup>
@@ -46,6 +42,10 @@
         <input type="submit" value="Register" />
     </fieldset>
 }
+
+    <p>
+        @Html.ActionLink("Forgot Username/Password?", "AccountRetrieval") if you can't remember your login information
+    </p>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
