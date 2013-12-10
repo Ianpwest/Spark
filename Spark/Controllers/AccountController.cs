@@ -94,13 +94,16 @@ namespace Spark.Controllers
 
             //Sends an email for the user to verify that they have a valid email address before they 
             //are allowed to contribute to the site.
-            SendActivationEmail(rm.Email, rm.gActivationGUID.ToString());
+
+            string strMessage = "Please click the link below to activate your account: \r\n\r\n http://localhost:51415/Account/Activate?user=" + rm.gActivationGUID.ToString();
+            if (Utilities.SendEmail(rm.Email, "Activate your account", strMessage))
+                ViewBag.Activated = "E-mail Sent";
+            else
+                ViewBag.Activated = "False";
 
             //Set authorization cookie
             FormsAuthentication.SetAuthCookie(rm.UserName, false);
 
-            //Tell the user to activate
-            ViewBag.Activated = "E-mail Sent";
             return View("Activate");
         }
 
@@ -112,7 +115,31 @@ namespace Spark.Controllers
         [HttpPost]
         public ActionResult AccountRetrieval(Spark.Models.AccountRetrieval ar)
         {
+            if (DatabaseInterface.ResetAccountSendEmail(ar.Email))
+                ViewBag.Status = "Email Sent";
+            else
+                ViewBag.Status = "Failure-AccountDoesNotExist";
+
+           
             return View();
+        }
+
+        public ActionResult ResetPassword(string user)
+        {
+            //Get the account
+            accounts accountReset = DatabaseInterface.GetAccountByActivationGuid(user);
+
+            string strPassword = DatabaseInterface.ResetAccountPassword(accountReset);
+           
+            if (!string.IsNullOrEmpty(strPassword))
+                ViewBag.Status = "Success";
+            else
+                ViewBag.Status = "Failure";
+
+            ViewBag.Username = accountReset.strUserName;
+            ViewBag.Password = strPassword;
+
+            return View("AccountRetrieval");
         }
 
         // GET: /Account/LogOff
@@ -178,8 +205,13 @@ namespace Spark.Controllers
                 return View("Activate");
             }
 
-            SendActivationEmail(account.strEmail, account.gActivationGUID.ToString());
-            ViewBag.Activated = "E-mail Sent";
+            string strMessage = "Please click the link below to activate your account: \r\n\r\n http://localhost:51415/Account/Activate?user=" + account.gActivationGUID.ToString();
+
+            if (Utilities.SendEmail(account.strEmail, "Activate your account", strMessage))
+                ViewBag.Activated = "E-mail Sent";
+            else
+                ViewBag.Activated = "False";
+
             return View("Activate");
         }
 

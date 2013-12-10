@@ -65,6 +65,54 @@ namespace Spark.Classes
             return bExists;
         }
 
+        public static string ResetAccountPassword(accounts account)
+        {
+            if (account == null)
+                return string.Empty;
+
+            string strTempPassword = System.Web.Security.Membership.GeneratePassword(15, 2);
+            
+            account.strSalt = Utilities.GetSalt();
+            account.strPassword = Utilities.Encrypt(account.strSalt + strTempPassword);
+
+            try
+            {
+                //Save the changes
+                m_db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return string.Empty;
+            }
+
+            return strTempPassword;
+        }
+
+        public static bool ResetAccountSendEmail(string strEmail)
+        {
+            if (string.IsNullOrEmpty(strEmail))
+                return false;
+
+           
+
+            if (AccountEmailExists(strEmail))
+            {
+                //Get the account only if they are using an account through spark not oauth
+                accounts accountReset = (from r in m_db.accounts
+                                         where r.strEmail == strEmail
+                                         && r.gActivationGUID != null
+                                         select r).FirstOrDefault();
+
+                //Use their current activation guid to uniquely identify them.
+                string strMessage = "Click on this link to reset your password: http://localhost:51415/Account/ResetPassword?user=" + accountReset.gActivationGUID;
+                Utilities.SendEmail(accountReset.strEmail, "Account Recovery", strMessage);
+
+                return true;
+            }
+
+            return false;
+        }
+
         /// <summary>
         /// Checks to see if an account exists given a email
         /// </summary>
@@ -176,6 +224,23 @@ namespace Spark.Classes
             accounts account = (from r in m_db.accounts
                                where r.strUserName == strUserName
                                select r).FirstOrDefault();
+
+            if (account == null)
+                return null;
+
+            return account;
+        }
+
+        /// <summary>
+        /// Gets an account given a salt
+        /// </summary>
+        /// <param name="strUserName">salt of account</param>
+        /// <returns>Account</returns>
+        public static accounts GetAccountByActivationGuid(string strActivationGUID)
+        {
+            accounts account = (from r in m_db.accounts
+                                where r.gActivationGUID == strActivationGUID
+                                select r).FirstOrDefault();
 
             if (account == null)
                 return null;

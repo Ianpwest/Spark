@@ -6,22 +6,52 @@
 
 <h2>Account Retrieval</h2>
 
-@using (Html.BeginForm())
+@if(ViewBag.Status == "Success")
 {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+    <p>
+        Username is: @ViewBag.Username
+    </p>
+    <p>
+        Password has been reset to: @ViewBag.Password
+    </p>
+}
+else if (ViewBag.Status == "Failure")
+{
+    <p>
+        Failed to retrieve account.
+    </p>
+}
+else if (ViewBag.Status == "Failure-AccountDoesNotExist")
+{
+    <p>
+        No account is associated with the e-mail address given.
+    </p>
+}
+else if (ViewBag.Status == "Email Sent")
+{
+    <p>
+        E-mail has been sent to the address provided.
+    </p>
+}
+else
+{
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>Log in Form</legend>
-        <ol>
-            <li>
-                @Html.LabelFor(m => m.Email)
-                @Html.TextBoxFor(m => m.Email)
-                @Html.ValidationMessageFor(m => m.Email)
-            </li>
+        <fieldset>
+            <legend>Log in Form</legend>
+            <ol>
+                <li>
+                    @Html.LabelFor(m => m.Email)
+                    @Html.TextBoxFor(m => m.Email)
+                    @Html.ValidationMessageFor(m => m.Email)
+                </li>
            
-        </ol>
-        <input type="submit" value="Retrieve" />
-    </fieldset>
+            </ol>
+            <input type="submit" value="Retrieve" />
+        </fieldset>
+    }
 }
     
