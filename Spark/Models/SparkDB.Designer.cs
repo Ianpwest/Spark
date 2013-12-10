@@ -34,13 +34,9 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("sparkdbModel", "FK_sparkinterestvotes_profiles", "profiles", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.profiles), "sparkinterestvotes", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.sparkinterestvotes), true)]
 [assembly: EdmRelationshipAttribute("sparkdbModel", "FK_sparkinterestvotes_sparks", "sparks", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.sparks), "sparkinterestvotes", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.sparkinterestvotes), true)]
 [assembly: EdmRelationshipAttribute("sparkdbModel", "FK_transactions_accounts", "accounts", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.accounts), "transactions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.transactions), true)]
-[assembly: EdmRelationshipAttribute("sparkdbModel", "FK__categories", "categories", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.categories), "sparks_categories", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.sparks_categories), true)]
-[assembly: EdmRelationshipAttribute("sparkdbModel", "FK__categories_2", "categories", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.categories), "sparks_categories", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.sparks_categories), true)]
-[assembly: EdmRelationshipAttribute("sparkdbModel", "FK__categories_3", "categories", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.categories), "sparks_categories", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.sparks_categories), true)]
 [assembly: EdmRelationshipAttribute("sparkdbModel", "FK_influencegains_profiles", "profiles", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.profiles), "influencegains", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.influencegains), true)]
 [assembly: EdmRelationshipAttribute("sparkdbModel", "FK_influencegains_profiles_2", "profiles", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.profiles), "influencegains", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.influencegains), true)]
 [assembly: EdmRelationshipAttribute("sparkdbModel", "FK_influencegains_subjectmatters", "subjectmatters", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.subjectmatters), "influencegains", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.influencegains), true)]
-[assembly: EdmRelationshipAttribute("sparkdbModel", "FK__sparks", "sparks", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.sparks), "sparks_categories", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.sparks_categories), true)]
 [assembly: EdmRelationshipAttribute("sparkdbModel", "FK_sparks_subjectmatters", "subjectmatters", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.subjectmatters), "sparks", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.sparks), true)]
 [assembly: EdmRelationshipAttribute("sparkdbModel", "FK_transactions_transactionstates", "transactionstates", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.transactionstates), "transactions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.transactions), true)]
 [assembly: EdmRelationshipAttribute("sparkdbModel", "FK_transactions_transactiontypes", "transactiontypes", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.transactiontypes), "transactions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.transactions), true)]
@@ -50,6 +46,10 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("sparkdbModel", "FK_Heat_profiles", "profiles", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.profiles), "heat", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.heat), true)]
 [assembly: EdmRelationshipAttribute("sparkdbModel", "FK__subjectmatters", "subjectmatters", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.subjectmatters), "subjectmatterspreads", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.subjectmatterspreads), true)]
 [assembly: EdmRelationshipAttribute("sparkdbModel", "FK__subjectmatters_2", "subjectmatters", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.subjectmatters), "subjectmatterspreads", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.subjectmatterspreads), true)]
+[assembly: EdmRelationshipAttribute("sparkdbModel", "FK__categories1", "categories", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.categories), "sparkscategory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.sparkscategory), true)]
+[assembly: EdmRelationshipAttribute("sparkdbModel", "FK__categories_21", "categories", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.categories), "sparkscategory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.sparkscategory), true)]
+[assembly: EdmRelationshipAttribute("sparkdbModel", "FK__categories_31", "categories", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.categories), "sparkscategory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.sparkscategory), true)]
+[assembly: EdmRelationshipAttribute("sparkdbModel", "FK__sparks1", "sparks", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.sparks), "sparkscategory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.sparkscategory), true)]
 
 #endregion
 
@@ -328,22 +328,6 @@ namespace Spark.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<sparks_categories> sparks_categories
-        {
-            get
-            {
-                if ((_sparks_categories == null))
-                {
-                    _sparks_categories = base.CreateObjectSet<sparks_categories>("sparks_categories");
-                }
-                return _sparks_categories;
-            }
-        }
-        private ObjectSet<sparks_categories> _sparks_categories;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<subjectmatters> subjectmatters
         {
             get
@@ -468,6 +452,22 @@ namespace Spark.Models
             }
         }
         private ObjectSet<subjectmatterspreads> _subjectmatterspreads;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<sparkscategory> sparkscategories
+        {
+            get
+            {
+                if ((_sparkscategories == null))
+                {
+                    _sparkscategories = base.CreateObjectSet<sparkscategory>("sparkscategories");
+                }
+                return _sparkscategories;
+            }
+        }
+        private ObjectSet<sparkscategory> _sparkscategories;
 
         #endregion
 
@@ -586,14 +586,6 @@ namespace Spark.Models
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the sparks_categories EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTosparks_categories(sparks_categories sparks_categories)
-        {
-            base.AddObject("sparks_categories", sparks_categories);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the subjectmatters EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddTosubjectmatters(subjectmatters subjectmatters)
@@ -655,6 +647,14 @@ namespace Spark.Models
         public void AddTosubjectmatterspreads(subjectmatterspreads subjectmatterspreads)
         {
             base.AddObject("subjectmatterspreads", subjectmatterspreads);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the sparkscategories EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTosparkscategories(sparkscategory sparkscategory)
+        {
+            base.AddObject("sparkscategories", sparkscategory);
         }
 
         #endregion
@@ -1011,18 +1011,18 @@ namespace Spark.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK__categories", "sparks_categories")]
-        public EntityCollection<sparks_categories> sparks_categories
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK__categories1", "sparkscategory")]
+        public EntityCollection<sparkscategory> sparkscategories
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<sparks_categories>("sparkdbModel.FK__categories", "sparks_categories");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<sparkscategory>("sparkdbModel.FK__categories1", "sparkscategory");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<sparks_categories>("sparkdbModel.FK__categories", "sparks_categories", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<sparkscategory>("sparkdbModel.FK__categories1", "sparkscategory", value);
                 }
             }
         }
@@ -1033,18 +1033,18 @@ namespace Spark.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK__categories_2", "sparks_categories")]
-        public EntityCollection<sparks_categories> sparks_categories1
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK__categories_21", "sparkscategory")]
+        public EntityCollection<sparkscategory> sparkscategories1
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<sparks_categories>("sparkdbModel.FK__categories_2", "sparks_categories");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<sparkscategory>("sparkdbModel.FK__categories_21", "sparkscategory");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<sparks_categories>("sparkdbModel.FK__categories_2", "sparks_categories", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<sparkscategory>("sparkdbModel.FK__categories_21", "sparkscategory", value);
                 }
             }
         }
@@ -1055,18 +1055,18 @@ namespace Spark.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK__categories_3", "sparks_categories")]
-        public EntityCollection<sparks_categories> sparks_categories2
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK__categories_31", "sparkscategory")]
+        public EntityCollection<sparkscategory> sparkscategories2
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<sparks_categories>("sparkdbModel.FK__categories_3", "sparks_categories");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<sparkscategory>("sparkdbModel.FK__categories_31", "sparkscategory");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<sparks_categories>("sparkdbModel.FK__categories_3", "sparks_categories", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<sparkscategory>("sparkdbModel.FK__categories_31", "sparkscategory", value);
                 }
             }
         }
@@ -4267,28 +4267,6 @@ namespace Spark.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK__sparks", "sparks_categories")]
-        public EntityCollection<sparks_categories> sparks_categories
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<sparks_categories>("sparkdbModel.FK__sparks", "sparks_categories");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<sparks_categories>("sparkdbModel.FK__sparks", "sparks_categories", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK_sparks_subjectmatters", "subjectmatters")]
         public subjectmatters subjectmatters
         {
@@ -4320,6 +4298,28 @@ namespace Spark.Models
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK__sparks1", "sparkscategory")]
+        public EntityCollection<sparkscategory> sparkscategories
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<sparkscategory>("sparkdbModel.FK__sparks1", "sparkscategory");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<sparkscategory>("sparkdbModel.FK__sparks1", "sparkscategory", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -4328,30 +4328,30 @@ namespace Spark.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="sparkdbModel", Name="sparks_categories")]
+    [EdmEntityTypeAttribute(NamespaceName="sparkdbModel", Name="sparkscategory")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class sparks_categories : EntityObject
+    public partial class sparkscategory : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new sparks_categories object.
+        /// Create a new sparkscategory object.
         /// </summary>
         /// <param name="pK">Initial value of the PK property.</param>
         /// <param name="fKSparks">Initial value of the FKSparks property.</param>
         /// <param name="fKCategories1">Initial value of the FKCategories1 property.</param>
         /// <param name="fKCategories2">Initial value of the FKCategories2 property.</param>
         /// <param name="fKCategories3">Initial value of the FKCategories3 property.</param>
-        public static sparks_categories Createsparks_categories(global::System.Int32 pK, global::System.Int32 fKSparks, global::System.Int32 fKCategories1, global::System.Int32 fKCategories2, global::System.Int32 fKCategories3)
+        public static sparkscategory Createsparkscategory(global::System.Int32 pK, global::System.Int32 fKSparks, global::System.Int32 fKCategories1, global::System.Int32 fKCategories2, global::System.Int32 fKCategories3)
         {
-            sparks_categories sparks_categories = new sparks_categories();
-            sparks_categories.PK = pK;
-            sparks_categories.FKSparks = fKSparks;
-            sparks_categories.FKCategories1 = fKCategories1;
-            sparks_categories.FKCategories2 = fKCategories2;
-            sparks_categories.FKCategories3 = fKCategories3;
-            return sparks_categories;
+            sparkscategory sparkscategory = new sparkscategory();
+            sparkscategory.PK = pK;
+            sparkscategory.FKSparks = fKSparks;
+            sparkscategory.FKCategories1 = fKCategories1;
+            sparkscategory.FKCategories2 = fKCategories2;
+            sparkscategory.FKCategories3 = fKCategories3;
+            return sparkscategory;
         }
 
         #endregion
@@ -4492,16 +4492,16 @@ namespace Spark.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK__categories", "categories")]
-        public categories categories
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK__categories1", "categories")]
+        public categories category
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<categories>("sparkdbModel.FK__categories", "categories").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<categories>("sparkdbModel.FK__categories1", "categories").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<categories>("sparkdbModel.FK__categories", "categories").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<categories>("sparkdbModel.FK__categories1", "categories").Value = value;
             }
         }
         /// <summary>
@@ -4509,17 +4509,17 @@ namespace Spark.Models
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<categories> categoriesReference
+        public EntityReference<categories> categoryReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<categories>("sparkdbModel.FK__categories", "categories");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<categories>("sparkdbModel.FK__categories1", "categories");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<categories>("sparkdbModel.FK__categories", "categories", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<categories>("sparkdbModel.FK__categories1", "categories", value);
                 }
             }
         }
@@ -4530,16 +4530,16 @@ namespace Spark.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK__categories_2", "categories")]
-        public categories categories1
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK__categories_21", "categories")]
+        public categories category1
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<categories>("sparkdbModel.FK__categories_2", "categories").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<categories>("sparkdbModel.FK__categories_21", "categories").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<categories>("sparkdbModel.FK__categories_2", "categories").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<categories>("sparkdbModel.FK__categories_21", "categories").Value = value;
             }
         }
         /// <summary>
@@ -4547,17 +4547,17 @@ namespace Spark.Models
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<categories> categories1Reference
+        public EntityReference<categories> category1Reference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<categories>("sparkdbModel.FK__categories_2", "categories");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<categories>("sparkdbModel.FK__categories_21", "categories");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<categories>("sparkdbModel.FK__categories_2", "categories", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<categories>("sparkdbModel.FK__categories_21", "categories", value);
                 }
             }
         }
@@ -4568,16 +4568,16 @@ namespace Spark.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK__categories_3", "categories")]
-        public categories categories2
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK__categories_31", "categories")]
+        public categories category2
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<categories>("sparkdbModel.FK__categories_3", "categories").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<categories>("sparkdbModel.FK__categories_31", "categories").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<categories>("sparkdbModel.FK__categories_3", "categories").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<categories>("sparkdbModel.FK__categories_31", "categories").Value = value;
             }
         }
         /// <summary>
@@ -4585,17 +4585,17 @@ namespace Spark.Models
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<categories> categories2Reference
+        public EntityReference<categories> category2Reference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<categories>("sparkdbModel.FK__categories_3", "categories");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<categories>("sparkdbModel.FK__categories_31", "categories");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<categories>("sparkdbModel.FK__categories_3", "categories", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<categories>("sparkdbModel.FK__categories_31", "categories", value);
                 }
             }
         }
@@ -4606,16 +4606,16 @@ namespace Spark.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK__sparks", "sparks")]
-        public sparks sparks
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK__sparks1", "sparks")]
+        public sparks spark
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<sparks>("sparkdbModel.FK__sparks", "sparks").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<sparks>("sparkdbModel.FK__sparks1", "sparks").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<sparks>("sparkdbModel.FK__sparks", "sparks").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<sparks>("sparkdbModel.FK__sparks1", "sparks").Value = value;
             }
         }
         /// <summary>
@@ -4623,17 +4623,17 @@ namespace Spark.Models
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<sparks> sparksReference
+        public EntityReference<sparks> sparkReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<sparks>("sparkdbModel.FK__sparks", "sparks");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<sparks>("sparkdbModel.FK__sparks1", "sparks");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<sparks>("sparkdbModel.FK__sparks", "sparks", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<sparks>("sparkdbModel.FK__sparks1", "sparks", value);
                 }
             }
         }
