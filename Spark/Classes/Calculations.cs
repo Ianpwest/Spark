@@ -17,31 +17,31 @@ namespace Spark.Classes
         /// Used to calculate a particular user's total influence.
         /// </summary>
         /// <returns></returns>
-        public static double Influence(accounts userCurrent, sparkdbEntities dbModel, int nSubjectMatterId)
+        public static double Influence(accounts userCurrent, sparkdbEntities dbEntity, int nSubjectMatterId)
         {
             double dblInfluence = 0;
 
-            dblInfluence += GetBaseInfluence(userCurrent, dbModel, nSubjectMatterId);
-            dblInfluence += GetUserAddons(userCurrent, dbModel, nSubjectMatterId);
-            dblInfluence += GetSpread(userCurrent, dbModel, nSubjectMatterId);
+            dblInfluence += GetBaseInfluence(userCurrent, dbEntity, nSubjectMatterId);
+            dblInfluence += GetUserAddons(userCurrent, dbEntity, nSubjectMatterId);
+            dblInfluence += GetSpread(userCurrent, dbEntity, nSubjectMatterId);
 
             return dblInfluence;
         }
 
-        private static double GetBaseInfluence(accounts userCurrent, sparkdbEntities dbModel, int nSubjectMatterId)
+        private static double GetBaseInfluence(accounts userCurrent, sparkdbEntities dbEntity, int nSubjectMatterId)
         {
             double dblBase = 0;
 
             // Returns the number of positive votes minus the number of negative votes from the gains table to get the absolute scale.
-            dblBase  = (from influencegains influencegain in dbModel.influencegains
+            dblBase  = (from influencegains influencegain in dbEntity.influencegains
                         where influencegain.FKProfilesReceived == userCurrent.PK && influencegain.bIsPositive == true && influencegain.FKSubjectMatters == nSubjectMatterId
                         select influencegain).Count() -
-                        (from influencegains influencegain in dbModel.influencegains
+                        (from influencegains influencegain in dbEntity.influencegains
                         where influencegain.FKProfilesReceived == userCurrent.PK && influencegain.bIsPositive == false && influencegain.FKSubjectMatters == nSubjectMatterId
                         select influencegain).Count();
 
             double nConstant = 1;
-            if(double.TryParse((from constants constant in dbModel.constants
+            if(double.TryParse((from constants constant in dbEntity.constants
                                 where constant.strKey == "InfluenceBaseConstant"
                                 select constant.strValue).FirstOrDefault(), out nConstant))
                 dblBase = dblBase * nConstant;
@@ -49,35 +49,35 @@ namespace Spark.Classes
             return dblBase;
         }
 
-        private static double GetUserAddons(accounts userCurrent, sparkdbEntities dbModel, int nSubjectMatterId)
+        private static double GetUserAddons(accounts userCurrent, sparkdbEntities dbEntity, int nSubjectMatterId)
         {
             double dblUserAddon = 0;
 
             // Queries for all of the userIds of people who contributed to the initial user's influence in the gains table.
-            IEnumerable<int> qryAllContributors = from influencegains influence in dbModel.influencegains
+            IEnumerable<int> qryAllContributors = from influencegains influence in dbEntity.influencegains
                                                   where influence.FKProfilesReceived == userCurrent.PK
                                                   select influence.FKProfilesContributor;
             
             // Attempts to determine the constant to use for userAddon values.
             double nConstant = 1;
-            double.TryParse((from constants constant in dbModel.constants
+            double.TryParse((from constants constant in dbEntity.constants
                             where constant.strKey == "InfluenceUserAddonConstant"
                             select constant.strValue).FirstOrDefault(), out nConstant);
             foreach (int n in qryAllContributors)
             {
                 // Finds the base influence value for each of the users who contributed to the current user's influence.
                 // Multiplies the base value found by a constant, then adds it to the running total.
-                dblUserAddon += (GetBaseInfluence(new accounts() { PK = n, strUserName = string.Empty }, dbModel, nSubjectMatterId) * nConstant) ;
+                dblUserAddon += (GetBaseInfluence(new accounts() { PK = n, strUserName = string.Empty }, dbEntity, nSubjectMatterId) * nConstant) ;
             }
             
             return dblUserAddon;
         }
 
-        private static double GetSpread(accounts userCurrent, sparkdbEntities dbModel, int nSubjectMatterId)
+        private static double GetSpread(accounts userCurrent, sparkdbEntities dbEntity, int nSubjectMatterId)
         {
             double dblSpread = 0;
 
-            IEnumerable<int> qrySpreadValues = from subjectmatterspreads spread in dbModel.subjectmatterspreads
+            IEnumerable<int> qrySpreadValues = from subjectmatterspreads spread in dbEntity.subjectmatterspreads
                                                where spread.FKSubjectMattersSpread == nSubjectMatterId
                                                select spread.nValue;
             foreach (int n in qrySpreadValues)
@@ -92,12 +92,12 @@ namespace Spark.Classes
 
         #region Spark Sorting
 
-        public static List<sparks> SortSparksByPopularity(sparkdbEntities dbModel)
+        public static List<sparks> SortSparksByPopularity(sparkdbEntities dbEntity)
         {
             List<sparks> lstSorted = new List<sparks>();
-            Dictionary<sparks, double> dictSparkValues = ApplyPopularitySorting(dbModel);
+            Dictionary<sparks, double> dictSparkValues = ApplyPopularitySorting(dbEntity);
 
-            Dictionary<sparks, double> dictDecayed = ApplyDecayAlgorithm(dictSparkValues, dbModel);
+            Dictionary<sparks, double> dictDecayed = ApplyDecayAlgorithm(dictSparkValues, dbEntity);
 
             // Sorts the dictionary by the double values in descending order to get the highest value spark
             // at the first index and converts it to a list.
@@ -108,13 +108,13 @@ namespace Spark.Classes
             return lstSorted;
         }
 
-        public static List<sparks> SortSparksBySubject(sparkdbEntities dbModel, int nSubjectMatterId)
+        public static List<sparks> SortSparksBySubject(sparkdbEntities dbEntity, int nSubjectMatterId)
         {
             List<sparks> lstSorted = new List<sparks>();
 
-            Dictionary<sparks, double> dictPopularitySorted = ApplyPopularitySorting(dbModel);
+            Dictionary<sparks, double> dictPopularitySorted = ApplyPopularitySorting(dbEntity);
 
-            var qrySparksBySubject = from sparks spark in dbModel.sparks
+            var qrySparksBySubject = from sparks spark in dbEntity.sparks
                                      where spark.FKSubjectMatters == nSubjectMatterId
                                      select spark;
             
@@ -141,21 +141,21 @@ namespace Spark.Classes
                     dictSubjectPopSorted.Add(spark, 0);
             }
 
-            lstSorted = (from KeyValuePair<sparks, double> kvp in ApplyDecayAlgorithm(dictSubjectPopSorted, dbModel)
+            lstSorted = (from KeyValuePair<sparks, double> kvp in ApplyDecayAlgorithm(dictSubjectPopSorted, dbEntity)
                          orderby kvp.Value descending
                          select kvp.Key).ToList<sparks>();
 
             return lstSorted;
         }
 
-        public static List<sparks> SortSparksByUserInterest(sparkdbEntities dbModel)
+        public static List<sparks> SortSparksByUserInterest(sparkdbEntities dbEntity)
         {
             List<sparks> lstSorted = new List<sparks>();
 
             return lstSorted;
         }
 
-        private static Dictionary<sparks, double> ApplyDecayAlgorithm(Dictionary<sparks, double> dictSparks, sparkdbEntities dbModel)
+        private static Dictionary<sparks, double> ApplyDecayAlgorithm(Dictionary<sparks, double> dictSparks, sparkdbEntities dbEntity)
         {
             Dictionary<sparks, double> dictSparkValues = new Dictionary<sparks, double>();
 
@@ -165,10 +165,10 @@ namespace Spark.Classes
             double dblConstantMultiplier = 1;
             double dblConstantShifter = 0;
 
-            double.TryParse((from constants constant in dbModel.constants
+            double.TryParse((from constants constant in dbEntity.constants
                              where constant.strKey == "SortingDecayMultiplier"
                              select constant.strValue).FirstOrDefault(), out dblConstantMultiplier);
-            double.TryParse((from constants constant in dbModel.constants
+            double.TryParse((from constants constant in dbEntity.constants
                              where constant.strKey == "SortingDecayShifter"
                              select constant.strValue).FirstOrDefault(), out dblConstantShifter);
 
@@ -194,14 +194,14 @@ namespace Spark.Classes
             return dictSparkValues;
         }
 
-        private static Dictionary<sparks, double> ApplyPopularitySorting(sparkdbEntities dbModel)
+        private static Dictionary<sparks, double> ApplyPopularitySorting(sparkdbEntities dbEntity)
         {
             Dictionary<sparks, double> dictSorted = new Dictionary<sparks, double>();
 
             // Collection of key value pairs, key = sparkId and value = interest amount.
             Dictionary<int, double> dictInterestSparks = new Dictionary<int, double>();
             // Finds all of the interest votes for each spark.
-            var qryForInterest = from sparkinterestvotes votes in dbModel.sparkinterestvotes
+            var qryForInterest = from sparkinterestvotes votes in dbEntity.sparkinterestvotes
                                  orderby votes.FKSparks
                                  select votes;
 
@@ -230,12 +230,12 @@ namespace Spark.Classes
                 }
             }
 
-            var qryForSparksWithInterests = from sparks spark in dbModel.sparks
+            var qryForSparksWithInterests = from sparks spark in dbEntity.sparks
                                             where dictInterestSparks.ContainsKey(spark.PK)
                                             orderby spark.PK
                                             select spark;
             double nConstant = 1;
-            double.TryParse((from constants constant in dbModel.constants
+            double.TryParse((from constants constant in dbEntity.constants
                              where constant.strKey == "SortingPopularityConstant"
                              select constant).FirstOrDefault().strValue, out nConstant);
             foreach (sparks spark in qryForSparksWithInterests)
@@ -249,5 +249,6 @@ namespace Spark.Classes
         }
 
         #endregion
+
     }
 }
