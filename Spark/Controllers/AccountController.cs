@@ -124,20 +124,28 @@ namespace Spark.Controllers
             return View();
         }
 
-        public ActionResult ResetPassword(string user)
+        public ActionResult ChangePassword(string user)
         {
             //Get the account
             accounts accountReset = DatabaseInterface.GetAccountByActivationGuid(user);
+            
+            Models.PasswordChangeModel pcm = new PasswordChangeModel();
+            pcm.Username = accountReset.strUserName;
 
-            string strPassword = DatabaseInterface.ResetAccountPassword(accountReset);
+            ViewBag.Username = accountReset.strUserName;
+
+            return View(pcm);
+        }
+
+        [HttpPost]
+        public ActionResult ChangePassword(PasswordChangeModel pcm)
+        {
+            string strPassword = DatabaseInterface.ResetAccountPassword(pcm);
            
             if (!string.IsNullOrEmpty(strPassword))
                 ViewBag.Status = "Success";
             else
                 ViewBag.Status = "Failure";
-
-            ViewBag.Username = accountReset.strUserName;
-            ViewBag.Password = strPassword;
 
             return View("AccountRetrieval");
         }

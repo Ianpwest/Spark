@@ -65,15 +65,15 @@ namespace Spark.Classes
             return bExists;
         }
 
-        public static string ResetAccountPassword(accounts account)
+        public static string ResetAccountPassword(PasswordChangeModel pcm)
         {
-            if (account == null)
+            if (pcm == null)
                 return string.Empty;
 
-            string strTempPassword = System.Web.Security.Membership.GeneratePassword(15, 1);
+            accounts account = GetAccount(pcm.Username);
             
             account.strSalt = Utilities.GetSalt();
-            account.strPassword = Utilities.Encrypt(account.strSalt + strTempPassword);
+            account.strPassword = Utilities.Encrypt(account.strSalt + pcm.NewPassword);
 
             try
             {
@@ -85,15 +85,13 @@ namespace Spark.Classes
                 return string.Empty;
             }
 
-            return strTempPassword;
+            return pcm.NewPassword;
         }
 
         public static bool ResetAccountSendEmail(string strEmail)
         {
             if (string.IsNullOrEmpty(strEmail))
                 return false;
-
-           
 
             if (AccountEmailExists(strEmail))
             {
@@ -104,7 +102,7 @@ namespace Spark.Classes
                                          select r).FirstOrDefault();
 
                 //Use their current activation guid to uniquely identify them.
-                string strMessage = "Click on this link to reset your password: http://localhost:51415/Account/ResetPassword?user=" + accountReset.gActivationGUID;
+                string strMessage = "Click on this link to reset your password: http://localhost:51415/Account/ChangePassword?user=" + accountReset.gActivationGUID;
                 Utilities.SendEmail(accountReset.strEmail, "Account Recovery", strMessage);
 
                 return true;
