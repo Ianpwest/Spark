@@ -65,12 +65,20 @@ namespace Spark.Classes
             return bExists;
         }
 
-        public static string ResetAccountPassword(PasswordChangeModel pcm)
+        /// <summary>
+        /// Method to reset the password of an account to the specified new password
+        /// </summary>
+        /// <param name="pcm">Password Change Model</param>
+        /// <returns>New Password</returns>
+        public static bool ResetAccountPassword(PasswordChangeModel pcm)
         {
             if (pcm == null)
-                return string.Empty;
+                return false;
 
             accounts account = GetAccount(pcm.Username);
+
+            if (account == null)
+                return false;
             
             account.strSalt = Utilities.GetSalt();
             account.strPassword = Utilities.Encrypt(account.strSalt + pcm.NewPassword);
@@ -82,12 +90,18 @@ namespace Spark.Classes
             }
             catch (Exception ex)
             {
-                return string.Empty;
+                return false;
             }
 
-            return pcm.NewPassword;
+            return true;
         }
 
+        /// <summary>
+        /// Method to send the reset account password email to the user to begin
+        /// the account reset process
+        /// </summary>
+        /// <param name="strEmail">E-mail of person to reset account</param>
+        /// <returns>Success</returns>
         public static bool ResetAccountSendEmail(string strEmail)
         {
             if (string.IsNullOrEmpty(strEmail))

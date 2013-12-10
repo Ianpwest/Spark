@@ -107,11 +107,20 @@ namespace Spark.Controllers
             return View("Activate");
         }
 
+        /// <summary>
+        /// Get: Start Account retrieval process
+        /// </summary>
+        /// <returns></returns>
         public ActionResult AccountRetrieval()
         {
             return View();
         }
 
+        /// <summary>
+        /// Post: Account retrieval.
+        /// </summary>
+        /// <param name="ar">Account retrieval model</param>
+        /// <returns>View</returns>
         [HttpPost]
         public ActionResult AccountRetrieval(Spark.Models.AccountRetrieval ar)
         {
@@ -124,6 +133,11 @@ namespace Spark.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Get: Change Password. Started from email link
+        /// </summary>
+        /// <param name="user">User Activation Guid (Used to uniquely identify user)</param>
+        /// <returns>View</returns>
         public ActionResult ChangePassword(string user)
         {
             //Get the account
@@ -137,12 +151,15 @@ namespace Spark.Controllers
             return View(pcm);
         }
 
+        /// <summary>
+        /// Post: Actually resets the password to the given parameters specified in the password change model
+        /// </summary>
+        /// <param name="pcm">Password Change Model</param>
+        /// <returns>View</returns>
         [HttpPost]
         public ActionResult ChangePassword(PasswordChangeModel pcm)
         {
-            string strPassword = DatabaseInterface.ResetAccountPassword(pcm);
-           
-            if (!string.IsNullOrEmpty(strPassword))
+            if (DatabaseInterface.ResetAccountPassword(pcm))
                 ViewBag.Status = "Success";
             else
                 ViewBag.Status = "Failure";
