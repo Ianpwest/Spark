@@ -70,7 +70,7 @@ namespace Spark.Classes
             if (account == null)
                 return string.Empty;
 
-            string strTempPassword = System.Web.Security.Membership.GeneratePassword(15, 2);
+            string strTempPassword = System.Web.Security.Membership.GeneratePassword(15, 1);
             
             account.strSalt = Utilities.GetSalt();
             account.strPassword = Utilities.Encrypt(account.strSalt + strTempPassword);
