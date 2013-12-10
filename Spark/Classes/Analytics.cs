@@ -66,7 +66,7 @@ namespace Spark.Classes
             return dtReturn;
         }
 
-        private void TestMethod(sparkdbEntities dbEntity)
+        private static void TestMethod(sparkdbEntities dbEntity)
         {
             
         }
