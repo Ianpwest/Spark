@@ -246,25 +246,49 @@ namespace Spark.Classes
             return account;
         }
 
-        internal static void CreateSpark(sparks sparkModel)
+        public static bool CreateSpark(sparks sparkModel, string strUserName)
         {
-            // Do stuff
-            sparks sparkNew = new sparks();
 
-            sparkNew.strImagePath = sparkModel.strImagePath;
-            sparkNew.strDescription = sparkModel.strDescription;
-            sparkNew.strTopic = sparkModel.strTopic;
-            sparkNew.FKSubjectMatters = sparkModel.FKSubjectMatters;
-            sparkNew.FKProfilesCreatedBy = sparkModel.FKProfilesCreatedBy;
+            var strUser = from r in m_db.accounts
+                          join p in m_db.profiles on r.PK equals p.FKAccounts
+                          where r.strUserName == strUserName
+                          select p.PK;
+
+            if (strUser == null || strUser.Count() != 1)
+                return false;
+
+            sparkModel.FKProfilesCreatedBy = strUser.First();
+
             try
             {
-                m_db.AddTosparks(sparkNew);
+                m_db.AddTosparks(sparkModel);
                 m_db.SaveChanges();
             }
             catch (Exception ex)
             {
                 // log ex.
+                return false;
             }
+
+            return true;
+        }
+
+        public static Dictionary<int, string> GetSubjectMatters()
+        {
+            Dictionary<int, string> dictSubjectMatters = new Dictionary<int, string>();
+
+            var qrySubjectMatters = from r in m_db.subjectmatters
+                                    select new KeyValuePair<int, string>(r.PK, r.strName);
+
+            foreach (KeyValuePair<int, string> kvp in qrySubjectMatters)
+            {
+                if (dictSubjectMatters.ContainsKey(kvp.Key))
+                    continue;
+
+                dictSubjectMatters.Add(kvp.Key, kvp.Value);
+            }
+
+            return dictSubjectMatters;
         }
     }
 }

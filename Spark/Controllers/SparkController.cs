@@ -12,6 +12,7 @@ namespace Spark.Controllers
 
         public ActionResult SparkCreate()
         {
+            // Need to create a new model that holds all of the subject matters.
             Models.sparks sparkModel = new Models.sparks();
 
             return View(sparkModel);
@@ -20,9 +21,10 @@ namespace Spark.Controllers
         [HttpPost]
         public ActionResult SparkCreate(Models.sparks sparkModel)
         {
-            // Do stuff
-            DatabaseInterface.CreateSpark(sparkModel);
-           
+            // Redirect somewhere else when it fails.
+            if(!DatabaseInterface.CreateSpark(sparkModel, User.Identity.Name))
+                return RedirectToAction("Index", "Home");
+            
             return RedirectToAction("Index", "Home");
         }
     }

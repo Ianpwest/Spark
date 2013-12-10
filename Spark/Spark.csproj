@@ -181,6 +181,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SparkDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\SparkModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
