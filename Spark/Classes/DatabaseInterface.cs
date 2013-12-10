@@ -126,7 +126,7 @@ namespace Spark.Classes
         }
 
         /// <summary>
-        /// Checks to see if an account exists given a email
+        /// Checks to see if an account exists given an email
         /// </summary>
         /// <param name="strUserName">username to check</param>
         /// <returns>If account already exists</returns>
@@ -197,10 +197,10 @@ namespace Spark.Classes
         /// associated with their account.
         /// </summary>
         /// <param name="userGUID">Guid from email link</param>
-        public static bool ActivateAccount(string userGUID, string strUserName)
+        public static bool ActivateAccount(string userGUID)
         {
             accounts result =  (from r in m_db.accounts
-                                where r.strUserName == strUserName
+                                where r.gActivationGUID == userGUID
                                 select r).FirstOrDefault();
 
             //User not found

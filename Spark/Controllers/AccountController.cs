@@ -179,7 +179,7 @@ namespace Spark.Controllers
         public ActionResult Activate(string user)
         {
             //Check to see if the guid given is the guid associated with this account.
-            if (!DatabaseInterface.ActivateAccount(user, User.Identity.Name))
+            if (!DatabaseInterface.ActivateAccount(user))
             {
                 //We failed activation do something here... probably need to send them another e-mail to try again.
                 ViewBag.Activated = "False";
