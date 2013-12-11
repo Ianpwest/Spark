@@ -165,10 +165,10 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Classes\Analytics.cs" />
     <Compile Include="Classes\Calculations.cs" />
-    <Compile Include="Classes\AccountsDatabaseInterface.cs" />
-    <Compile Include="Classes\SparksDatabaseInterface.cs" />
+    <Compile Include="Classes\DatabaseInterfaces\AccountsDatabaseInterface.cs" />
+    <Compile Include="Classes\DatabaseInterfaces\SparksDatabaseInterface.cs" />
     <Compile Include="Classes\Utilities.cs" />
-    <Compile Include="Classes\UtilitiesDatabaseInterface.cs" />
+    <Compile Include="Classes\DatabaseInterfaces\UtilitiesDatabaseInterface.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SparkController.cs" />
