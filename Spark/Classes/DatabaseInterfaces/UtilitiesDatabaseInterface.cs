@@ -22,14 +22,15 @@ namespace Spark.Classes
             Dictionary<int, string> dictSubjectMatters = new Dictionary<int, string>();
 
             var qrySubjectMatters = from r in m_db.subjectmatters
-                                    select new KeyValuePair<int, string>(r.PK, r.strName);
+                                    select r;
 
-            foreach (KeyValuePair<int, string> kvp in qrySubjectMatters)
+            
+            foreach (Models.subjectmatters sm in qrySubjectMatters)
             {
-                if (dictSubjectMatters.ContainsKey(kvp.Key))
+                if (dictSubjectMatters.ContainsKey(sm.PK))
                     continue;
 
-                dictSubjectMatters.Add(kvp.Key, kvp.Value);
+                dictSubjectMatters.Add(sm.PK, sm.strName);
             }
 
             return dictSubjectMatters;

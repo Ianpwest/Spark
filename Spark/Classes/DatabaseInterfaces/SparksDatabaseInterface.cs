@@ -19,18 +19,25 @@ namespace Spark.Classes
         /// <param name="sparkModel"></param>
         /// <param name="strUserName"></param>
         /// <returns></returns>
-        public static bool CreateSpark(sparks sparkModel, string strUserName)
+        public static bool CreateSpark(SparkCreateModel sparkCreateModel)
         {
+            sparks sparkModel = new sparks();
+            sparkModel.strDescription = sparkCreateModel.Description;
+            sparkModel.strTopic = sparkCreateModel.Topic;
+            
+            sparkModel.FKSubjectMatters = sparkCreateModel.SubjectMatterId;
 
-            var strUser = from r in m_db.accounts
-                          join p in m_db.profiles on r.PK equals p.FKAccounts
-                          where r.strUserName == strUserName
-                          select p.PK;
+            var nQryUserId = from r in m_db.accounts
+                             join p in m_db.profiles on r.PK equals p.FKAccounts
+                             where r.strUserName == sparkCreateModel.UserId
+                             select p.PK;
 
-            if (strUser == null || strUser.Count() != 1)
+            if (nQryUserId == null || nQryUserId.Count() != 1)
                 return false;
 
-            sparkModel.FKProfilesCreatedBy = strUser.First();
+            sparkModel.FKProfilesCreatedBy = nQryUserId.First();
+            sparkModel.dDateCreated = DateTime.Now;
+            sparkModel.dDateModified = DateTime.Now;
 
             try
             {

@@ -4,7 +4,6 @@
 
 function readUrl(input) {
 
-    document.getElementById("test").setAttribute("title", "Test2");
     if (input.files && input.files[0]) 
     {
         var reader = new FileReader();
