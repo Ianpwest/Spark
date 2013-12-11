@@ -6,7 +6,7 @@
 
 body {
     background-color: #fff;
-    border-top: solid 10px #000;
+    border-top: solid 0px #000;
     color: #333;
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
@@ -90,12 +90,52 @@ h5, h6 {
         text-decoration: none;
     }
 
+/* Navigation Bar Layout */
+.navigation-bar
+{
+    margin:0 auto;
+    max-width: 1200px;
+}
+
+.horizontalAlign
+{
+    overflow:hidden;
+}
+
+/* This is how you horizontally align elements*/
+.navigationSparkIcon
+{
+    float:left;
+}
+
+.navigationQueryIcon
+{
+    overflow:hidden;
+}
+
+.navigationSparkIcon img
+{
+    width: 50px;
+    height:50px;
+    cursor: pointer;
+}
+
+.navigationQueryIcon img
+{
+    width: 50px;
+    height:50px;
+    cursor: pointer;
+}
+
+
+
+/*End Navigation Bar Layout */
 
 /* main layout
 ----------------------------------------------------------*/
 .content-wrapper {
     margin: 0 auto;
-    max-width: 960px;
+    max-width: 950px;
 }
 
 #body {
@@ -104,15 +144,7 @@ h5, h6 {
     padding-bottom: 35px;
 }
 
-    .main-content {
-        background: url("../Images/accent.png") no-repeat;
-        padding-left: 10px;
-        padding-top: 30px;
-    }
-
-    .featured + .main-content {
-        background: url("../Images/heroAccent.png") no-repeat;
-    }
+  
 
 header .content-wrapper {
     padding-top: 20px; 
