@@ -6,7 +6,7 @@ using Spark.Models;
 
 namespace Spark.Classes
 {
-    public static class DatabaseInterface
+    public static class AccountsDatabaseInterface
     {
         /// <summary>
         /// Local Instance of the database model
@@ -114,6 +114,9 @@ namespace Spark.Classes
                                          where r.strEmail == strEmail
                                          && r.gActivationGUID != null
                                          select r).FirstOrDefault();
+
+                if (accountReset == null)
+                    return false;
 
                 //Use their current activation guid to uniquely identify them.
                 string strMessage = "Click on this link to reset your password: http://localhost:51415/Account/ChangePassword?user=" + accountReset.gActivationGUID;
@@ -258,51 +261,6 @@ namespace Spark.Classes
                 return null;
 
             return account;
-        }
-
-        public static bool CreateSpark(sparks sparkModel, string strUserName)
-        {
-
-            var strUser = from r in m_db.accounts
-                          join p in m_db.profiles on r.PK equals p.FKAccounts
-                          where r.strUserName == strUserName
-                          select p.PK;
-
-            if (strUser == null || strUser.Count() != 1)
-                return false;
-
-            sparkModel.FKProfilesCreatedBy = strUser.First();
-
-            try
-            {
-                m_db.AddTosparks(sparkModel);
-                m_db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                // log ex.
-                return false;
-            }
-
-            return true;
-        }
-
-        public static Dictionary<int, string> GetSubjectMatters()
-        {
-            Dictionary<int, string> dictSubjectMatters = new Dictionary<int, string>();
-
-            var qrySubjectMatters = from r in m_db.subjectmatters
-                                    select new KeyValuePair<int, string>(r.PK, r.strName);
-
-            foreach (KeyValuePair<int, string> kvp in qrySubjectMatters)
-            {
-                if (dictSubjectMatters.ContainsKey(kvp.Key))
-                    continue;
-
-                dictSubjectMatters.Add(kvp.Key, kvp.Value);
-            }
-
-            return dictSubjectMatters;
         }
     }
 }

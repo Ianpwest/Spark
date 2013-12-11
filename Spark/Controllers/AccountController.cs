@@ -16,7 +16,6 @@ namespace Spark.Controllers
 {
     public class AccountController : Controller
     {
-        //
         // GET: /Account/
         public ActionResult Index()
         {
@@ -36,7 +35,7 @@ namespace Spark.Controllers
         public ActionResult Login(Spark.Models.LoginModel lm)
         {
             //Verify the account exists with the given information
-            if (DatabaseInterface.VerifyAccount(lm))
+            if (AccountsDatabaseInterface.VerifyAccount(lm))
             {
                 //Set the authorization cookie with the username
                 FormsAuthentication.SetAuthCookie(lm.UserName, lm.RememberMe);
@@ -55,7 +54,6 @@ namespace Spark.Controllers
             return View(lm);
         }
 
-        //
         // GET: /Register/
         public ActionResult Register()
         {
@@ -68,7 +66,7 @@ namespace Spark.Controllers
         public ActionResult Register(Models.RegisterModel rm)
         {
             //Check to see if the account name is already in use
-            if (DatabaseInterface.AccountUsernameExists(rm.UserName))
+            if (AccountsDatabaseInterface.AccountUsernameExists(rm.UserName))
             {
                 rm.bFailedRegister = true;
 
@@ -77,7 +75,7 @@ namespace Spark.Controllers
             }
 
             //Check to see if the email is already in use
-            if (DatabaseInterface.AccountEmailExists(rm.Email))
+            if (AccountsDatabaseInterface.AccountEmailExists(rm.Email))
             {
                 rm.bFailedRegister = true;
 
@@ -86,7 +84,7 @@ namespace Spark.Controllers
             }
 
             //If database failed to register
-            if (!DatabaseInterface.RegisterAccount(rm))
+            if (!AccountsDatabaseInterface.RegisterAccount(rm))
             {
                 rm.bFailedRegister = true;
                 return View(rm);
@@ -94,7 +92,6 @@ namespace Spark.Controllers
 
             //Sends an email for the user to verify that they have a valid email address before they 
             //are allowed to contribute to the site.
-
             string strMessage = "Please click the link below to activate your account: \r\n\r\n http://localhost:51415/Account/Activate?user=" + rm.gActivationGUID.ToString();
             if (Utilities.SendEmail(rm.Email, "Activate your account", strMessage))
                 ViewBag.Activated = "E-mail Sent";
@@ -124,12 +121,11 @@ namespace Spark.Controllers
         [HttpPost]
         public ActionResult AccountRetrieval(Spark.Models.AccountRetrieval ar)
         {
-            if (DatabaseInterface.ResetAccountSendEmail(ar.Email))
+            if (AccountsDatabaseInterface.ResetAccountSendEmail(ar.Email))
                 ViewBag.Status = "Email Sent";
             else
                 ViewBag.Status = "Failure-AccountDoesNotExist";
 
-           
             return View();
         }
 
@@ -141,7 +137,7 @@ namespace Spark.Controllers
         public ActionResult ChangePassword(string user)
         {
             //Get the account
-            accounts accountReset = DatabaseInterface.GetAccountByActivationGuid(user);
+            accounts accountReset = AccountsDatabaseInterface.GetAccountByActivationGuid(user);
             
             Models.PasswordChangeModel pcm = new PasswordChangeModel();
             pcm.Username = accountReset.strUserName;
@@ -159,7 +155,7 @@ namespace Spark.Controllers
         [HttpPost]
         public ActionResult ChangePassword(PasswordChangeModel pcm)
         {
-            if (DatabaseInterface.ResetAccountPassword(pcm))
+            if (AccountsDatabaseInterface.ResetAccountPassword(pcm))
                 ViewBag.Status = "Success";
             else
                 ViewBag.Status = "Failure";
@@ -179,7 +175,7 @@ namespace Spark.Controllers
         public ActionResult Activate(string user)
         {
             //Check to see if the guid given is the guid associated with this account.
-            if (!DatabaseInterface.ActivateAccount(user))
+            if (!AccountsDatabaseInterface.ActivateAccount(user))
             {
                 //We failed activation do something here... probably need to send them another e-mail to try again.
                 ViewBag.Activated = "False";
@@ -222,7 +218,7 @@ namespace Spark.Controllers
         /// <returns>View notifying the user</returns>
         public ActionResult ResendActivationEmail()
         {
-            accounts account = DatabaseInterface.GetAccount(User.Identity.Name);
+            accounts account = AccountsDatabaseInterface.GetAccount(User.Identity.Name);
 
             if (account == null)
             {
@@ -270,7 +266,7 @@ namespace Spark.Controllers
                 return RedirectToAction("ExternalLoginFailure");
             }
             //This user already has an account registered with us, go ahead and log them in
-            if (DatabaseInterface.AccountUsernameExists(strUserName))
+            if (AccountsDatabaseInterface.AccountUsernameExists(strUserName))
             {
                 FormsAuthentication.SetAuthCookie(strUserName, true);
 
@@ -326,11 +322,11 @@ namespace Spark.Controllers
                     strUserName = strUserName.Substring(0, strUserName.IndexOf('@'));
 
                 // Check if user already exists
-                if (!DatabaseInterface.AccountUsernameExists(model.UserName))
+                if (!AccountsDatabaseInterface.AccountUsernameExists(model.UserName))
                 {
                     // Insert into the accounts table
                     accounts account = new accounts { strUserName = model.UserName, strEmail = model.Email, bIsActivated = true };
-                    DatabaseInterface.AddAccount(account);
+                    AccountsDatabaseInterface.AddAccount(account);
 
                     FormsAuthentication.SetAuthCookie(account.strUserName, true);
 

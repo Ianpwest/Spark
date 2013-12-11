@@ -22,7 +22,7 @@ namespace Spark.Controllers
         public ActionResult SparkCreate(Models.sparks sparkModel)
         {
             // Redirect somewhere else when it fails.
-            if(!DatabaseInterface.CreateSpark(sparkModel, User.Identity.Name))
+            if(!SparksDatabaseInterface.CreateSpark(sparkModel, User.Identity.Name))
                 return RedirectToAction("Index", "Home");
             
             return RedirectToAction("Index", "Home");
