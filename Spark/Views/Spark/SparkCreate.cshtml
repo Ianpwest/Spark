@@ -1,8 +1,11 @@
-﻿@model Spark.Models.sparks
+﻿@model Spark.Models.SparkCreateModel
 
 @{
     ViewBag.Title = "SparkCreate";
 }
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 
 <h2>SparkCreate</h2>
 
@@ -12,61 +15,37 @@
     <fieldset>
         <legend>sparks</legend>
 
+        <div style="position:relative; height: 150px; width: 325px; border-width: medium; border-style: solid;">
+            <img id="imgPreview" style="position:absolute; width: 100%; height: 100%;" alt=""
+                            src="../../Content/BlankImage.gif" />
+        </div>
+        <input id="Img"  type="file" name="FileUpload1" onchange="readUrl(this);" />
         <div class="editor-label">
-            @Html.LabelFor(model => model.strImagePath)
+            @Html.LabelFor(model => model.Topic)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.strImagePath)
-            @Html.ValidationMessageFor(model => model.strImagePath)
+            @Html.EditorFor(model => model.Topic)
+            @Html.ValidationMessageFor(model => model.Topic)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.strTopic)
+            @Html.LabelFor(model => model.Description)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.strTopic)
-            @Html.ValidationMessageFor(model => model.strTopic)
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.strDescription)
+            @Html.LabelFor(model => model.SubjectMatterId)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.strDescription)
-            @Html.ValidationMessageFor(model => model.strDescription)
+            @Html.DropDownListFor(model => model.SubjectMatterId, Model.SubjectMattersAll)
+            @Html.ValidationMessageFor(model => model.SubjectMatterId)
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FKProfilesCreatedBy)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FKProfilesCreatedBy)
-            @Html.ValidationMessageFor(model => model.FKProfilesCreatedBy)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.dDateCreated)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.dDateCreated)
-            @Html.ValidationMessageFor(model => model.dDateCreated)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.dDateModified)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.dDateModified)
-            @Html.ValidationMessageFor(model => model.dDateModified)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FKSubjectMatters)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FKSubjectMatters)
-            @Html.ValidationMessageFor(model => model.FKSubjectMatters)
-        </div>
+        @Html.HiddenFor(model => model.UserId)
+        @Html.HiddenFor(model => model.SubjectMattersAll)
 
         <p>
             <input type="submit" value="Create" />
