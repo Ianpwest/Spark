@@ -11,6 +11,11 @@ namespace Spark.Classes
 {
     public static class Utilities
     {
+        /// <summary>
+        /// Method to encrypt a given string
+        /// </summary>
+        /// <param name="strToEncrypt">String to encrypt</param>
+        /// <returns>Encrypted string</returns>
         public static String Encrypt(string strToEncrypt)
         {
             string strEncryptedPassword = string.Empty;
@@ -33,6 +38,10 @@ namespace Spark.Classes
             return strBuilder.ToString();
         }
 
+        /// <summary>
+        /// Method to get a random salt
+        /// </summary>
+        /// <returns>Salt string</returns>
         public static String GetSalt()
         {
             //Generate a cryptographic random number.
@@ -44,6 +53,13 @@ namespace Spark.Classes
             return Convert.ToBase64String(buff);
         }
 
+        /// <summary>
+        /// Method to find the encrypted string to compare against given a
+        /// password string and a salt string
+        /// </summary>
+        /// <param name="strPassword">Password String</param>
+        /// <param name="strSalt">Salt String</param>
+        /// <returns>Encrypted combined value</returns>
         public static string GetHashPassword(string strPassword, string strSalt)
         {
             string strPasswordToCompare = strSalt + strPassword;
@@ -62,6 +78,7 @@ namespace Spark.Classes
             //Successfully registered
             var client = new SmtpClient("smtp.gmail.com", 587)
             {
+                //TODO: Push these values to an xml file or database. Encrypt them
                 Credentials = new NetworkCredential("SparkItEmail@gmail.com", "Margaritas!"),
                 EnableSsl = true
             };
