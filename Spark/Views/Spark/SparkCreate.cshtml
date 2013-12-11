@@ -9,7 +9,8 @@
 
 <h2>SparkCreate</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm("SparkCreate", "Spark", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
     @Html.ValidationSummary(true)
 
     <fieldset>
@@ -43,9 +44,6 @@
             @Html.DropDownListFor(model => model.SubjectMatterId, Model.SubjectMattersAll)
             @Html.ValidationMessageFor(model => model.SubjectMatterId)
         </div>
-
-        @Html.HiddenFor(model => model.UserId)
-        @Html.HiddenFor(model => model.SubjectMattersAll)
 
         <p>
             <input type="submit" value="Create" />

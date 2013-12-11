@@ -13,18 +13,18 @@ namespace Spark.Models
     {
         [Required]
         [Display(Name = "Subject Matter")]
-        public int SubjectMatterId;
+        public int SubjectMatterId {get;set;}
 
         [Required]
         [Display(Name = "Topic")]
-        public string Topic;
+        public string Topic { get; set; }
 
         [Required]
         [Display(Name = "Description")]
-        public string Description;
+        public string Description { get; set; }
 
-        public string UserId;
+        public string UserId { get; set; }
 
-        public SelectList SubjectMattersAll;
+        public SelectList SubjectMattersAll { get; set; }
     }
 }

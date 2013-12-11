@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Spark.Classes;
 using System.IO;
+using Spark.Models;
 
 namespace Spark.Controllers
 {
@@ -14,7 +15,7 @@ namespace Spark.Controllers
         public ActionResult SparkCreate()
         {
             // Need to create a new model that holds all of the subject matters.
-            Models.SparkCreateModel scModel = new Models.SparkCreateModel();
+            SparkCreateModel scModel = new SparkCreateModel();
             scModel.UserId = User.Identity.Name;
             List<SelectListItem> lstItems = new List<SelectListItem>();
 
@@ -30,7 +31,7 @@ namespace Spark.Controllers
         }
 
         [HttpPost]
-        public ActionResult SparkCreate(Models.SparkCreateModel sparkCreateModel)
+        public ActionResult SparkCreate(SparkCreateModel model)
         {
             // Redirect somewhere else when it fails.
             if (Request.Files.Count == 1)
@@ -58,7 +59,7 @@ namespace Spark.Controllers
                 //db.SaveChanges();
                 
             }
-            if (!SparksDatabaseInterface.CreateSpark(sparkCreateModel))
+            if (!SparksDatabaseInterface.CreateSpark(model))
                 return RedirectToAction("Index", "Home");
             
             return RedirectToAction("Index", "Home");
