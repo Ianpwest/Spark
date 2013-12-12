@@ -26,11 +26,10 @@ namespace Spark.Classes
             sparkModel.strTopic = sparkCreateModel.Topic;
             
             sparkModel.FKSubjectMatters = sparkCreateModel.SubjectMatterId;
-
+            
             var nQryUserId = from r in m_db.accounts
-                             join p in m_db.profiles on r.PK equals p.FKAccounts
                              where r.strUserName == sparkCreateModel.UserId
-                             select p.PK;
+                             select r.PK;
 
             if (nQryUserId == null || nQryUserId.Count() != 1)
                 return false;

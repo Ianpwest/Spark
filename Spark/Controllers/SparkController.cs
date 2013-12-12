@@ -33,6 +33,7 @@ namespace Spark.Controllers
         [HttpPost]
         public ActionResult SparkCreate(SparkCreateModel model)
         {
+            model.UserId = User.Identity.Name;
             // Redirect somewhere else when it fails.
             if (Request.Files.Count == 1)
             {
