@@ -19,7 +19,6 @@ using System.Xml.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("sparkdbModel", "FKAccounts", "accounts", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.accounts), "profiles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.profiles), true)]
 [assembly: EdmRelationshipAttribute("sparkdbModel", "FKCities", "cities", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Spark.Models.cities), "profiles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.profiles), true)]
 [assembly: EdmRelationshipAttribute("sparkdbModel", "FKStatesProvidences", "statesprovidences", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.statesprovidences), "cities", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.cities), true)]
 [assembly: EdmRelationshipAttribute("sparkdbModel", "FKCommentsParent", "comments", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Spark.Models.comments), "comments1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.comments), true)]
@@ -29,11 +28,9 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("sparkdbModel", "FKEducationalLevels", "educationlevels", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Spark.Models.educationlevels), "profiles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.profiles), true)]
 [assembly: EdmRelationshipAttribute("sparkdbModel", "FKGenders", "genders", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Spark.Models.genders), "profiles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.profiles), true)]
 [assembly: EdmRelationshipAttribute("sparkdbModel", "FKPoliticalIdeologies", "politicalideologies", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Spark.Models.politicalideologies), "profiles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.profiles), true)]
-[assembly: EdmRelationshipAttribute("sparkdbModel", "FKProfilesCreatedBy", "profiles", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.profiles), "sparks", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.sparks), true)]
 [assembly: EdmRelationshipAttribute("sparkdbModel", "FKReligions", "religions", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Spark.Models.religions), "profiles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.profiles), true)]
 [assembly: EdmRelationshipAttribute("sparkdbModel", "FK_sparkinterestvotes_profiles", "profiles", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.profiles), "sparkinterestvotes", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.sparkinterestvotes), true)]
 [assembly: EdmRelationshipAttribute("sparkdbModel", "FK_sparkinterestvotes_sparks", "sparks", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.sparks), "sparkinterestvotes", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.sparkinterestvotes), true)]
-[assembly: EdmRelationshipAttribute("sparkdbModel", "FK_transactions_accounts", "accounts", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.accounts), "transactions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.transactions), true)]
 [assembly: EdmRelationshipAttribute("sparkdbModel", "FK_influencegains_profiles", "profiles", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.profiles), "influencegains", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.influencegains), true)]
 [assembly: EdmRelationshipAttribute("sparkdbModel", "FK_influencegains_profiles_2", "profiles", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.profiles), "influencegains", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.influencegains), true)]
 [assembly: EdmRelationshipAttribute("sparkdbModel", "FK_influencegains_subjectmatters", "subjectmatters", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.subjectmatters), "influencegains", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.influencegains), true)]
@@ -50,6 +47,9 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("sparkdbModel", "FK__categories_21", "categories", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.categories), "sparkscategory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.sparkscategory), true)]
 [assembly: EdmRelationshipAttribute("sparkdbModel", "FK__categories_31", "categories", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.categories), "sparkscategory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.sparkscategory), true)]
 [assembly: EdmRelationshipAttribute("sparkdbModel", "FK__sparks1", "sparks", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.sparks), "sparkscategory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.sparkscategory), true)]
+[assembly: EdmRelationshipAttribute("sparkdbModel", "FK_sparks_accounts", "accounts", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.accounts), "sparks", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.sparks), true)]
+[assembly: EdmRelationshipAttribute("sparkdbModel", "FK_transactions_accounts", "accounts", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.accounts), "transactions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.transactions), true)]
+[assembly: EdmRelationshipAttribute("sparkdbModel", "FKAccounts", "accounts", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Spark.Models.accounts), "profiles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Spark.Models.profiles), true)]
 
 #endregion
 
@@ -100,22 +100,6 @@ namespace Spark.Models
         #endregion
     
         #region ObjectSet Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<accounts> accounts
-        {
-            get
-            {
-                if ((_accounts == null))
-                {
-                    _accounts = base.CreateObjectSet<accounts>("accounts");
-                }
-                return _accounts;
-            }
-        }
-        private ObjectSet<accounts> _accounts;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -468,18 +452,26 @@ namespace Spark.Models
             }
         }
         private ObjectSet<sparkscategory> _sparkscategories;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<accounts> accounts
+        {
+            get
+            {
+                if ((_accounts == null))
+                {
+                    _accounts = base.CreateObjectSet<accounts>("accounts");
+                }
+                return _accounts;
+            }
+        }
+        private ObjectSet<accounts> _accounts;
 
         #endregion
 
         #region AddTo Methods
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the accounts EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToaccounts(accounts accounts)
-        {
-            base.AddObject("accounts", accounts);
-        }
     
         /// <summary>
         /// Deprecated Method for adding a new object to the categories EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
@@ -656,6 +648,14 @@ namespace Spark.Models
         {
             base.AddObject("sparkscategories", sparkscategory);
         }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the accounts EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToaccounts(accounts accounts)
+        {
+            base.AddObject("accounts", accounts);
+        }
 
         #endregion
 
@@ -679,18 +679,14 @@ namespace Spark.Models
         /// Create a new accounts object.
         /// </summary>
         /// <param name="pK">Initial value of the PK property.</param>
-        /// <param name="bIsActivated">Initial value of the bIsActivated property.</param>
         /// <param name="strUserName">Initial value of the strUserName property.</param>
-        /// <param name="strPassword">Initial value of the strPassword property.</param>
-        /// <param name="strSalt">Initial value of the strSalt property.</param>
-        public static accounts Createaccounts(global::System.Int32 pK, global::System.Boolean bIsActivated, global::System.String strUserName, global::System.String strPassword, global::System.String strSalt)
+        /// <param name="bIsActivated">Initial value of the bIsActivated property.</param>
+        public static accounts Createaccounts(global::System.Int32 pK, global::System.String strUserName, global::System.Boolean bIsActivated)
         {
             accounts accounts = new accounts();
             accounts.PK = pK;
-            accounts.bIsActivated = bIsActivated;
             accounts.strUserName = strUserName;
-            accounts.strPassword = strPassword;
-            accounts.strSalt = strSalt;
+            accounts.bIsActivated = bIsActivated;
             return accounts;
         }
 
@@ -730,30 +726,6 @@ namespace Spark.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Boolean bIsActivated
-        {
-            get
-            {
-                return _bIsActivated;
-            }
-            set
-            {
-                OnbIsActivatedChanging(value);
-                ReportPropertyChanging("bIsActivated");
-                _bIsActivated = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("bIsActivated");
-                OnbIsActivatedChanged();
-            }
-        }
-        private global::System.Boolean _bIsActivated;
-        partial void OnbIsActivatedChanging(global::System.Boolean value);
-        partial void OnbIsActivatedChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
         public global::System.String strUserName
         {
             get
@@ -776,7 +748,7 @@ namespace Spark.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String strPassword
         {
@@ -788,7 +760,7 @@ namespace Spark.Models
             {
                 OnstrPasswordChanging(value);
                 ReportPropertyChanging("strPassword");
-                _strPassword = StructuralObject.SetValidValue(value, false);
+                _strPassword = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("strPassword");
                 OnstrPasswordChanged();
             }
@@ -800,7 +772,7 @@ namespace Spark.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String strSalt
         {
@@ -812,7 +784,7 @@ namespace Spark.Models
             {
                 OnstrSaltChanging(value);
                 ReportPropertyChanging("strSalt");
-                _strSalt = StructuralObject.SetValidValue(value, false);
+                _strSalt = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("strSalt");
                 OnstrSaltChanged();
             }
@@ -820,6 +792,30 @@ namespace Spark.Models
         private global::System.String _strSalt;
         partial void OnstrSaltChanging(global::System.String value);
         partial void OnstrSaltChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean bIsActivated
+        {
+            get
+            {
+                return _bIsActivated;
+            }
+            set
+            {
+                OnbIsActivatedChanging(value);
+                ReportPropertyChanging("bIsActivated");
+                _bIsActivated = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("bIsActivated");
+                OnbIsActivatedChanged();
+            }
+        }
+        private global::System.Boolean _bIsActivated;
+        partial void OnbIsActivatedChanging(global::System.Boolean value);
+        partial void OnbIsActivatedChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -850,7 +846,7 @@ namespace Spark.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String gActivationGUID
+        public Nullable<global::System.Guid> gActivationGUID
         {
             get
             {
@@ -860,13 +856,13 @@ namespace Spark.Models
             {
                 OngActivationGUIDChanging(value);
                 ReportPropertyChanging("gActivationGUID");
-                _gActivationGUID = StructuralObject.SetValidValue(value, true);
+                _gActivationGUID = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("gActivationGUID");
                 OngActivationGUIDChanged();
             }
         }
-        private global::System.String _gActivationGUID;
-        partial void OngActivationGUIDChanging(global::System.String value);
+        private Nullable<global::System.Guid> _gActivationGUID;
+        partial void OngActivationGUIDChanging(Nullable<global::System.Guid> value);
         partial void OngActivationGUIDChanged();
 
         #endregion
@@ -880,18 +876,18 @@ namespace Spark.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FKAccounts", "profiles")]
-        public EntityCollection<profiles> profiles
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK_sparks_accounts", "sparks")]
+        public EntityCollection<sparks> sparks
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<profiles>("sparkdbModel.FKAccounts", "profiles");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<sparks>("sparkdbModel.FK_sparks_accounts", "sparks");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<profiles>("sparkdbModel.FKAccounts", "profiles", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<sparks>("sparkdbModel.FK_sparks_accounts", "sparks", value);
                 }
             }
         }
@@ -914,6 +910,28 @@ namespace Spark.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<transactions>("sparkdbModel.FK_transactions_accounts", "transactions", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FKAccounts", "profiles")]
+        public EntityCollection<profiles> profiles
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<profiles>("sparkdbModel.FKAccounts", "profiles");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<profiles>("sparkdbModel.FKAccounts", "profiles", value);
                 }
             }
         }
@@ -3246,44 +3264,6 @@ namespace Spark.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FKAccounts", "accounts")]
-        public accounts accounts
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<accounts>("sparkdbModel.FKAccounts", "accounts").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<accounts>("sparkdbModel.FKAccounts", "accounts").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<accounts> accountsReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<accounts>("sparkdbModel.FKAccounts", "accounts");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<accounts>("sparkdbModel.FKAccounts", "accounts", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FKCities", "cities")]
         public cities cities
         {
@@ -3458,28 +3438,6 @@ namespace Spark.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FKProfilesCreatedBy", "sparks")]
-        public EntityCollection<sparks> sparks
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<sparks>("sparkdbModel.FKProfilesCreatedBy", "sparks");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<sparks>("sparkdbModel.FKProfilesCreatedBy", "sparks", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FKReligions", "religions")]
         public religions religions
         {
@@ -3618,6 +3576,44 @@ namespace Spark.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<heat>("sparkdbModel.FK_Heat_profiles", "heat", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FKAccounts", "accounts")]
+        public accounts accounts
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<accounts>("sparkdbModel.FKAccounts", "accounts").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<accounts>("sparkdbModel.FKAccounts", "accounts").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<accounts> accountsReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<accounts>("sparkdbModel.FKAccounts", "accounts");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<accounts>("sparkdbModel.FKAccounts", "accounts", value);
                 }
             }
         }
@@ -3964,14 +3960,14 @@ namespace Spark.Models
         /// Create a new sparks object.
         /// </summary>
         /// <param name="pK">Initial value of the PK property.</param>
-        /// <param name="fKProfilesCreatedBy">Initial value of the FKProfilesCreatedBy property.</param>
         /// <param name="fKSubjectMatters">Initial value of the FKSubjectMatters property.</param>
-        public static sparks Createsparks(global::System.Int32 pK, global::System.Int32 fKProfilesCreatedBy, global::System.Int32 fKSubjectMatters)
+        /// <param name="fKAccountsCreatedBy">Initial value of the FKAccountsCreatedBy property.</param>
+        public static sparks Createsparks(global::System.Int32 pK, global::System.Int32 fKSubjectMatters, global::System.Int32 fKAccountsCreatedBy)
         {
             sparks sparks = new sparks();
             sparks.PK = pK;
-            sparks.FKProfilesCreatedBy = fKProfilesCreatedBy;
             sparks.FKSubjectMatters = fKSubjectMatters;
+            sparks.FKAccountsCreatedBy = fKAccountsCreatedBy;
             return sparks;
         }
 
@@ -4081,30 +4077,6 @@ namespace Spark.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 FKProfilesCreatedBy
-        {
-            get
-            {
-                return _FKProfilesCreatedBy;
-            }
-            set
-            {
-                OnFKProfilesCreatedByChanging(value);
-                ReportPropertyChanging("FKProfilesCreatedBy");
-                _FKProfilesCreatedBy = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("FKProfilesCreatedBy");
-                OnFKProfilesCreatedByChanged();
-            }
-        }
-        private global::System.Int32 _FKProfilesCreatedBy;
-        partial void OnFKProfilesCreatedByChanging(global::System.Int32 value);
-        partial void OnFKProfilesCreatedByChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public Nullable<global::System.DateTime> dDateCreated
@@ -4173,6 +4145,30 @@ namespace Spark.Models
         private global::System.Int32 _FKSubjectMatters;
         partial void OnFKSubjectMattersChanging(global::System.Int32 value);
         partial void OnFKSubjectMattersChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 FKAccountsCreatedBy
+        {
+            get
+            {
+                return _FKAccountsCreatedBy;
+            }
+            set
+            {
+                OnFKAccountsCreatedByChanging(value);
+                ReportPropertyChanging("FKAccountsCreatedBy");
+                _FKAccountsCreatedBy = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FKAccountsCreatedBy");
+                OnFKAccountsCreatedByChanged();
+            }
+        }
+        private global::System.Int32 _FKAccountsCreatedBy;
+        partial void OnFKAccountsCreatedByChanging(global::System.Int32 value);
+        partial void OnFKAccountsCreatedByChanged();
 
         #endregion
 
@@ -4197,44 +4193,6 @@ namespace Spark.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<comments>("sparkdbModel.FKSparks", "comments", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FKProfilesCreatedBy", "profiles")]
-        public profiles profiles
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<profiles>("sparkdbModel.FKProfilesCreatedBy", "profiles").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<profiles>("sparkdbModel.FKProfilesCreatedBy", "profiles").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<profiles> profilesReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<profiles>("sparkdbModel.FKProfilesCreatedBy", "profiles");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<profiles>("sparkdbModel.FKProfilesCreatedBy", "profiles", value);
                 }
             }
         }
@@ -4317,6 +4275,44 @@ namespace Spark.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<sparkscategory>("sparkdbModel.FK__sparks1", "sparkscategory", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK_sparks_accounts", "accounts")]
+        public accounts accounts
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<accounts>("sparkdbModel.FK_sparks_accounts", "accounts").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<accounts>("sparkdbModel.FK_sparks_accounts", "accounts").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<accounts> accountsReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<accounts>("sparkdbModel.FK_sparks_accounts", "accounts");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<accounts>("sparkdbModel.FK_sparks_accounts", "accounts", value);
                 }
             }
         }
@@ -5424,44 +5420,6 @@ namespace Spark.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK_transactions_accounts", "accounts")]
-        public accounts accounts
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<accounts>("sparkdbModel.FK_transactions_accounts", "accounts").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<accounts>("sparkdbModel.FK_transactions_accounts", "accounts").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<accounts> accountsReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<accounts>("sparkdbModel.FK_transactions_accounts", "accounts");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<accounts>("sparkdbModel.FK_transactions_accounts", "accounts", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK_transactions_transactionstates", "transactionstates")]
         public transactionstates transactionstates
         {
@@ -5528,6 +5486,44 @@ namespace Spark.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<transactiontypes>("sparkdbModel.FK_transactions_transactiontypes", "transactiontypes", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("sparkdbModel", "FK_transactions_accounts", "accounts")]
+        public accounts accounts
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<accounts>("sparkdbModel.FK_transactions_accounts", "accounts").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<accounts>("sparkdbModel.FK_transactions_accounts", "accounts").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<accounts> accountsReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<accounts>("sparkdbModel.FK_transactions_accounts", "accounts");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<accounts>("sparkdbModel.FK_transactions_accounts", "accounts", value);
                 }
             }
         }

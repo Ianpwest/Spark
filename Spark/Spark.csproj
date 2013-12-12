@@ -350,12 +350,6 @@
     <Content Include="Views\Tutorial\TutorialPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Models\SparkDB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SparkDB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Account\Activate.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -369,6 +363,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_NavigationBarPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Models\SparkDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SparkDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -179,7 +179,7 @@ namespace Spark.Classes
             accountNew.strUserName = rm.UserName;
             accountNew.strSalt = Utilities.GetSalt();
             accountNew.strPassword = Utilities.Encrypt(accountNew.strSalt + rm.Password);
-            accountNew.gActivationGUID = rm.gActivationGUID.ToString();
+            accountNew.gActivationGUID = rm.gActivationGUID;
             accountNew.strEmail = rm.Email;
 
             try
@@ -203,7 +203,7 @@ namespace Spark.Classes
         public static bool ActivateAccount(string userGUID)
         {
             accounts result =  (from r in m_db.accounts
-                                where r.gActivationGUID == userGUID
+                                where r.gActivationGUID.ToString() == userGUID
                                 select r).FirstOrDefault();
 
             //User not found
@@ -254,7 +254,7 @@ namespace Spark.Classes
         public static accounts GetAccountByActivationGuid(string strActivationGUID)
         {
             accounts account = (from r in m_db.accounts
-                                where r.gActivationGUID == strActivationGUID
+                                where r.gActivationGUID.ToString() == strActivationGUID
                                 select r).FirstOrDefault();
 
             if (account == null)

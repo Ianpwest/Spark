@@ -34,7 +34,7 @@ namespace Spark.Classes
             if (nQryUserId == null || nQryUserId.Count() != 1)
                 return false;
 
-            sparkModel.FKProfilesCreatedBy = nQryUserId.First();
+            sparkModel.FKAccountsCreatedBy = nQryUserId.First();
             sparkModel.dDateCreated = DateTime.Now;
             sparkModel.dDateModified = DateTime.Now;
 
