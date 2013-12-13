@@ -36,62 +36,56 @@ namespace Spark.Controllers
         public ActionResult SparkCreate(SparkCreateModel model)
         {
             model.UserId = User.Identity.Name;
+            model.FileName = Guid.NewGuid().ToString() + ".jpg"; ;
             // Redirect somewhere else when it fails.
-            if (Request.Files.Count == 1)
-            {
-                Guid gName = Guid.NewGuid();
-                String strFileName = gName.ToString() + ".jpg";
-                model.FileName = strFileName;
-                //Add logic here to only accept certain MIME types?
-                string strMimeType = Request.Files[0].ContentType;
-                Stream streamFileStream = Request.Files[0].InputStream;
-
-                int fileLength = Request.Files[0].ContentLength;
-                byte[] fileData = new byte[fileLength];
-                streamFileStream.Read(fileData, 0, fileLength);
-                fileData = ResizeImage(fileData, fileLength);
-
-                XDocument xDoc = XDocument.Load(Server.MapPath("~/App_Data/Config.xml"));
-                IEnumerable<XElement> configuration = xDoc.Elements();
-
-                var strFilePath = (from r in xDoc.Elements()
-                                  where r.Element("filepath").Attribute("name").Value == "sparkImgRoot"
-                                  select r.Element("filepath").Attribute("value").Value).FirstOrDefault();
-                
-                try
-                {
-                    strFilePath += strFileName;
-                    
-                    System.IO.FileStream _FileStream = new System.IO.FileStream(strFilePath, System.IO.FileMode.Create,
-                                  System.IO.FileAccess.Write);
-                    // Writes a block of bytes to this stream using data from
-                    // a byte array.
-                    _FileStream.Write(fileData, 0, fileData.Length);
-
-                    // close file stream
-                    _FileStream.Close();
-                }
-                catch
-                {
-
-                }
-                //using (StreamWriter writer = new StreamWriter(
-
-                //MVCEventBench.Models.Image myImage = new MVCEventBench.Models.Image();
-                //myImage.gEventImageGUID = Guid.NewGuid();
-                //myImage.gEvent = gEvent;
-                //myImage.imgContent = fileData;
-                //myImage.strMIMEType = strMimeType;
-                //myImage.strFileName = strFileName;
-
-                //db.AddToImage(myImage);
-                //db.SaveChanges();
-                
-            }
+            
             if (!SparksDatabaseInterface.CreateSpark(model))
                 return RedirectToAction("Index", "Home");
-            
+
+            // If record was inserted correct, try to add an image if it exists.
+            if (Request.Files.Count == 1)
+            {
+                WriteImageToFile(model.FileName);
+            }
+
             return RedirectToAction("Index", "Home");
+        }
+
+        private void WriteImageToFile(String strFileName)
+        {
+            //Add logic here to only accept certain MIME types?
+            string strMimeType = Request.Files[0].ContentType;
+            Stream streamFileStream = Request.Files[0].InputStream;
+
+            int fileLength = Request.Files[0].ContentLength;
+            byte[] fileData = new byte[fileLength];
+            streamFileStream.Read(fileData, 0, fileLength);
+            fileData = ResizeImage(fileData, fileLength);
+
+            XDocument xDoc = XDocument.Load(Server.MapPath("~/App_Data/Config.xml"));
+            IEnumerable<XElement> configuration = xDoc.Elements();
+
+            var strFilePath = (from r in xDoc.Elements()
+                               where r.Element("filepath").Attribute("name").Value == "sparkImgRoot"
+                               select r.Element("filepath").Attribute("value").Value).FirstOrDefault();
+
+            try
+            {
+                strFilePath += strFileName;
+
+                System.IO.FileStream _FileStream = new System.IO.FileStream(strFilePath, System.IO.FileMode.Create,
+                              System.IO.FileAccess.Write);
+                // Writes a block of bytes to this stream using data from
+                // a byte array.
+                _FileStream.Write(fileData, 0, fileData.Length);
+
+                // close file stream
+                _FileStream.Close();
+            }
+            catch
+            {
+
+            }
         }
 
         /// <summary>
