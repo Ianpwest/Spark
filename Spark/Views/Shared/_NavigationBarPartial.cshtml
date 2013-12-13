@@ -1,13 +1,28 @@
-﻿<div class="float-left">
+﻿<div>
     <div class="horizontalAlign">
-        <div class="navigationSparkIcon">
-            <img src="~/Images/Icons/SparkIcon.jpg" />
+        <div class="navigationIcon">
+            @*<img src="~/Images/Icons/SparkIcon.jpg" alt="Home"/>*@
+            <a href="/Home">Home</a>
         </div>
-        <div class="navigationQueryIcon">
-            <img src="../../Images/Icons/QIcon.jpg" />
+        <div class="navigationIcon">
+            @*<img src="../../Images/Icons/QIcon.jpg" alt="Query"/>*@
+            <a href="/Spark/SparkQuery">Query</a>
         </div>
+        <div class="navigationIcon">
+            @*<img src="../../Images/Icons/C.png" alt="Categories" />*@
+            <a href="/Spark/SparkCategories">Categories</a>
+        </div>
+        <div class="navigationIcon">
+            @*<img src="../../Images/Icons/plusIcon.jpg" alt="Create" />*@
+            <a href="/Spark/SparkCreate" >Create</a>
+        </div>
+        <div class="navigationLogin">
+            @Html.Partial("_LoginPartial")
+        </div>
+        <div class="navigationTitle">
+            <p>Page Title</p>
+        </div>
+       
     </div>
 </div>
-<div class="float-right">
-    @Html.Partial("_LoginPartial")
-</div>
+
