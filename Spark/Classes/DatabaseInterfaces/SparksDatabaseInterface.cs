@@ -24,6 +24,7 @@ namespace Spark.Classes
             sparks sparkModel = new sparks();
             sparkModel.strDescription = sparkCreateModel.Description;
             sparkModel.strTopic = sparkCreateModel.Topic;
+            sparkModel.strImagePath = sparkCreateModel.FileName;
             
             sparkModel.FKSubjectMatters = sparkCreateModel.SubjectMatterId;
             
@@ -37,7 +38,7 @@ namespace Spark.Classes
             sparkModel.FKAccountsCreatedBy = nQryUserId.First();
             sparkModel.dDateCreated = DateTime.Now;
             sparkModel.dDateModified = DateTime.Now;
-
+            
             try
             {
                 m_db.AddTosparks(sparkModel);

@@ -295,7 +295,7 @@
           <Key>
             <PropertyRef Name="PK" />
           </Key>
-          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="PK" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="FKAccountsCreatedBy" Type="int" Nullable="false" />
           <Property Name="FKSubjectMatters" Type="int" Nullable="false" />
           <Property Name="strImagePath" Type="varchar" MaxLength="200" />
