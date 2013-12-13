@@ -61,6 +61,7 @@ mark {
 h1, h2, h3,
 h4, h5, h6 {
     color: #000;
+    margin-top:0;
     margin-bottom: 0;
     padding-bottom: 0;
 }
@@ -573,7 +574,7 @@ input[type="checkbox"].input-validation-error {
 table {
     border-collapse: collapse;
     border-spacing: 0;
-    margin-top: 0.75em;
+    margin-top: 0.7em;
     border: 0 none;
 }
 
