@@ -4,5 +4,5 @@
 
 
 $(document).ready(function () {
-    $(".pageTitle").text($(".title").text());
+    $(".NavigationBarTitleP").text($(".title").text());
 });
