@@ -1,0 +1,116 @@
+﻿.NavigationBarContainer a
+{
+  font-family:Century Gothic;
+  color:lightgray;
+  text-decoration:none;
+}
+
+.NavigationBarHomeIcon:hover, selected,
+.NavigationBarQueryIcon:hover, selected,
+.NavigationBarCategoryIcon:hover, selected,
+.NavigationBarCreateIcon:hover, selected,
+.NavigationBarLoginContainer a:hover, selected
+{
+  border-bottom:3px groove white;
+}
+
+.NavigationBarHomeIcon:hover a,
+.NavigationBarQueryIcon:hover a,
+.NavigationBarCategoryIcon:hover a,
+.NavigationBarCreateIcon:hover a,
+.NavigationBarLoginContainer a:hover
+{
+  color:white;
+}
+
+.NavigationBarContainer
+{
+  width: auto;
+  height:3em;
+  position:relative;
+
+background: linear-gradient(to bottom, #4c4c4c 0%,#666666 0%,#2c2c2c 0%,#595959 0%,#474747 0%,#000000 100%,#1c1c1c 100%,#2b2b2b 100%,#131313 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313',GradientType=0 ); /* IE6-8 */
+}
+
+.NavigationBarInnerContainer
+{ 
+  width:75%;
+  min-width:850px;
+  height: 1.5em; 
+  
+  position:absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.NavigationBarDivide
+{
+  float:left;
+  border-right: 1px solid white;
+  margin-right: .5em;
+  margin-left: .5em;
+}
+
+.NavigationBarHomeIcon
+{
+  height:32px;
+  float:left;
+  margin-right:6em;
+}
+
+.NavigationBarQueryIcon
+{
+  height:32px;
+  float:left;
+}
+
+.NavigationBarCategoryIcon
+{
+  height:32px;
+  float:left;
+}
+
+.NavigationBarCreateIcon
+{
+  height:32px;
+  float:left;
+}
+
+.NavigationBarTitle
+{
+  width:250px;
+  height: 1.5em;
+  
+  position:absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.NavigationBarTitleP
+{
+  color:white;
+  margin: 0 auto;
+  text-align:center;
+  margin-top:-5px;
+  font-size:25px;
+}
+
+.NavigationBarLoginContainer
+{
+  float:right;
+  height:1.5em;
+}
+
+.NavigationBarLoginContainer a
+{
+  margin: 0 auto;
+  float:left;
+  height:32px;
+}

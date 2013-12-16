@@ -1,26 +1,29 @@
-﻿<div>
-    <div class="horizontalAlign">
-        <div class="navigationIcon">
-            @*<img src="~/Images/Icons/SparkIcon.jpg" alt="Home"/>*@
-            <a href="/Home">Home</a>
+﻿
+<div class="NavigationBarContainer">
+    <div class="NavigationBarInnerContainer">
+        <div class="NavigationBarHomeIcon">
+            <a id="HomeIcon" href="/">Home</a>
         </div>
-        <div class="navigationIcon">
-            @*<img src="../../Images/Icons/QIcon.jpg" alt="Query"/>*@
+        <div class="NavigationBarQueryIcon">
             <a href="/Spark/SparkQuery">Query</a>
         </div>
-        <div class="navigationIcon">
-            @*<img src="../../Images/Icons/C.png" alt="Categories" />*@
+        <div class="NavigationBarDivide">
+            &nbsp
+        </div>
+        <div class="NavigationBarCategoryIcon">
             <a href="/Spark/SparkCategories">Categories</a>
         </div>
-        <div class="navigationIcon">
-            @*<img src="../../Images/Icons/plusIcon.jpg" alt="Create" />*@
-            <a href="/Spark/SparkCreate" >Create</a>
+        <div class="NavigationBarDivide">
+            &nbsp
         </div>
-        <div class="navigationLogin">
+        <div class="NavigationBarCreateIcon">
+            <a href="/Spark/SparkCreate">Create</a>
+        </div>
+        <div class="NavigationBarTitle">
+            <p class="NavigationBarTitleP"></p>
+        </div>
+        <div class="NavigationBarLoginContainer">
             @Html.Partial("_LoginPartial")
-        </div>
-        <div class="navigationTitle">
-            <p class="pageTitle"></p>
         </div>
     </div>
 </div>
