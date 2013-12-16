@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b420d27a42704732b5d758ac353fd626" Name="Diagram1">
+        <EntityTypeShape EntityType="sparkdbModel.accounts" Width="1.5" PointX="0.75" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="sparkdbModel.arguments" Width="1.5" PointX="3" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="sparkdbModel.categories" Width="1.5" PointX="9" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="sparkdbModel.cities" Width="1.5" PointX="3.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="sparkdbModel.comments" Width="1.5" PointX="8.25" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="sparkdbModel.commentvotes" Width="1.5" PointX="6" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sparkdbModel.constants" Width="1.5" PointX="8.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="sparkdbModel.countries" Width="1.5" PointX="1.5" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="sparkdbModel.educationlevels" Width="1.5" PointX="3.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="sparkdbModel.errorlog" Width="1.5" PointX="3" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sparkdbModel.genders" Width="1.5" PointX="3.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="sparkdbModel.heat" Width="1.5" PointX="10.5" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="sparkdbModel.influencegains" Width="1.5" PointX="3" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="sparkdbModel.interactionlog" Width="1.5" PointX="8" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sparkdbModel.interactiontypes" Width="1.5" PointX="5.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="sparkdbModel.politicalideologies" Width="1.5" PointX="3.75" PointY="26.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="sparkdbModel.profiles" Width="1.5" PointX="6" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="sparkdbModel.religions" Width="1.5" PointX="3.75" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="sparkdbModel.sparkinterestvotes" Width="1.5" PointX="6" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sparkdbModel.sparks" Width="1.5" PointX="9" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="sparkdbModel.sparkscategories" Width="1.5" PointX="11.25" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="sparkdbModel.statesprovidences" Width="1.5" PointX="1.5" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="sparkdbModel.subjectmatters" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sparkdbModel.subjectmatterspreads" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sparkdbModel.transactions" Width="1.5" PointX="9" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="sparkdbModel.transactionstates" Width="1.5" PointX="6.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="sparkdbModel.transactiontypes" Width="1.5" PointX="6.75" PointY="5.25" IsExpanded="true" />
+        <AssociationConnector Association="sparkdbModel.FK__profiles" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FK_arguments_accounts" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FK_errorlog_accounts" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FK_Heat_accounts" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FK_influencegains_accounts" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FK_influencegains_accounts_2" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FK_sparkinterestvotes_accounts" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FK_sparks_accounts" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FK_transactions_accounts" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FKAccounts" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FKProfiles" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FK_arguments_sparks" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FK_comments_arguments" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FK__categories" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FK__categories_2" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FK__categories_3" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FKCities" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FKStatesProvidences" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FK__comments" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FK_comments_comments" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FK_Heat_comments" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FKCountries" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FKEducationalLevels" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FKGenders" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FK_influencegains_subjectmatters" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FK_interactionlog_interactiontypes" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FKPoliticalIdeologies" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FKReligions" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FK_sparkinterestvotes_sparks" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FK__sparks" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FK_sparks_subjectmatters" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FK__subjectmatters" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FK__subjectmatters_2" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FK_transactions_transactionstates" ManuallyRouted="false" />
+        <AssociationConnector Association="sparkdbModel.FK_transactions_transactiontypes" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

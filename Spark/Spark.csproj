@@ -170,6 +170,7 @@
     <Compile Include="Classes\Analytics.cs" />
     <Compile Include="Classes\Calculations.cs" />
     <Compile Include="Classes\DatabaseInterfaces\AccountsDatabaseInterface.cs" />
+    <Compile Include="Classes\DatabaseInterfaces\BaseDatabaseInterface.cs" />
     <Compile Include="Classes\DatabaseInterfaces\SparksDatabaseInterface.cs" />
     <Compile Include="Classes\Utilities.cs" />
     <Compile Include="Classes\DatabaseInterfaces\UtilitiesDatabaseInterface.cs" />
@@ -181,13 +182,104 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AccountRetrieval.cs" />
+    <Compile Include="Models\accounts.cs">
+      <DependentUpon>SparkDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\arguments.cs">
+      <DependentUpon>SparkDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\categories.cs">
+      <DependentUpon>SparkDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\cities.cs">
+      <DependentUpon>SparkDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\comments.cs">
+      <DependentUpon>SparkDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\commentvotes.cs">
+      <DependentUpon>SparkDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\constants.cs">
+      <DependentUpon>SparkDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\countries.cs">
+      <DependentUpon>SparkDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\educationlevels.cs">
+      <DependentUpon>SparkDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\errorlog.cs">
+      <DependentUpon>SparkDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\genders.cs">
+      <DependentUpon>SparkDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\heat.cs">
+      <DependentUpon>SparkDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\influencegains.cs">
+      <DependentUpon>SparkDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\interactionlog.cs">
+      <DependentUpon>SparkDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\interactiontypes.cs">
+      <DependentUpon>SparkDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PasswordChangeModel.cs" />
+    <Compile Include="Models\politicalideologies.cs">
+      <DependentUpon>SparkDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\profiles.cs">
+      <DependentUpon>SparkDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\religions.cs">
+      <DependentUpon>SparkDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SparkDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SparkDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SparkDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SparkDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SparkDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SparkDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\sparkinterestvotes.cs">
+      <DependentUpon>SparkDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SparkModels.cs" />
+    <Compile Include="Models\sparks.cs">
+      <DependentUpon>SparkDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sparkscategories.cs">
+      <DependentUpon>SparkDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\statesprovidences.cs">
+      <DependentUpon>SparkDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\subjectmatters.cs">
+      <DependentUpon>SparkDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\subjectmatterspreads.cs">
+      <DependentUpon>SparkDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\transactions.cs">
+      <DependentUpon>SparkDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\transactionstates.cs">
+      <DependentUpon>SparkDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\transactiontypes.cs">
+      <DependentUpon>SparkDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -372,6 +464,24 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SparkDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\SparkDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SparkDB.edmx</DependentUpon>
+      <LastGenOutput>SparkDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\SparkDB.edmx.diagram">
+      <DependentUpon>SparkDB.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\SparkDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SparkDB.edmx</DependentUpon>
+      <LastGenOutput>SparkDB.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
