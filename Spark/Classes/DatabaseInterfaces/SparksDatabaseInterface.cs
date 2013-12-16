@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using Spark.Classes.DatabaseInterfaces;
@@ -40,8 +41,16 @@ namespace Spark.Classes
                 m_db.sparks.Add(sparkModel);
                 m_db.SaveChanges();
             }
-            catch (Exception ex)
+            catch (DbEntityValidationException ex)
             {
+                foreach (var validationErrors in ex.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string str1 = validationError.PropertyName;
+                        string str2 = validationError.ErrorMessage;
+                    }
+                }
                 // log ex.
                 return false;
             }

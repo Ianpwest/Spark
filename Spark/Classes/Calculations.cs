@@ -17,7 +17,7 @@ namespace Spark.Classes
         /// Used to calculate a particular user's total influence.
         /// </summary>
         /// <returns></returns>
-        public static double Influence(accounts userCurrent, sparkdbEntities dbEntity, int nSubjectMatterId)
+        public static double Influence(accounts userCurrent, sparkdbEntities1 dbEntity, int nSubjectMatterId)
         {
             double dblInfluence = 0;
 
@@ -35,7 +35,7 @@ namespace Spark.Classes
         /// <param name="dbEntity">Database entity.</param>
         /// <param name="nSubjectMatterId">Broad category against which to calculate.</param>
         /// <returns>Double value that represents the base influence number.</returns>
-        private static double GetBaseInfluence(accounts userCurrent, sparkdbEntities dbEntity, int nSubjectMatterId)
+        private static double GetBaseInfluence(accounts userCurrent, sparkdbEntities1 dbEntity, int nSubjectMatterId)
         {
             double dblBase = 0;
 
@@ -63,7 +63,7 @@ namespace Spark.Classes
         /// <param name="dbEntity">Database entity.</param>
         /// <param name="nSubjectMatterId">Broad category against which to calculate.</param>
         /// <returns>Double value that represents a total of all related user gained/lost influence.</returns>
-        private static double GetUserAddons(accounts userCurrent, sparkdbEntities dbEntity, int nSubjectMatterId)
+        private static double GetUserAddons(accounts userCurrent, sparkdbEntities1 dbEntity, int nSubjectMatterId)
         {
             double dblUserAddon = 0;
 
@@ -94,7 +94,7 @@ namespace Spark.Classes
         /// <param name="dbEntity">Database entity.</param>
         /// <param name="nSubjectMatterId">Broad category against which to calculate.</param>
         /// <returns>Double value that represents a sum of all spread gains/losses for the given broad category.</returns>
-        private static double GetSpread(accounts userCurrent, sparkdbEntities dbEntity, int nSubjectMatterId)
+        private static double GetSpread(accounts userCurrent, sparkdbEntities1 dbEntity, int nSubjectMatterId)
         {
             double dblSpread = 0;
 
@@ -118,7 +118,7 @@ namespace Spark.Classes
         /// </summary>
         /// <param name="dbEntity">Database entity.</param>
         /// <returns>Sorted list of sparks.</returns>
-        public static List<sparks> SortSparksByPopularity(sparkdbEntities dbEntity)
+        public static List<sparks> SortSparksByPopularity(sparkdbEntities1 dbEntity)
         {
             List<sparks> lstSorted = new List<sparks>();
             Dictionary<sparks, double> dictSparkValues = ApplyPopularitySorting(dbEntity);
@@ -140,7 +140,7 @@ namespace Spark.Classes
         /// <param name="dbEntity">Database entity.</param>
         /// <param name="nSubjectMatterId"></param>
         /// <returns></returns>
-        public static List<sparks> SortSparksBySubject(sparkdbEntities dbEntity, int nSubjectMatterId)
+        public static List<sparks> SortSparksBySubject(sparkdbEntities1 dbEntity, int nSubjectMatterId)
         {
             List<sparks> lstSorted = new List<sparks>();
 
@@ -182,14 +182,14 @@ namespace Spark.Classes
             return lstSorted;
         }
 
-        public static List<sparks> SortSparksByUserInterest(sparkdbEntities dbEntity)
+        public static List<sparks> SortSparksByUserInterest(sparkdbEntities1 dbEntity)
         {
             List<sparks> lstSorted = new List<sparks>();
 
             return lstSorted;
         }
 
-        private static Dictionary<sparks, double> ApplyDecayAlgorithm(Dictionary<sparks, double> dictSparks, sparkdbEntities dbEntity)
+        private static Dictionary<sparks, double> ApplyDecayAlgorithm(Dictionary<sparks, double> dictSparks, sparkdbEntities1 dbEntity)
         {
             Dictionary<sparks, double> dictSparkValues = new Dictionary<sparks, double>();
 
@@ -228,7 +228,7 @@ namespace Spark.Classes
             return dictSparkValues;
         }
 
-        private static Dictionary<sparks, double> ApplyPopularitySorting(sparkdbEntities dbEntity)
+        private static Dictionary<sparks, double> ApplyPopularitySorting(sparkdbEntities1 dbEntity)
         {
             Dictionary<sparks, double> dictSorted = new Dictionary<sparks, double>();
 

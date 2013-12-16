@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using Spark.Models;
@@ -7,24 +8,27 @@ using Spark.Models;
 namespace Spark.Classes.DatabaseInterfaces
 {
     /// <summary>
-    /// Base class to be used for all database interface classes. This class contains the static sparkdbEntities field.
+    /// Base class to be used for all database interface classes. This class contains the static sparkdbEntities1 field.
     /// This class also contains all error logging and user interaction logging.
     /// </summary>
     public class BaseDatabaseInterface
     {
+        #region Logging
+
         /// Logs an error in the database using the given account Id, custom message, stacktrace message, calling controller or view, calling method, and potentially errored variable field.
         /// If a parameter is unknown or unused, use an empty string or null.
-        protected static sparkdbEntities m_db = new sparkdbEntities();
+        protected static sparkdbEntities1 m_db = new sparkdbEntities1();
 
         /// <summary>
         /// Logs an error in the database using the given account Id and custom message.
         /// </summary>
         /// <param name="accountId">Account Id</param>
         /// <param name="strMessage">Custom message about error to be stored.</param>
-        public static void LogError(int accountId, string strMessage)
+        public static void LogError(string strUserName, string strMessage)
         {
             DateTime dtNow = DateTime.Now;
-
+            int accountId = GetUserId(strUserName);
+            
             errorlog log = new errorlog();
             log.dDate = dtNow;
             log.FKAccounts = accountId;
@@ -40,9 +44,10 @@ namespace Spark.Classes.DatabaseInterfaces
         /// <param name="accountId">Account Id</param>
         /// <param name="strMessage">Custom message about error to be stored.</param>
         /// <param name="strStackTrace">Given by stacktrace of the exception.</param>
-        public static void LogError(int accountId, string strMessage, string strStackTrace)
+        public static void LogError(string strUserName, string strMessage, string strStackTrace)
         {
             DateTime dtNow = DateTime.Now;
+            int accountId = GetUserId(strUserName);
 
             errorlog log = new errorlog();
             log.dDate = dtNow;
@@ -65,9 +70,10 @@ namespace Spark.Classes.DatabaseInterfaces
         /// <param name="strMethod">Method that contains the error.</param>
         /// <param name="strStackTrace">Given by stacktrace of the exception.</param>
         /// <param name="strVariableName">Variable name that could possibly be null or otherwise error prone.</param>
-        public static void LogError(int accountId, string strMessage, string strControllerView, string strMethod, string strStackTrace, string strVariableName)
+        public static void LogError(string strUserName, string strMessage, string strControllerView, string strMethod, string strStackTrace, string strVariableName)
         {
             DateTime dtNow = DateTime.Now;
+            int accountId = GetUserId(strUserName);
 
             errorlog log = new errorlog();
             log.dDate = dtNow;
@@ -86,9 +92,10 @@ namespace Spark.Classes.DatabaseInterfaces
         /// </summary>
         /// <param name="accountId">Account Id</param>
         /// <param name="type">Type of user interaction as specificed in the database configuration table.</param>
-        public static void LogInteraction(int accountId, InteractionType type)
+        public static void LogInteraction(string strUserName, InteractionType type)
         {
             DateTime dtNow = DateTime.Now;
+            int accountId = GetUserId(strUserName);
 
             interactionlog log = new interactionlog();
             log.dDate = dtNow;
@@ -96,7 +103,22 @@ namespace Spark.Classes.DatabaseInterfaces
             log.FKInteractionTypes = (int)type;
 
             m_db.interactionlog.Add(log);
-            m_db.SaveChanges();
+            try
+            {
+                m_db.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                foreach (var validationErrors in ex.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string str1 = validationError.PropertyName;
+                        string str2 = validationError.ErrorMessage;
+                    }
+                }
+            }
+            
         }
 
         /// <summary>
@@ -104,9 +126,10 @@ namespace Spark.Classes.DatabaseInterfaces
         /// </summary>
         /// <param name="accountId">Account Id</param>
         /// <param name="type">Type of user interaction as specificed in the database configuration table.</param>
-        public static void LogInteraction(int accountId, int type)
+        public static void LogInteraction(string strUserName, int type)
         {
             DateTime dtNow = DateTime.Now;
+            int accountId = GetUserId(strUserName);
 
             interactionlog log = new interactionlog();
             log.dDate = dtNow;
@@ -123,9 +146,10 @@ namespace Spark.Classes.DatabaseInterfaces
         /// <param name="accountId">Account Id</param>
         /// <param name="type">Type of user interaction as specificed in the database configuration table.</param>
         /// <param name="strControllerView">Controller or view that originated the interaction.</param>
-        public static void LogInteraction(int accountId, InteractionType type, string strControllerView)
+        public static void LogInteraction(string strUserName, InteractionType type, string strControllerView)
         {
             DateTime dtNow = DateTime.Now;
+            int accountId = GetUserId(strUserName);
 
             interactionlog log = new interactionlog();
             log.dDate = dtNow;
@@ -143,9 +167,10 @@ namespace Spark.Classes.DatabaseInterfaces
         /// <param name="accountId">Account Id</param>
         /// <param name="type">Type of user interaction as specificed in the database configuration table.</param>
         /// <param name="strControllerView">Controller or view that originated the interaction.</param>
-        public static void LogInteraction(int accountId, int type, string strControllerView)
+        public static void LogInteraction(string strUserName, int type, string strControllerView)
         {
             DateTime dtNow = DateTime.Now;
+            int accountId = GetUserId(strUserName);
 
             interactionlog log = new interactionlog();
             log.dDate = dtNow;
@@ -155,6 +180,32 @@ namespace Spark.Classes.DatabaseInterfaces
 
             m_db.interactionlog.Add(log);
             m_db.SaveChanges();
+        }
+
+        private static int GetUserId(string strUserName)
+        {
+            var qryForId = from r in m_db.accounts
+                           where r.strUserName == strUserName
+                           select r.PK;
+
+            if (qryForId != null && qryForId.Count() > 0)
+                return qryForId.FirstOrDefault();
+
+            return 0;
+        }
+
+        #endregion
+
+        protected void SaveChanges(string strUserId)
+        {
+            try
+            {
+                m_db.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                LogError(strUserId, "Generate Error", ex.StackTrace);
+            }
         }
     }
 

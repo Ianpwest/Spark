@@ -129,7 +129,7 @@
           </Key>
           <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FKAccounts" Type="int" Nullable="false" />
-          <Property Name="strControllerView" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="strControllerView" Type="varchar" MaxLength="50" />
           <Property Name="dDate" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="FKInteractionTypes" Type="int" Nullable="false" />
         </EntityType>
@@ -137,7 +137,7 @@
           <Key>
             <PropertyRef Name="PK" />
           </Key>
-          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PK" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="strName" Type="varchar" MaxLength="150" Nullable="false" />
         </EntityType>
         <EntityType Name="politicalideologies">
@@ -1094,7 +1094,7 @@
             <PropertyRef Name="PK" />
           </Key>
           <Property Name="PK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="strControllerView" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="strControllerView" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="true" />
           <Property Name="dDate" Type="DateTime" Nullable="false" />
           <Property Name="FKInteractionTypes" Type="Int32" Nullable="false" />
           <NavigationProperty Name="interactiontypes" Relationship="Self.FK_interactionlog_interactiontypes" FromRole="interactionlog" ToRole="interactiontypes" />
@@ -1744,7 +1744,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="sparkdbEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="sparkdbEntities11" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="accounts" EntityType="Self.accounts" />
           <EntitySet Name="arguments" EntityType="Self.arguments" />
           <EntitySet Name="categories" EntityType="Self.categories" />
@@ -1936,7 +1936,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SparkDBStoreContainer" CdmEntityContainer="sparkdbEntities1">
+        <EntityContainerMapping StorageEntityContainer="SparkDBStoreContainer" CdmEntityContainer="sparkdbEntities11">
           <EntitySetMapping Name="accounts">
             <EntityTypeMapping TypeName="SparkDB.accounts">
               <MappingFragment StoreEntitySet="accounts">
