@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Spark.Classes.DatabaseInterfaces;
 using Spark.Models;
 
 namespace Spark.Classes
 {
-    public class SparksDatabaseInterface
+    public class SparksDatabaseInterface : BaseDatabaseInterface
     {
-        /// <summary>
-        /// Local Instance of the database model
-        /// </summary>
-        private static Spark.Models.sparkdbEntities m_db = new Models.sparkdbEntities();
-
         /// <summary>
         /// TODO: Add commenting here
         /// </summary>

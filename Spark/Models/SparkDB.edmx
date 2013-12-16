@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SparkDB.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="SparkDB.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityType Name="accounts">
           <Key>
             <PropertyRef Name="PK" />
@@ -128,6 +128,7 @@
             <PropertyRef Name="PK" />
           </Key>
           <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FKAccounts" Type="int" Nullable="false" />
           <Property Name="strControllerView" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="dDate" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="FKInteractionTypes" Type="int" Nullable="false" />
@@ -506,6 +507,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_interactionlog_accounts">
+          <End Role="accounts" Type="Self.accounts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="interactionlog" Type="Self.interactionlog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accounts">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="interactionlog">
+              <PropertyRef Name="FKAccounts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_interactionlog_interactiontypes">
           <End Role="interactiontypes" Type="Self.interactiontypes" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -842,6 +857,10 @@
             <End Role="subjectmatters" EntitySet="subjectmatters" />
             <End Role="influencegains" EntitySet="influencegains" />
           </AssociationSet>
+          <AssociationSet Name="FK_interactionlog_accounts" Association="Self.FK_interactionlog_accounts">
+            <End Role="accounts" EntitySet="accounts" />
+            <End Role="interactionlog" EntitySet="interactionlog" />
+          </AssociationSet>
           <AssociationSet Name="FK_interactionlog_interactiontypes" Association="Self.FK_interactionlog_interactiontypes">
             <End Role="interactiontypes" EntitySet="interactiontypes" />
             <End Role="interactionlog" EntitySet="interactionlog" />
@@ -911,8 +930,7 @@
             <End Role="cities" EntitySet="cities" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SparkDB" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -938,6 +956,7 @@
           <NavigationProperty Name="transactions" Relationship="Self.FK_transactions_accounts" FromRole="accounts" ToRole="transactions" />
           <NavigationProperty Name="profiles" Relationship="Self.FKAccounts" FromRole="accounts" ToRole="profiles" />
           <NavigationProperty Name="comments" Relationship="Self.FKProfiles" FromRole="accounts" ToRole="comments" />
+          <NavigationProperty Name="interactionlog" Relationship="SparkDB.FK_interactionlog_accounts" FromRole="accounts" ToRole="interactionlog" />
         </EntityType>
         <EntityType Name="arguments">
           <Key>
@@ -1079,6 +1098,8 @@
           <Property Name="dDate" Type="DateTime" Nullable="false" />
           <Property Name="FKInteractionTypes" Type="Int32" Nullable="false" />
           <NavigationProperty Name="interactiontypes" Relationship="Self.FK_interactionlog_interactiontypes" FromRole="interactionlog" ToRole="interactiontypes" />
+          <Property Name="FKAccounts" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="accounts" Relationship="SparkDB.FK_interactionlog_accounts" FromRole="interactionlog" ToRole="accounts" />
         </EntityType>
         <EntityType Name="interactiontypes">
           <Key>
@@ -1891,7 +1912,25 @@
             <End Role="transactiontypes" EntitySet="transactiontypes" />
             <End Role="transactions" EntitySet="transactions" />
           </AssociationSet>
+          <AssociationSet Name="FK_interactionlog_accounts" Association="SparkDB.FK_interactionlog_accounts">
+            <End Role="accounts" EntitySet="accounts" />
+            <End Role="interactionlog" EntitySet="interactionlog" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_interactionlog_accounts">
+          <End Type="SparkDB.accounts" Role="accounts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SparkDB.interactionlog" Role="interactionlog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accounts">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="interactionlog">
+              <PropertyRef Name="FKAccounts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2032,6 +2071,7 @@
           <EntitySetMapping Name="interactionlog">
             <EntityTypeMapping TypeName="SparkDB.interactionlog">
               <MappingFragment StoreEntitySet="interactionlog">
+                <ScalarProperty Name="FKAccounts" ColumnName="FKAccounts" />
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="strControllerView" ColumnName="strControllerView" />
                 <ScalarProperty Name="dDate" ColumnName="dDate" />

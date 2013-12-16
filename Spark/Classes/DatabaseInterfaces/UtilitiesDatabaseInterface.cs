@@ -2,25 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Spark.Classes.DatabaseInterfaces;
 
 namespace Spark.Classes
 {
 
-    public class UtilitiesDatabaseInterface
-    {
+    public class UtilitiesDatabaseInterface : BaseDatabaseInterface
+    {   
         /// <summary>
-        /// Local Instance of the database model
+        /// Provides a list of all available broad categories for the spark categorization.
         /// </summary>
-        private static Spark.Models.sparkdbEntities m_db = new Models.sparkdbEntities();
-
-        /// <summary>
-        /// TODO: Add commenting here
-        /// </summary>
-        /// <returns></returns>
+        /// <returns>Dictionary containing a indexed list of all broad categories whose keys consist of the primary key from the database for each broad category and
+        /// values equal to the respective names of the broad categories.</returns>
         public static Dictionary<int, string> GetSubjectMatters()
         {
             Dictionary<int, string> dictSubjectMatters = new Dictionary<int, string>();
-
+            
             var qrySubjectMatters = from r in m_db.subjectmatters
                                     select r;
 

@@ -67,6 +67,7 @@
         <AssociationConnector Association="SparkDB.FK__subjectmatters_2" ManuallyRouted="false" />
         <AssociationConnector Association="SparkDB.FK_transactions_transactionstates" ManuallyRouted="false" />
         <AssociationConnector Association="SparkDB.FK_transactions_transactiontypes" ManuallyRouted="false" />
+        <AssociationConnector Association="SparkDB.FK_interactionlog_accounts" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

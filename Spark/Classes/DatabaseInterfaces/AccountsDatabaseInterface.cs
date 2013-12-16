@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Spark.Classes.DatabaseInterfaces;
 using Spark.Models;
 
 namespace Spark.Classes
 {
-    public static class AccountsDatabaseInterface
+    public class AccountsDatabaseInterface : BaseDatabaseInterface
     {
-        /// <summary>
-        /// Local Instance of the database model
-        /// </summary>
-        private static Spark.Models.sparkdbEntities m_db = new Models.sparkdbEntities();
-
         /// <summary>
         /// Verifies an account given a login model against the database
         /// </summary>

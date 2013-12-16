@@ -28,6 +28,13 @@ namespace Spark.Classes
             return dblInfluence;
         }
 
+        /// <summary>
+        /// Calculates base influence for a specific user in a specific broad category. This influence is base and is not affected by any other influencial gains.
+        /// </summary>
+        /// <param name="userCurrent">Account Id for user.</param>
+        /// <param name="dbEntity">Database entity.</param>
+        /// <param name="nSubjectMatterId">Broad category against which to calculate.</param>
+        /// <returns>Double value that represents the base influence number.</returns>
         private static double GetBaseInfluence(accounts userCurrent, sparkdbEntities dbEntity, int nSubjectMatterId)
         {
             double dblBase = 0;
@@ -49,6 +56,13 @@ namespace Spark.Classes
             return dblBase;
         }
 
+        /// <summary>
+        /// Calculates the additional gains given by all other user's base influence effect on the given user.
+        /// </summary>
+        /// <param name="userCurrent">Account Id for user.</param>
+        /// <param name="dbEntity">Database entity.</param>
+        /// <param name="nSubjectMatterId">Broad category against which to calculate.</param>
+        /// <returns>Double value that represents a total of all related user gained/lost influence.</returns>
         private static double GetUserAddons(accounts userCurrent, sparkdbEntities dbEntity, int nSubjectMatterId)
         {
             double dblUserAddon = 0;
@@ -73,6 +87,13 @@ namespace Spark.Classes
             return dblUserAddon;
         }
 
+        /// <summary>
+        /// Calculates the total amount of spread influence the user gains for a specified broad category given their influence in related broad categories.
+        /// </summary>
+        /// <param name="userCurrent">Account Id for user.</param>
+        /// <param name="dbEntity">Database entity.</param>
+        /// <param name="nSubjectMatterId">Broad category against which to calculate.</param>
+        /// <returns>Double value that represents a sum of all spread gains/losses for the given broad category.</returns>
         private static double GetSpread(accounts userCurrent, sparkdbEntities dbEntity, int nSubjectMatterId)
         {
             double dblSpread = 0;
@@ -92,6 +113,11 @@ namespace Spark.Classes
 
         #region Spark Sorting
 
+        /// <summary>
+        /// Provides a list of sparks sorted by their popularity. Popularity is based on spark interest votes.
+        /// </summary>
+        /// <param name="dbEntity">Database entity.</param>
+        /// <returns>Sorted list of sparks.</returns>
         public static List<sparks> SortSparksByPopularity(sparkdbEntities dbEntity)
         {
             List<sparks> lstSorted = new List<sparks>();
@@ -108,16 +134,24 @@ namespace Spark.Classes
             return lstSorted;
         }
 
+        /// <summary>
+        /// Provides a list of sparks sorted by broad category given the broad category Id.
+        /// </summary>
+        /// <param name="dbEntity">Database entity.</param>
+        /// <param name="nSubjectMatterId"></param>
+        /// <returns></returns>
         public static List<sparks> SortSparksBySubject(sparkdbEntities dbEntity, int nSubjectMatterId)
         {
             List<sparks> lstSorted = new List<sparks>();
 
             Dictionary<sparks, double> dictPopularitySorted = ApplyPopularitySorting(dbEntity);
 
+            // Gets a collection of the sparks that belong to a specific broad category.
             var qrySparksBySubject = from sparks spark in dbEntity.sparks
                                      where spark.FKSubjectMatters == nSubjectMatterId
                                      select spark;
             
+            // Iterates through the popularity sorted dictionary and sorts the return collection by the value.
             var qrySortPopulartyColl = from KeyValuePair<sparks, double> kvp in dictPopularitySorted
                                        orderby kvp.Value descending
                                        select kvp;
@@ -230,14 +264,19 @@ namespace Spark.Classes
                 }
             }
 
+            // Selects all sparks in the database that are contained in the popularity sorted dictionary and sorts them by their Id.
             var qryForSparksWithInterests = from sparks spark in dbEntity.sparks
                                             where dictInterestSparks.ContainsKey(spark.PK)
                                             orderby spark.PK
                                             select spark;
+
+            // Attempts to get the constant value that is multiplied to each popularity rating.
             double nConstant = 1;
             double.TryParse((from constants constant in dbEntity.constants
                              where constant.strKey == "SortingPopularityConstant"
                              select constant).FirstOrDefault().strValue, out nConstant);
+
+            // Applies the multiplier constant to each item in the collection to modify its final value of popularity.
             foreach (sparks spark in qryForSparksWithInterests)
             {
                 if (dictSorted.ContainsKey(spark))
