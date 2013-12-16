@@ -34,10 +34,10 @@ namespace Spark.Classes
 
             // Returns the number of positive votes minus the number of negative votes from the gains table to get the absolute scale.
             dblBase  = (from influencegains influencegain in dbEntity.influencegains
-                        where influencegain.FKProfilesReceived == userCurrent.PK && influencegain.bIsPositive == true && influencegain.FKSubjectMatters == nSubjectMatterId
+                        where influencegain.FKAccountsReceived == userCurrent.PK && influencegain.bIsPositive == true && influencegain.FKSubjectMatters == nSubjectMatterId
                         select influencegain).Count() -
                         (from influencegains influencegain in dbEntity.influencegains
-                        where influencegain.FKProfilesReceived == userCurrent.PK && influencegain.bIsPositive == false && influencegain.FKSubjectMatters == nSubjectMatterId
+                        where influencegain.FKAccountsReceived == userCurrent.PK && influencegain.bIsPositive == false && influencegain.FKSubjectMatters == nSubjectMatterId
                         select influencegain).Count();
 
             double nConstant = 1;
@@ -55,8 +55,8 @@ namespace Spark.Classes
 
             // Queries for all of the userIds of people who contributed to the initial user's influence in the gains table.
             IEnumerable<int> qryAllContributors = from influencegains influence in dbEntity.influencegains
-                                                  where influence.FKProfilesReceived == userCurrent.PK
-                                                  select influence.FKProfilesContributor;
+                                                  where influence.FKAccountsReceived == userCurrent.PK
+                                                  select influence.FKAccountsReceived;
             
             // Attempts to determine the constant to use for userAddon values.
             double nConstant = 1;

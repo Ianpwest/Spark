@@ -41,7 +41,7 @@ namespace Spark.Classes
             
             try
             {
-                m_db.AddTosparks(sparkModel);
+                m_db.sparks.Add(sparkModel);
                 m_db.SaveChanges();
             }
             catch (Exception ex)

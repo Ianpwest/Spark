@@ -13,9 +13,9 @@ namespace Spark.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class sparkdbEntities1 : DbContext
+    public partial class sparkdbEntities : DbContext
     {
-        public sparkdbEntities1()
+        public sparkdbEntities()
             : base("name=sparkdbEntities1")
         {
         }

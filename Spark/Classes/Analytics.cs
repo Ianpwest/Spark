@@ -33,7 +33,7 @@ namespace Spark.Classes
                 dr[dcGender] = nGender;
 
                 int nTotalVotes = (from r in dbEntity.sparkinterestvotes
-                                     join p in dbEntity.profiles on r.FKProfiles equals p.PK
+                                     join p in dbEntity.profiles on r.FKAccounts equals p.PK
                                      where p.FKGenders == nGender
                                      select r).Count();
 
@@ -43,7 +43,7 @@ namespace Spark.Classes
                     dr[dcSubjectMatter] = nSubjectMatter;
                     // Performs a query to gather all up or down votes for this selected gender and subject matter combination.
                     var qryMain = from siv in dbEntity.sparkinterestvotes
-                                  join p in dbEntity.profiles on siv.FKProfiles equals p.PK
+                                  join p in dbEntity.profiles on siv.FKAccounts equals p.PK
                                   join s in dbEntity.sparks on siv.FKSparks equals s.PK
                                   where p.FKGenders == nGender && s.FKSubjectMatters == nSubjectMatter
                                   select siv;

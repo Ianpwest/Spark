@@ -156,7 +156,7 @@ namespace Spark.Classes
         {
             try
             {
-                m_db.accounts.AddObject(account);
+                m_db.accounts.Add(account);
                 m_db.SaveChanges();
                 return true;
             }
@@ -184,7 +184,7 @@ namespace Spark.Classes
 
             try
             {
-                m_db.AddToaccounts(accountNew);
+                m_db.accounts.Add(accountNew);
                 m_db.SaveChanges();
             }
             catch
