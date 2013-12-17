@@ -18,7 +18,9 @@ namespace Spark.Models
         public string strControllerView { get; set; }
         public System.DateTime dDate { get; set; }
         public int FKInteractionTypes { get; set; }
+        public int FKAccounts { get; set; }
     
         public virtual interactiontypes interactiontypes { get; set; }
+        public virtual accounts accounts { get; set; }
     }
 }

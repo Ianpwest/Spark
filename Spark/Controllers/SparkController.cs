@@ -46,6 +46,7 @@ namespace Spark.Controllers
             if (Request.Files.Count == 1)
             {
                 WriteImageToFile(model.FileName);
+                SparksDatabaseInterface.LogInteraction(User.Identity.Name, Classes.DatabaseInterfaces.InteractionType.SubmitForm);
             }
 
             return RedirectToAction("Index", "Home");

@@ -27,6 +27,7 @@ namespace Spark.Models
             this.transactions = new HashSet<transactions>();
             this.profiles = new HashSet<profiles>();
             this.comments = new HashSet<comments>();
+            this.interactionlog = new HashSet<interactionlog>();
         }
     
         public int PK { get; set; }
@@ -48,5 +49,6 @@ namespace Spark.Models
         public virtual ICollection<transactions> transactions { get; set; }
         public virtual ICollection<profiles> profiles { get; set; }
         public virtual ICollection<comments> comments { get; set; }
+        public virtual ICollection<interactionlog> interactionlog { get; set; }
     }
 }

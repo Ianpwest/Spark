@@ -18,7 +18,7 @@ namespace Spark.Classes
         /// The average is (#upvotes - #downvotes) / #totalvotes and is repeated for each gender and subject matter combination.
         /// </summary>
         /// <returns></returns>
-        public static DataTable CompareGenderCategories(sparkdbEntities dbEntity)
+        public static DataTable CompareGenderCategories(sparkdbEntities1 dbEntity)
         {
             DataTable dtReturn = new DataTable();
             DataColumn dcGender = new DataColumn("Gender");
@@ -66,7 +66,7 @@ namespace Spark.Classes
             return dtReturn;
         }
 
-        private static void TestMethod(sparkdbEntities dbEntity)
+        private static void TestMethod(sparkdbEntities1 dbEntity)
         {
             
         }
