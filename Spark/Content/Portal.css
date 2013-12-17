@@ -1,0 +1,138 @@
+﻿.portalHeader
+{
+  position:relative;
+  padding-top:0px;
+}
+
+.portalHeader p
+{
+  padding-top:0px;
+  margin:0 auto;
+  text-align:center;
+  font-size:45px;
+  font-family: Century Gothic;
+  color:White;
+}
+
+.portalExampleImg
+{
+  height:500px;
+}
+
+.portalExampleImg p
+{
+  padding-top:200px;
+
+  text-align:center;
+}
+
+.portalRegistrationButtonContainer
+{
+  padding-top:160px; /*Change this to influence default screen height */
+  width:200px;
+  position:relative;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.portalRegistrationButtonContainer button
+{
+  width:210px;
+  padding:10px;
+  background: #FF3300;
+  border: 1px solid rgba(33, 68, 72, 0.59);
+     
+  color: lightgray;
+  cursor:pointer;
+  font-family:Century Gothic;
+  
+  background: linear-gradient(top, #34696f, #2f5f63);
+  border-radius: 4px;
+  box-shadow: 1.5px 2px 0 #1b383b;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+.portalRegistrationButtonContainer button:hover {
+    background: #3d7a80;
+    background: -webkit-linear-gradient(top, #3d7a80,  
+                #2f5f63);
+    background: -moz-linear-gradient(top, #3d7a80, #2f5f63);
+    background: -o-linear-gradient(top, #3d7a80, #2f5f63);
+    background: -ms-linear-gradient(top, #3d7a80, #2f5f63);
+    background: linear-gradient(top, #3d7a80, #2f5f63);
+}
+
+.portalRegistrationButtonContainer button:active {
+    
+    box-shadow: none;
+}
+
+.portalScrollText
+{
+  position:absolute;
+  width:300px;
+  left:50px;
+  right:0;
+  margin-left:auto;
+  margin-right:auto;
+  bottom:0;
+ 
+  
+  -moz-animation: largeTextMoz 3s infinite alternate;
+  -webkit-animation:largeTextSaf 3s infinite alternate;
+  animation: largeTextIE 3s infinite alternate;
+}
+
+@-moz-keyframes largeTextMoz {
+    0% {
+        opacity:0;
+    }
+
+    100% {
+        opacity:.95;
+    };
+}
+
+@-webkit-keyframes largeTextSaf
+{
+  0% {
+        opacity:0;
+    }
+
+    100% {
+        opacity:.95;
+    };
+}
+
+@keyframes largeTextIE
+{
+0% {
+        opacity:0;
+    }
+
+    100% {
+        opacity:.95;
+    };
+}
+
+
+.portalExtendInfo
+{
+  height:2000px;
+}
+
+.portalSpacer
+{
+  width:auto;
+  background-color:black;
+  height:5px;
+  margin-top:3px;
+  padding-top: -30px;
+  padding-bottom:20px;
+}
+
+.portalBody
+{
+}

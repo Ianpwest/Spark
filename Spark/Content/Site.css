@@ -1,96 +1,25 @@
 ﻿html {
-    background-color: #e2e2e2;
+    background-image:url('/Images/gray_texture_background.png');
     margin: 0;
     padding: 0;
 }
 
-body {
-    background-color: #fff;
-    border-top: solid 0px #000;
-    
-    padding: 0;
-    margin:0;
+body
+{
+    margin:0 auto;
+    padding:0;
 }
 
-header, footer, hgroup,
-nav, section {
-    display: block;
+p, a
+{
+  font-family:Century Gothic;
+  color:lightgray;
+  margin:0 auto;
 }
-
-mark {
-    background-color: #a6dbed;
-    padding-left: 5px;
-    padding-right: 5px;
-}
-
-.float-left {
-    float: left;
-}
-
-.float-right {
-    float: right;
-}
-
-.clear-fix:after {
-    content: ".";
-    clear: both;
-    display: block;
-    height: 0;
-    visibility: hidden;
-}
-
-h1, h2, h3,
-h4, h5, h6 {
-    color: #000;
-    margin-top:0;
-    margin-bottom: 0;
-    padding-bottom: 0;
-}
-
-h1 {
-    font-size: 2em;
-}
-
-h2 {
-    font-size: 1.75em;
-}
-
-h3 {
-    font-size: 1.2em;
-}
-
-h4 {
-    font-size: 1.1em;
-}
-
-h5, h6 {
-    font-size: 1em;
-}
-
-    h5 a:link, h5 a:visited, h5 a:active {
-        padding: 0;
-        text-decoration: none;
-    }
 
 /* main layout
 ----------------------------------------------------------*/
-.content-wrapper {
-    margin: 0 auto;
-    max-width: 950px;
-}
 
-#body {
-    background-color: #efeeef;
-    clear: both;
-    padding-bottom: 35px;
-    margin-top: 20px;
-}
-
-  
-
-header .content-wrapper {
-    padding-top: 20px; 
-}
 
 footer {
     clear: both;
@@ -102,19 +31,7 @@ footer {
 
 /* site title
 ----------------------------------------------------------*/
-.site-title {
-    color: #c8c8c8;
-    font-family: Rockwell, Consolas, "Courier New", Courier, monospace;
-    font-size: 2.3em;
-    margin: 0;
-}
 
-.site-title a, .site-title a:hover, .site-title a:active {
-    background: none;
-    color: #c8c8c8;
-    outline: none;
-    text-decoration: none;
-}
 
 
 /* login
@@ -206,25 +123,7 @@ ul#menu {
         }
 
 /* page titles */
-hgroup.title {
-    margin-bottom: 10px;
-}
 
-hgroup.title h1, hgroup.title h2 {
-    display: inline;
-}
-
-hgroup.title h2 {
-    font-weight: normal;
-    margin-left: 3px;
-}
-
-/* features */
-section.feature {
-    width: 300px;
-    float: left;
-    padding: 10px;
-}
 
 /* ordered list */
 ol.round {
@@ -368,81 +267,7 @@ aside {
     margin: 5px 0 0 10px;
 }
 
-/* forms */
-fieldset {
-    border: none;
-    margin: 0;
-    padding: 0;
-}
 
-    fieldset legend {
-        display: none;
-    }
-
-    fieldset ol {
-        padding: 0;
-        list-style: none;
-    }
-
-        fieldset ol li {
-            padding-bottom: 5px;
-        }
-
-label {
-    display: block;
-    font-size: 1.2em;
-    font-weight: 600;
-}
-
-label.checkbox {
-    display: inline;
-}
-
-input, textarea {
-    border: 1px solid #e2e2e2;
-    background: #fff;
-    color: #333;
-    font-size: 1.2em;
-    margin: 5px 0 6px 0;
-    padding: 5px;
-    width: 300px;
-}
-
-textarea {
-    font-family: inherit;
-    width: 500px;
-}
-
-    input:focus, textarea:focus {
-        border: 1px solid #7ac0da;
-    }
-
-    input[type="checkbox"] {
-        background: transparent;
-        border: inherit;
-        width: auto;
-    }
-
-    input[type="submit"],
-    input[type="button"],
-    button {
-        background-color: #d3dce0;
-        border: 1px solid #787878;
-        cursor: pointer;
-        font-size: 1.2em;
-        font-weight: 600;
-        padding: 7px;
-        margin-right: 8px;
-        width: auto;
-    }
-
-    td input[type="submit"],
-    td input[type="button"],
-    td button {
-        font-size: 1em;
-        padding: 4px;
-        margin-right: 4px;
-    }
 
 /* info and errors */
 .message-info {

@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/Content/css")
         @Styles.Render("~/Content/NavigationBar.css")
+        @Styles.Render("~/Content/Portal.css")
         @Scripts.Render("~/bundles/modernizr")
         @Scripts.Render("http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js")
         @Scripts.Render("http://code.jquery.com/ui/1.8.19/jquery-ui.min.js")
@@ -14,24 +15,11 @@
     </head>
     <body>
         <header>
-            <div class="navigation-bar">
-                <div>
-                    @Html.Partial("_NavigationBarPartial")
-                </div>
-            </div>
+             @Html.Partial("_NavigationBarPartial")
         </header>
-        <div id="body">
-            <section class="content-wrapper main-content clear-fix">
-                @RenderBody()
-            </section>
+        <div style="padding-top:80px;">
+             @RenderBody()
         </div>
-        <footer>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
-                </div>
-            </div>
-        </footer>
 
         @Scripts.Render("~/bundles/jquery")
         @RenderSection("scripts", required: false)
