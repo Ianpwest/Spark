@@ -3,6 +3,12 @@
 //*******************************************************************************************************//
 
 
-$(document).ready(function () {
-    $(".NavigationBarTitleP").text($(".title").text());
+$(document).ready(function ()
+{
+    if ($(".title").text() != "Portal")
+    {
+        $(".NavigationBarTitleP").text($(".title").text());
+    }
+
 });
+

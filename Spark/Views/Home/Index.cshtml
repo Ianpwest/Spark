@@ -1,5 +1,5 @@
 ﻿
-<p class="title" hidden="hidden">Home Page</p>
+<p class="title" hidden="hidden">Portal</p>
 
 <div class="portalBodyContainer">
     <div class="portalHeader">
@@ -23,6 +23,22 @@
 <div class="portalExtendInfo">
 </div>
 
-
+@if (!Request.IsAuthenticated)
+{
+<script type="text/javascript">
+    $(document).ready(function ()
+    {
+        $(function () {
+            $('.NavigationBarHomeIcon').addClass('hidden');
+            $('.NavigationBarQueryIcon').addClass('hidden');
+            $('.NavigationBarCategoryIcon').addClass('hidden');
+            $('.NavigationBarCreateIcon').addClass('hidden');
+            $('.NavigationBarTitle').addClass('hidden');
+            $('.NavigationBarDivide').addClass('hidden');
+            $('.NavigationBarLogo').css("display", "inline");
+        });
+    });
+</script>
+}
 
 @Scripts.Render("~/Scripts/PageLoad.js")

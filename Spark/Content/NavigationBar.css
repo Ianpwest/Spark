@@ -1,4 +1,13 @@
 ﻿
+.hidden
+{
+    display:none;
+}
+
+p, a
+{
+    text-decoration:none;
+}
 
 .NavigationBarHomeIcon:hover, selected,
 .NavigationBarQueryIcon:hover, selected,
@@ -49,6 +58,21 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
   border-right: 1px solid white;
   margin-right: .5em;
   margin-left: .5em;
+}
+
+.NavigationBarLogo
+{
+    display:none;
+}
+
+.NavigationBarLogo p
+{
+  float:left;
+  color:white;
+  margin: 0 auto;
+  margin-top:-7px;
+  margin-left:-50px;
+  font-size:30px;
 }
 
 .NavigationBarHomeIcon
