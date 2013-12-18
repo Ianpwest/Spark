@@ -9,11 +9,22 @@ p, a
     text-decoration:none;
 }
 
+.actionLink
+{   
+    text-align:center;
+    display:block;
+    margin-left:-8px;
+    padding-top:2px;
+
+    position:relative;
+    width:70px;
+    height:20px;
+}
+
 .NavigationBarHomeIcon:hover, selected,
 .NavigationBarQueryIcon:hover, selected,
 .NavigationBarCategoryIcon:hover, selected,
-.NavigationBarCreateIcon:hover, selected,
-.NavigationBarLoginContainer a:hover, selected
+.NavigationBarCreateIcon:hover, selected
 {
   border-bottom:3px groove white;
 }
@@ -53,6 +64,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 }
 
 .NavigationBarDivide
+{
+  float:left;
+  border-right: 1px solid white;
+  margin-right: .5em;
+  margin-left: .5em;
+}
+
+/*The one between register and login*/
+.NavigationBarDivideRegLog
 {
   float:left;
   border-right: 1px solid white;

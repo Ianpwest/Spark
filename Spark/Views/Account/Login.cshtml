@@ -2,7 +2,7 @@
 
 <p class="title" hidden="hidden">Log in</p>
 
-<section>
+<section id="loginForm">
 
     @{
         if (Model.bFailedLogin)
@@ -49,7 +49,7 @@
     }
 </section>
 
-<section>
+<section class="social" id="socialLoginForm">
     <h2>Use another service to log in.</h2>
     @Html.Action("ExternalLoginsList", new { ReturnUrl = "/Index" })
 </section>
