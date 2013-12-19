@@ -346,6 +346,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Images\gray_texture_background.png" />
+    <Content Include="Images\Icons\SparkIcon1.png" />
     <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -406,7 +407,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Filters\" />
-    <Folder Include="Images\Icons\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

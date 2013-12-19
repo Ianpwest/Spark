@@ -17,12 +17,13 @@
             </button>
         </a>
     </div>
-    <p class="portalScrollText">v v Scroll for what else you'll find inside v v</p>
+    <p class="portalScrollText">v Scroll for what else you'll find inside v</p>
 </div>
 
 <div class="portalExtendInfo">
 </div>
 
+@*This javascript runs if the user is not authenticated. It hides all functionality to navigate into the site*@
 @if (!Request.IsAuthenticated)
 {
 <script type="text/javascript">
@@ -35,7 +36,7 @@
             $('.NavigationBarCreateIcon').addClass('hidden');
             $('.NavigationBarTitle').addClass('hidden');
             $('.NavigationBarDivide').addClass('hidden');
-            $('.NavigationBarLogo').css("display", "inline");
+            $('.NavigationBarLogoLettering').css("display", "inline");
         });
     });
 </script>
