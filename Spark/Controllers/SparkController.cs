@@ -52,6 +52,21 @@ namespace Spark.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpPost]
+        public ActionResult GetImage(string fileName)
+        {
+            // Loads the config xml document.
+            XDocument xDoc = XDocument.Load(Server.MapPath("~/App_Data/Config.xml"));
+            IEnumerable<XElement> configuration = xDoc.Elements();
+
+            // Extracts the server location of the image files from the config doc.
+            var strFilePath = (from r in xDoc.Elements()
+                               where r.Element("filepath").Attribute("name").Value == "sparkImgRoot"
+                               select r.Element("filepath").Attribute("value").Value).FirstOrDefault();
+
+            return base.File(strFilePath + fileName, "image/jpeg");
+        }
+
         private void WriteImageToFile(String strFileName)
         {
             //Add logic here to only accept certain MIME types?
