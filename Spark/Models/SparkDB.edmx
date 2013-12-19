@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SparkDB.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="sparkdbModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityType Name="accounts">
           <Key>
             <PropertyRef Name="PK" />
@@ -91,6 +91,7 @@
           <Property Name="FKAccounts" Type="int" />
           <Property Name="strControllerView" Type="varchar" MaxLength="50" />
           <Property Name="strMessage" Type="varchar" MaxLength="150" />
+          <Property Name="strException" Type="text" />
           <Property Name="strMethod" Type="varchar" MaxLength="50" />
           <Property Name="strStackTrace" Type="text" />
           <Property Name="strVariableName" Type="varchar" MaxLength="50" />
@@ -137,7 +138,7 @@
           <Key>
             <PropertyRef Name="PK" />
           </Key>
-          <Property Name="PK" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PK" Type="int" Nullable="false" />
           <Property Name="strName" Type="varchar" MaxLength="150" Nullable="false" />
         </EntityType>
         <EntityType Name="politicalideologies">
@@ -219,6 +220,7 @@
           </Key>
           <Property Name="PK" Type="int" Nullable="false" />
           <Property Name="strName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="strImageName" Type="varchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="subjectmatterspreads">
           <Key>
@@ -757,7 +759,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="SparkDBStoreContainer">
+        <EntityContainer Name="sparkdbModelStoreContainer">
           <EntitySet Name="accounts" EntityType="Self.accounts" Schema="sparkdb" store:Type="Tables" />
           <EntitySet Name="arguments" EntityType="Self.arguments" Schema="sparkdb" store:Type="Tables" />
           <EntitySet Name="categories" EntityType="Self.categories" Schema="sparkdb" store:Type="Tables" />
@@ -933,7 +935,7 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="SparkDB" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+      <Schema Namespace="sparkdbModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityType Name="accounts">
           <Key>
             <PropertyRef Name="PK" />
@@ -951,12 +953,12 @@
           <NavigationProperty Name="heat" Relationship="Self.FK_Heat_accounts" FromRole="accounts" ToRole="heat" />
           <NavigationProperty Name="influencegains" Relationship="Self.FK_influencegains_accounts" FromRole="accounts" ToRole="influencegains" />
           <NavigationProperty Name="influencegains1" Relationship="Self.FK_influencegains_accounts_2" FromRole="accounts" ToRole="influencegains" />
+          <NavigationProperty Name="interactionlog" Relationship="Self.FK_interactionlog_accounts" FromRole="accounts" ToRole="interactionlog" />
           <NavigationProperty Name="sparkinterestvotes" Relationship="Self.FK_sparkinterestvotes_accounts" FromRole="accounts" ToRole="sparkinterestvotes" />
           <NavigationProperty Name="sparks" Relationship="Self.FK_sparks_accounts" FromRole="accounts" ToRole="sparks" />
           <NavigationProperty Name="transactions" Relationship="Self.FK_transactions_accounts" FromRole="accounts" ToRole="transactions" />
           <NavigationProperty Name="profiles" Relationship="Self.FKAccounts" FromRole="accounts" ToRole="profiles" />
           <NavigationProperty Name="comments" Relationship="Self.FKProfiles" FromRole="accounts" ToRole="comments" />
-          <NavigationProperty Name="interactionlog" Relationship="SparkDB.FK_interactionlog_accounts" FromRole="accounts" ToRole="interactionlog" />
         </EntityType>
         <EntityType Name="arguments">
           <Key>
@@ -1055,6 +1057,7 @@
           <Property Name="strVariableName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="dDate" Type="DateTime" />
           <NavigationProperty Name="accounts" Relationship="Self.FK_errorlog_accounts" FromRole="errorlog" ToRole="accounts" />
+          <Property Name="strException" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="genders">
           <Key>
@@ -1094,18 +1097,18 @@
             <PropertyRef Name="PK" />
           </Key>
           <Property Name="PK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="strControllerView" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="true" />
+          <Property Name="FKAccounts" Type="Int32" Nullable="false" />
+          <Property Name="strControllerView" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="dDate" Type="DateTime" Nullable="false" />
           <Property Name="FKInteractionTypes" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="accounts" Relationship="Self.FK_interactionlog_accounts" FromRole="interactionlog" ToRole="accounts" />
           <NavigationProperty Name="interactiontypes" Relationship="Self.FK_interactionlog_interactiontypes" FromRole="interactionlog" ToRole="interactiontypes" />
-          <Property Name="FKAccounts" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="accounts" Relationship="SparkDB.FK_interactionlog_accounts" FromRole="interactionlog" ToRole="accounts" />
         </EntityType>
         <EntityType Name="interactiontypes">
           <Key>
             <PropertyRef Name="PK" />
           </Key>
-          <Property Name="PK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PK" Type="Int32" Nullable="false" />
           <Property Name="strName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="interactionlog" Relationship="Self.FK_interactionlog_interactiontypes" FromRole="interactiontypes" ToRole="interactionlog" />
         </EntityType>
@@ -1209,6 +1212,7 @@
           </Key>
           <Property Name="PK" Type="Int32" Nullable="false" />
           <Property Name="strName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="strImageName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="influencegains" Relationship="Self.FK_influencegains_subjectmatters" FromRole="subjectmatters" ToRole="influencegains" />
           <NavigationProperty Name="sparks" Relationship="Self.FK_sparks_subjectmatters" FromRole="subjectmatters" ToRole="sparks" />
           <NavigationProperty Name="subjectmatterspreads" Relationship="Self.FK__subjectmatters" FromRole="subjectmatters" ToRole="subjectmatterspreads" />
@@ -1337,6 +1341,20 @@
             </Principal>
             <Dependent Role="influencegains">
               <PropertyRef Name="FKAccountsReceived" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_interactionlog_accounts">
+          <End Role="accounts" Type="Self.accounts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="interactionlog" Type="Self.interactionlog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accounts">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="interactionlog">
+              <PropertyRef Name="FKAccounts" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1744,7 +1762,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="sparkdbEntities11" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="sparkdbEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="accounts" EntityType="Self.accounts" />
           <EntitySet Name="arguments" EntityType="Self.arguments" />
           <EntitySet Name="categories" EntityType="Self.categories" />
@@ -1795,6 +1813,10 @@
           <AssociationSet Name="FK_influencegains_accounts_2" Association="Self.FK_influencegains_accounts_2">
             <End Role="accounts" EntitySet="accounts" />
             <End Role="influencegains" EntitySet="influencegains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_interactionlog_accounts" Association="Self.FK_interactionlog_accounts">
+            <End Role="accounts" EntitySet="accounts" />
+            <End Role="interactionlog" EntitySet="interactionlog" />
           </AssociationSet>
           <AssociationSet Name="FK_sparkinterestvotes_accounts" Association="Self.FK_sparkinterestvotes_accounts">
             <End Role="accounts" EntitySet="accounts" />
@@ -1912,33 +1934,15 @@
             <End Role="transactiontypes" EntitySet="transactiontypes" />
             <End Role="transactions" EntitySet="transactions" />
           </AssociationSet>
-          <AssociationSet Name="FK_interactionlog_accounts" Association="SparkDB.FK_interactionlog_accounts">
-            <End Role="accounts" EntitySet="accounts" />
-            <End Role="interactionlog" EntitySet="interactionlog" />
-          </AssociationSet>
         </EntityContainer>
-        <Association Name="FK_interactionlog_accounts">
-          <End Type="SparkDB.accounts" Role="accounts" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="SparkDB.interactionlog" Role="interactionlog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="accounts">
-              <PropertyRef Name="PK" />
-            </Principal>
-            <Dependent Role="interactionlog">
-              <PropertyRef Name="FKAccounts" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SparkDBStoreContainer" CdmEntityContainer="sparkdbEntities11">
+        <EntityContainerMapping StorageEntityContainer="sparkdbModelStoreContainer" CdmEntityContainer="sparkdbEntities1">
           <EntitySetMapping Name="accounts">
-            <EntityTypeMapping TypeName="SparkDB.accounts">
+            <EntityTypeMapping TypeName="sparkdbModel.accounts">
               <MappingFragment StoreEntitySet="accounts">
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="strUserName" ColumnName="strUserName" />
@@ -1951,7 +1955,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="arguments">
-            <EntityTypeMapping TypeName="SparkDB.arguments">
+            <EntityTypeMapping TypeName="sparkdbModel.arguments">
               <MappingFragment StoreEntitySet="arguments">
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="FKSparks" ColumnName="FKSparks" />
@@ -1962,7 +1966,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="categories">
-            <EntityTypeMapping TypeName="SparkDB.categories">
+            <EntityTypeMapping TypeName="sparkdbModel.categories">
               <MappingFragment StoreEntitySet="categories">
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="strName" ColumnName="strName" />
@@ -1970,7 +1974,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="cities">
-            <EntityTypeMapping TypeName="SparkDB.cities">
+            <EntityTypeMapping TypeName="sparkdbModel.cities">
               <MappingFragment StoreEntitySet="cities">
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="FKStatesProvidences" ColumnName="FKStatesProvidences" />
@@ -1979,7 +1983,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="comments">
-            <EntityTypeMapping TypeName="SparkDB.comments">
+            <EntityTypeMapping TypeName="sparkdbModel.comments">
               <MappingFragment StoreEntitySet="comments">
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="FKArguments" ColumnName="FKArguments" />
@@ -1990,7 +1994,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="commentvotes">
-            <EntityTypeMapping TypeName="SparkDB.commentvotes">
+            <EntityTypeMapping TypeName="sparkdbModel.commentvotes">
               <MappingFragment StoreEntitySet="commentvotes">
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="FKComments" ColumnName="FKComments" />
@@ -2000,7 +2004,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="constants">
-            <EntityTypeMapping TypeName="SparkDB.constants">
+            <EntityTypeMapping TypeName="sparkdbModel.constants">
               <MappingFragment StoreEntitySet="constants">
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="strKey" ColumnName="strKey" />
@@ -2009,7 +2013,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="countries">
-            <EntityTypeMapping TypeName="SparkDB.countries">
+            <EntityTypeMapping TypeName="sparkdbModel.countries">
               <MappingFragment StoreEntitySet="countries">
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="strName" ColumnName="strName" />
@@ -2017,7 +2021,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="educationlevels">
-            <EntityTypeMapping TypeName="SparkDB.educationlevels">
+            <EntityTypeMapping TypeName="sparkdbModel.educationlevels">
               <MappingFragment StoreEntitySet="educationlevels">
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="strName" ColumnName="strName" />
@@ -2025,8 +2029,9 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="errorlog">
-            <EntityTypeMapping TypeName="SparkDB.errorlog">
+            <EntityTypeMapping TypeName="sparkdbModel.errorlog">
               <MappingFragment StoreEntitySet="errorlog">
+                <ScalarProperty Name="strException" ColumnName="strException" />
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="FKAccounts" ColumnName="FKAccounts" />
                 <ScalarProperty Name="strControllerView" ColumnName="strControllerView" />
@@ -2039,7 +2044,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="genders">
-            <EntityTypeMapping TypeName="SparkDB.genders">
+            <EntityTypeMapping TypeName="sparkdbModel.genders">
               <MappingFragment StoreEntitySet="genders">
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="strName" ColumnName="strName" />
@@ -2047,7 +2052,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="heat">
-            <EntityTypeMapping TypeName="SparkDB.heat">
+            <EntityTypeMapping TypeName="sparkdbModel.heat">
               <MappingFragment StoreEntitySet="heat">
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="FKComments" ColumnName="FKComments" />
@@ -2058,7 +2063,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="influencegains">
-            <EntityTypeMapping TypeName="SparkDB.influencegains">
+            <EntityTypeMapping TypeName="sparkdbModel.influencegains">
               <MappingFragment StoreEntitySet="influencegains">
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="bIsPositive" ColumnName="bIsPositive" />
@@ -2069,10 +2074,10 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="interactionlog">
-            <EntityTypeMapping TypeName="SparkDB.interactionlog">
+            <EntityTypeMapping TypeName="sparkdbModel.interactionlog">
               <MappingFragment StoreEntitySet="interactionlog">
-                <ScalarProperty Name="FKAccounts" ColumnName="FKAccounts" />
                 <ScalarProperty Name="PK" ColumnName="PK" />
+                <ScalarProperty Name="FKAccounts" ColumnName="FKAccounts" />
                 <ScalarProperty Name="strControllerView" ColumnName="strControllerView" />
                 <ScalarProperty Name="dDate" ColumnName="dDate" />
                 <ScalarProperty Name="FKInteractionTypes" ColumnName="FKInteractionTypes" />
@@ -2080,7 +2085,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="interactiontypes">
-            <EntityTypeMapping TypeName="SparkDB.interactiontypes">
+            <EntityTypeMapping TypeName="sparkdbModel.interactiontypes">
               <MappingFragment StoreEntitySet="interactiontypes">
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="strName" ColumnName="strName" />
@@ -2088,7 +2093,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="politicalideologies">
-            <EntityTypeMapping TypeName="SparkDB.politicalideologies">
+            <EntityTypeMapping TypeName="sparkdbModel.politicalideologies">
               <MappingFragment StoreEntitySet="politicalideologies">
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="strName" ColumnName="strName" />
@@ -2096,7 +2101,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="profiles">
-            <EntityTypeMapping TypeName="SparkDB.profiles">
+            <EntityTypeMapping TypeName="sparkdbModel.profiles">
               <MappingFragment StoreEntitySet="profiles">
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="FKAccounts" ColumnName="FKAccounts" />
@@ -2116,7 +2121,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="religions">
-            <EntityTypeMapping TypeName="SparkDB.religions">
+            <EntityTypeMapping TypeName="sparkdbModel.religions">
               <MappingFragment StoreEntitySet="religions">
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="strName" ColumnName="strName" />
@@ -2124,7 +2129,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sparkinterestvotes">
-            <EntityTypeMapping TypeName="SparkDB.sparkinterestvotes">
+            <EntityTypeMapping TypeName="sparkdbModel.sparkinterestvotes">
               <MappingFragment StoreEntitySet="sparkinterestvotes">
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="FKSparks" ColumnName="FKSparks" />
@@ -2134,7 +2139,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sparks">
-            <EntityTypeMapping TypeName="SparkDB.sparks">
+            <EntityTypeMapping TypeName="sparkdbModel.sparks">
               <MappingFragment StoreEntitySet="sparks">
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="FKAccountsCreatedBy" ColumnName="FKAccountsCreatedBy" />
@@ -2148,7 +2153,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sparkscategories">
-            <EntityTypeMapping TypeName="SparkDB.sparkscategories">
+            <EntityTypeMapping TypeName="sparkdbModel.sparkscategories">
               <MappingFragment StoreEntitySet="sparkscategories">
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="FKSparks" ColumnName="FKSparks" />
@@ -2159,7 +2164,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="statesprovidences">
-            <EntityTypeMapping TypeName="SparkDB.statesprovidences">
+            <EntityTypeMapping TypeName="sparkdbModel.statesprovidences">
               <MappingFragment StoreEntitySet="statesprovidences">
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="FKCountries" ColumnName="FKCountries" />
@@ -2168,15 +2173,16 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="subjectmatters">
-            <EntityTypeMapping TypeName="SparkDB.subjectmatters">
+            <EntityTypeMapping TypeName="sparkdbModel.subjectmatters">
               <MappingFragment StoreEntitySet="subjectmatters">
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="strName" ColumnName="strName" />
+                <ScalarProperty Name="strImageName" ColumnName="strImageName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="subjectmatterspreads">
-            <EntityTypeMapping TypeName="SparkDB.subjectmatterspreads">
+            <EntityTypeMapping TypeName="sparkdbModel.subjectmatterspreads">
               <MappingFragment StoreEntitySet="subjectmatterspreads">
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="FKSubjectMattersContributor" ColumnName="FKSubjectMattersContributor" />
@@ -2186,7 +2192,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="transactions">
-            <EntityTypeMapping TypeName="SparkDB.transactions">
+            <EntityTypeMapping TypeName="sparkdbModel.transactions">
               <MappingFragment StoreEntitySet="transactions">
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="FKAccountsBuyer" ColumnName="FKAccountsBuyer" />
@@ -2199,7 +2205,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="transactionstates">
-            <EntityTypeMapping TypeName="SparkDB.transactionstates">
+            <EntityTypeMapping TypeName="sparkdbModel.transactionstates">
               <MappingFragment StoreEntitySet="transactionstates">
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="strName" ColumnName="strName" />
@@ -2207,7 +2213,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="transactiontypes">
-            <EntityTypeMapping TypeName="SparkDB.transactiontypes">
+            <EntityTypeMapping TypeName="sparkdbModel.transactiontypes">
               <MappingFragment StoreEntitySet="transactiontypes">
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="strName" ColumnName="strName" />

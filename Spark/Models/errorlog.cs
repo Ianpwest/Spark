@@ -22,6 +22,7 @@ namespace Spark.Models
         public string strStackTrace { get; set; }
         public string strVariableName { get; set; }
         public Nullable<System.DateTime> dDate { get; set; }
+        public string strException { get; set; }
     
         public virtual accounts accounts { get; set; }
     }
