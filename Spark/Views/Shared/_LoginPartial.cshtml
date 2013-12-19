@@ -1,20 +1,51 @@
 ﻿@if (Request.IsAuthenticated)
 {
-    <div style="float:left; overflow: hidden">
+    @*<div style="float:left; overflow: hidden">
         <div style="float:left">
             <p>Welcome <strong>@User.Identity.Name</strong>!</p>
         </div>
         <div style="float:right">
             @Html.ActionLink("Log Off", "LogOff", "Account")
         </div>
+    </div>*@
+
+    <div class="NavigationBarProfileInfoContainer">
+        <div class="NavigationBarProfilePic">
+            <img></img>
+        </div>
+        <div class="NavigationBarProfileUsername">
+            <p>@User.Identity.Name</p>
+        </div>
+        <div class="NavigationBarDivide">
+            &nbsp
+        </div>
+        <div class="NavigationBarSettings">
+            <ul>
+                <li>
+                    <a href="." title="">Settings</a>
+                    <ul>
+                        <li>
+                            @Html.ActionLink("Log Off", "LogOff", "Account")
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
     </div>
 }
 else
 {
-    @Html.ActionLink("Register", "Register", "Account")
-    <div class="NavigationBarDivide">
-            &nbsp
+    <div class="NavigationBarLoginContainer">
+      <button style="background-color:#FF3300" type="button">
+        @Html.ActionLink("Register", "Register", "Account", null, new { @class = "actionLink" })
+      </button>
+       <div class="NavigationBarDivideRegLog">
+         &nbsp
+       </div>  
+       <button style="background-color:#1A1A1A" type="button">
+        @Html.ActionLink("Log In", "Login", "Account", null, new { @class = "actionLink" })
+       </button>
     </div>
-    @Html.ActionLink("Log In", "Login", "Account")
   
 }

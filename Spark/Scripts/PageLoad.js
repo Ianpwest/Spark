@@ -3,6 +3,13 @@
 //*******************************************************************************************************//
 
 
-$(document).ready(function () {
-    $(".NavigationBarTitleP").text($(".title").text());
+$(document).ready(function ()
+{
+    //Display the page header unless it's the portal.
+    if ($(".title").text() != "Portal")
+    {
+        $(".NavigationBarTitleP").text($(".title").text());
+    }
+
 });
+
