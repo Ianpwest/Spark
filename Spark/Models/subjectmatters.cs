@@ -24,6 +24,7 @@ namespace Spark.Models
     
         public int PK { get; set; }
         public string strName { get; set; }
+        public string strImageName { get; set; }
     
         public virtual ICollection<influencegains> influencegains { get; set; }
         public virtual ICollection<sparks> sparks { get; set; }

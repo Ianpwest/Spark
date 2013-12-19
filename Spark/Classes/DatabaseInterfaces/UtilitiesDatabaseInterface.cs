@@ -32,5 +32,12 @@ namespace Spark.Classes
 
             return dictSubjectMatters;
         }
+
+        public static string GetSubjectMatterImageName(int nSubjectMatterId)
+        {
+            return (from r in m_db.subjectmatters
+                    where r.PK == nSubjectMatterId
+                    select r.strImageName).FirstOrDefault();
+        }
     }
 }

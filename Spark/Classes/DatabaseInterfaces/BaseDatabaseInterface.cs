@@ -44,7 +44,7 @@ namespace Spark.Classes.DatabaseInterfaces
         /// <param name="accountId">Account Id</param>
         /// <param name="strMessage">Custom message about error to be stored.</param>
         /// <param name="strStackTrace">Given by stacktrace of the exception.</param>
-        public static void LogError(string strUserName, string strMessage, string strStackTrace)
+        public static void LogError(string strUserName, string strMessage, string strException, string strStackTrace)
         {
             DateTime dtNow = DateTime.Now;
             int accountId = GetUserId(strUserName);
@@ -70,7 +70,7 @@ namespace Spark.Classes.DatabaseInterfaces
         /// <param name="strMethod">Method that contains the error.</param>
         /// <param name="strStackTrace">Given by stacktrace of the exception.</param>
         /// <param name="strVariableName">Variable name that could possibly be null or otherwise error prone.</param>
-        public static void LogError(string strUserName, string strMessage, string strControllerView, string strMethod, string strStackTrace, string strVariableName)
+        public static void LogError(string strUserName, string strMessage, string strException, string strStackTrace, string strControllerView, string strMethod, string strVariableName)
         {
             DateTime dtNow = DateTime.Now;
             int accountId = GetUserId(strUserName);
@@ -204,7 +204,7 @@ namespace Spark.Classes.DatabaseInterfaces
             }
             catch(Exception ex)
             {
-                LogError(strUserId, "Generate Error", ex.StackTrace);
+                LogError(strUserId, "Generate Error", ex.ToString(), ex.StackTrace);
             }
         }
     }

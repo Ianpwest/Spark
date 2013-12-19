@@ -22,12 +22,12 @@ namespace Spark.Models
             this.heat = new HashSet<heat>();
             this.influencegains = new HashSet<influencegains>();
             this.influencegains1 = new HashSet<influencegains>();
+            this.interactionlog = new HashSet<interactionlog>();
             this.sparkinterestvotes = new HashSet<sparkinterestvotes>();
             this.sparks = new HashSet<sparks>();
             this.transactions = new HashSet<transactions>();
             this.profiles = new HashSet<profiles>();
             this.comments = new HashSet<comments>();
-            this.interactionlog = new HashSet<interactionlog>();
         }
     
         public int PK { get; set; }
@@ -44,11 +44,11 @@ namespace Spark.Models
         public virtual ICollection<heat> heat { get; set; }
         public virtual ICollection<influencegains> influencegains { get; set; }
         public virtual ICollection<influencegains> influencegains1 { get; set; }
+        public virtual ICollection<interactionlog> interactionlog { get; set; }
         public virtual ICollection<sparkinterestvotes> sparkinterestvotes { get; set; }
         public virtual ICollection<sparks> sparks { get; set; }
         public virtual ICollection<transactions> transactions { get; set; }
         public virtual ICollection<profiles> profiles { get; set; }
         public virtual ICollection<comments> comments { get; set; }
-        public virtual ICollection<interactionlog> interactionlog { get; set; }
     }
 }

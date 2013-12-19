@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <configuration>
-  <filepath name="sparkImgRoot" value="\\LUCIFERIS-PC\Users\Public\SparkImages\" />
+  <!--<filepath name="sparkImgRoot" value="\\LUCIFERIS-PC\SparkImages\" />-->
+  <filepath name="sparkCategoryImgRoot" value="\\LUCIFERIS-PC\SparkCategoryImages\" />
 </configuration>

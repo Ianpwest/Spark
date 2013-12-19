@@ -52,19 +52,50 @@ namespace Spark.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpPost]
-        public ActionResult GetImage(string fileName)
+        public ActionResult GetImage(string nCategoryId)
         {
+            string strFileName = "";
+            int nTest = 0;
+            if (int.TryParse(nCategoryId, out nTest))
+                strFileName = UtilitiesDatabaseInterface.GetSubjectMatterImageName(nTest);
+            else
+                UtilitiesDatabaseInterface.LogError(User.Identity.Name, "Failed to find subject matter Id from view.");
+
+            if(string.IsNullOrEmpty(strFileName))
+            {
+                UtilitiesDatabaseInterface.LogError(User.Identity.Name, "Could not find filename for subject matter.");
+                return null;
+            }
+
             // Loads the config xml document.
             XDocument xDoc = XDocument.Load(Server.MapPath("~/App_Data/Config.xml"));
             IEnumerable<XElement> configuration = xDoc.Elements();
 
             // Extracts the server location of the image files from the config doc.
+            // TODO - can't search through multiple child tags with this method.
             var strFilePath = (from r in xDoc.Elements()
-                               where r.Element("filepath").Attribute("name").Value == "sparkImgRoot"
+                               where r.Element("filepath").Attribute("name").Value == "sparkCategoryImgRoot"
                                select r.Element("filepath").Attribute("value").Value).FirstOrDefault();
 
-            return base.File(strFilePath + fileName, "image/jpeg");
+            byte[] byArray = new byte[0];
+            FileStream fs;
+            BinaryReader br;
+
+            try
+            {
+                fs = new FileStream(strFilePath + strFileName, FileMode.Open, FileAccess.Read);
+                byArray = new byte[fs.Length];
+                br = new BinaryReader(fs);
+
+                byArray = br.ReadBytes((int)fs.Length);
+            }
+            catch (Exception ex)
+            {
+                UtilitiesDatabaseInterface.LogError(User.Identity.Name, "Filestream error.", ex.ToString(), ex.StackTrace, "SparkController", "GetImage", "fs");
+            }
+
+            string strMessageReturn = String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(byArray));
+            return Json(new { success = true, message = strMessageReturn });
         }
 
         private void WriteImageToFile(String strFileName)
