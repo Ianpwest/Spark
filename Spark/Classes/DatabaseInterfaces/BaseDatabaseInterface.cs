@@ -243,7 +243,7 @@ namespace Spark.Classes.DatabaseInterfaces
             {
                 m_db.SaveChanges();
             }
-            catch(Exception ex)
+            catch
             {
                 // Avoiding for now to prevent recursion on errors.
                 //LogError(strUserId, "Generate Error", ex.ToString(), ex.StackTrace);
