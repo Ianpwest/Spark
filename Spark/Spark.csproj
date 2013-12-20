@@ -289,6 +289,7 @@
     <Content Include="Content\BlankImage.gif" />
     <Content Include="Content\NavigationBar.css" />
     <Content Include="Content\Portal.css" />
+    <Content Include="Content\SparkContainer.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -415,7 +416,7 @@
     <Content Include="Views\Portal\Portal.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Spark\Spark.cshtml" />
+    <Content Include="Views\Spark\SparkContainer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Spark\SparkPartial.cshtml" />

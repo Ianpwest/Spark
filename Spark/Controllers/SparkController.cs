@@ -98,6 +98,13 @@ namespace Spark.Controllers
             return Json(new { success = true, message = strMessageReturn });
         }
 
+        public ActionResult SparkContainer()
+        {
+            //TODO:Probably write some code here to go get the sparks metadata (topic...etc).
+
+            return View();
+        }
+
         private void WriteImageToFile(String strFileName)
         {
             //Add logic here to only accept certain MIME types?
