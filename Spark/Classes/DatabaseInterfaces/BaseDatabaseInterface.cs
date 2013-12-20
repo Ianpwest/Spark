@@ -28,14 +28,16 @@ namespace Spark.Classes.DatabaseInterfaces
         {
             DateTime dtNow = DateTime.Now;
             int accountId = GetUserId(strUserName);
-            
+
+            if (accountId == int.MinValue)
+                LogNonUserError(strMessage, "", "", "", "", "");
             errorlog log = new errorlog();
             log.dDate = dtNow;
             log.FKAccounts = accountId;
             log.strMessage = strMessage;
 
             m_db.errorlog.Add(log);
-            m_db.SaveChanges();
+            SaveChanges();
         }
 
         /// <summary>
@@ -49,6 +51,9 @@ namespace Spark.Classes.DatabaseInterfaces
             DateTime dtNow = DateTime.Now;
             int accountId = GetUserId(strUserName);
 
+            if (accountId == int.MinValue)
+                LogNonUserError(strMessage, strException, strStackTrace, "", "", "");
+
             errorlog log = new errorlog();
             log.dDate = dtNow;
             log.FKAccounts = accountId;
@@ -56,7 +61,7 @@ namespace Spark.Classes.DatabaseInterfaces
             log.strStackTrace = strStackTrace;
 
             m_db.errorlog.Add(log);
-            m_db.SaveChanges();
+            SaveChanges();
 
         }
 
@@ -75,6 +80,9 @@ namespace Spark.Classes.DatabaseInterfaces
             DateTime dtNow = DateTime.Now;
             int accountId = GetUserId(strUserName);
 
+            if (accountId == int.MinValue)
+                LogNonUserError(strMessage, strException, strStackTrace, strControllerView, strMethod, strVariableName);
+
             errorlog log = new errorlog();
             log.dDate = dtNow;
             log.FKAccounts = accountId;
@@ -84,7 +92,7 @@ namespace Spark.Classes.DatabaseInterfaces
             log.strVariableName = strVariableName;
 
             m_db.errorlog.Add(log);
-            m_db.SaveChanges();
+            SaveChanges();
         }
 
         /// <summary>
@@ -96,6 +104,8 @@ namespace Spark.Classes.DatabaseInterfaces
         {
             DateTime dtNow = DateTime.Now;
             int accountId = GetUserId(strUserName);
+            if (accountId == int.MinValue)
+                LogNonUserInteraction((int)type, "");
 
             interactionlog log = new interactionlog();
             log.dDate = dtNow;
@@ -103,22 +113,7 @@ namespace Spark.Classes.DatabaseInterfaces
             log.FKInteractionTypes = (int)type;
 
             m_db.interactionlog.Add(log);
-            try
-            {
-                m_db.SaveChanges();
-            }
-            catch (DbEntityValidationException ex)
-            {
-                foreach (var validationErrors in ex.EntityValidationErrors)
-                {
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                    {
-                        string str1 = validationError.PropertyName;
-                        string str2 = validationError.ErrorMessage;
-                    }
-                }
-            }
-            
+            SaveChanges();
         }
 
         /// <summary>
@@ -137,7 +132,7 @@ namespace Spark.Classes.DatabaseInterfaces
             log.FKInteractionTypes = type;
 
             m_db.interactionlog.Add(log);
-            m_db.SaveChanges();
+            SaveChanges();
         }
 
         /// <summary>
@@ -158,7 +153,7 @@ namespace Spark.Classes.DatabaseInterfaces
             log.strControllerView = strControllerView;
 
             m_db.interactionlog.Add(log);
-            m_db.SaveChanges();
+            SaveChanges();
         }
 
         /// <summary>
@@ -179,9 +174,15 @@ namespace Spark.Classes.DatabaseInterfaces
             log.strControllerView = strControllerView;
 
             m_db.interactionlog.Add(log);
-            m_db.SaveChanges();
+            SaveChanges();
         }
-
+        
+        /// <summary>
+        /// Attempts to find the user identity PK from the database that is associated with the given username stored by microsoft's built in User framework.
+        /// Returns the numeric Id or int.MinValue if no Id can be found.
+        /// </summary>
+        /// <param name="strUserName">Username given by the User.Identity.Name from a controller class.</param>
+        /// <returns>Database keyd Id number or int.MinValue if no Id can be found.</returns>
         private static int GetUserId(string strUserName)
         {
             var qryForId = from r in m_db.accounts
@@ -191,12 +192,52 @@ namespace Spark.Classes.DatabaseInterfaces
             if (qryForId != null && qryForId.Count() > 0)
                 return qryForId.FirstOrDefault();
 
-            return 0;
+            return int.MinValue;
         }
 
+        /// <summary>
+        /// Attempts to log an error that does not have a valid user.
+        /// Use empty strings if the string parameters are unknown.
+        /// </summary>
+        private static void LogNonUserError(string strMessage, string strException, string strStackTrace, string strControllerView, string strMethod, string strVariableName)
+        {
+            errorlog log = new errorlog();
+            log.dDate = DateTime.Now;
+            log.FKAccounts = int.MinValue;
+            log.strMessage = strMessage;
+            log.strStackTrace = strStackTrace;
+            log.strMethod = strMethod;
+            log.strVariableName = strVariableName;
+
+            m_db.errorlog.Add(log);
+            SaveChanges();
+        }
+
+        /// <summary>
+        /// Attemps to log an interaction that does not have a valid user.
+        /// Use empty strings if the string parameters are unknown.
+        /// </summary>
+        /// <param name="nType"></param>
+        /// <param name="strControllerView"></param>
+        private static void LogNonUserInteraction(int nType, string strControllerView)
+        {
+            interactionlog log = new interactionlog();
+            log.dDate = DateTime.Now;
+            log.FKAccounts = int.MinValue;
+            log.FKInteractionTypes = nType;
+            log.strControllerView = strControllerView;
+
+            m_db.interactionlog.Add(log);
+            SaveChanges();
+        }
         #endregion
 
-        protected void SaveChanges(string strUserId)
+        /// <summary>
+        /// Base method used to save to a database - should be applied to all derived classes.
+        /// Encapsulates the database call in a try catch block.
+        /// </summary>
+        /// <param name="strUserId">String value of the user Id or an empty string if unknown.</param>
+        protected static bool SaveChanges()
         {
             try
             {
@@ -204,8 +245,12 @@ namespace Spark.Classes.DatabaseInterfaces
             }
             catch(Exception ex)
             {
-                LogError(strUserId, "Generate Error", ex.ToString(), ex.StackTrace);
+                // Avoiding for now to prevent recursion on errors.
+                //LogError(strUserId, "Generate Error", ex.ToString(), ex.StackTrace);
+                return false;
             }
+
+            return true;
         }
     }
 

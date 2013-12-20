@@ -35,27 +35,11 @@ namespace Spark.Classes
             sparkModel.FKAccountsCreatedBy = nQryUserId.First();
             sparkModel.dDateCreated = DateTime.Now;
             sparkModel.dDateModified = DateTime.Now;
-            
-            try
-            {
-                m_db.sparks.Add(sparkModel);
-                m_db.SaveChanges();
-            }
-            catch (DbEntityValidationException ex)
-            {
-                foreach (var validationErrors in ex.EntityValidationErrors)
-                {
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                    {
-                        string str1 = validationError.PropertyName;
-                        string str2 = validationError.ErrorMessage;
-                    }
-                }
-                // log ex.
+            m_db.sparks.Add(sparkModel);
+            if (SaveChanges())
+                return true;
+            else
                 return false;
-            }
-
-            return true;
         }
     }
 }

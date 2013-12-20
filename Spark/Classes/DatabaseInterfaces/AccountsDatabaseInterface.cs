@@ -82,7 +82,7 @@ namespace Spark.Classes
             try
             {
                 //Save the changes
-                m_db.SaveChanges();
+                SaveChanges();
             }
             catch (Exception ex)
             {
@@ -153,7 +153,7 @@ namespace Spark.Classes
             try
             {
                 m_db.accounts.Add(account);
-                m_db.SaveChanges();
+                SaveChanges();
                 return true;
             }
             catch
@@ -181,7 +181,7 @@ namespace Spark.Classes
             try
             {
                 m_db.accounts.Add(accountNew);
-                m_db.SaveChanges();
+                SaveChanges();
             }
             catch
             {
@@ -215,7 +215,7 @@ namespace Spark.Classes
 
             try
             {
-                m_db.SaveChanges();
+                SaveChanges();
             }
             catch
             {
