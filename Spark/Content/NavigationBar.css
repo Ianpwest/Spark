@@ -7,6 +7,7 @@
 p, a
 {
     text-decoration:none;
+    font-size:18px;
 }
 
 .actionLink
@@ -15,6 +16,7 @@ p, a
     display:block;
     margin-left:-8px;
     padding-top:2px;
+    font-size:12px;
 
     position:relative;
     width:70px;
@@ -43,7 +45,7 @@ p, a
   width: 100%;
   height:3em;
   position:fixed;
-  z-index:1;
+  z-index:2;
 
 background: linear-gradient(to bottom, #4c4c4c 0%,#666666 0%,#2c2c2c 0%,#595959 0%,#474747 0%,#000000 100%,#1c1c1c 100%,#2b2b2b 100%,#131313 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313',GradientType=0 ); /* IE6-8 */
@@ -80,7 +82,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
   margin-left: .5em;
 }
 
-.NavigationBarLogo
+.NavigationBarLogoLettering
 {
     display:none;
 }
@@ -91,8 +93,17 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
   color:white;
   margin: 0 auto;
   margin-top:-7px;
-  margin-left:-50px;
+  margin-left:-30px;
   font-size:30px;
+}
+
+.NavigationBarLogoIcon img
+{
+  float:left;
+  width:45px; height:45px;
+  margin: 0 auto;
+  margin-top:-11px;
+  margin-left:-130px;
 }
 
 .NavigationBarHomeIcon
