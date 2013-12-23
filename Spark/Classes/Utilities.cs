@@ -141,6 +141,7 @@ namespace Spark.Classes
             }
             catch(Exception ex)
             {
+                UtilitiesDatabaseInterface.LogError(string.Empty, "Failed to write image to file.", ex.ToString(), ex.StackTrace);
                 return false;
             }
             return true;

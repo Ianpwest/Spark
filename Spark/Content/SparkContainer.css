@@ -35,7 +35,7 @@
   width:200px;
 }
 
-.sparkDisagree:hover
+.sparkDisagree:hover, .sparkAgree:hover
 {
   box-shadow: 0px 0px 0px #1b383b;
 }

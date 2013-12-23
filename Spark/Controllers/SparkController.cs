@@ -84,5 +84,12 @@ namespace Spark.Controllers
             return Json(new { success = true, message = strMessageReturn });
         }
 
+
+        public ActionResult SparkContainer()
+        {
+            //TODO: get spark information such as topic...etc...
+            return View();
+        }
+
     }
 }

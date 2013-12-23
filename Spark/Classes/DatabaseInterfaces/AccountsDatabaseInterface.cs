@@ -79,17 +79,8 @@ namespace Spark.Classes
             account.strSalt = Utilities.GetSalt();
             account.strPassword = Utilities.Encrypt(account.strSalt + pcm.NewPassword);
 
-            try
-            {
-                //Save the changes
-                SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-
-            return true;
+            //Save the changes
+            return SaveChanges();
         }
 
         /// <summary>
