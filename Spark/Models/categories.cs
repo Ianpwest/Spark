@@ -23,6 +23,7 @@ namespace Spark.Models
     
         public int PK { get; set; }
         public string strName { get; set; }
+        public string strImageName { get; set; }
     
         public virtual ICollection<sparkscategories> sparkscategories { get; set; }
         public virtual ICollection<sparkscategories> sparkscategories1 { get; set; }

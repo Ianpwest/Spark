@@ -33,6 +33,7 @@
           </Key>
           <Property Name="PK" Type="int" Nullable="false" />
           <Property Name="strName" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="strImageName" Type="varchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="cities">
           <Key>
@@ -982,6 +983,7 @@
           <NavigationProperty Name="sparkscategories" Relationship="Self.FK__categories" FromRole="categories" ToRole="sparkscategories" />
           <NavigationProperty Name="sparkscategories1" Relationship="Self.FK__categories_2" FromRole="categories" ToRole="sparkscategories" />
           <NavigationProperty Name="sparkscategories2" Relationship="Self.FK__categories_3" FromRole="categories" ToRole="sparkscategories" />
+          <Property Name="strImageName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="cities">
           <Key>
@@ -1968,6 +1970,7 @@
           <EntitySetMapping Name="categories">
             <EntityTypeMapping TypeName="sparkdbModel.categories">
               <MappingFragment StoreEntitySet="categories">
+                <ScalarProperty Name="strImageName" ColumnName="strImageName" />
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="strName" ColumnName="strName" />
               </MappingFragment>

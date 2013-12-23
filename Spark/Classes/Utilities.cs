@@ -177,5 +177,68 @@ namespace Spark.Classes
 
             return msNewImage.ToArray();
         }
+
+        /// <summary>
+        /// Generates a base 64 string that can be used to place into an image tag's "src" attribute. This searches the given directory from the imgLoc parameter for the file that
+        /// uses the file name specified in the strFileName parameter. The Server parameter is the "Server" property used in the controllers.
+        /// </summary>
+        /// <param name="strFileName">Simple file name inside the root image directory.</param>
+        /// <param name="imgLoc">Enumeration to indicate which directory to check.</param>
+        /// <param name="Server">Server property given from the controller. Used to map to the config file.</param>
+        /// <returns></returns>
+        public static string GenerateImageString(string strFileName, ImageLocation imgLoc, HttpServerUtilityBase Server)
+        {
+            XDocument xDoc = XDocument.Load(Server.MapPath("~/App_Data/Config.xml"));
+            IEnumerable<XElement> configuration = xDoc.Elements();
+            string strRootFolder = "";
+            switch(imgLoc)
+            {
+                case ImageLocation.Spark:
+                    strRootFolder = "sparkImgRoot";
+                    break;
+                case ImageLocation.Category:
+                    strRootFolder = "sparkCategoryImgRoot";
+                    break;
+                case ImageLocation.Tag:
+                    strRootFolder = "sparkTagImgRoot";
+                    break;
+            }
+
+            // Extracts the server location of the image files from the config doc.
+            // TODO - can't search through multiple child tags with this method.
+            var strFilePath = (from r in configuration.FirstOrDefault().Elements()
+                               where r.Attribute("name").Value == strRootFolder
+                               select r.Attribute("value").Value).FirstOrDefault();
+
+            if (string.IsNullOrEmpty(strFilePath))
+                return string.Empty;
+
+            byte[] byArray = new byte[0];
+            FileStream fs;
+            BinaryReader br;
+
+            try
+            {
+                fs = new FileStream(strFilePath + strFileName, FileMode.Open, FileAccess.Read);
+                byArray = new byte[fs.Length];
+                br = new BinaryReader(fs);
+
+                byArray = br.ReadBytes((int)fs.Length);
+            }
+            catch (Exception ex)
+            {
+                UtilitiesDatabaseInterface.LogNonUserError("Filestream error.", ex.ToString(), ex.StackTrace, "SparkController", "GetImage", "fs");
+                return string.Empty;
+            }
+
+            return String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(byArray)); ;
+        }
+    }
+
+    public enum ImageLocation
+    {
+        Spark = 0,
+        Category = 1,
+        Tag = 2
     }
 }

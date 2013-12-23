@@ -199,7 +199,7 @@ namespace Spark.Classes.DatabaseInterfaces
         /// Attempts to log an error that does not have a valid user.
         /// Use empty strings if the string parameters are unknown.
         /// </summary>
-        private static void LogNonUserError(string strMessage, string strException, string strStackTrace, string strControllerView, string strMethod, string strVariableName)
+        public static void LogNonUserError(string strMessage, string strException, string strStackTrace, string strControllerView, string strMethod, string strVariableName)
         {
             errorlog log = new errorlog();
             log.dDate = DateTime.Now;
@@ -219,7 +219,7 @@ namespace Spark.Classes.DatabaseInterfaces
         /// </summary>
         /// <param name="nType"></param>
         /// <param name="strControllerView"></param>
-        private static void LogNonUserInteraction(int nType, string strControllerView)
+        public static void LogNonUserInteraction(int nType, string strControllerView)
         {
             interactionlog log = new interactionlog();
             log.dDate = DateTime.Now;
