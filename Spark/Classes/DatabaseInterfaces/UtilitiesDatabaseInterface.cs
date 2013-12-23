@@ -39,5 +39,78 @@ namespace Spark.Classes
                     where r.PK == nSubjectMatterId
                     select r.strImageName).FirstOrDefault();
         }
+
+        public static Dictionary<int, string> GetTagIdAndNames()
+        {
+            var qryAllTags = from r in m_db.categories
+                             select r;
+            if (qryAllTags == null || qryAllTags.Count() < 1)
+            {
+                LogNonUserError("Unable to get tags from the database.", "", "", "DbUtil class", "GetTagIdAndNames", "qryAllTags");
+                return null;
+            }
+
+            Dictionary<int, string> dictIdNames = new Dictionary<int, string>();
+
+            foreach (Spark.Models.categories cat in qryAllTags)
+            {
+                if (dictIdNames.ContainsKey(cat.PK))
+                    continue;
+
+                dictIdNames.Add(cat.PK, cat.strName);
+            }
+
+            return dictIdNames;
+        }
+
+        public static Dictionary<int, string> GetTagIdAndImageNames()
+        {
+            var qryAllTags = from r in m_db.categories
+                             select r;
+            if (qryAllTags == null || qryAllTags.Count() < 1)
+            {
+                LogNonUserError("Unable to get tags from the database.", "", "", "DbUtil class", "GetTagIdAndImageNames", "qryAllTags");
+                return null;
+            }
+
+            Dictionary<int, string> dictIdImg = new Dictionary<int, string>();
+
+            foreach (Spark.Models.categories cat in qryAllTags)
+            {
+                if (dictIdImg.ContainsKey(cat.PK))
+                    continue;
+
+                dictIdImg.Add(cat.PK, cat.strImageName);
+            }
+
+            return dictIdImg;
+        }
+
+        public static bool GenerateTagInfoForSpark(Spark.Models.SparkCreateModel sparkModel)
+        {
+            var qryAllTags = from r in m_db.categories
+                             select r;
+            if(qryAllTags == null || qryAllTags.Count() < 1)
+            {
+                LogNonUserError("Unable to get tags from the database.", "", "", "DbUtil class", "GenerateTagInfoForSpark", "qryAllTags");
+                return false;
+            }
+            Dictionary<int, string> dictIdNames = new Dictionary<int, string>();
+            Dictionary<int, string> dictIdImg = new Dictionary<int, string>();
+
+            foreach(Spark.Models.categories cat in qryAllTags)
+            {
+                if(dictIdImg.ContainsKey(cat.PK) || dictIdNames.ContainsKey(cat.PK))
+                    continue;
+
+                dictIdNames.Add(cat.PK, cat.strName);
+                dictIdImg.Add(cat.PK, cat.strImageName);
+            }
+
+            sparkModel.TagIdAndNames = dictIdNames;
+            sparkModel.TagIdAndImages = dictIdImg;
+
+            return false;
+        }
     }
 }

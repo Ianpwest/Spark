@@ -27,5 +27,7 @@ namespace Spark.Models
         public string FileName { get; set; }
 
         public SelectList SubjectMattersAll { get; set; }
+        public Dictionary<int, string> TagIdAndImages { get; set; }
+        public Dictionary<int, string> TagIdAndNames { get; set; }
     }
 }

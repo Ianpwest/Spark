@@ -43,7 +43,29 @@
                 @Html.DropDownListFor(model => model.SubjectMatterId, Model.SubjectMattersAll, new { onchange = "getImage(this)" })
                 @Html.ValidationMessageFor(model => model.SubjectMatterId)
             </div>
-
+            <div class="editor-field">
+                <label>Tags</label>
+            </div>
+            <div>
+                <table>
+                    <thead>
+                        <tr><td>Header</td></tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach(KeyValuePair<int, string> kvp in Model.TagIdAndNames)
+                            {
+                                <tr>
+                                    <td id=@"availableTag">
+                                        @kvp.Value
+                                    </td>
+                                    <td><img src="@Model.TagIdAndImages[kvp.Key]" /></td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
             <p>
                 <input type="submit" value="Create" />
             </p>
