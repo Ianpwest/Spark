@@ -348,6 +348,7 @@
     <Content Include="Global.asax" />
     <Content Include="Images\gray_texture_background.png" />
     <Content Include="Images\Icons\SparkIcon1.png" />
+    <Content Include="Scripts\ArgumentExpansion.js" />
     <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -486,6 +487,12 @@
       <DependentUpon>SparkDB.edmx</DependentUpon>
       <LastGenOutput>SparkDB.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Spark\SparkArgumentAgreePartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Spark\SparkArgumentDisagreePartial.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
