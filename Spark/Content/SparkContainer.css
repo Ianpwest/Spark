@@ -83,3 +83,208 @@
   min-height:100%;
   margin-top:116px;
 }
+
+.sparkAgreeSide, .sparkDisagreeSide
+{
+  position:absolute;
+  margin-top:118px;
+  height:100%;
+  width:50%;
+}
+
+    .sparkDisagreeSide
+    {
+      margin-left:50%;
+    }
+
+.sparkArgumentPreviewAgree, .sparkArgumentPreviewDisagree
+{
+  position:relative;
+  width:100%;
+  
+}
+
+.sparkArgumentInsideContainerAgree, .sparkArgumentInsideContainerDisagree
+{
+  position:relative;
+  width:95%;
+  height:200px;
+  border-top: 2px solid black;
+  margin-bottom:20px;
+  float:left;
+}
+
+.sparkArgumentInsideContainerDisagree
+{
+  float:right;
+}
+
+.sparkArgumentPreviewTitleLineAgree, .sparkArgumentPreviewTitleLineDisagree
+{
+  padding:0;
+  color:white;
+}
+
+.sparkUsernameAgree, .sparkUsernameDisagree
+{
+  padding:0;
+  margin:0;
+  margin-left:6px;
+  font-size:20px;
+  float:left;
+}
+  .sparkUsernameDisagree
+   {
+     float:right;
+     margin-right:6px;
+   }
+
+.sparkUpvoteAgree
+{
+  margin-right:15px;
+  float:right
+}
+
+.sparkUpvoteDisagree
+{
+  margin-left:15px;
+  float:left
+}
+
+.sparkCommentsCountAgree
+{
+  margin-right:15px;
+  float:right;
+}
+
+.sparkCommentsCountDisagree
+{
+  margin-left:15px;
+  float:left;
+}
+
+.sparkDownvoteAgree
+{
+  margin-right:8px;
+  float:right
+}
+
+.sparkDownvoteDisagree
+{
+  margin-left:8px;
+  float:left;
+}
+
+.sparkAgreeSpark
+{
+  margin-right:5px;
+  float:left;
+}
+
+.sparkDisagreeSpark
+{
+  float:right;
+}
+
+.sparkInfluenceScoreAgree
+{
+  float:right;
+  margin-right:8px;
+  margin-left:20px;
+}
+
+.sparkInfluenceScoreDisagree
+{
+  float:left;
+  margin-left:8px;
+  margin-right:20px;
+}
+
+.sparkArgumentUpDownVoteAgree, .sparkArgumentUpDownVoteDisagree
+{
+  text-align:center;
+  float:right;
+  width:5%;
+  margin-top:5%;
+  overflow:none;
+}
+  .sparkArgumentUpDownDisagree
+  {
+       
+  }
+
+.sparkConclusion
+{
+  width:95%;
+  background-color:
+  word-wrap:break-word;
+  margin-top:30px;
+  margin-left:20px;
+  overflow:hidden;
+  padding:0;
+}
+
+.sparkConclusion p
+{
+  font-family:helvetica;
+  font-size:16px;
+  padding:0;
+  margin:0;
+  height: 8.6em;
+  color:lightgray;
+}
+
+.sparkArgumentFooter
+{
+  float:left;
+  width:98%;
+  margin-top:10px;
+  padding:0;
+  margin-left:8px;
+}
+
+.sparkExpandAgree, .sparkExpandDisagree
+{
+  float:right;
+  color:white;
+}
+  .sparkExpandDisagree
+  {
+    float:left;
+  }
+
+.sparkArgumentFlagAgree, .sparkArgumentFlagDisagree
+{
+  float:left;
+  color:white;
+  margin:0;
+  padding:0;
+}
+  .sparkArgumentFlagDisagree
+  {
+    float:right;
+  }
+
+/*Expansion window*/
+#blanket {
+background-color: #666;
+opacity: 0.65;
+filter: alpha(opacity=45);
+position: absolute;
+z-index: 9001;
+top: 0px;
+left: 0px;
+width: 100%;
+}
+
+#popUpDiv {
+background-image:url('/Images/gray_texture_background.png');
+border:2px solid black;
+  height:800px;
+  margin-left:-450px;
+  margin-top:-240px;
+  padding:20px;
+  position:absolute;
+  width:1400px;
+  z-index:9002;
+}

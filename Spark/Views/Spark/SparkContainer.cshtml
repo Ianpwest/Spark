@@ -3,6 +3,7 @@
 <p class="title" hidden="hidden">Spark</p>
 
 @Styles.Render("~/Content/SparkContainer.css")
+@Scripts.Render("~/Scripts/ArgumentExpansion.js")
 
 <div class="sparkTopicLine">
     
@@ -11,7 +12,7 @@
     </div>
     
     <div class="sparkTopic">
-        <p>Going to war with North Korea would be a mistake</p>
+        <p>Going to war with North Korea would be a mistake. This is some more text to tack on the end of this statement</p>
     </div>
     
     <div class="sparkDisagree">
@@ -20,7 +21,29 @@
 
 </div>
 
+<div class="sparkAgreeSide">
+    @Html.Partial("SparkArgumentAgreePartial")
+    @Html.Partial("SparkArgumentAgreePartial")
+    @Html.Partial("SparkArgumentAgreePartial")
+    @Html.Partial("SparkArgumentAgreePartial")
+    @Html.Partial("SparkArgumentAgreePartial")
+    @Html.Partial("SparkArgumentAgreePartial")
+</div>
 <div class="sparkDivider">
 </div>
-       
-
+<div class="sparkDisagreeSide">
+    @Html.Partial("SparkArgumentDisagreePartial")
+    @Html.Partial("SparkArgumentDisagreePartial")
+    @Html.Partial("SparkArgumentDisagreePartial")
+    @Html.Partial("SparkArgumentDisagreePartial")
+    @Html.Partial("SparkArgumentDisagreePartial")
+    @Html.Partial("SparkArgumentDisagreePartial")
+    @Html.Partial("SparkArgumentDisagreePartial")
+</div>
+      
+@*Pop up window*@
+<div style="display: none;" id="blanket"></div>
+<div style="display: none;" id="popUpDiv">
+    <a onclick="popup('popUpDiv')" href="#">Close</a><br />
+    <p class="popup">Content goes here. You can add any html you need. Make sure to adjust the css for this div to accomodate for the width/height of this content.</p>
+</div>
