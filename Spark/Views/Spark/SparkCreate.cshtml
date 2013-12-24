@@ -56,7 +56,7 @@
                             foreach(KeyValuePair<int, string> kvp in Model.TagIdAndNames)
                             {
                                 <tr>
-                                    <td id=@"availableTag">
+                                    <td id=@String.Concat("availableTag" + kvp.Key)>
                                         @kvp.Value
                                     </td>
                                     <td><img src="@Model.TagIdAndImages[kvp.Key]" /></td>
