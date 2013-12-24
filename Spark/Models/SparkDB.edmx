@@ -24,7 +24,10 @@
           <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FKSparks" Type="int" Nullable="false" />
           <Property Name="FKAccounts" Type="int" Nullable="false" />
-          <Property Name="strArgument" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="strArgument" Type="varchar" MaxLength="10000" Nullable="false" />
+          <Property Name="nFlagCount" Type="int" />
+          <Property Name="strConclusion" Type="varchar" MaxLength="700" Nullable="false" />
+          <Property Name="strCitations" Type="varchar" MaxLength="700" Nullable="false" />
           <Property Name="bIsAgree" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="categories">
@@ -973,6 +976,9 @@
           <NavigationProperty Name="accounts" Relationship="Self.FK_arguments_accounts" FromRole="arguments" ToRole="accounts" />
           <NavigationProperty Name="sparks" Relationship="Self.FK_arguments_sparks" FromRole="arguments" ToRole="sparks" />
           <NavigationProperty Name="comments" Relationship="Self.FK_comments_arguments" FromRole="arguments" ToRole="comments" />
+          <Property Name="nFlagCount" Type="Int32" />
+          <Property Name="strConclusion" Type="String" Nullable="false" MaxLength="700" FixedLength="false" Unicode="false" />
+          <Property Name="strCitations" Type="String" Nullable="false" MaxLength="700" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="categories">
           <Key>
@@ -1959,6 +1965,9 @@
           <EntitySetMapping Name="arguments">
             <EntityTypeMapping TypeName="sparkdbModel.arguments">
               <MappingFragment StoreEntitySet="arguments">
+                <ScalarProperty Name="strCitations" ColumnName="strCitations" />
+                <ScalarProperty Name="strConclusion" ColumnName="strConclusion" />
+                <ScalarProperty Name="nFlagCount" ColumnName="nFlagCount" />
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="FKSparks" ColumnName="FKSparks" />
                 <ScalarProperty Name="FKAccounts" ColumnName="FKAccounts" />

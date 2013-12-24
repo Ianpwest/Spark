@@ -237,6 +237,7 @@
     <Compile Include="Models\religions.cs">
       <DependentUpon>SparkDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SparkArgumentModel.cs" />
     <Compile Include="Models\SparkDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

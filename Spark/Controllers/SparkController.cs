@@ -84,10 +84,59 @@ namespace Spark.Controllers
             return Json(new { success = true, message = strMessageReturn });
         }
 
-
+        //GET
         public ActionResult SparkContainer()
         {
             //TODO: get spark information such as topic...etc...
+            List<List<SparkArgumentModel>> lstReturn = new List<List<SparkArgumentModel>>();
+
+            List<SparkArgumentModel> lstArgumentsAgree = new List<SparkArgumentModel>();
+            List<SparkArgumentModel> lstArgumentsDisagree = new List<SparkArgumentModel>();
+
+            //Begin Testing code
+            List<Models.arguments> lstArguments = SparksDatabaseInterface.GetAllArgumentsForSpark(1); //hard coded id, controller method should take an id
+
+
+            //No arguments were found
+            if (lstArguments == null || lstArguments.Count == 0)
+            {
+                lstReturn.Add(lstArgumentsAgree);
+                lstReturn.Add(lstArgumentsDisagree);
+                ViewBag.Arguments = lstReturn;
+                return View(//TODO: no arguments found
+                            );
+            }
+                
+
+            //Run analytics and create sparkArgumentModels to return
+            foreach(Models.arguments argument in lstArguments)
+            {
+                //Need to pass this argument to the analytics engine to fill in the rest of the fields?
+                SparkArgumentModel sam = new SparkArgumentModel();
+                sam.bIsAgree = argument.bIsAgree;
+                sam.nArgumentScore = 25; //this should come from the analytics result.
+                sam.nCommentCount = 420; //this should come from the analytics result.
+                sam.nDownVote = 20; //analytics result
+                sam.nInfluenceScore = 355; //analytics result
+                sam.nUpVote = 300; //analytics result
+                sam.strArgument = argument.strArgument;
+                sam.strCitations = argument.strCitations;
+                sam.strConclusion = argument.strConclusion;
+                sam.strUserName = AccountsDatabaseInterface.GetUsername(argument.FKAccounts);
+
+                if (sam.bIsAgree)
+                    lstArgumentsAgree.Add(sam);
+                else
+                    lstArgumentsDisagree.Add(sam);
+            }
+
+            //Prepare the lists to be returned
+            lstReturn.Add(lstArgumentsAgree);
+            lstReturn.Add(lstArgumentsDisagree);
+            ViewBag.Arguments = lstReturn;
+
+            //End testing code
+
             return View();
         }
 

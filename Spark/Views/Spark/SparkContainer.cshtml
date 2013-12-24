@@ -1,6 +1,4 @@
-﻿@model Spark.Models.sparks
-
-<p class="title" hidden="hidden">Spark</p>
+﻿<p class="title" hidden="hidden">Spark</p>
 
 @Styles.Render("~/Content/SparkContainer.css")
 @Scripts.Render("~/Scripts/ArgumentExpansion.js")
@@ -22,23 +20,22 @@
 </div>
 
 <div class="sparkAgreeSide">
-    @Html.Partial("SparkArgumentAgreePartial")
-    @Html.Partial("SparkArgumentAgreePartial")
-    @Html.Partial("SparkArgumentAgreePartial")
-    @Html.Partial("SparkArgumentAgreePartial")
-    @Html.Partial("SparkArgumentAgreePartial")
-    @Html.Partial("SparkArgumentAgreePartial")
+    @{
+        foreach(Spark.Models.SparkArgumentModel samAgree in ViewBag.Arguments[0])
+        {
+            @Html.Partial("SparkArgumentAgreePartial", samAgree);
+        }
+    }
 </div>
 <div class="sparkDivider">
 </div>
 <div class="sparkDisagreeSide">
-    @Html.Partial("SparkArgumentDisagreePartial")
-    @Html.Partial("SparkArgumentDisagreePartial")
-    @Html.Partial("SparkArgumentDisagreePartial")
-    @Html.Partial("SparkArgumentDisagreePartial")
-    @Html.Partial("SparkArgumentDisagreePartial")
-    @Html.Partial("SparkArgumentDisagreePartial")
-    @Html.Partial("SparkArgumentDisagreePartial")
+    @{
+        foreach (Spark.Models.SparkArgumentModel samDisagree in ViewBag.Arguments[1])
+        {
+            @Html.Partial("SparkArgumentDisagreePartial", samDisagree);
+        }
+    }
 </div>
       
 @*Pop up window*@

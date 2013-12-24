@@ -1,30 +1,30 @@
-﻿<div class="sparkArgumentPreviewAgree">
+﻿@model Spark.Models.SparkArgumentModel
+
+<div class="sparkArgumentPreviewAgree">
     <div class="sparkArgumentInsideContainerAgree">
         <div class="sparkArgumentPreviewTitleLineAgree">
             <div class="sparkAgreeSpark">
                 Spark
             </div>
             <div class="sparkUsernameAgree">
-                Username
+                @Model.strUserName
             </div>
             <div class="sparkInfluenceScoreAgree">
-                IScore
+                Influence: @Model.nInfluenceScore.ToString()
             </div>
             <div class="sparkDownvoteAgree">
-                -vote
+               -# @Model.nDownVote.ToString()
             </div>
             <div class="sparkUpvoteAgree">
-                +vote
+                +# @Model.nUpVote.ToString()
             </div>
             <div class="sparkCommentsCountAgree">
-                comCount
+                Comment # @Model.nCommentCount.ToString()
             </div>
         </div>
         <div class="sparkConclusion">
             <p>
-                Lorem ipsum dolor sit amet, lobortis vituperatoribus cum te, eos at brute sonet insolens. Vel ad persecuti expetendis philosophia, mei conceptam scripserit ea. Qualisque maluisset at mea, his te unum homero salutatus, ferri veniam qui ne. Cum dicam graecis ut. Solet constituto voluptatibus quo ea.
-
-                Vim aeque oporteat praesent ad. Phaedrum adipisci interpretaris vel at, nec saepe tempor ad. Vim populo expetenda neglegentur id. Ubique impetus indoctum ea mei. Te sed inani graeci vituperata, graeci accusata cotidieque duo eu. Natum summo scripta no mel, ex cum debet tempor referrentur, illud propriae ea pro.
+                @Model.strConclusion
             </p>
         </div>
         <div class="sparkArgumentFooter">
@@ -38,7 +38,7 @@
     </div>
     <div class="sparkArgumentUpDownVoteAgree">
         <img>Up</img>
-        <p style="word-wrap:break-word">1000</p>
+        <p style="word-wrap:break-word">@Model.nArgumentScore.ToString()</p>
         <img>Down</img>
     </div>
 </div>

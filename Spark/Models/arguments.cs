@@ -24,6 +24,9 @@ namespace Spark.Models
         public int FKAccounts { get; set; }
         public string strArgument { get; set; }
         public bool bIsAgree { get; set; }
+        public Nullable<int> nFlagCount { get; set; }
+        public string strConclusion { get; set; }
+        public string strCitations { get; set; }
     
         public virtual accounts accounts { get; set; }
         public virtual sparks sparks { get; set; }
