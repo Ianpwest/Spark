@@ -111,6 +111,7 @@
   border-top: 2px solid black;
   margin-bottom:20px;
   float:left;
+  border-radius:3px;
   background-color: gray;
 }
 
@@ -122,7 +123,9 @@
 .sparkArgumentPreviewTitleLineAgree, .sparkArgumentPreviewTitleLineDisagree
 {
   padding:0;
-  color:white;
+  color:black;
+  height:21px;
+  background: linear-gradient(to bottom, #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* W3C */
 }
 
 .sparkUsernameAgree, .sparkUsernameDisagree
@@ -181,6 +184,28 @@
   float:left;
 }
 
+.sparkUpVote
+{
+    border-color: black transparent;
+    border-style: solid;
+    border-width: 0px 20px 20px 20px;
+    height: 0px;
+    width: 0px;
+    margin-bottom:10px;
+    margin-left:2px;
+}
+
+.sparkDownVote
+{
+	border-color: black transparent;
+	border-style: solid;
+	border-width: 20px 20px 0px 20px;
+	height: 0px;
+	width: 0px;
+    margin-top:10px;
+    margin-left:2px;
+}
+
 .sparkDisagreeSpark
 {
   float:right;
@@ -216,9 +241,8 @@
 .sparkConclusion
 {
   width:95%;
-  background-color:
   word-wrap:break-word;
-  margin-top:30px;
+  margin-top:10px;
   margin-left:20px;
   overflow:hidden;
   padding:0;
