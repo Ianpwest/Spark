@@ -7,6 +7,8 @@ namespace Spark.Models
 {
     public class SparkArgumentModel
     {
+        public int id { get; set; }
+
         public string strUserName { get; set; }
 
         public int nCommentCount { get; set; }

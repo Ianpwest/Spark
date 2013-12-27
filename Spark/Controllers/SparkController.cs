@@ -113,6 +113,7 @@ namespace Spark.Controllers
             {
                 //Need to pass this argument to the analytics engine to fill in the rest of the fields?
                 SparkArgumentModel sam = new SparkArgumentModel();
+                sam.id = argument.PK;
                 sam.bIsAgree = argument.bIsAgree;
                 sam.nArgumentScore = 25; //this should come from the analytics result.
                 sam.nCommentCount = 420; //this should come from the analytics result.
@@ -140,5 +141,13 @@ namespace Spark.Controllers
             return View();
         }
 
+        public ActionResult GetExpandedArgumentView(int id)
+        {
+            //using the id build the expanded argument view to return.
+
+
+
+            return PartialView("SparkArgumentExpanded");
+        }
     }
 }
