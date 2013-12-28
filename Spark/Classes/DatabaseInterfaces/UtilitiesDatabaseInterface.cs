@@ -89,6 +89,7 @@ namespace Spark.Classes
         public static bool GenerateTagInfoForSpark(Spark.Models.SparkCreateModel sparkModel)
         {
             var qryAllTags = from r in m_db.categories
+                             where r.PK >= 0
                              select r;
             if(qryAllTags == null || qryAllTags.Count() < 1)
             {

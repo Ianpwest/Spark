@@ -21,7 +21,6 @@ namespace Spark.Classes
             sparks sparkModel = new sparks();
             sparkModel.strDescription = sparkCreateModel.Description;
             sparkModel.strTopic = sparkCreateModel.Topic;
-            sparkModel.strImagePath = sparkCreateModel.FileName;
             
             sparkModel.FKSubjectMatters = sparkCreateModel.SubjectMatterId;
             
@@ -31,6 +30,12 @@ namespace Spark.Classes
 
             if (nQryUserId == null || nQryUserId.Count() != 1)
                 return false;
+
+            sparkModel.FKCategories1 = sparkCreateModel.Tag1;
+            sparkModel.FKCategories2 = sparkCreateModel.Tag2;
+            sparkModel.FKCategories3 = sparkCreateModel.Tag3;
+            sparkModel.FKCategories4 = sparkCreateModel.Tag4;
+            sparkModel.FKCategories5 = sparkCreateModel.Tag5;
 
             sparkModel.FKAccountsCreatedBy = nQryUserId.First();
             sparkModel.dDateCreated = DateTime.Now;

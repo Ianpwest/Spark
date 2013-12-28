@@ -24,10 +24,15 @@ namespace Spark.Models
         public string Description { get; set; }
 
         public string UserId { get; set; }
-        public string FileName { get; set; }
 
         public SelectList SubjectMattersAll { get; set; }
         public Dictionary<int, string> TagIdAndImages { get; set; }
         public Dictionary<int, string> TagIdAndNames { get; set; }
+
+        public int Tag1 { get; set; }
+        public int Tag2 { get; set; }
+        public int Tag3 { get; set; }
+        public int Tag4 { get; set; }
+        public int Tag5 { get; set; }
     }
 }

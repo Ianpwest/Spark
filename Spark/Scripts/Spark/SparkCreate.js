@@ -19,7 +19,6 @@ function readUrl(input) {
 // Calls a json object back from the server containing the image and decoding information given a subject Id as input.
 function getImage(input)
 {
-    document.getElementById("tester").innerHTML = input.getAttribute("value");
     var option = input.options[input.selectedIndex].value;
     $.ajax({
         type: "Post",
@@ -32,6 +31,18 @@ function getImage(input)
             img.src = data.message;
         }
     });
+}
+
+function updateModelWithTags(input)
+{
+    var arrayTags = input;
+    $.ajax(
+        {
+            type: "Post",
+            datatype: 'json',
+            data: "arrayCategories=" + arrayTags,
+            url: "/Spark/UpdateModel"
+        });
 }
 
 // Sets the visibility to visible given the id of an element.
@@ -53,38 +64,29 @@ function animateLeft(id)
 }
 
 function testCells(input) {
-    moveLeft("divDescription");
+    
     var row = input.parentNode;
+    var idSelected = input.id.substring(12);
     var obj = row.cells[1];
-    var cellArray = checkTableForSelection("tableTagsAvailable");
+    var cellArray = checkTableForSelection("tableAvailableTags");
 
-    if (obj.className == "clickedCell") {
-        deleteRow(obj);
-        obj.style.backgroundColor = "#FFFFFF";
+    if (obj.className == "clickedCell")
+    {
+        deleteRow(input);
+
+        obj.style.backgroundColor = "transparent";
         obj.className = "";
-        input.style.backgroundColor = "#FFFFFF";
+        input.style.backgroundColor = "transparent";
         input.className = "";
-        obj.id = "";
     }
     else if (cellArray.length < 5) {
         obj.style.backgroundColor = "#FF0000";
         obj.className = "clickedCell";
         input.style.backgroundColor = "#FF0000";
         input.className = "clickedCell";
-        var nNextIndex = 0;
-        if (cellArray.length > 0)
-            nNextIndex = getNextIndex();
 
-        obj.id = "clickedCellId" + nNextIndex;
-        addRow(obj.innerHTML, nNextIndex);
+        addRow(obj.innerHTML, idSelected);
     }
-    cellArray = checkTableForSelection("tableTagsAvailable");
-    if (cellArray.length > 0)
-        setVisible("divTagsAdded");
-    else
-        setHidden("divTagsAdded");
-    if (cellArray.length == 5)
-        moveLeft("divTagsAvailable");
 }
 
 function checkTableForSelection(id) {
@@ -105,25 +107,37 @@ function checkTableForSelection(id) {
 }
 
 function addRow(dataToAdd, arrayLength) {
-    var table = document.getElementById("tableTagsAdded");
+    var table = document.getElementById("tableSelectedTags");
     var length = table.tBodies[0].rows.length;
     var row = table.tBodies[0].insertRow(length);
     row.id = "rowAddedId" + arrayLength;
     var cell = row.insertCell(0);
     cell.innerHTML = dataToAdd;
+
+    // Moves the current index up by one when a row is added.
+    var index = parseInt(document.getElementById("divHiddenTags").innerHTML);
+    index = index + 1;
+    document.getElementById("divHiddenTags").innerHTML = index;
+    changeTagValues();
 }
 
 function deleteRow(tdDeleted) {
-    var Id = tdDeleted.id.substring(13);
+    var Id = tdDeleted.id.substring(12);
     var trId = "rowAddedId" + Id;
     var tr = document.getElementById(trId);
     var trIndex = tr.rowIndex;
-    var table = document.getElementById("tableTagsAdded");
+    var table = document.getElementById("tableSelectedTags");
     table.deleteRow(trIndex);
+
+    // Moves the current index down by one when a row is deleted.
+    var index = parseInt(document.getElementById("divHiddenTags").innerHTML);
+    index = index - 1;
+    document.getElementById("divHiddenTags").innerHTML = index;
+    changeTagValues();
 }
 
 function getNextIndex() {
-    var table = document.getElementById("tableTagsAdded");
+    var table = document.getElementById("tableSelectedTags");
     var rows = table.tBodies[0].rows;
     var numArray = new Array();
     for (var i = 0; i < rows.length ; i++) {
@@ -137,6 +151,37 @@ function getNextIndex() {
             counter = j;
     }
     return counter;
+}
+
+function changeTagValues()
+{
+    var table = document.getElementById("tableSelectedTags");
+    var rows = table.tBodies[0].rows;
+    clearTagValues();
+    for (var i = 0; i < rows.length ; i++)
+    {
+        var row = rows[i];
+        var index = row.id.substring(10);
+        if (i == 0)
+            document.getElementById("Tag1").setAttribute("value", index);
+        if (i == 1)
+            document.getElementById("Tag2").setAttribute("value", index);
+        if (i == 2)
+            document.getElementById("Tag3").setAttribute("value", index);
+        if (i == 3)
+            document.getElementById("Tag4").setAttribute("value", index);
+        if (i == 4)
+            document.getElementById("Tag5").setAttribute("value", index);
+    }
+}
+
+function clearTagValues()
+{
+    document.getElementById("Tag1").setAttribute("value", "-1");
+    document.getElementById("Tag2").setAttribute("value", "-1");
+    document.getElementById("Tag3").setAttribute("value", "-1");
+    document.getElementById("Tag4").setAttribute("value", "-1");
+    document.getElementById("Tag5").setAttribute("value", "-1");
 }
 
 

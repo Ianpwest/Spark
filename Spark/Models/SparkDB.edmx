@@ -194,7 +194,11 @@
           <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FKAccountsCreatedBy" Type="int" Nullable="false" />
           <Property Name="FKSubjectMatters" Type="int" Nullable="false" />
-          <Property Name="strImagePath" Type="varchar" MaxLength="200" />
+          <Property Name="FKCategories1" Type="int" Nullable="false" />
+          <Property Name="FKCategories2" Type="int" Nullable="false" />
+          <Property Name="FKCategories3" Type="int" Nullable="false" />
+          <Property Name="FKCategories4" Type="int" Nullable="false" />
+          <Property Name="FKCategories5" Type="int" Nullable="false" />
           <Property Name="strTopic" Type="varchar" MaxLength="250" />
           <Property Name="strDescription" Type="varchar" MaxLength="1500" />
           <Property Name="dDateCreated" Type="datetime" Precision="0" />
@@ -977,8 +981,8 @@
           <NavigationProperty Name="sparks" Relationship="Self.FK_arguments_sparks" FromRole="arguments" ToRole="sparks" />
           <NavigationProperty Name="comments" Relationship="Self.FK_comments_arguments" FromRole="arguments" ToRole="comments" />
           <Property Name="nFlagCount" Type="Int32" />
-          <Property Name="strConclusion" Type="String" Nullable="false" MaxLength="700" FixedLength="false" Unicode="false" />
-          <Property Name="strCitations" Type="String" Nullable="false" MaxLength="700" FixedLength="false" Unicode="false" />
+          <Property Name="strConclusion" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="strCitations" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="categories">
           <Key>
@@ -1179,7 +1183,6 @@
           <Property Name="PK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FKAccountsCreatedBy" Type="Int32" Nullable="false" />
           <Property Name="FKSubjectMatters" Type="Int32" Nullable="false" />
-          <Property Name="strImagePath" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="strTopic" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="strDescription" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
           <Property Name="dDateCreated" Type="DateTime" />
@@ -1189,6 +1192,11 @@
           <NavigationProperty Name="sparkinterestvotes" Relationship="Self.FK_sparkinterestvotes_sparks" FromRole="sparks" ToRole="sparkinterestvotes" />
           <NavigationProperty Name="sparkscategories" Relationship="Self.FK__sparks" FromRole="sparks" ToRole="sparkscategories" />
           <NavigationProperty Name="subjectmatters" Relationship="Self.FK_sparks_subjectmatters" FromRole="sparks" ToRole="subjectmatters" />
+          <Property Name="FKCategories1" Type="Int32" Nullable="false" />
+          <Property Name="FKCategories2" Type="Int32" Nullable="false" />
+          <Property Name="FKCategories3" Type="Int32" Nullable="false" />
+          <Property Name="FKCategories4" Type="Int32" Nullable="false" />
+          <Property Name="FKCategories5" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="sparkscategories">
           <Key>
@@ -2153,10 +2161,14 @@
           <EntitySetMapping Name="sparks">
             <EntityTypeMapping TypeName="sparkdbModel.sparks">
               <MappingFragment StoreEntitySet="sparks">
+                <ScalarProperty Name="FKCategories5" ColumnName="FKCategories5" />
+                <ScalarProperty Name="FKCategories4" ColumnName="FKCategories4" />
+                <ScalarProperty Name="FKCategories3" ColumnName="FKCategories3" />
+                <ScalarProperty Name="FKCategories2" ColumnName="FKCategories2" />
+                <ScalarProperty Name="FKCategories1" ColumnName="FKCategories1" />
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="FKAccountsCreatedBy" ColumnName="FKAccountsCreatedBy" />
                 <ScalarProperty Name="FKSubjectMatters" ColumnName="FKSubjectMatters" />
-                <ScalarProperty Name="strImagePath" ColumnName="strImagePath" />
                 <ScalarProperty Name="strTopic" ColumnName="strTopic" />
                 <ScalarProperty Name="strDescription" ColumnName="strDescription" />
                 <ScalarProperty Name="dDateCreated" ColumnName="dDateCreated" />
