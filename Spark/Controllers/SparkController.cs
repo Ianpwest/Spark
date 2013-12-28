@@ -18,6 +18,7 @@ namespace Spark.Controllers
         {
             // Need to create a new model that holds all of the subject matters.
             SparkCreateModel scModel = new SparkCreateModel();
+            scModel.Tag1 = -1; scModel.Tag2 = -1; scModel.Tag3 = -1; scModel.Tag4 = -1; scModel.Tag5 = -1;
             scModel.UserId = User.Identity.Name;
             List<SelectListItem> lstItems = new List<SelectListItem>();
 
@@ -49,18 +50,18 @@ namespace Spark.Controllers
         public ActionResult SparkCreate(SparkCreateModel model)
         {
             model.UserId = User.Identity.Name;
-            model.FileName = Guid.NewGuid().ToString() + ".jpg"; ;
+            //model.FileName = Guid.NewGuid().ToString() + ".jpg"; ;
             // Redirect somewhere else when it fails.
             
             if (!SparksDatabaseInterface.CreateSpark(model))
                 return RedirectToAction("Index", "Home");
 
-            // If record was inserted correct, try to add an image if it exists.
-            if (Request.Files.Count == 1)
-            {
-                Utilities.WriteImageToFile(model.FileName, Request, Server);
-                SparksDatabaseInterface.LogInteraction(User.Identity.Name, Classes.DatabaseInterfaces.InteractionType.SubmitForm);
-            }
+            //// If record was inserted correct, try to add an image if it exists.
+            //if (Request.Files.Count == 1)
+            //{
+            //    Utilities.WriteImageToFile(model.FileName, Request, Server);
+            //    SparksDatabaseInterface.LogInteraction(User.Identity.Name, Classes.DatabaseInterfaces.InteractionType.SubmitForm);
+            //}
 
             return RedirectToAction("Index", "Home");
         }
