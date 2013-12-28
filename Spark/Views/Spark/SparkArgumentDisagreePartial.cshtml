@@ -1,30 +1,30 @@
-﻿<div class="sparkArgumentPreviewDisagree">
+﻿@model Spark.Models.SparkArgumentModel
+
+<div class="sparkArgumentPreviewDisagree">
     <div class="sparkArgumentInsideContainerDisagree">
         <div class="sparkArgumentPreviewTitleLineDisagree">
             <div class="sparkDisagreeSpark">
                 Spark
             </div>
             <div class="sparkUsernameDisagree">
-                Username
+                @Model.strUserName
             </div>
             <div class="sparkInfluenceScoreDisagree">
-                IScore
+                @Model.nInfluenceScore.ToString()
             </div>
             <div class="sparkDownvoteDisagree">
-                -vote
+                @Model.nDownVote.ToString()
             </div>
             <div class="sparkUpvoteDisagree">
-                +vote
+                @Model.nUpVote.ToString()
             </div>
             <div class="sparkCommentsCountDisagree">
-                comCount
+                @Model.nCommentCount.ToString()
             </div>
         </div>
         <div class="sparkConclusion">
             <p>
-                Lorem ipsum dolor sit amet, lobortis vituperatoribus cum te, eos at brute sonet insolens. Vel ad persecuti expetendis philosophia, mei conceptam scripserit ea. Qualisque maluisset at mea, his te unum homero salutatus, ferri veniam qui ne. Cum dicam graecis ut. Solet constituto voluptatibus quo ea.
-
-                Vim aeque oporteat praesent ad. Phaedrum adipisci interpretaris vel at, nec saepe tempor ad. Vim populo expetenda neglegentur id. Ubique impetus indoctum ea mei. Te sed inani graeci vituperata, graeci accusata cotidieque duo eu. Natum summo scripta no mel, ex cum debet tempor referrentur, illud propriae ea pro. Te duo mutat corrumpit, duo quaestio adolescens scriptorem ad, per no accommodare deterruisset. Qui saperet molestie appellantur ea, gubergren elaboraret nec te. Eu his agam albucius. Mel dignissim incorrupte
+               @Model.strConclusion
             </p>
         </div>
         <div class="sparkArgumentFooter">
@@ -38,7 +38,7 @@
     </div>
     <div class="sparkArgumentUpDownVoteDisagree">
         <img>Up</img>
-        <p style="word-wrap:break-word">1000</p>
+        <p style="word-wrap:break-word">@Model.nArgumentScore.ToString()</p>
         <img>Down</img>
     </div>
 </div>

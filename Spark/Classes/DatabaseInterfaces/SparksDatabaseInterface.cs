@@ -46,5 +46,26 @@ namespace Spark.Classes
             else
                 return false;
         }
+
+        /// <summary>
+        /// Method to get all arguments for a given spark.
+        /// </summary>
+        /// <param name="nSparkId">Id of spark</param>
+        /// <returns>List of arguments</returns>
+        public static List<Models.arguments> GetAllArgumentsForSpark(int nSparkId)
+        {
+            List<arguments> lstArguments = new List<arguments>();
+
+            var arguments = from r in m_db.arguments
+                            where r.FKSparks == nSparkId
+                            select r;
+
+            foreach(arguments argument in arguments)
+            {
+                lstArguments.Add(argument);
+            }
+
+            return lstArguments;
+        }
     }
 }

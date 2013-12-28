@@ -249,5 +249,17 @@ namespace Spark.Classes
 
             return account;
         }
+
+        /// <summary>
+        /// Gets a username given the account id
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        public static string GetUsername(int accountID)
+        {
+            return (from r in m_db.accounts
+                   where r.PK == accountID
+                   select r.strUserName).FirstOrDefault();
+        }
     }
 }

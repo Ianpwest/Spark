@@ -3,6 +3,7 @@
     if (el.style.display == 'none') { el.style.display = 'block'; }
     else { el.style.display = 'none'; }
 }
+
 function blanket_size(popUpDivVar) {
     if (typeof window.innerWidth != 'undefined') {
         viewportheight = window.innerHeight;
@@ -24,6 +25,7 @@ function blanket_size(popUpDivVar) {
     popUpDiv_height = blanket_height / 2 - 200;//100 is half popup's height
     popUpDiv.style.top = popUpDiv_height + 'px';
 }
+
 function window_pos(popUpDivVar) {
     if (typeof window.innerWidth != 'undefined') {
         viewportwidth = window.innerHeight;
@@ -43,9 +45,26 @@ function window_pos(popUpDivVar) {
     window_width = window_width / 2 - 250;//250 is half popup's width
     popUpDiv.style.left = window_width + 'px';
 }
+
 function popup(windowname) {
     blanket_size(windowname);
     window_pos(windowname);
     toggle('blanket');
     toggle(windowname);
+
+    getExpandedArgumentView($(".sparkExpandAgree a").attr('title'));
+}
+
+function getExpandedArgumentView(id)
+{
+    $.ajax({
+        type: "Post",
+        datatype: 'html',
+        data: "id=" + id,
+        url: "/Spark/GetExpandedArgumentView",
+        success: function (data)
+        {
+            $('.popup').html(data);
+        }
+    });
 }

@@ -77,10 +77,10 @@
   position: absolute;
   border-right:2px solid black;
   right: 0;
-  left: -2px;
+  left: 0px;
   margin-right: auto;
   margin-left: auto;
-  min-height:100%;
+  height:160%;
   margin-top:116px;
 }
 
@@ -100,18 +100,19 @@
 .sparkArgumentPreviewAgree, .sparkArgumentPreviewDisagree
 {
   position:relative;
-  width:100%;
-  
 }
 
 .sparkArgumentInsideContainerAgree, .sparkArgumentInsideContainerDisagree
 {
   position:relative;
-  width:95%;
+  width:89%;
+  min-width:500px;
   height:200px;
   border-top: 2px solid black;
   margin-bottom:20px;
   float:left;
+  border-radius:3px;
+  background-color: gray;
 }
 
 .sparkArgumentInsideContainerDisagree
@@ -122,7 +123,9 @@
 .sparkArgumentPreviewTitleLineAgree, .sparkArgumentPreviewTitleLineDisagree
 {
   padding:0;
-  color:white;
+  color:black;
+  height:21px;
+  background: linear-gradient(to bottom, #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* W3C */
 }
 
 .sparkUsernameAgree, .sparkUsernameDisagree
@@ -181,6 +184,43 @@
   float:left;
 }
 
+.sparkUpVote, .sparkDownVote
+{
+  margin-left:4px;
+  width: 0px;
+  border-style: solid;
+  cursor:pointer;
+}
+
+.sparkUpVote:hover, .sparkDownVote:hover
+{
+  border-color:darkblue transparent;
+}
+
+.sparkUpVote:active
+{
+  border-width: 0px 20px 19px 20px;
+}
+
+.sparkDownVote:active
+{
+  border-width: 19px 19px 0px 20px;
+}
+
+.sparkUpVote
+{
+    border-color: white transparent;
+    border-width: 0px 20px 20px 20px;
+    margin-bottom:10px;
+}
+
+.sparkDownVote
+{
+	  border-color: black transparent;
+	  border-width: 20px 20px 0px 20px;
+    margin-top:10px;
+}
+
 .sparkDisagreeSpark
 {
   float:right;
@@ -202,23 +242,22 @@
 
 .sparkArgumentUpDownVoteAgree, .sparkArgumentUpDownVoteDisagree
 {
-  text-align:center;
-  float:right;
-  width:5%;
-  margin-top:5%;
-  overflow:none;
+  width:50px;
+  position:relative;
+  margin-left:103%;
+  margin-top:-130px;
+  height:0;
 }
-  .sparkArgumentUpDownDisagree
-  {
-       
-  }
+    .sparkArgumentUpDownVoteAgree p
+    {
+         text-align:center;
+    }
 
 .sparkConclusion
 {
   width:95%;
-  background-color:
   word-wrap:break-word;
-  margin-top:30px;
+  margin-top:10px;
   margin-left:20px;
   overflow:hidden;
   padding:0;
@@ -242,6 +281,15 @@
   padding:0;
   margin-left:8px;
 }
+
+.sparkAddComment
+{
+  float:left;
+  color:white;
+  width:80%;
+  text-align:center;
+}
+
 
 .sparkExpandAgree, .sparkExpandDisagree
 {

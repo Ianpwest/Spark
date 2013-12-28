@@ -1,44 +1,48 @@
-﻿<div class="sparkArgumentPreviewAgree">
+﻿@model Spark.Models.SparkArgumentModel
+
+<div class="sparkArgumentPreviewAgree">
     <div class="sparkArgumentInsideContainerAgree">
         <div class="sparkArgumentPreviewTitleLineAgree">
             <div class="sparkAgreeSpark">
-                Spark
+                <img src="~/Images/Icons/SparkIcon1.png" alt="Spark" height="20" width="20" />
             </div>
             <div class="sparkUsernameAgree">
-                Username
+                @Model.strUserName
             </div>
             <div class="sparkInfluenceScoreAgree">
-                IScore
+                Influence: @Model.nInfluenceScore.ToString()
             </div>
             <div class="sparkDownvoteAgree">
-                -vote
+               -# @Model.nDownVote.ToString()
             </div>
             <div class="sparkUpvoteAgree">
-                +vote
+                +# @Model.nUpVote.ToString()
             </div>
             <div class="sparkCommentsCountAgree">
-                comCount
+                Comment # @Model.nCommentCount.ToString()
             </div>
         </div>
         <div class="sparkConclusion">
             <p>
-                Lorem ipsum dolor sit amet, lobortis vituperatoribus cum te, eos at brute sonet insolens. Vel ad persecuti expetendis philosophia, mei conceptam scripserit ea. Qualisque maluisset at mea, his te unum homero salutatus, ferri veniam qui ne. Cum dicam graecis ut. Solet constituto voluptatibus quo ea.
-
-                Vim aeque oporteat praesent ad. Phaedrum adipisci interpretaris vel at, nec saepe tempor ad. Vim populo expetenda neglegentur id. Ubique impetus indoctum ea mei. Te sed inani graeci vituperata, graeci accusata cotidieque duo eu. Natum summo scripta no mel, ex cum debet tempor referrentur, illud propriae ea pro.
+                @Model.strConclusion
             </p>
         </div>
         <div class="sparkArgumentFooter">
             <div class="sparkArgumentFlagAgree">
                 Flag
             </div>
+            <div class="sparkAddComment">
+                <a onclick="popup('popUpDiv')" href="#">Add Comment</a>
+            </div>
             <div class="sparkExpandAgree">
-                <a onclick="popup('popUpDiv')" href="#">Expand</a>
+                <a onclick="popup('popUpDiv')" title=@Model.id.ToString() href="#">Expand</a>
             </div>
         </div>
+        <div class="sparkArgumentUpDownVoteAgree">
+            <div class="sparkUpVote"></div>
+            <p style="word-wrap:break-word">@Model.nArgumentScore.ToString()</p>
+            <div class="sparkDownVote"></div>
+        </div>
     </div>
-    <div class="sparkArgumentUpDownVoteAgree">
-        <img>Up</img>
-        <p style="word-wrap:break-word">1000</p>
-        <img>Down</img>
-    </div>
+   
 </div>

@@ -1,0 +1,154 @@
+﻿.sparkArgumentPreview
+{
+    margin:0 auto;
+}
+
+.sparkArgumentInsideContainerExpanded
+{
+    height:auto;
+}
+
+.sparkArgumentPreviewExpanded
+{
+  position:relative;
+}
+
+.sparkArgumentInsideContainerExpanded
+{
+  position:relative;
+  width:89%;
+  min-width:500px;
+  height:auto;
+  border-top: 2px solid black;
+  margin-bottom:20px;
+  float:left;
+  border-radius:3px;
+  background-color: gray;
+}
+
+.sparkArgumentPreviewTitleLineExpanded
+{
+  padding:0;
+  color:black;
+  height:21px;
+  background: linear-gradient(to bottom, #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* W3C */
+}
+
+.sparkUsernameExpanded
+{
+  padding:0;
+  margin:0;
+  margin-left:6px;
+  font-size:20px;
+  float:left;
+}
+
+.sparkUpvoteExpanded
+{
+  margin-right:15px;
+  float:right
+}
+
+.sparkCommentsCountExpanded
+{
+  margin-right:15px;
+  float:right;
+}
+
+.sparkDownvoteExpanded
+{
+  margin-right:8px;
+  float:right
+}
+
+.sparkExpandedSpark
+{
+  margin-right:5px;
+  float:left;
+}
+
+
+.sparkInfluenceScoreExpanded
+{
+  float:right;
+  margin-right:8px;
+  margin-left:20px;
+}
+
+.sparkConclusionExpanded
+{
+  width:100%;
+  word-wrap:break-word;
+  margin-top:10px;
+  overflow:hidden;
+  padding:0;
+}
+
+.sparkConclusionExpanded p
+{
+  font-family:helvetica;
+  font-size:16px;
+  padding:0;
+  margin:0;
+  height: auto;
+  color:lightgray;
+}
+
+.sparkAddCommentExpanded
+{
+  float:left;
+  color:white;
+  width:100%;
+  text-align:center;
+}
+
+.sparkArgumentFlagExpanded
+{
+  float:left;
+  color:white;
+  margin:0;
+  padding:0;
+}
+
+/*Expansion window*/
+#blanket {
+background-color: #666;
+opacity: 0.65;
+filter: alpha(opacity=45);
+position: absolute;
+z-index: 9001;
+top: 0px;
+left: 0px;
+width: 100%;
+}
+
+#popUpDiv {
+background-image:url('/Images/gray_texture_background.png');
+border:2px solid black;
+  height:800px;
+  margin-left:-450px;
+  margin-top:-240px;
+  padding:20px;
+  position:absolute;
+  width:1400px;
+  z-index:9002;
+}
+
+#sparkArgumentAddComment
+{
+  display:none;
+  margin:0 auto;
+  background:red;
+  width:800px;
+  height:auto;
+}
+
+#sparkArgumentAddComment textarea
+{
+  width:500px;
+  height:150px;
+}
+
+
+
+
