@@ -125,7 +125,8 @@ width: 100%;
 #popUpDiv {
 background-image:url('/Images/gray_texture_background.png');
 border:2px solid black;
-  height:800px;
+  height:auto;
+  min-height:800px;
   margin-left:-450px;
   margin-top:-240px;
   padding:20px;

@@ -1,0 +1,54 @@
+﻿@model Spark.Models.arguments
+
+@Styles.Render("~/Content/SparkArgumentCreate.css")
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>arguments</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.strArgument)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.strArgument, new { @class = "textAreaCreate" })
+            @Html.ValidationMessageFor(model => model.strArgument)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.strConclusion)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.strConclusion, new { @class = "textAreaCreate" })
+            @Html.ValidationMessageFor(model => model.strConclusion)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.strCitations)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.strCitations, new { @class = "textAreaCreate" })
+            @Html.ValidationMessageFor(model => model.strCitations)
+        </div>
+
+
+        @*Hidden Elements*@
+        <div class="editor-field" hidden="hidden">
+            @Html.EditorFor(model => model.FKAccounts)
+        </div>
+        <div class="editor-field" hidden="hidden">
+            @Html.EditorFor(model => model.FKSparks)
+        </div>
+        <div class="editor-field" hidden="hidden">
+            @Html.EditorFor(model => model.bIsAgree)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}

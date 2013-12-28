@@ -22,11 +22,19 @@
   width:200px;
   text-align:center;
   margin-top:50px;
+  cursor:pointer;
   
   border-radius: 4px;
   box-shadow: 2px 2px 0 #1b383b;
 }
 
+.sparkAgree button
+{
+    float:left;
+    height:60px;
+    width:60px;
+    margin-left:-102px;
+}
 .sparkAgree a, .sparkDisagree a
 {
   display:block;

@@ -46,13 +46,29 @@ function window_pos(popUpDivVar) {
     popUpDiv.style.left = window_width + 'px';
 }
 
-function popup(windowname) {
+function popup(windowname, bAgree) {
     blanket_size(windowname);
     window_pos(windowname);
     toggle('blanket');
     toggle(windowname);
 
+    //clear the window
+    $('.popup').html("");
+
     getExpandedArgumentView($(".sparkExpandAgree a").attr('title'));
+}
+
+function popup(windowname, bAgree, nSparkId)
+{
+    blanket_size(windowname);
+    window_pos(windowname);
+    toggle('blanket');
+    toggle(windowname);
+
+    //clear the window
+    $('.popup').html("");
+
+   getCreateArgumentView(bAgree, nSparkId);
 }
 
 function getExpandedArgumentView(id)
@@ -67,4 +83,22 @@ function getExpandedArgumentView(id)
             $('.popup').html(data);
         }
     });
+}
+
+function getCreateArgumentView(bAgree, nSparkId)
+{
+    $.ajax({
+        type: "Get",
+        datatype: 'html',
+        data: "bAgree=" + bAgree + "&nSparkId=" + nSparkId,
+        url: "/Spark/CreateArgument",
+        success: function (data) {
+            $('.popup').html(data);
+        }
+    });
+}
+
+function addArgument(isAgree, nSparkId)
+{
+    popup('popUpDiv', isAgree, nSparkId);
 }

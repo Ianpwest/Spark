@@ -24,10 +24,10 @@
           <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FKSparks" Type="int" Nullable="false" />
           <Property Name="FKAccounts" Type="int" Nullable="false" />
-          <Property Name="strArgument" Type="varchar" MaxLength="10000" Nullable="false" />
+          <Property Name="strArgument" Type="text" Nullable="false" />
           <Property Name="nFlagCount" Type="int" />
-          <Property Name="strConclusion" Type="varchar" MaxLength="700" Nullable="false" />
-          <Property Name="strCitations" Type="varchar" MaxLength="700" Nullable="false" />
+          <Property Name="strConclusion" Type="text" Nullable="false" />
+          <Property Name="strCitations" Type="text" Nullable="false" />
           <Property Name="bIsAgree" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="categories">

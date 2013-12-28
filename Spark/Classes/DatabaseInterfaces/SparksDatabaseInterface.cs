@@ -62,5 +62,16 @@ namespace Spark.Classes
 
             return lstArguments;
         }
+
+        /// <summary>
+        /// Adds an argument to the database
+        /// </summary>
+        /// <param name="argumentModel">argument to add</param>
+        /// <returns>Success</returns>
+        public static bool CreateArgument(arguments argumentModel)
+        {
+            m_db.arguments.Add(argumentModel);
+            return SaveChanges();
+        }
     }
 }

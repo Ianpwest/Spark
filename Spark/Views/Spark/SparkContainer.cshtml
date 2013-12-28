@@ -5,9 +5,8 @@
 @Scripts.Render("~/Scripts/ArgumentExpansion.js")
 
 <div class="sparkTopicLine">
-    
     <div class="sparkAgree">
-        <a href=".">Agree</a>
+        <a onclick="addArgument(true, 1 )">Agree</a> @*1 is a place holder for the spark id*@
     </div>
     
     <div class="sparkTopic">
@@ -15,7 +14,7 @@
     </div>
     
     <div class="sparkDisagree">
-        <a href=".">Disagree</a>
+        <a onclick="addArgument(false, 1)">Disagree</a>
     </div>
 
 </div>

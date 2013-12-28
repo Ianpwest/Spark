@@ -42,6 +42,16 @@ namespace Spark.Classes
             return bExists;
         }
 
+        public static int GetAccountsPKByUsername(string strUserName)
+        {
+            int results = (from r in m_db.accounts
+                           where r.strUserName == strUserName
+                           select r.PK).FirstOrDefault();
+
+            return results;
+
+        }
+
         /// <summary>
         /// Checks to see if an account exists given a username
         /// </summary>

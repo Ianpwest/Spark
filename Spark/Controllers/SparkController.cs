@@ -149,5 +149,32 @@ namespace Spark.Controllers
 
             return PartialView("SparkArgumentExpanded");
         }
+
+        [HttpGet]
+        public ActionResult CreateArgument(bool bAgree, int nSparkID)
+        {
+            arguments argumentModel = new arguments();
+
+            //TODO: if this returns 0 (we have no user logged in) return a failure screen
+            argumentModel.FKAccounts = AccountsDatabaseInterface.GetAccountsPKByUsername(User.Identity.Name);
+            argumentModel.bIsAgree = bAgree;
+            argumentModel.FKSparks = nSparkID;
+
+            return PartialView("SparkArgumentCreate", argumentModel);
+        }
+
+        [HttpPost]
+        public ActionResult CreateArgument(Models.arguments argumentModel)
+        {
+            if(SparksDatabaseInterface.CreateArgument(argumentModel))
+            {
+                //We were successful in adding the argument
+                //TODO: Go to the right spark
+                return RedirectToAction("SparkContainer");
+            }
+
+            //We failed TODO:What do we do when we fail
+            return RedirectToAction("SparkContainer");//remove this line
+        }
     }
 }
