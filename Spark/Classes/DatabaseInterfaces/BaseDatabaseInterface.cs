@@ -45,8 +45,9 @@ namespace Spark.Classes.DatabaseInterfaces
             log.FKAccounts = accountId;
             log.strMessage = strMessage;
 
-            m_db.errorlog.Add(log);
-            SaveChanges();
+            sparkdbEntities1 db = new sparkdbEntities1();
+            db.errorlog.Add(log);
+            SaveChanges(db);
         }
 
         /// <summary>
@@ -69,8 +70,9 @@ namespace Spark.Classes.DatabaseInterfaces
             log.strMessage = strMessage;
             log.strStackTrace = strStackTrace;
 
-            m_db.errorlog.Add(log);
-            SaveChanges();
+            sparkdbEntities1 db = new sparkdbEntities1();
+            db.errorlog.Add(log);
+            SaveChanges(db);
 
         }
 
@@ -100,8 +102,10 @@ namespace Spark.Classes.DatabaseInterfaces
             log.strMethod = strMethod;
             log.strVariableName = strVariableName;
 
-            m_db.errorlog.Add(log);
-            SaveChanges();
+
+            sparkdbEntities1 db = new sparkdbEntities1();
+            db.errorlog.Add(log);
+            SaveChanges(db);
         }
 
         /// <summary>
@@ -121,8 +125,9 @@ namespace Spark.Classes.DatabaseInterfaces
             log.FKAccounts = accountId;
             log.FKInteractionTypes = (int)type;
 
+            sparkdbEntities1 db = new sparkdbEntities1();
             m_db.interactionlog.Add(log);
-            SaveChanges();
+            SaveChanges(db);
         }
 
         /// <summary>
@@ -140,8 +145,9 @@ namespace Spark.Classes.DatabaseInterfaces
             log.FKAccounts = accountId;
             log.FKInteractionTypes = type;
 
-            m_db.interactionlog.Add(log);
-            SaveChanges();
+            sparkdbEntities1 db = new sparkdbEntities1();
+            db.interactionlog.Add(log);
+            SaveChanges(db);
         }
 
         /// <summary>
@@ -161,8 +167,9 @@ namespace Spark.Classes.DatabaseInterfaces
             log.FKInteractionTypes = (int)type;
             log.strControllerView = strControllerView;
 
-            m_db.interactionlog.Add(log);
-            SaveChanges();
+            sparkdbEntities1 db = new sparkdbEntities1();
+            db.interactionlog.Add(log);
+            SaveChanges(db);
         }
 
         /// <summary>
@@ -182,8 +189,9 @@ namespace Spark.Classes.DatabaseInterfaces
             log.FKInteractionTypes = type;
             log.strControllerView = strControllerView;
 
-            m_db.interactionlog.Add(log);
-            SaveChanges();
+            sparkdbEntities1 db = new sparkdbEntities1();
+            db.interactionlog.Add(log);
+            SaveChanges(db);
         }
         
         /// <summary>
@@ -218,8 +226,9 @@ namespace Spark.Classes.DatabaseInterfaces
             log.strMethod = strMethod;
             log.strVariableName = strVariableName;
 
-            m_db.errorlog.Add(log);
-            SaveChanges();
+            sparkdbEntities1 db = new sparkdbEntities1();
+            db.errorlog.Add(log);
+            SaveChanges(db);
         }
 
         /// <summary>
@@ -236,31 +245,11 @@ namespace Spark.Classes.DatabaseInterfaces
             log.FKInteractionTypes = nType;
             log.strControllerView = strControllerView;
 
-            m_db.interactionlog.Add(log);
-            SaveChanges();
+            sparkdbEntities1 db = new sparkdbEntities1();
+            db.interactionlog.Add(log);
+            SaveChanges(db);
         }
         #endregion
-
-        /// <summary>
-        /// Base method used to save to a database - should be applied to all derived classes.
-        /// Encapsulates the database call in a try catch block.
-        /// </summary>
-        /// <param name="strUserId">String value of the user Id or an empty string if unknown.</param>
-        protected static bool SaveChanges()
-        {
-            try
-            {
-                m_db.SaveChanges();
-            }
-            catch
-            {
-                // Avoiding for now to prevent recursion on errors.
-                //LogError(strUserId, "Generate Error", ex.ToString(), ex.StackTrace);
-                return false;
-            }
-
-            return true;
-        }
 
         /// <summary>
         /// Base method used to save to a database - should be applied to all derived classes.

@@ -43,7 +43,7 @@ namespace Spark.Classes
             sparkModel.dDateCreated = DateTime.Now;
             sparkModel.dDateModified = DateTime.Now;
             db.sparks.Add(sparkModel);
-            if (SaveChanges())
+            if (SaveChanges(db))
                 return true;
             else
                 return false;

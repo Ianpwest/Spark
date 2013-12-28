@@ -87,7 +87,9 @@ namespace Spark.Classes
             if (pcm == null)
                 return false;
 
-            accounts account = GetAccount(pcm.Username);
+            sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
+
+            accounts account = GetAccount(pcm.Username, db);
 
             if (account == null)
                 return false;
@@ -96,7 +98,7 @@ namespace Spark.Classes
             account.strPassword = Utilities.Encrypt(account.strSalt + pcm.NewPassword);
 
             //Save the changes
-            return SaveChanges();
+            return SaveChanges(db);
         }
 
         /// <summary>
@@ -165,7 +167,7 @@ namespace Spark.Classes
                 sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
 
                 db.accounts.Add(account);
-                SaveChanges();
+                SaveChanges(db);
                 return true;
             }
             catch
@@ -195,7 +197,7 @@ namespace Spark.Classes
                 sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
 
                 db.accounts.Add(accountNew);
-                SaveChanges();
+                SaveChanges(db);
             }
             catch
             {
@@ -231,7 +233,7 @@ namespace Spark.Classes
 
             try
             {
-                SaveChanges();
+                SaveChanges(db);
             }
             catch
             {
@@ -246,10 +248,8 @@ namespace Spark.Classes
         /// </summary>
         /// <param name="strUserName">username of account</param>
         /// <returns>Account</returns>
-        public static accounts GetAccount(string strUserName)
+        public static accounts GetAccount(string strUserName, sparkdbEntities1 db)
         {
-            sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
-
             accounts account = (from r in db.accounts
                                where r.strUserName == strUserName
                                select r).FirstOrDefault();

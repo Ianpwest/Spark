@@ -218,7 +218,8 @@ namespace Spark.Controllers
         /// <returns>View notifying the user</returns>
         public ActionResult ResendActivationEmail()
         {
-            accounts account = AccountsDatabaseInterface.GetAccount(User.Identity.Name);
+            sparkdbEntities1 db = new sparkdbEntities1();
+            accounts account = AccountsDatabaseInterface.GetAccount(User.Identity.Name, db);
 
             if (account == null)
             {
