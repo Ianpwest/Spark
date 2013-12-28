@@ -46,7 +46,13 @@ function window_pos(popUpDivVar) {
     popUpDiv.style.left = window_width + 'px';
 }
 
-function popup(windowname, bAgree) {
+function popup(windowname)
+{
+    toggle('blanket');
+    toggle(windowname);
+}
+
+function popupExpand(windowname) {
     blanket_size(windowname);
     window_pos(windowname);
     toggle('blanket');
@@ -58,7 +64,7 @@ function popup(windowname, bAgree) {
     getExpandedArgumentView($(".sparkExpandAgree a").attr('title'));
 }
 
-function popup(windowname, bAgree, nSparkId)
+function popupAddArgument(windowname, bAgree, nSparkId)
 {
     blanket_size(windowname);
     window_pos(windowname);
@@ -100,5 +106,5 @@ function getCreateArgumentView(bAgree, nSparkId)
 
 function addArgument(isAgree, nSparkId)
 {
-    popup('popUpDiv', isAgree, nSparkId);
+    popupAddArgument('popUpDiv', isAgree, nSparkId);
 }
