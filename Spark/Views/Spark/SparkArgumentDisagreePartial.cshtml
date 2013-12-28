@@ -4,22 +4,22 @@
     <div class="sparkArgumentInsideContainerDisagree">
         <div class="sparkArgumentPreviewTitleLineDisagree">
             <div class="sparkDisagreeSpark">
-                Spark
+                <img src="~/Images/Icons/SparkIcon1.png" alt="Spark" height="20" width="20" />
             </div>
             <div class="sparkUsernameDisagree">
                 @Model.strUserName
             </div>
             <div class="sparkInfluenceScoreDisagree">
-                @Model.nInfluenceScore.ToString()
+                Influence: @Model.nInfluenceScore.ToString()
             </div>
             <div class="sparkDownvoteDisagree">
-                @Model.nDownVote.ToString()
+                -# @Model.nDownVote.ToString()
             </div>
             <div class="sparkUpvoteDisagree">
-                @Model.nUpVote.ToString()
+                +# @Model.nUpVote.ToString()
             </div>
             <div class="sparkCommentsCountDisagree">
-                @Model.nCommentCount.ToString()
+                Comment # @Model.nCommentCount.ToString()
             </div>
         </div>
         <div class="sparkConclusion">
@@ -32,13 +32,17 @@
                 Flag
             </div>
             <div class="sparkExpandDisagree">
-                <a onclick="popup('popUpDiv')" href="#">Expand</a>
+                <a onclick="popupExpand('popUpDiv', '@Model.id')" href="#">Expand</a>
+            </div>
+            <div class="sparkAddComment">
+                <a @*onclick="addArgument(true, 1)"*@ href="#">Add Comment</a>
             </div>
         </div>
+        
     </div>
     <div class="sparkArgumentUpDownVoteDisagree">
-        <img>Up</img>
+        <div class="sparkUpVote"></div>
         <p style="word-wrap:break-word">@Model.nArgumentScore.ToString()</p>
-        <img>Down</img>
+        <div class="sparkDownVote"></div>
     </div>
 </div>

@@ -20,6 +20,15 @@ namespace Spark.Classes.DatabaseInterfaces
         protected static sparkdbEntities1 m_db = new sparkdbEntities1();
 
         /// <summary>
+        /// Method to get an instance of a database
+        /// </summary>
+        /// <returns>database instance</returns>
+        public static sparkdbEntities1 GetDatabaseInstance()
+        {
+            return new sparkdbEntities1();
+        }
+
+        /// <summary>
         /// Logs an error in the database using the given account Id and custom message.
         /// </summary>
         /// <param name="accountId">Account Id</param>
@@ -242,6 +251,27 @@ namespace Spark.Classes.DatabaseInterfaces
             try
             {
                 m_db.SaveChanges();
+            }
+            catch
+            {
+                // Avoiding for now to prevent recursion on errors.
+                //LogError(strUserId, "Generate Error", ex.ToString(), ex.StackTrace);
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Base method used to save to a database - should be applied to all derived classes.
+        /// Encapsulates the database call in a try catch block.
+        /// </summary>
+        /// <param name="strUserId">String value of the user Id or an empty string if unknown.</param>
+        protected static bool SaveChanges(sparkdbEntities1 database)
+        {
+            try
+            {
+                database.SaveChanges();
             }
             catch
             {

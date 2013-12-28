@@ -86,9 +86,29 @@ namespace Spark.Controllers
         }
 
         //GET
-        public ActionResult SparkContainer()
+        public ActionResult SparkContainer(/*int nSparkId*/) //Testing need to uncomment this out
         {
-            //TODO: get spark information such as topic...etc...
+            //TESTING DELETE
+            int nSparkId = 1;
+
+            //Get the spark
+            //TODO:What if we fail?
+            Models.sparks spark = SparksDatabaseInterface.GetSpark(nSparkId);
+
+            //Pass the arguments for this spark to the view
+            ViewBag.Arguments = GetArgumentsForSpark(nSparkId);
+
+            //We failed to get a Spark for the given id
+            if(spark == null)
+            {
+                //We need to return an error view TODO
+            }
+
+            return View(spark);
+        }
+
+        private List<List<SparkArgumentModel>> GetArgumentsForSpark(int nSparkId)
+        {
             List<List<SparkArgumentModel>> lstReturn = new List<List<SparkArgumentModel>>();
 
             List<SparkArgumentModel> lstArgumentsAgree = new List<SparkArgumentModel>();
@@ -101,31 +121,15 @@ namespace Spark.Controllers
             //No arguments were found
             if (lstArguments == null || lstArguments.Count == 0)
             {
-                lstReturn.Add(lstArgumentsAgree);
-                lstReturn.Add(lstArgumentsDisagree);
-                ViewBag.Arguments = lstReturn;
-                return View(//TODO: no arguments found
-                            );
+                return null;
             }
-                
 
             //Run analytics and create sparkArgumentModels to return
-            foreach(Models.arguments argument in lstArguments)
+            foreach (Models.arguments argument in lstArguments)
             {
-                //Need to pass this argument to the analytics engine to fill in the rest of the fields?
-                SparkArgumentModel sam = new SparkArgumentModel();
-                sam.id = argument.PK;
-                sam.bIsAgree = argument.bIsAgree;
-                sam.nArgumentScore = 25; //this should come from the analytics result.
-                sam.nCommentCount = 420; //this should come from the analytics result.
-                sam.nDownVote = 20; //analytics result
-                sam.nInfluenceScore = 355; //analytics result
-                sam.nUpVote = 300; //analytics result
-                sam.strArgument = argument.strArgument;
-                sam.strCitations = argument.strCitations;
-                sam.strConclusion = argument.strConclusion;
-                sam.strUserName = AccountsDatabaseInterface.GetUsername(argument.FKAccounts);
-
+                SparkArgumentModel sam = BuildSparkArgumentModel(argument);
+                
+                //Determine which list to put the argument in (agree vs disagree)
                 if (sam.bIsAgree)
                     lstArgumentsAgree.Add(sam);
                 else
@@ -135,20 +139,39 @@ namespace Spark.Controllers
             //Prepare the lists to be returned
             lstReturn.Add(lstArgumentsAgree);
             lstReturn.Add(lstArgumentsDisagree);
-            ViewBag.Arguments = lstReturn;
 
-            //End testing code
-
-            return View();
+            return lstReturn;
         }
 
         public ActionResult GetExpandedArgumentView(int id)
         {
             //using the id build the expanded argument view to return.
+            arguments argument = SparksDatabaseInterface.GetArgument(id);
 
+            //Get the rest of the extended argument properties.
+            SparkArgumentModel sam = BuildSparkArgumentModel(argument);
 
+            return PartialView("SparkArgumentExpanded", sam);
+        }
 
-            return PartialView("SparkArgumentExpanded");
+        private SparkArgumentModel BuildSparkArgumentModel(arguments argument)
+        {
+            //Need to pass this argument to the analytics engine to fill in the rest of the fields?
+            SparkArgumentModel sam = new SparkArgumentModel();
+
+            sam.id = argument.PK;
+            sam.bIsAgree = argument.bIsAgree;
+            sam.nArgumentScore = 25; //this should come from the analytics result.
+            sam.nCommentCount = 420; //this should come from the analytics result.
+            sam.nDownVote = 20; //analytics result
+            sam.nInfluenceScore = 355; //analytics result
+            sam.nUpVote = 300; //analytics result
+            sam.strArgument = argument.strArgument;
+            sam.strCitations = argument.strCitations;
+            sam.strConclusion = argument.strConclusion;
+            sam.strUserName = AccountsDatabaseInterface.GetUsername(argument.FKAccounts);
+
+            return sam;
         }
 
         [HttpGet]

@@ -74,6 +74,8 @@
 .sparkTopic p
 {
   padding-top:20px;
+  padding-left:1px;
+  padding-right:1px;
   color:white;
   text-align:center;
   font-size:23px;
@@ -108,13 +110,14 @@
 .sparkArgumentPreviewAgree, .sparkArgumentPreviewDisagree
 {
   position:relative;
+  width:100%;
+  min-width:700px;
 }
 
 .sparkArgumentInsideContainerAgree, .sparkArgumentInsideContainerDisagree
 {
   position:relative;
-  width:89%;
-  min-width:500px;
+  width:90%;
   height:200px;
   border-top: 2px solid black;
   margin-bottom:20px;
@@ -194,9 +197,12 @@
 
 .sparkUpVote, .sparkDownVote
 {
-  margin-left:4px;
+  min-height: 50px;
+
   width: 0px;
+  
   border-style: solid;
+  
   cursor:pointer;
 }
 
@@ -248,18 +254,24 @@
   margin-right:20px;
 }
 
-.sparkArgumentUpDownVoteAgree, .sparkArgumentUpDownVoteDisagree
+.sparkArgumentUpDownVoteAgree p, .sparkArgumentUpDownVoteDisagree p
 {
-  width:50px;
-  position:relative;
-  margin-left:103%;
-  margin-top:-130px;
-  height:0;
+    text-align:center;
 }
-    .sparkArgumentUpDownVoteAgree p
-    {
-         text-align:center;
-    }
+
+.sparkArgumentUpDownVoteAgree
+{
+    position:relative;
+    float:right;
+    margin-right:20px;
+}
+.sparkArgumentUpDownVoteDisagree
+{
+    position:relative;
+    float:left;
+    margin-left:20px;
+}
+
 
 .sparkConclusion
 {

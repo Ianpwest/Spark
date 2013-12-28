@@ -1,4 +1,6 @@
-﻿<p class="title" hidden="hidden">Spark</p>
+﻿@model Spark.Models.sparks
+
+<p class="title" hidden="hidden">Spark</p>
 
 @Styles.Render("~/Content/SparkContainer.css")
 @Styles.Render("~/Content/SparkArgumentFull.css")
@@ -6,22 +8,22 @@
 
 <div class="sparkTopicLine">
     <div class="sparkAgree">
-        <a onclick="addArgument(true, 1 )">Agree</a> @*1 is a place holder for the spark id*@
+        <a onclick="addArgument(true, @Model.PK )">Agree</a>
     </div>
     
     <div class="sparkTopic">
-        <p>Going to war with North Korea would be a mistake. This is some more text to tack on the end of this statement</p>
+        <p>@Model.strTopic</p>
     </div>
     
     <div class="sparkDisagree">
-        <a onclick="addArgument(false, 1)">Disagree</a>
+        <a onclick="addArgument(false, @Model.PK)">Disagree</a>
     </div>
 
 </div>
 
 <div class="sparkAgreeSide">
     @{
-        foreach(Spark.Models.SparkArgumentModel samAgree in ViewBag.Arguments[0])
+        foreach (Spark.Models.SparkArgumentModel samAgree in ViewBag.Arguments[0])
         {
             @Html.Partial("SparkArgumentAgreePartial", samAgree);
         }

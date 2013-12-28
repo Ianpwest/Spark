@@ -52,7 +52,7 @@ function popup(windowname)
     toggle(windowname);
 }
 
-function popupExpand(windowname) {
+function popupExpand(windowname, id) {
     blanket_size(windowname);
     window_pos(windowname);
     toggle('blanket');
@@ -61,7 +61,7 @@ function popupExpand(windowname) {
     //clear the window
     $('.popup').html("");
 
-    getExpandedArgumentView($(".sparkExpandAgree a").attr('title'));
+    getExpandedArgumentView(id);
 }
 
 function popupAddArgument(windowname, bAgree, nSparkId)

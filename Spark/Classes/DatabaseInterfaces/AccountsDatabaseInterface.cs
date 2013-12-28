@@ -18,8 +18,10 @@ namespace Spark.Classes
         {
             bool bExists = false;
 
+            sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
+
             //Get the salt for this user
-            string strSaltResult = (from r in m_db.accounts
+            string strSaltResult = (from r in db.accounts
                                    where r.strUserName == lm.UserName
                                    select r.strSalt).FirstOrDefault();
 
@@ -27,7 +29,7 @@ namespace Spark.Classes
             string strHashToCheck = Utilities.GetHashPassword(lm.Password, strSaltResult);
 
             //See if there is a user with this username and password; return 
-            var result =   from r in m_db.accounts
+            var result =   from r in db.accounts
                            where r.strUserName == lm.UserName
                            && r.strPassword == strHashToCheck
                            select r.bIsActivated;
@@ -44,7 +46,9 @@ namespace Spark.Classes
 
         public static int GetAccountsPKByUsername(string strUserName)
         {
-            int results = (from r in m_db.accounts
+            sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
+
+            int results = (from r in db.accounts
                            where r.strUserName == strUserName
                            select r.PK).FirstOrDefault();
 
@@ -61,7 +65,9 @@ namespace Spark.Classes
         {
             bool bExists = false;
 
-            int results = (from r in m_db.accounts
+            sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
+
+            int results = (from r in db.accounts
                            where r.strUserName == strUserName
                            select r).Count();
 
@@ -106,8 +112,10 @@ namespace Spark.Classes
 
             if (AccountEmailExists(strEmail))
             {
+                sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
+
                 //Get the account only if they are using an account through spark not oauth
-                accounts accountReset = (from r in m_db.accounts
+                accounts accountReset = (from r in db.accounts
                                          where r.strEmail == strEmail
                                          && r.gActivationGUID != null
                                          select r).FirstOrDefault();
@@ -133,8 +141,9 @@ namespace Spark.Classes
         public static bool AccountEmailExists(string strEmail)
         {
             bool bExists = false;
+            sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
 
-            int results = (from r in m_db.accounts
+            int results = (from r in db.accounts
                            where r.strEmail == strEmail
                            select r).Count();
 
@@ -153,7 +162,9 @@ namespace Spark.Classes
         {
             try
             {
-                m_db.accounts.Add(account);
+                sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
+
+                db.accounts.Add(account);
                 SaveChanges();
                 return true;
             }
@@ -181,7 +192,9 @@ namespace Spark.Classes
 
             try
             {
-                m_db.accounts.Add(accountNew);
+                sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
+
+                db.accounts.Add(accountNew);
                 SaveChanges();
             }
             catch
@@ -199,7 +212,9 @@ namespace Spark.Classes
         /// <param name="userGUID">Guid from email link</param>
         public static bool ActivateAccount(string userGUID)
         {
-            accounts result =  (from r in m_db.accounts
+            sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
+
+            accounts result =  (from r in db.accounts
                                 where r.gActivationGUID.ToString() == userGUID
                                 select r).FirstOrDefault();
 
@@ -233,7 +248,9 @@ namespace Spark.Classes
         /// <returns>Account</returns>
         public static accounts GetAccount(string strUserName)
         {
-            accounts account = (from r in m_db.accounts
+            sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
+
+            accounts account = (from r in db.accounts
                                where r.strUserName == strUserName
                                select r).FirstOrDefault();
 
@@ -250,7 +267,9 @@ namespace Spark.Classes
         /// <returns>Account</returns>
         public static accounts GetAccountByActivationGuid(string strActivationGUID)
         {
-            accounts account = (from r in m_db.accounts
+            sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
+
+            accounts account = (from r in db.accounts
                                 where r.gActivationGUID.ToString() == strActivationGUID
                                 select r).FirstOrDefault();
 
@@ -267,7 +286,9 @@ namespace Spark.Classes
         /// <returns></returns>
         public static string GetUsername(int accountID)
         {
-            return (from r in m_db.accounts
+            sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
+
+            return (from r in db.accounts
                    where r.PK == accountID
                    select r.strUserName).FirstOrDefault();
         }
