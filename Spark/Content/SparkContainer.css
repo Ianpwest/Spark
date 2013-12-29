@@ -123,13 +123,19 @@
   margin-bottom:20px;
   float:left;
   border-radius:3px;
-  background-color: gray;
+  background-color: ghostwhite;
 }
 
-.sparkArgumentInsideContainerDisagree
-{
-  float:right;
-}
+    .sparkArgumentInsideContainerDisagree
+    {
+      float:right;
+    }
+
+    .sparkArgumentInsideContainerAgree a, .sparkArgumentInsideContainerDisagree a
+    {
+        color:black;
+        text-decoration:underline;
+    }
 
 .sparkArgumentPreviewTitleLineAgree, .sparkArgumentPreviewTitleLineDisagree
 {
@@ -276,11 +282,11 @@
 .sparkConclusion
 {
   width:95%;
-  word-wrap:break-word;
   margin-top:10px;
   margin-left:20px;
-  overflow:hidden;
+  overflow:auto;
   padding:0;
+  height:8.6em;
 }
 
 .sparkConclusion p
@@ -290,7 +296,8 @@
   padding:0;
   margin:0;
   height: 8.6em;
-  color:lightgray;
+  color:black;
+  overflow:hidden;
 }
 
 .sparkArgumentFooter
@@ -355,4 +362,9 @@ border:2px solid black;
   position:absolute;
   width:1400px;
   z-index:9002;
+
+  -webkit-transition: opacity .8s ease-in-out;
+  -moz-transition: opacity .8s ease-in-out;
+   transition: opacity .8s ease-in-out;
+
 }
