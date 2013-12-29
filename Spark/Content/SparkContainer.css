@@ -74,6 +74,8 @@
 .sparkTopic p
 {
   padding-top:20px;
+  padding-left:1px;
+  padding-right:1px;
   color:white;
   text-align:center;
   font-size:23px;
@@ -108,25 +110,32 @@
 .sparkArgumentPreviewAgree, .sparkArgumentPreviewDisagree
 {
   position:relative;
+  width:100%;
+  min-width:700px;
 }
 
 .sparkArgumentInsideContainerAgree, .sparkArgumentInsideContainerDisagree
 {
   position:relative;
-  width:89%;
-  min-width:500px;
+  width:90%;
   height:200px;
   border-top: 2px solid black;
   margin-bottom:20px;
   float:left;
   border-radius:3px;
-  background-color: gray;
+  background-color: ghostwhite;
 }
 
-.sparkArgumentInsideContainerDisagree
-{
-  float:right;
-}
+    .sparkArgumentInsideContainerDisagree
+    {
+      float:right;
+    }
+
+    .sparkArgumentInsideContainerAgree a, .sparkArgumentInsideContainerDisagree a
+    {
+        color:black;
+        text-decoration:underline;
+    }
 
 .sparkArgumentPreviewTitleLineAgree, .sparkArgumentPreviewTitleLineDisagree
 {
@@ -194,9 +203,12 @@
 
 .sparkUpVote, .sparkDownVote
 {
-  margin-left:4px;
+  min-height: 50px;
+
   width: 0px;
+  
   border-style: solid;
+  
   cursor:pointer;
 }
 
@@ -248,27 +260,33 @@
   margin-right:20px;
 }
 
-.sparkArgumentUpDownVoteAgree, .sparkArgumentUpDownVoteDisagree
+.sparkArgumentUpDownVoteAgree p, .sparkArgumentUpDownVoteDisagree p
 {
-  width:50px;
-  position:relative;
-  margin-left:103%;
-  margin-top:-130px;
-  height:0;
+    text-align:center;
 }
-    .sparkArgumentUpDownVoteAgree p
-    {
-         text-align:center;
-    }
+
+.sparkArgumentUpDownVoteAgree
+{
+    position:relative;
+    float:right;
+    margin-right:20px;
+}
+.sparkArgumentUpDownVoteDisagree
+{
+    position:relative;
+    float:left;
+    margin-left:20px;
+}
+
 
 .sparkConclusion
 {
   width:95%;
-  word-wrap:break-word;
   margin-top:10px;
   margin-left:20px;
-  overflow:hidden;
+  overflow:auto;
   padding:0;
+  height:8.6em;
 }
 
 .sparkConclusion p
@@ -278,7 +296,8 @@
   padding:0;
   margin:0;
   height: 8.6em;
-  color:lightgray;
+  color:black;
+  overflow:hidden;
 }
 
 .sparkArgumentFooter
@@ -343,4 +362,9 @@ border:2px solid black;
   position:absolute;
   width:1400px;
   z-index:9002;
+
+  -webkit-transition: opacity .8s ease-in-out;
+  -moz-transition: opacity .8s ease-in-out;
+   transition: opacity .8s ease-in-out;
+
 }

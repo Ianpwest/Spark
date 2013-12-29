@@ -20,6 +20,15 @@ namespace Spark.Classes.DatabaseInterfaces
         protected static sparkdbEntities1 m_db = new sparkdbEntities1();
 
         /// <summary>
+        /// Method to get an instance of a database
+        /// </summary>
+        /// <returns>database instance</returns>
+        public static sparkdbEntities1 GetDatabaseInstance()
+        {
+            return new sparkdbEntities1();
+        }
+
+        /// <summary>
         /// Logs an error in the database using the given account Id and custom message.
         /// </summary>
         /// <param name="accountId">Account Id</param>
@@ -36,8 +45,9 @@ namespace Spark.Classes.DatabaseInterfaces
             log.FKAccounts = accountId;
             log.strMessage = strMessage;
 
-            m_db.errorlog.Add(log);
-            SaveChanges();
+            sparkdbEntities1 db = new sparkdbEntities1();
+            db.errorlog.Add(log);
+            SaveChanges(db);
         }
 
         /// <summary>
@@ -60,8 +70,9 @@ namespace Spark.Classes.DatabaseInterfaces
             log.strMessage = strMessage;
             log.strStackTrace = strStackTrace;
 
-            m_db.errorlog.Add(log);
-            SaveChanges();
+            sparkdbEntities1 db = new sparkdbEntities1();
+            db.errorlog.Add(log);
+            SaveChanges(db);
 
         }
 
@@ -91,8 +102,10 @@ namespace Spark.Classes.DatabaseInterfaces
             log.strMethod = strMethod;
             log.strVariableName = strVariableName;
 
-            m_db.errorlog.Add(log);
-            SaveChanges();
+
+            sparkdbEntities1 db = new sparkdbEntities1();
+            db.errorlog.Add(log);
+            SaveChanges(db);
         }
 
         /// <summary>
@@ -112,8 +125,9 @@ namespace Spark.Classes.DatabaseInterfaces
             log.FKAccounts = accountId;
             log.FKInteractionTypes = (int)type;
 
+            sparkdbEntities1 db = new sparkdbEntities1();
             m_db.interactionlog.Add(log);
-            SaveChanges();
+            SaveChanges(db);
         }
 
         /// <summary>
@@ -131,8 +145,9 @@ namespace Spark.Classes.DatabaseInterfaces
             log.FKAccounts = accountId;
             log.FKInteractionTypes = type;
 
-            m_db.interactionlog.Add(log);
-            SaveChanges();
+            sparkdbEntities1 db = new sparkdbEntities1();
+            db.interactionlog.Add(log);
+            SaveChanges(db);
         }
 
         /// <summary>
@@ -152,8 +167,9 @@ namespace Spark.Classes.DatabaseInterfaces
             log.FKInteractionTypes = (int)type;
             log.strControllerView = strControllerView;
 
-            m_db.interactionlog.Add(log);
-            SaveChanges();
+            sparkdbEntities1 db = new sparkdbEntities1();
+            db.interactionlog.Add(log);
+            SaveChanges(db);
         }
 
         /// <summary>
@@ -173,8 +189,9 @@ namespace Spark.Classes.DatabaseInterfaces
             log.FKInteractionTypes = type;
             log.strControllerView = strControllerView;
 
-            m_db.interactionlog.Add(log);
-            SaveChanges();
+            sparkdbEntities1 db = new sparkdbEntities1();
+            db.interactionlog.Add(log);
+            SaveChanges(db);
         }
         
         /// <summary>
@@ -209,8 +226,9 @@ namespace Spark.Classes.DatabaseInterfaces
             log.strMethod = strMethod;
             log.strVariableName = strVariableName;
 
-            m_db.errorlog.Add(log);
-            SaveChanges();
+            sparkdbEntities1 db = new sparkdbEntities1();
+            db.errorlog.Add(log);
+            SaveChanges(db);
         }
 
         /// <summary>
@@ -227,8 +245,9 @@ namespace Spark.Classes.DatabaseInterfaces
             log.FKInteractionTypes = nType;
             log.strControllerView = strControllerView;
 
-            m_db.interactionlog.Add(log);
-            SaveChanges();
+            sparkdbEntities1 db = new sparkdbEntities1();
+            db.interactionlog.Add(log);
+            SaveChanges(db);
         }
         #endregion
 
@@ -237,11 +256,11 @@ namespace Spark.Classes.DatabaseInterfaces
         /// Encapsulates the database call in a try catch block.
         /// </summary>
         /// <param name="strUserId">String value of the user Id or an empty string if unknown.</param>
-        protected static bool SaveChanges()
+        protected static bool SaveChanges(sparkdbEntities1 database)
         {
             try
             {
-                m_db.SaveChanges();
+                database.SaveChanges();
             }
             catch
             {

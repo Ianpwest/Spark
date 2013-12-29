@@ -29,20 +29,20 @@
         </div>
         <div class="sparkArgumentFooter">
             <div class="sparkArgumentFlagAgree">
-                Flag
+                <a onclick="" href="#">flag</a>
             </div>
             <div class="sparkAddComment">
-                <a onclick="popup('popUpDiv', 'argument')" href="#">Add Comment</a>
+                <a @*onclick="addArgument(true, 1)"*@ href="#">Add Comment</a>
             </div>
             <div class="sparkExpandAgree">
-                <a onclick="popup('popUpDiv', 'expand')" title=@Model.id.ToString() href="#">Expand</a>
+                <a onclick="popupExpand('popUpDiv', '@Model.id')" href="#">Expand</a>
             </div>
         </div>
-        <div class="sparkArgumentUpDownVoteAgree">
-            <div class="sparkUpVote"></div>
-            <p style="word-wrap:break-word">@Model.nArgumentScore.ToString()</p>
-            <div class="sparkDownVote"></div>
-        </div>
+        
     </div>
-   
+    <div class="sparkArgumentUpDownVoteAgree">
+        <div class="sparkUpVote"></div>
+        <p style="word-wrap:break-word">@Model.nArgumentScore.ToString()</p>
+        <div class="sparkDownVote"></div>
+    </div>
 </div>

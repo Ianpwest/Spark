@@ -11,6 +11,7 @@
 .sparkArgumentPreviewExpanded
 {
   position:relative;
+  margin-left:100px;
 }
 
 .sparkArgumentInsideContainerExpanded
@@ -135,11 +136,15 @@ border:2px solid black;
   z-index:9002;
 }
 
+#popup
+{
+    height:auto;
+}
+
 #sparkArgumentAddComment
 {
   display:none;
   margin:0 auto;
-  background:red;
   width:800px;
   height:auto;
 }
@@ -147,7 +152,7 @@ border:2px solid black;
 #sparkArgumentAddComment textarea
 {
   width:500px;
-  height:150px;
+  height:auto;
 }
 
 

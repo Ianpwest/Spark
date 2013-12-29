@@ -1,7 +1,20 @@
 ﻿function toggle(div_id) {
     var el = document.getElementById(div_id);
-    if (el.style.display == 'none') { el.style.display = 'block'; }
-    else { el.style.display = 'none'; }
+
+    if (el.style.opacity == 0)
+    {
+        if (div_id == "blanket")
+            el.style.opacity = .65;
+        else
+            el.style.opacity = 1;
+    }
+    else
+    {
+        el.style.opacity = 0;
+    }
+
+    if (el.style.visibility == "collapse") { el.style.visibility = "visible"; }
+    else { el.style.visibility = "collapse"; }
 }
 
 function blanket_size(popUpDivVar) {
@@ -46,19 +59,7 @@ function window_pos(popUpDivVar) {
     popUpDiv.style.left = window_width + 'px';
 }
 
-function popup(windowname, bAgree) {
-    blanket_size(windowname);
-    window_pos(windowname);
-    toggle('blanket');
-    toggle(windowname);
-
-    //clear the window
-    $('.popup').html("");
-
-    getExpandedArgumentView($(".sparkExpandAgree a").attr('title'));
-}
-
-function popup(windowname, bAgree, nSparkId)
+function popup(windowname)
 {
     blanket_size(windowname);
     window_pos(windowname);
@@ -67,6 +68,18 @@ function popup(windowname, bAgree, nSparkId)
 
     //clear the window
     $('.popup').html("");
+}
+
+function popupExpand(windowname, id)
+{
+    popup(windowname);
+   
+    getExpandedArgumentView(id);
+}
+
+function popupAddArgument(windowname, bAgree, nSparkId)
+{
+   popup(windowname);
 
    getCreateArgumentView(bAgree, nSparkId);
 }
@@ -100,5 +113,21 @@ function getCreateArgumentView(bAgree, nSparkId)
 
 function addArgument(isAgree, nSparkId)
 {
-    popup('popUpDiv', isAgree, nSparkId);
+    popupAddArgument('popUpDiv', isAgree, nSparkId);
+}
+
+function addComment() {
+
+    var btnText = "Add Comment";
+    var display = document.getElementById('sparkArgumentAddComment').style.display;
+    if (display == 'none' || display == '') {
+        display = 'block';
+        btnText = 'Close Comment';
+    }
+    else {
+        display = 'none';
+        btnText = 'Add Comment';
+    }
+
+    document.getElementById('sparkArgumentAddComment').style.display = display;
 }

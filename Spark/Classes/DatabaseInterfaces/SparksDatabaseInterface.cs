@@ -18,13 +18,15 @@ namespace Spark.Classes
         /// <returns></returns>
         public static int CreateSpark(SparkCreateModel sparkCreateModel)
         {
+            sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
+
             sparks sparkModel = new sparks();
             sparkModel.strDescription = sparkCreateModel.Description;
             sparkModel.strTopic = sparkCreateModel.Topic;
             
             sparkModel.FKSubjectMatters = sparkCreateModel.SubjectMatterId;
             
-            var nQryUserId = from r in m_db.accounts
+            var nQryUserId = from r in db.accounts
                              where r.strUserName == sparkCreateModel.UserId
                              select r.PK;
 
@@ -40,8 +42,8 @@ namespace Spark.Classes
             sparkModel.FKAccountsCreatedBy = nQryUserId.First();
             sparkModel.dDateCreated = DateTime.Now;
             sparkModel.dDateModified = DateTime.Now;
-            m_db.sparks.Add(sparkModel);
-            if (SaveChanges())
+            db.sparks.Add(sparkModel);
+            if (SaveChanges(db))
                 return sparkModel.PK;
             else
                 return int.MinValue;
@@ -54,9 +56,11 @@ namespace Spark.Classes
         /// <returns>List of arguments</returns>
         public static List<Models.arguments> GetAllArgumentsForSpark(int nSparkId)
         {
+            sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
+
             List<arguments> lstArguments = new List<arguments>();
 
-            var arguments = from r in m_db.arguments
+            var arguments = from r in db.arguments
                             where r.FKSparks == nSparkId
                             select r;
 
@@ -75,8 +79,38 @@ namespace Spark.Classes
         /// <returns>Success</returns>
         public static bool CreateArgument(arguments argumentModel)
         {
-            m_db.arguments.Add(argumentModel);
-            return SaveChanges();
+            sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
+
+            db.arguments.Add(argumentModel);
+            return SaveChanges(db);
+        }
+
+        /// <summary>
+        /// Get the spark given the spark id    
+        /// </summary>
+        /// <param name="nSparkId">spark id</param>
+        /// <returns>spark</returns>
+        public static sparks GetSpark(int nSparkId)
+        {
+            sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
+
+            return (from r in db.sparks
+                    where r.PK == nSparkId
+                    select r).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Get the argument given the id   
+        /// </summary>
+        /// <param name="id">argument id</param>
+        /// <returns>argument</returns>
+        public static arguments GetArgument(int id)
+        {
+            sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
+
+            return (from r in db.arguments
+                    where r.PK == id
+                    select r).FirstOrDefault();
         }
     }
 }
