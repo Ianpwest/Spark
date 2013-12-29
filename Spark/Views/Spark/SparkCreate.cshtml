@@ -20,109 +20,99 @@
         <fieldset>
             <legend>sparks</legend>
 
-            <p id="tester">Tester</p>
-            <div style="position:relative; height: 150px; width: 325px; border-width: medium; border-style: solid;">
-                <img id="imgPreview" style="position:absolute; width: 100%; height: 100%;" alt=""
-                     src="~/content/blankimage.gif" />
-            </div>
-            <input id="Img" type="file" name="FileUpload1" onchange="readUrl(this);" style="background-color:transparent;" />
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Topic)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.Topic)
-                @Html.ValidationMessageFor(model => model.Topic)
-            </div>
+            <div id="divMainFirst" style="position:relative; height:100%; width:100%;">
+                <div style="position:relative; height: 150px; width: 325px; border-width: medium; border-style: solid;">
+                    <img id="imgPreview" style="position:absolute; width: 100%; height: 100%;" alt=""
+                         src="~/content/blankimage.gif" />
+                </div>
 
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Description)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.Description)
-                @Html.ValidationMessageFor(model => model.Description)
-            </div>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Topic)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Topic)
+                    @Html.ValidationMessageFor(model => model.Topic)
+                </div>
 
-            <div class="editor-label">
-                @Html.LabelFor(model => model.SubjectMatterId)
-            </div>
-            <div class="editor-field">
-                @Html.DropDownListFor(model => model.SubjectMatterId, Model.SubjectMattersAll, new { onchange = "getImage(this)" })
-                @Html.ValidationMessageFor(model => model.SubjectMatterId)
-            </div>
-            <div class="editor-field">
-                <label>Tags</label>
-            </div>
-            <div style=" height: 300px; width:auto;" >
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Description)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Description)
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
 
-                <table id="tableAvailableTags" style=" float:left; margin-top:0; margin-bottom:0; margin-right:20px; padding:0; width:200px;">
-                    <thead>
-                        <tr style="display:block;"><td>@Html.TextBox("Header", null, new { @style = "width:200px" })</td></tr>
-                    </thead>
-                    <tbody style="overflow:auto; display:block; height:200px;">
-                        @{
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.SubjectMatterId)
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(model => model.SubjectMatterId, Model.SubjectMattersAll, new { onchange = "getImage(this)" })
+                    @Html.ValidationMessageFor(model => model.SubjectMatterId)
+                </div>
+                <div class="editor-field">
+                    <label>Tags</label>
+                </div>
+                <div style=" height: 300px; width:auto;">
+
+                    <table id="tableAvailableTags" style=" float:left; margin-top:0; margin-bottom:0; margin-right:20px; padding:0; width:200px; height:300px; border:2px solid grey">
+                        <thead>
+                            <tr style="display:block;"><td>@Html.TextBox("Header", null, new { @style = "width:200px", onkeyup = "filterResults(this.value)" })</td></tr>
+                        </thead>
+                        <tbody style="overflow:auto; display:block; height:200px;">
+                            @{
                                 foreach (KeyValuePair<int, string> kvp in Model.TagIdAndNames)
                                 {
-                                        <tr>
-                                            <td style="width:75%;" onclick="testCells(this)" id=@String.Concat("availableTag" + kvp.Key)>
-                                                @kvp.Value
-                                            </td>
-                                            <td><img src="@Model.TagIdAndImages[kvp.Key]" height="40" width="40" /></td>
-                                        </tr>
+                                    <tr>
+                                        <td style="width:75%;" onclick="testCells(this)" id=@String.Concat("availableTag" + kvp.Key)>
+                                            @kvp.Value
+                                        </td>
+                                        <td><img src="@Model.TagIdAndImages[kvp.Key]" height="40" width="40" /></td>
+                                    </tr>
                                 }
-                        }
-                    </tbody>
-                </table>
+                            }
+                        </tbody>
+                    </table>
 
-                <table id="tableSelectedTags" style=" width:200px;">
-                    <thead>
-                        <tr><td>Selected Tags</td></tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+                    <table id="tableSelectedTags" style="position:relative; width:200px; height:300px; border:2px solid grey; margin-left:20px;">
+                        <thead>
+                            <tr><td>Selected Tags</td></tr>
+                        </thead>
+                        <tbody style="vertical-align: top; display: inline-grid;"></tbody>
+                    </table>
+                </div>
+
+                <div id="divHiddenTags" style="visibility:hidden">0</div>
+
+                @Html.HiddenFor(model => model.Tag1)
+                @Html.HiddenFor(model => model.Tag2)
+                @Html.HiddenFor(model => model.Tag3)
+                @Html.HiddenFor(model => model.Tag4)
+                @Html.HiddenFor(model => model.Tag5)
+                <p style="position:relative">
+                    <input type="button" value="Next" onclick="nextTab()" />
+                </p>
             </div>
 
-            <div id="divHiddenTags" style="visibility:hidden">0</div>
-            
-            @Html.HiddenFor(model => model.Tag1)
-            @Html.HiddenFor(model => model.Tag2)
-            @Html.HiddenFor(model => model.Tag3)
-            @Html.HiddenFor(model => model.Tag4)
-            @Html.HiddenFor(model => model.Tag5)
+            <div id="divMainSecond" style=" width:100%; position:absolute; opacity:0; top:500px; visibility:hidden;">
+                <p class="classSubmitButtons">Would you like to create an argument for either side?</p>
+                @Html.HiddenFor(model => model.ArgEntryType)
+                <div>
+                    <input class="classSubmitButtons" type="button" value="Agree and Create" onclick="setArgumentType('1'), getArgumentLayout()" />
+                    <input class="classSubmitButtons" type="button" value="Disagree and Create" onclick="setArgumentType('2'), getArgumentLayout()" />
+                </div>
+                <div id="divCreateBack">
+                    <input class="classSubmitButtons" type="button" value="Back" onclick="previousTab()" />
+                    <input class="classSubmitButtons" type="submit" value="Just Create" />
+                </div>
+                <div id="divArgumentContainer" style="opacity: 0; position: absolute; width: 100%;">
 
-            <p style="position:relative;">
-                <input type="submit" value="Create" onclick="getSelectedTagsForModel()"/>
-            </p>
+                </div>
+            </div>
+            
         </fieldset>
     }
-
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
 
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
-
-<script type="text/javascript">
-    function getSelectedTagsForModel()
-    {
-        var obj = document.getElementById("tableSelectedTags");
-        var rows = obj.tBodies[0].rows;
-        var arrayTags = new Array();
-        for(var i = 0; i < rows.length; i++)
-        {
-            var name = rows[i].id.substring(10);
-            arrayTags[i] = name;
-        }
-
-        @{
-            Model.TagIdAndImages = new Dictionary<int, string>();
-            Model.TagIdAndNames = new Dictionary<int,string>();
-          }
-        for(var j = 0; i < arrayTags.length; j++)
-        {
-            @*@Model.TagReturnValues.Add((int)@:arrayTags[j], @string.Empty);*@
-        }
-    }
-</script>

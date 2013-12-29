@@ -12,7 +12,7 @@ namespace Spark.Models
     public class SparkCreateModel
     {
         [Required]
-        [Display(Name = "Subject Matter")]
+        [Display(Name = "Category")]
         public int SubjectMatterId {get;set;}
 
         [Required]
@@ -34,5 +34,13 @@ namespace Spark.Models
         public int Tag3 { get; set; }
         public int Tag4 { get; set; }
         public int Tag5 { get; set; }
+
+        public ArgumentEntryType ArgEntryType { get; set; }
+    }
+    public enum ArgumentEntryType
+    {
+        Neither = 0,
+        Agree = 1,
+        Disagree = 2
     }
 }

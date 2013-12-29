@@ -16,7 +16,7 @@ namespace Spark.Classes
         /// <param name="sparkModel"></param>
         /// <param name="strUserName"></param>
         /// <returns></returns>
-        public static bool CreateSpark(SparkCreateModel sparkCreateModel)
+        public static int CreateSpark(SparkCreateModel sparkCreateModel)
         {
             sparks sparkModel = new sparks();
             sparkModel.strDescription = sparkCreateModel.Description;
@@ -29,7 +29,7 @@ namespace Spark.Classes
                              select r.PK;
 
             if (nQryUserId == null || nQryUserId.Count() != 1)
-                return false;
+                return int.MinValue;
 
             sparkModel.FKCategories1 = sparkCreateModel.Tag1;
             sparkModel.FKCategories2 = sparkCreateModel.Tag2;
@@ -42,9 +42,9 @@ namespace Spark.Classes
             sparkModel.dDateModified = DateTime.Now;
             m_db.sparks.Add(sparkModel);
             if (SaveChanges())
-                return true;
+                return sparkModel.PK;
             else
-                return false;
+                return int.MinValue;
         }
 
         /// <summary>

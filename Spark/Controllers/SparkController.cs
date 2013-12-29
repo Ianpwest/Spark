@@ -19,6 +19,7 @@ namespace Spark.Controllers
             // Need to create a new model that holds all of the subject matters.
             SparkCreateModel scModel = new SparkCreateModel();
             scModel.Tag1 = -1; scModel.Tag2 = -1; scModel.Tag3 = -1; scModel.Tag4 = -1; scModel.Tag5 = -1;
+            scModel.ArgEntryType = ArgumentEntryType.Neither;
             scModel.UserId = User.Identity.Name;
             List<SelectListItem> lstItems = new List<SelectListItem>();
 
@@ -50,20 +51,47 @@ namespace Spark.Controllers
         public ActionResult SparkCreate(SparkCreateModel model)
         {
             model.UserId = User.Identity.Name;
-            //model.FileName = Guid.NewGuid().ToString() + ".jpg"; ;
-            // Redirect somewhere else when it fails.
-            
-            if (!SparksDatabaseInterface.CreateSpark(model))
+
+            int sparkPK = SparksDatabaseInterface.CreateSpark(model);
+            // Spark failed to create - TODO : error log and redirect to error page.
+            if (sparkPK == int.MinValue)
                 return RedirectToAction("Index", "Home");
 
-            //// If record was inserted correct, try to add an image if it exists.
-            //if (Request.Files.Count == 1)
-            //{
-            //    Utilities.WriteImageToFile(model.FileName, Request, Server);
-            //    SparksDatabaseInterface.LogInteraction(User.Identity.Name, Classes.DatabaseInterfaces.InteractionType.SubmitForm);
-            //}
-
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public ActionResult SparkCreateWithArg(string strModelInfo)
+        {
+            SparkCreateModel scmModel = ParseStringToModel(strModelInfo);
+            if (scmModel == null)
+                return RedirectToAction("Index", "Home"); // TODO - redirect to error page and log error.
+            scmModel.UserId = User.Identity.Name;
+            
+            int sparkPK = SparksDatabaseInterface.CreateSpark(scmModel);
+            // Spark failed to create - TODO : error log and redirect to error page.
+            if (sparkPK == int.MinValue)
+                return RedirectToAction("Index", "Home");
+            
+            
+            if (scmModel.ArgEntryType == ArgumentEntryType.Neither)
+            {
+                // TODO- redirect to action with error page.
+            }
+
+            arguments argumentModel = new arguments();
+
+            //TODO: if this returns 0 (we have no user logged in) return a failure screen
+            argumentModel.FKAccounts = AccountsDatabaseInterface.GetAccountsPKByUsername(User.Identity.Name);
+            if (scmModel.ArgEntryType == ArgumentEntryType.Agree)
+                argumentModel.bIsAgree = true;
+            else
+                argumentModel.bIsAgree = false;
+
+            argumentModel.FKSparks = sparkPK;
+
+
+            return PartialView("SparkArgumentCreate", argumentModel);
         }
 
         public ActionResult GetImage(string nCategoryId)
@@ -176,6 +204,30 @@ namespace Spark.Controllers
 
             //We failed TODO:What do we do when we fail
             return RedirectToAction("SparkContainer");//remove this line
+        }
+
+        private SparkCreateModel ParseStringToModel(string strModelInfo)
+        {
+            SparkCreateModel scm = new SparkCreateModel();
+
+            string[] strArray = strModelInfo.Split(',');
+            if (strArray.Length < 9)
+                return null;
+
+            scm.Topic = strArray[0];
+            scm.Description = strArray[1];
+            scm.SubjectMatterId = int.Parse(strArray[2]);
+            scm.Tag1 = int.Parse(strArray[3]);
+            scm.Tag2 = int.Parse(strArray[4]);
+            scm.Tag3 = int.Parse(strArray[5]);
+            scm.Tag4 = int.Parse(strArray[6]);
+            scm.Tag5 = int.Parse(strArray[7]);
+            if (int.Parse(strArray[8]) == 1)
+                scm.ArgEntryType = ArgumentEntryType.Agree;
+            else
+                scm.ArgEntryType = ArgumentEntryType.Disagree;
+
+            return scm;
         }
     }
 }

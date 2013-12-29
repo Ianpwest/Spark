@@ -33,6 +33,46 @@ function getImage(input)
     });
 }
 
+function setArgumentType(input)
+{
+    var obj = document.getElementById("ArgEntryType");
+    obj.setAttribute("value", input);
+}
+
+function getArgumentLayout()
+{
+    $.ajax({
+        type: "Post",
+        datatype: 'String',
+        data: "strModelInfo=" + getModelString(),
+        url: "/Spark/SparkCreateWithArg",
+        success: function(data)
+        {
+            var obj = document.getElementById("divArgumentContainer");
+            obj.innerHTML = data;
+            fadeCreateButtons();
+            fadeIn("divArgumentContainer");
+
+        }
+
+    });
+}
+
+function getModelString()
+{
+    var topic = document.getElementById("Topic").value;
+    var description = document.getElementById("Description").value;
+    var subjectmatterid = document.getElementById("SubjectMatterId").value;
+    var tag1 = document.getElementById("Tag1").getAttribute("value");
+    var tag2 = document.getElementById("Tag2").getAttribute("value");
+    var tag3 = document.getElementById("Tag3").getAttribute("value");
+    var tag4 = document.getElementById("Tag4").getAttribute("value");
+    var tag5 = document.getElementById("Tag5").getAttribute("value");
+    var argentrytype = document.getElementById("ArgEntryType").getAttribute("value");
+    var strConcat = topic + ", " + description + ", " + subjectmatterid + ", " + tag1 + ", " + tag2 + ", " + tag3 + ", " + tag4 + ", " + tag5 + ", " + argentrytype;
+    return strConcat;
+}
+
 function updateModelWithTags(input)
 {
     var arrayTags = input;
@@ -52,15 +92,56 @@ function setVisible(id)
     obj.style.setProperty("visibility", "visible");
 }
 
+// Sets the visibility to hidden given the id of an element.
+function setHidden(id) {
+    var obj = document.getElementById(id);
+    obj.style.setProperty("visibility", "hidden");
+}
+
 // Animates the object to the left by changing the left property to 0 for the element with the given id. Sets the label associated with this element to hidden.
-function animateLeft(id)
+function fadeAway(id)
 {
     $(document).ready(function () {
-        $("#" + id).animate({ left: '0' });
+        //$("#" + id).animate({ top: "500px", opacity: 0, visibility:"hidden" }, 1000);
+        $("#" + id).animate({ top: "400px", opacity: 0, height:"0px"}, 1000, function ()
+        {
+            $("#" + id).css({ visibility: "hidden" });
+            $("#" + id).css({ top: "0px" });
+        });
     });
+}
 
-    var obj = document.getElementById(id + "lbl");
-    obj.style.setProperty("visibility", "hidden");
+function fadeCreateButtons()
+{
+    $(document).ready(function () {
+        $(".classSubmitButtons").animate({opacity: 0, height: "0px" }, 1000, function () {
+            $("#" + id).css({ visibility: "hidden" });
+        });
+    });
+}
+function fadeIn(id)
+{
+    $(document).ready(function () {
+        //$("#" + id).animate({ top: "0px", opacity: 100, visibility:"visible" }, 1000);
+        $("#" + id).css({ opacity: 0.0, visibility: "visible", top: "500px" }).animate({ top: "0px", opacity: 1.0, height: "700px" }, 1000);
+    });
+}
+
+function nextTab()
+{
+    //setVisible("divMainSecond");
+    fadeAway("divMainFirst");
+    fadeIn("divMainSecond");
+    //setHidden("divMainFirst");
+}
+
+function previousTab()
+{
+    //setVisible("divMainFirst");
+    fadeAway("divMainSecond");
+    fadeIn("divMainFirst");
+    //setHidden("divMainSecond");
+    
 }
 
 function testCells(input) {
@@ -110,6 +191,8 @@ function addRow(dataToAdd, arrayLength) {
     var table = document.getElementById("tableSelectedTags");
     var length = table.tBodies[0].rows.length;
     var row = table.tBodies[0].insertRow(length);
+    row.style.textAlign = "center";
+    row.style.setProperty("vertical-align", "top");
     row.id = "rowAddedId" + arrayLength;
     var cell = row.insertCell(0);
     cell.innerHTML = dataToAdd;
@@ -182,6 +265,28 @@ function clearTagValues()
     document.getElementById("Tag3").setAttribute("value", "-1");
     document.getElementById("Tag4").setAttribute("value", "-1");
     document.getElementById("Tag5").setAttribute("value", "-1");
+}
+
+function filterResults(inputString)
+{
+    var tBody = document.getElementById("tableAvailableTags").tBodies[0];
+    var rows = tBody.rows;
+    if (inputString == "")
+    {
+        for(var j = 0; j < rows.length; j++)
+            rows[j].style.setProperty("display", "inline");
+        return;
+    }
+
+    for(var i = 0; i < rows.length ; i++)
+    {
+        var cell = rows[i].cells[0];
+        var value = cell.innerHTML;
+        if(value.indexOf(inputString) == -1)
+            rows[i].style.setProperty("display", "none");
+        else
+            rows[i].style.setProperty("display", "inline");
+    }
 }
 
 
