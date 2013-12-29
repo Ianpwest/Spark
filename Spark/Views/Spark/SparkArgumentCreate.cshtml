@@ -3,7 +3,7 @@
 @Styles.Render("~/Content/SparkArgumentCreate.css")
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("CreateArgument", "Spark", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
