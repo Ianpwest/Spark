@@ -289,4 +289,10 @@ function filterResults(inputString)
     }
 }
 
+function popupNewTagWnd()
+{
+    var data = document.getElementById("divTagPopup").innerHTML;
+    $('.modal-content').html(data);
+}
+
 

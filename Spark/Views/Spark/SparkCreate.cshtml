@@ -56,7 +56,7 @@
                         <thead>
                             <tr style="display:block;">
                                 <td>@Html.TextBox("Header", null, new { @style = "width:160px", onkeyup = "filterResults(this.value)" })</td>
-                                <td onclick="openNewTagWnd()">+</td>
+                                <td><a href="#modal-text" class="call-modal" title="Clicking this link shows the modal" onclick="popupNewTagWnd()">+</a></td>
                             </tr>
                         </thead>
                         <tbody style="overflow:auto; display:block; height:200px;">
