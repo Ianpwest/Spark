@@ -293,6 +293,7 @@
     <Content Include="Content\SparkArgumentCreate.css" />
     <Content Include="Content\SparkArgumentFull.css" />
     <Content Include="Content\SparkContainer.css" />
+    <Content Include="Content\SparkCreate.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />

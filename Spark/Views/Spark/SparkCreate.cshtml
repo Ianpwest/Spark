@@ -1,7 +1,5 @@
 ﻿@model Spark.Models.SparkCreateModel
 
-<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 <script type="text/javascript">
     window.onload = function()
     {
@@ -56,7 +54,10 @@
 
                     <table id="tableAvailableTags" style=" float:left; margin-top:0; margin-bottom:0; margin-right:20px; padding:0; width:200px; height:300px; border:2px solid grey">
                         <thead>
-                            <tr style="display:block;"><td>@Html.TextBox("Header", null, new { @style = "width:200px", onkeyup = "filterResults(this.value)" })</td></tr>
+                            <tr style="display:block;">
+                                <td>@Html.TextBox("Header", null, new { @style = "width:160px", onkeyup = "filterResults(this.value)" })</td>
+                                <td onclick="openNewTagWnd()">+</td>
+                            </tr>
                         </thead>
                         <tbody style="overflow:auto; display:block; height:200px;">
                             @{
@@ -72,7 +73,20 @@
                             }
                         </tbody>
                     </table>
-
+                    <div id="divTagPopup" style="display:none;">
+                        <div id="divNewTagName">
+                            <input id="inputNewTagName" type="text" value="Choose Name" />
+                        </div>
+                        <div class="divNewTagMiddleRow">
+                            <input id="inputNewTagUpload" type="file" />
+                        </div>
+                        <div class="divNewTagMiddleRow">
+                            <img id="imgNewTagImage" alt="" src="~/content/blankimage.gif" />
+                        </div>
+                        <div id="divNewTagSubmit">
+                            <input id="inputNewTagSubmit" type="button" value="Submit" />
+                        </div>
+                    </div>
                     <table id="tableSelectedTags" style="position:relative; width:200px; height:300px; border:2px solid grey; margin-left:20px;">
                         <thead>
                             <tr><td>Selected Tags</td></tr>

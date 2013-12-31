@@ -1,0 +1,69 @@
+﻿#divTagPopup
+{
+  background-color:#FFFFFF;
+  border:1px solid #999999;
+  cursor:default;
+  display:none;
+  margin-top: -175px;
+  position:absolute;
+  text-align:left;
+  width:400px;
+  height:200px;
+  z-index:50;
+}
+
+#divNewTagName
+{
+  width:100%;
+  height:33%;
+  position:relative;
+}
+
+.divNewTagMiddleRow
+{
+  width:50%;
+  height:33%;
+  position:relative;
+  float:left;
+}
+
+#divNewTagSubmit
+{
+  width:100%;
+  height:34%;
+  position:relative;
+  float:left;
+}
+
+#inputNewTagName
+{
+  position:absolute;
+  text-align:center;
+  top:33%;
+  left:33%;
+}
+
+#inputNewTagUpload
+{
+  display:block;
+  position:absolute;
+  top:33%;
+}
+
+#imgNewTagImage
+{
+  height:70%; 
+  width:25%;
+  position:absolute;
+  left:40%;
+  top:10%;
+}
+
+#inputNewTagSubmit
+{
+  width:33%;
+  height:33%;
+  position:absolute;
+  left:33%;
+  top:33%;
+}
