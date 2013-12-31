@@ -8,7 +8,7 @@
 
 <div class="sparkTopicLine">
     <div class="sparkAgree">
-        <a onclick="addArgument(true, @Model.PK )">Agree</a>
+        <a href="#modal-text" class="call-modal" title="Clicking this link shows the modal" onclick="addArgument(true, @Model.PK )">Agree</a>
     </div>
     
     <div class="sparkTopic">
@@ -16,12 +16,12 @@
     </div>
     
     <div class="sparkDisagree">
-        <a onclick="addArgument(false, @Model.PK)">Disagree</a>
+        <a href="#modal-text" class="call-modal" title="Clicking this link shows the modal" onclick="addArgument(false, @Model.PK )">Disagree</a>
     </div>
 
 </div>
 
-<div class="sparkAgreeSide">
+<div class="sparkAgreeSide" style="overflow:hidden;">
     @{
         foreach (Spark.Models.SparkArgumentModel samAgree in ViewBag.Arguments[0])
         {
@@ -31,7 +31,7 @@
 </div>
 <div class="sparkDivider">
 </div>
-<div class="sparkDisagreeSide">
+<div class="sparkDisagreeSide" style="overflow:hidden;">
     @{
         foreach (Spark.Models.SparkArgumentModel samDisagree in ViewBag.Arguments[1])
         {
@@ -40,11 +40,3 @@
     }
 </div>
       
-@*Pop up window*@
-<div style="display: block; opacity:0; visibility:collapse;" id="blanket"></div>
-<div style="display: block; opacity:0; visibility:collapse;" id="popUpDiv">
-    <a onclick="popup('popUpDiv')" href="#">Close</a><br />
-    <div class="popup">
-
-    </div>
-</div>

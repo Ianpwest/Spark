@@ -1,28 +1,42 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
-        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <meta name="viewport" content="width=device-width" />
-        @Styles.Render("~/Content/css")
-        @Styles.Render("~/Content/NavigationBar.css")
-        @Styles.Render("~/Content/Portal.css")
-        @Scripts.Render("~/bundles/modernizr")
-        @Scripts.Render("http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js")
-        @Scripts.Render("http://code.jquery.com/ui/1.8.19/jquery-ui.min.js")
-        @Scripts.Render("~/Scripts/Spark/SparkCreate.js")
-        @Scripts.Render("~/Scripts/PageLoad.js")
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/NavigationBar.css")
+    @Styles.Render("~/Content/Portal.css")
+    @Styles.Render("~/Content/modal.css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js")
+    @Scripts.Render("http://code.jquery.com/ui/1.8.19/jquery-ui.min.js")
+    @Scripts.Render("~/Scripts/Spark/SparkCreate.js")
+    @Scripts.Render("~/Scripts/PageLoad.js")
+    @Scripts.Render("~/Scripts/tinymce/tinymce.min.js")
     </head>
     <body>
         <header>
-             @Html.Partial("_NavigationBarPartial")
+            @Html.Partial("_NavigationBarPartial")
         </header>
-        <div style="padding-top: 80px;">
-             @RenderBody()
+        <div style="padding-top: 80px; overflow:hidden;">
+            @RenderBody()
         </div>
 
         @Scripts.Render("~/bundles/jquery")
         @RenderSection("scripts", required: false)
     </body>
+
+    @*Pop up window*@
+    <section class="semantic-content" id="modal-text" tabindex="-1"
+             role="dialog" aria-labelledby="modal-label" aria-hidden="true">
+
+        <div class="modal-inner">
+            <div class="modal-content"><!-- The modals content --></div>
+        </div>
+
+        <a href="#!" class="modal-close" title="Close this modal" data-close="Close"
+           data-dismiss="modal">×</a>
+    </section>
 </html>

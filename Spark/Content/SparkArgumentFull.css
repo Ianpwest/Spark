@@ -141,6 +141,8 @@ border:2px solid black;
     height:auto;
 }
 
+
+
 #sparkArgumentAddComment
 {
   display:none;
@@ -153,6 +155,31 @@ border:2px solid black;
 {
   width:500px;
   height:auto;
+}
+
+.button
+{
+  border:none;
+  background:#1882A8;
+  font-family:Century Gothic;
+  font-size:17px;
+  cursor:pointer;
+  color:white;
+  width:150px;
+  height:40px;
+  margin-bottom:20px;
+  
+  transition: all .5s ease-in;
+}
+
+.button:hover
+{
+  background:#5ec4e8;
+}
+
+.button:active
+{
+  border:1px solid white;
 }
 
 
