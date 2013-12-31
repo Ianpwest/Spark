@@ -24,7 +24,7 @@
         </div>
         <div class="sparkConclusion">
             <p>
-                @Model.strConclusion
+                @Html.Raw(Model.strConclusion)
             </p>
         </div>
         <div class="sparkArgumentFooter">
@@ -35,7 +35,7 @@
                 <a @*onclick="addArgument(true, 1)"*@ href="#">Add Comment</a>
             </div>
             <div class="sparkExpandAgree">
-                <a onclick="popupExpand('popUpDiv', '@Model.id')" href="#">Expand</a>
+                <a href="#modal-text" class="call-modal" title="Clicking this link shows the modal" onclick="popupExpand('@Model.id')">Expand</a>
             </div>
         </div>
         

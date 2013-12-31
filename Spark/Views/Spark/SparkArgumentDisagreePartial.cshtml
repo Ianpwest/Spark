@@ -23,14 +23,14 @@
             </div>
         </div>
         <div class="sparkConclusion">
-                @Model.strConclusion
+                @Html.Raw(Model.strConclusion)
         </div>
         <div class="sparkArgumentFooter">
             <div class="sparkArgumentFlagDisagree">
                 <a onclick="" href="#">flag</a>
             </div>
             <div class="sparkExpandDisagree">
-                <a onclick="popupExpand('popUpDiv', '@Model.id')" href="#">Expand</a>
+                <a href="#modal-text" class="call-modal" title="Clicking this link shows the modal" onclick="popupExpand('@Model.id')">Expand</a>
             </div>
             <div class="sparkAddComment">
                 <a @*onclick="addArgument(true, 1)"*@ href="#">Add Comment</a>
