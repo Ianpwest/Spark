@@ -81,6 +81,7 @@ namespace Spark.Classes
         {
             sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
 
+            
             db.arguments.Add(argumentModel);
             return SaveChanges(db);
         }

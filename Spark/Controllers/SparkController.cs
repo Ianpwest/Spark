@@ -215,7 +215,9 @@ namespace Spark.Controllers
             return PartialView("SparkArgumentCreate", argumentModel);
         }
 
+        
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult CreateArgument(Models.arguments argumentModel)
         {
             if(SparksDatabaseInterface.CreateArgument(argumentModel))
