@@ -113,6 +113,14 @@ namespace Spark.Controllers
             return Json(new { success = true, message = strMessageReturn });
         }
 
+        public ActionResult UploadNewTag(string strName, string strImage)
+        {
+            Guid gImg = Guid.NewGuid();
+            Utilities.WriteImageToFile(gImg.ToString(), Request, Server);
+            SparksDatabaseInterface.UploadTag(strName, string.Empty);
+            return Json(new { success = true, message = string.Empty });
+        }
+
         //GET
         public ActionResult SparkContainer(/*int nSparkId*/) //Testing need to uncomment this out
         {

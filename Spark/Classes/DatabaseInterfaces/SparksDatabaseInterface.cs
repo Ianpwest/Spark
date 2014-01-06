@@ -113,5 +113,10 @@ namespace Spark.Classes
                     where r.PK == id
                     select r).FirstOrDefault();
         }
+
+        public static Dictionary<int,string> UploadTag(string strName, string p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

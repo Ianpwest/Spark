@@ -78,13 +78,13 @@
                             <input id="inputNewTagName" type="text" value="Choose Name" />
                         </div>
                         <div class="divNewTagMiddleRow">
-                            <input id="inputNewTagUpload" type="file" />
+                            <input id="inputNewTagUpload" type="file" onchange="readUrl(this)" />
                         </div>
                         <div class="divNewTagMiddleRow">
                             <img id="imgNewTagImage" alt="" src="~/content/blankimage.gif" />
                         </div>
                         <div id="divNewTagSubmit">
-                            <input id="inputNewTagSubmit" type="button" value="Submit" />
+                            <input id="inputNewTagSubmit" type="button" value="Submit" onclick="uploadNewTag()" />
                         </div>
                     </div>
                     <table id="tableSelectedTags" style="position:relative; width:200px; height:300px; border:2px solid grey; margin-left:20px;">

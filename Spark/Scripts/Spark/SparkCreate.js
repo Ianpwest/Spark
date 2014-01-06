@@ -9,7 +9,7 @@ function readUrl(input) {
         var reader = new FileReader();
         reader.onload = function (e) 
         {
-            $('#imgPreview').attr('src', e.target.result);
+            $('#imgNewTagImage').attr('src', e.target.result);
         }
 
         reader.readAsDataURL(input.files[0]);
@@ -295,4 +295,8 @@ function popupNewTagWnd()
     $('.modal-content').html(data);
 }
 
+uploadNewTag()
+{
+
+}
 
