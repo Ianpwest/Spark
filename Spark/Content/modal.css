@@ -14,10 +14,136 @@
 /*
  * Configuration
  */
-html {
-  overflow-y: scroll;
+
+/*//Spark Argument Create CSS*/
+
+.textAreaEditor
+{
+    height:500px;
+    min-height:200px;
 }
 
+.textAreaNormal
+{
+  min-width:230px;
+  min-height:30px;
+  font-family:Century Gothic;
+  width:99.2%;
+  height:300px;
+  resize:none;
+}
+
+.inputContainer
+{
+
+}
+.inputContainer:hover .inputText
+{
+  background:#5c1900 ;
+}
+.inputText
+{
+  font-family:Century Gothic;
+  color:white;
+  background:#ff4500;
+  text-align:center;
+  
+  transition: all .5s ease-in;
+}
+
+
+.argumentCreateSparkIt
+{
+    display:none;
+    width:50%;
+    margin: 0 auto;
+}
+
+.argumentCreateArgument
+{
+    display:none;
+    margin:0 auto;
+    width:50%;
+}
+
+.argumentCreateCitations
+{
+    display:block;
+    margin:0 auto;
+    width:50%;
+}
+
+.navigationControlView
+{
+  margin-top:1%;
+  margin-left:19%;
+}
+
+ol.progtrckr {
+    margin: 0;
+    padding: 0;
+    list-style-type none;
+}
+
+ol.progtrckr li {
+    display: inline-block;
+    text-align: center;
+    line-height: 3em;
+}
+
+ol.progtrckr[data-progtrckr-steps="2"] li { width: 49%; }
+ol.progtrckr[data-progtrckr-steps="3"] li { width: 33%; }
+ol.progtrckr[data-progtrckr-steps="4"] li { width: 24%; }
+ol.progtrckr[data-progtrckr-steps="5"] li { width: 19%; }
+ol.progtrckr[data-progtrckr-steps="6"] li { width: 16%; }
+ol.progtrckr[data-progtrckr-steps="7"] li { width: 14%; }
+ol.progtrckr[data-progtrckr-steps="8"] li { width: 12%; }
+ol.progtrckr[data-progtrckr-steps="9"] li { width: 11%; }
+
+ol.progtrckr li
+{
+  font-family:century gothic;
+}
+ol.progtrckr li.progtrckr-done {
+    color: black;
+    border-bottom: 4px solid yellowgreen;
+}
+ol.progtrckr li.progtrckr-todo {
+    color: black; 
+    border-bottom: 4px solid silver;
+}
+
+ol.progtrckr li:after {
+    content: "\00a0\00a0";
+}
+ol.progtrckr li:before {
+    position: relative;
+    bottom: -2.5em;
+    float: left;
+    left: 50%;
+    line-height: 1em;
+}
+ol.progtrckr li.progtrckr-done:before {
+    content: "\2713";
+    color: white;
+    background-color: yellowgreen;
+    height: 1.2em;
+    width: 1.2em;
+    line-height: 1.2em;
+    border: none;
+    border-radius: 1.2em;
+}
+ol.progtrckr li.progtrckr-todo:before {
+    content: "\039F";
+    color: transparent;
+    background-color: white;
+    height: 1.2em;
+    width: 1.2em;
+    line-height: 1.2em;
+    border-radius: 1.2em;
+}
+
+/*//End Spark Argument Create CSS*/
 .has-overlay {
   overflow: hidden;
 }
@@ -71,6 +197,7 @@ html {
   background-image:url('/Images/gray_texture_background.png');
   -webkit-box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+  min-height:800px;
 }
 .semantic-content .modal-inner > img,
 .semantic-content .modal-inner > video,
@@ -91,10 +218,12 @@ html {
   margin: 0.5em 0;
 }
 .semantic-content .modal-content {
-  max-height: 80vh;
   border-bottom: 1px solid #dddddd;
   overflow-x: hidden;
   overflow-y: auto;
+  min-height:800px;
+  
+  max-height:800px;
 }
 .semantic-content .modal-content > * {
   max-width: 100%;
@@ -124,8 +253,8 @@ html {
   content: '\00d7';
   width:50px;
   position: absolute;
-  top: 18px;
-  left: 13%;
+  top: 20px;
+  left: 13.1%;
   z-index: 20;
   margin-left: 0px;
   background: url('/Images/gray_texture_background.png');
@@ -203,7 +332,6 @@ html {
     box-shadow: none;
   }
   .semantic-content .modal-content {
-    max-height: none;
   }
   .semantic-content .modal-close {
     right: auto;
@@ -224,13 +352,11 @@ html {
 }
 @media screen and (max-height: 46em) and (min-width: 30em) {
   .semantic-content .modal-content {
-    max-height: 340px;
     max-height: 50vh;
   }
 }
 @media screen and (max-height: 36em) and (min-width: 30em) {
   .semantic-content .modal-content {
-    max-height: 265px;
     max-height: 40vh;
   }
 }

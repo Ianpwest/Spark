@@ -563,6 +563,30 @@ tr.pager td {
     padding: 0 0.25em 0 0;
 }
 
+ input[type="button"], input[type="submit"]
+{
+  border:none;
+  background:#1882A8;
+  font-family:Century Gothic;
+  font-size:17px;
+  cursor:pointer;
+  color:white;
+  width:150px;
+  height:40px;
+  margin-top:20px;
+  
+  transition: all .5s ease-in;
+}
+
+ input[type="button"]:hover, input[type="submit"]:hover
+{
+  background:#5ec4e8;
+}
+
+ input[type="button"]:active, input[type="submit"]:active
+{
+  border:1px solid white;
+}
 
 /********************
 *   Mobile Styles   *

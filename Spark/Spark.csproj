@@ -291,7 +291,6 @@
     <Content Include="Content\modal.css" />
     <Content Include="Content\NavigationBar.css" />
     <Content Include="Content\Portal.css" />
-    <Content Include="Content\SparkArgumentCreate.css" />
     <Content Include="Content\SparkArgumentFull.css" />
     <Content Include="Content\SparkContainer.css" />
     <Content Include="Content\SparkCreate.css" />

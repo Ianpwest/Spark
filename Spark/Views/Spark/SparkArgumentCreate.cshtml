@@ -1,8 +1,5 @@
 ﻿@model Spark.Models.arguments
 
-@Styles.Render("~/Content/SparkArgumentCreate.css")
-
-
 @using (Html.BeginForm("CreateArgument", "Spark", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
@@ -11,30 +8,45 @@
     <fieldset>
         <legend>arguments</legend>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.strArgument)
-        </div>
-        <div class="editor-field">
-            @Html.TextAreaFor(model => model.strArgument, new { @class = "textAreaCreate" })
-            @Html.ValidationMessageFor(model => model.strArgument)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.strConclusion)
-        </div>
-        <div class="editor-field">
-            @Html.TextAreaFor(model => model.strConclusion, new { @class = "textAreaCreate" })
-            @Html.ValidationMessageFor(model => model.strConclusion)
+        <div class="argumentCreateSparkIt">
+            <div class="editor-field">
+                <h1 style="text-align:center; margin-bottom:20px;">Write something here that will catch your readers interest. Conclusions to your argument really stand out.</h1>
+                <div class="inputContainer">
+                    <div class="inputText">Spark It</div>
+                    @Html.TextAreaFor(model => model.strConclusion, new {@placeholder= "Write your spark here...", @class = "textAreaNormal" })
+                    @Html.ValidationMessageFor(model => model.strConclusion)
+                </div>
+            </div>
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.strCitations)
-        </div>
-        <div class="editor-field">
-            @Html.TextAreaFor(model => model.strCitations, new { @class = "textAreaCreate" })
-            @Html.ValidationMessageFor(model => model.strCitations)
+        <div class="argumentCreateArgument">
+            <h1 style="text-align:center; margin-bottom:20px;">Build your argument. Be creative.</h1>
+            <div class="editor-field">
+                @Html.TextAreaFor(model => model.strArgument, new { @class = "textAreaEditor" })
+                @Html.ValidationMessageFor(model => model.strArgument)
+            </div>
         </div>
 
+        <div class="argumentCreateCitations">
+            <h1 style="text-align:center; margin-bottom:20px;">Cite sources to verify your claims.</h1>
+            <div class="editor-field">
+                @Html.TextAreaFor(model => model.strCitations, new { @class = "textAreaEditor" })
+                @Html.ValidationMessageFor(model => model.strCitations)
+            </div>
+            @*<input type="submit" value="Create" />*@
+        </div>
+
+        @*<input type="button" value="Next" style="margin-left:40%;"/>*@
+
+         <div class="navigationControlView">
+            <ol class="progtrckr" data-progtrckr-steps="5">
+                <li class="progtrckr-done">Spark It</li><!--
+             --><li class="progtrckr-todo">Argument</li><!--
+             --><li class="progtrckr-todo">Citations</li><!--
+             --><li class="progtrckr-todo">Preview</li><!--
+             -->
+            </ol>
+         </div>
 
         @*Hidden Elements*@
         <div class="editor-field" hidden="hidden">
@@ -47,15 +59,15 @@
             @Html.EditorFor(model => model.bIsAgree)
         </div>
 
-        <p>
-            <input type="submit" value="Create" />
-        </p>
+        
     </fieldset>
 }
 
 <script type="text/javascript">
     tinymce.init({
-        invalid_elements : "img",
-        selector: "textarea"
+        //invalid_elements: "img",
+        selector: "textarea.textAreaEditor",
+        plugins: "image, textcolor",
+        toolbar: "insertfile undo redo | styleselect | bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
     });
 </script>
