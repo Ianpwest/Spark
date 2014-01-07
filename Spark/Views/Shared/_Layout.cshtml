@@ -23,20 +23,21 @@
         <div style="padding-top: 80px; overflow:hidden;">
             @RenderBody()
         </div>
+        @*
+          Pop up window
+          If copying HTML code from another part of the body, the ID will cause problems when using CSS or JS
+        *@
+        <div class="semantic-content" id="modal-text" tabindex="-1"
+                 role="dialog" aria-labelledby="modal-label" aria-hidden="true">
 
+            <div class="modal-inner">
+                <div class="modal-content"><!-- The modals content --></div>
+            </div>
+
+            <a href="#!" class="modal-close" title="Close this modal" data-close="Close"
+               data-dismiss="modal">×</a>
+        </div>
         @Scripts.Render("~/bundles/jquery")
         @RenderSection("scripts", required: false)
     </body>
-
-    @*Pop up window*@
-    <section class="semantic-content" id="modal-text" tabindex="-1"
-             role="dialog" aria-labelledby="modal-label" aria-hidden="true">
-
-        <div class="modal-inner">
-            <div class="modal-content"><!-- The modals content --></div>
-        </div>
-
-        <a href="#!" class="modal-close" title="Close this modal" data-close="Close"
-           data-dismiss="modal">×</a>
-    </section>
 </html>
