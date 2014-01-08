@@ -54,35 +54,58 @@
 
 .argumentCreateSparkIt
 {
-    display:none;
-    width:50%;
-    margin: 0 auto;
+    position:absolute;
+    display:block;
+    width:700px;
+    margin-left:20%;
 }
 
 .argumentCreateArgument
 {
+    position:absolute;
     display:none;
-    margin:0 auto;
-    width:50%;
+    width:700px;
+    margin-left:20%;
 }
 
 .argumentCreateCitations
 {
-    display:block;
-    margin:0 auto;
-    width:50%;
+    position:absolute;
+    display:none;
+    width:700px;
+    margin-left:20%;
+}
+
+.argumentCreateReview
+{
+    position:absolute;
+    display:none;
+    width:700px;
+    margin-left:20%;
 }
 
 .navigationControlView
 {
-  margin-top:1%;
-  margin-left:19%;
+  width:90%;
+  position:absolute;
+  margin-top:700px;
+  margin-left:150px;
+}
+
+.buttonPrevious
+{
+    float:left;
+}
+
+.buttonNext
+{
+    float:right;
 }
 
 ol.progtrckr {
     margin: 0;
     padding: 0;
-    list-style-type none;
+    list-style-type: none;
 }
 
 ol.progtrckr li {

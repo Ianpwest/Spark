@@ -12,7 +12,7 @@
 
 // Member/Window variables used to keep track of related position of the transition.
 var m_nTransitionIndex = 0; // current selected index of the page.
-var m_nPixelContainerWidth = 500; // current width of containers to use for left and right animation.
+var m_nPixelContainerLeftPercent = 20; // current width of containers to use for left and right animation.
 
 function SingleTransition(bIsNext)
 {
@@ -45,18 +45,18 @@ function PerformTransitionToIndex(nIndex, nPreviousIndex)
 
 function fadeAway(id) {
     $(document).ready(function () {
-        $("#" + id).animate({ opacity: 0, width: "0px" }, 1000, function () {
-            $("#" + id).css({ visibility: "hidden" });
+        $("#" + id).animate({ opacity: 0, left: "-50%" }, 1000, function () {
+            $("#" + id).css({ display: "none" });
         });
     });
 }
 
 function fadeIn(id) {
     $(document).ready(function () {
-        $("#" + id).css({ opacity: 0.0, visibility: "visible", width: "0px" }).animate({ opacity: 1.0, width: m_nPixelContainerWidth + "px" }, 1000);
+        $("#" + id).css({ opacity: 0.0, display: "block", left: "-50%" }).animate({ opacity: 1.0, left: m_nPixelContainerLeftPercent + "%" }, 1000);
     });
 }
 
-function InitializeContainerWidth(nPixelWidth) {
-    m_nPixelContainerWidth = nPixelWidth;
+function InitializeContainerLeftPercent(nPixelWidth) {
+    m_nPixelContainerLeftPercent = nPixelWidth;
 }
