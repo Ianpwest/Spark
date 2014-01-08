@@ -108,7 +108,7 @@ namespace Spark.Classes
         /// <param name="Request">Http request object.</param>
         /// <param name="Server">Http server utilities object.</param>
         /// <returns></returns>
-        public static bool WriteImageToFile(String strFileName, HttpRequestBase Request, HttpServerUtilityBase Server)
+        public static bool WriteImageToFile(string strFileName, HttpRequestBase Request, HttpServerUtilityBase Server)
         {
             //Add logic here to only accept certain MIME types?
             string strMimeType = Request.Files[0].ContentType;
@@ -145,6 +145,38 @@ namespace Spark.Classes
                 return false;
             }
             return true;
+        }
+
+        public static bool WriteImageToFile(string strFileName, string strImgString, ImageLocation imgLoc, HttpServerUtilityBase Server)
+        {
+            string strBytes = strImgString.Substring(strImgString.IndexOf(',') + 1);
+            byte[] bytes = Convert.FromBase64String(strBytes);
+
+            XDocument xDoc = XDocument.Load(Server.MapPath("~/App_Data/Config.xml"));
+            IEnumerable<XElement> configuration = xDoc.Elements();
+            string strRootFolder = Enum.GetName(typeof(ImageLocation), (int)imgLoc);
+
+            // Extracts the server location of the image files from the config doc.
+            // TODO - can't search through multiple child tags with this method.
+            var strFilePath = (from r in configuration.FirstOrDefault().Elements()
+                               where r.Attribute("name").Value == strRootFolder
+                               select r.Attribute("value").Value).FirstOrDefault();
+
+            if (string.IsNullOrEmpty(strFilePath))
+                // TODO - perform error logging here.
+                return false;
+            strFilePath += strFileName;
+            try
+            {
+                FileStream fs = new FileStream(strFilePath, FileMode.CreateNew, FileAccess.Write);
+                fs.Write(bytes, 0, bytes.Length);
+            }
+            catch (Exception ex)
+            {
+                UtilitiesDatabaseInterface.LogNonUserError("Filestream write error.", ex.ToString(), ex.StackTrace, "Utilities", "WriteImageToFile", "fs");
+                return false;
+            }
+            return false;
         }
 
         /// <summary>
@@ -190,20 +222,8 @@ namespace Spark.Classes
         {
             XDocument xDoc = XDocument.Load(Server.MapPath("~/App_Data/Config.xml"));
             IEnumerable<XElement> configuration = xDoc.Elements();
-            string strRootFolder = "";
-            switch(imgLoc)
-            {
-                case ImageLocation.Spark:
-                    strRootFolder = "sparkImgRoot";
-                    break;
-                case ImageLocation.Category:
-                    strRootFolder = "sparkCategoryImgRoot";
-                    break;
-                case ImageLocation.Tag:
-                    strRootFolder = "sparkTagImgRoot";
-                    break;
-            }
-
+            string strRootFolder = Enum.GetName(typeof(ImageLocation), (int)imgLoc);
+            
             // Extracts the server location of the image files from the config doc.
             // TODO - can't search through multiple child tags with this method.
             var strFilePath = (from r in configuration.FirstOrDefault().Elements()
@@ -227,7 +247,7 @@ namespace Spark.Classes
             }
             catch (Exception ex)
             {
-                UtilitiesDatabaseInterface.LogNonUserError("Filestream error.", ex.ToString(), ex.StackTrace, "SparkController", "GetImage", "fs");
+                UtilitiesDatabaseInterface.LogNonUserError("Filestream read error.", ex.ToString(), ex.StackTrace, "Utilities", "GenerateImageString", "fs");
                 return string.Empty;
             }
 

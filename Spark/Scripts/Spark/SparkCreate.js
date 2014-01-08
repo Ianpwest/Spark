@@ -295,8 +295,19 @@ function popupNewTagWnd()
     $('.modal-content').html(data);
 }
 
-uploadNewTag()
+function uploadNewTag(input)
 {
+    var imgString = input.options[input.selectedIndex].value;
+    $.ajax({
+        type: "Post",
+        datatype: 'json',
+        data: "nCategoryId=" + option,
+        url: "/Spark/GetImage",
+        success: function (data) {
 
+            var img = document.getElementById("imgPreview");
+            img.src = data.message;
+        }
+    });
 }
 
