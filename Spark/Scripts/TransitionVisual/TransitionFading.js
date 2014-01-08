@@ -12,7 +12,7 @@
 
 // Member/Window variables used to keep track of related position of the transition.
 var m_nTransitionIndex = 0; // current selected index of the page.
-var m_nPixelContainerLeftPercent = 20; // current width of containers to use for left and right animation.
+var m_nPixelContainerLeftPercent = 0; // current width of containers to use for left and right animation.
 
 function SingleTransition(bIsNext)
 {
