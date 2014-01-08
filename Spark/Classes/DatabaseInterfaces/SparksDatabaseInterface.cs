@@ -114,8 +114,17 @@ namespace Spark.Classes
                     select r).FirstOrDefault();
         }
 
-        public static Dictionary<int,string> UploadTag(string strName, string p)
+        public static Dictionary<int, string> UploadTag(string strName, string strImgName)
         {
+            sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
+
+            categories cat = new categories();
+            cat.strName = strName;
+            cat.strImageName = strImgName;
+            SaveChanges(db);
+
+            
+
             throw new NotImplementedException();
         }
     }

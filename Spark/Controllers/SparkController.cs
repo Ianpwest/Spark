@@ -116,8 +116,8 @@ namespace Spark.Controllers
         public ActionResult UploadNewTag(string strName, string strImage)
         {
             Guid gImg = Guid.NewGuid();
-            Utilities.WriteImageToFile(gImg.ToString(), Request, Server);
-            SparksDatabaseInterface.UploadTag(strName, string.Empty);
+            Utilities.WriteImageToFile(gImg.ToString(), strImage, ImageLocation.Tag, Server);
+            SparksDatabaseInterface.UploadTag(strName, gImg.ToString());
             return Json(new { success = true, message = string.Empty });
         }
 
