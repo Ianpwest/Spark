@@ -1,5 +1,7 @@
 ﻿@model Spark.Models.arguments
 
+@Scripts.Render("~/Scripts/TransitionVisual/TransitionFading.js")
+
 @using (Html.BeginForm("CreateArgument", "Spark", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
@@ -8,35 +10,44 @@
     <fieldset>
         <legend>arguments</legend>
 
-        <div class="argumentCreateSparkIt">
+        <div class="argumentCreateSparkIt" id="TransitionElement0">
             <div class="editor-field">
                 <h1 style="text-align:center; margin-bottom:20px;">Write something here that will catch your readers interest. Conclusions to your argument really stand out.</h1>
                 <div class="inputContainer">
                     <div class="inputText">Spark It</div>
-                    @Html.TextAreaFor(model => model.strConclusion, new {@placeholder= "Write your spark here...", @class = "textAreaNormal" })
+                    @Html.TextAreaFor(model => model.strConclusion, new { @id = "editorConclusion", @placeholder = "Write your spark here...", @class = "textAreaNormal" })
                     @Html.ValidationMessageFor(model => model.strConclusion)
                 </div>
             </div>
         </div>
 
-        <div class="argumentCreateArgument">
+        <div class="argumentCreateArgument" id="TransitionElement1">
             <h1 style="text-align:center; margin-bottom:20px;">Build your argument. Be creative.</h1>
             <div class="editor-field">
-                @Html.TextAreaFor(model => model.strArgument, new { @class = "textAreaEditor" })
+                @Html.TextAreaFor(model => model.strArgument, new { @id = "editorArgument", @class = "textAreaEditor" })
                 @Html.ValidationMessageFor(model => model.strArgument)
             </div>
         </div>
 
-        <div class="argumentCreateCitations">
+        <div class="argumentCreateCitations" id="TransitionElement2">
             <h1 style="text-align:center; margin-bottom:20px;">Cite sources to verify your claims.</h1>
             <div class="editor-field">
-                @Html.TextAreaFor(model => model.strCitations, new { @class = "textAreaEditor" })
+                @Html.TextAreaFor(model => model.strCitations, new { @id = "editorCitations", @class = "textAreaEditor" })
                 @Html.ValidationMessageFor(model => model.strCitations)
+            </div>
+        </div>
+
+        <div class="argumentCreateReview" id="TransitionElement3">
+            <h1 style="text-align:center; margin-bottom:20px;">Review your work</h1>
+            <div id="previewHTML" class="editor-field">
             </div>
             @*<input type="submit" value="Create" />*@
         </div>
 
         @*<input type="button" value="Next" style="margin-left:40%;"/>*@
+
+        <div class="buttonPrevious" onclick="SingleTransition(false)">Previous</div>
+        <div class="buttonNext" onclick="SingleTransition(true)">Next</div>
 
          <div class="navigationControlView">
             <ol class="progtrckr" data-progtrckr-steps="5">
@@ -48,7 +59,8 @@
             </ol>
          </div>
 
-        @*Hidden Elementfs*@
+
+        @*Hidden Elements*@
         <div class="editor-field" hidden="hidden">
             @Html.EditorFor(model => model.FKAccounts)
         </div>
@@ -64,10 +76,22 @@
 }
 
 <script type="text/javascript">
+
+    InitializeContainerLeftPercent("20");
+
     tinymce.init({
         //invalid_elements: "img",
         selector: "textarea.textAreaEditor",
         plugins: "image, textcolor",
         toolbar: "insertfile undo redo | styleselect | bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
     });
+
+    function dosomethinghere()
+    {
+        //Collect the string to display for review from the previous editors
+        var preview = "Add header for spark here" + $("editorConclusion").val() + "Add header for argument here" + tinyMCE.get('editorArgument').getContent() +
+        "Add header for citations here" + tinyMCE.get('editorCitations').getContent();
+
+        $('previewHTML').html(preview);
+    }
 </script>
