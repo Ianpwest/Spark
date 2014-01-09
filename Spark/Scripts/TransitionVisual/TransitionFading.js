@@ -12,19 +12,29 @@
 
 // Member/Window variables used to keep track of related position of the transition.
 var m_nTransitionIndex = 0; // current selected index of the page.
-var m_nPixelContainerLeftPercent = 0; // current width of containers to use for left and right animation.
+var m_nMaxIndex = 2; // Maximum index, needs to be initialized if not 2
+//var m_nPixelContainerLeftPercent = 0; // current width of containers to use for left and right animation.
 
 function SingleTransition(bIsNext)
 {
     if (bIsNext)
     {
+        if (m_nTransitionIndex == m_nMaxIndex)
+            return;
 
-        PerformTransitionToIndex(m_nTransitionIndex + 1, m_nTransitionIndex);
+        fadeAwayLeft("TransitionElement" + m_nTransitionIndex.toString());
+        fadeInLeft("TransitionElement" + (m_nTransitionIndex + 1).toString());
+        
         m_nTransitionIndex++;
     }
     else
     {
-        PerformTransitionToIndex(m_nTransitionIndex - 1, m_nTransitionIndex);
+        if (m_nTransitionIndex == 0)
+            return;
+
+        fadeAwayRight("TransitionElement" + m_nTransitionIndex.toString());
+        fadeInRight("TransitionElement" + (m_nTransitionIndex - 1).toString());
+
         m_nTransitionIndex--;
     }
 }
@@ -43,7 +53,7 @@ function PerformTransitionToIndex(nIndex, nPreviousIndex)
     fadeIn(strIdNext);
 }
 
-function fadeAway(id) {
+function fadeAwayLeft(id) {
     $(document).ready(function () {
         $("#" + id).animate({ opacity: 0, left: "-50%" }, 1000, function () {
             $("#" + id).css({ display: "none" });
@@ -51,12 +61,36 @@ function fadeAway(id) {
     });
 }
 
-function fadeIn(id) {
+function fadeAwayRight(id) {
     $(document).ready(function () {
-        $("#" + id).css({ opacity: 0.0, display: "block", left: "-50%" }).animate({ opacity: 1.0, left: m_nPixelContainerLeftPercent + "%" }, 1000);
+        $("#" + id).animate({ opacity: 0, left: "50%" }, 1000, function () {
+            $("#" + id).css({ display: "none" });
+        });
     });
 }
 
-function InitializeContainerLeftPercent(nPixelWidth) {
-    m_nPixelContainerLeftPercent = nPixelWidth;
+function fadeInRight(id) {
+    $(document).ready(function () {
+        $("#" + id).css({ opacity: 0.0, display: "block", left: "-50%" }).animate({ opacity: 1.0, left: "0%" }, 1000);
+    });
 }
+
+function fadeInLeft(id) {
+    $(document).ready(function () {
+        $("#" + id).css({ opacity: 0.0, display: "block", left: "50%" }).animate({ opacity: 1.0, left: "0%" }, 1000);
+    });
+}
+
+function InitializeMaxIndex(nIndexMax)
+{
+    m_nMaxIndex = nIndexMax;
+}
+
+function SetProgressBar(nIndex)
+{
+
+}
+
+//function InitializeContainerLeftPercent(nPixelWidth) {
+//    m_nPixelContainerLeftPercent = nPixelWidth;
+//}
