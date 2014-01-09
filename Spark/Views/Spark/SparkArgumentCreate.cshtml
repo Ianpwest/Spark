@@ -1,7 +1,5 @@
 ﻿@model Spark.Models.arguments
 
-@Scripts.Render("~/Scripts/TransitionVisual/TransitionFading.js")
-
 @using (Html.BeginForm("CreateArgument", "Spark", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
@@ -51,7 +49,7 @@
 
          <div class="navigationControlView">
             <ol class="progtrckr" data-progtrckr-steps="5">
-                <li class="progtrckr-done">Spark It</li><!--
+                <li class="progtrckr-todo">Spark It</li><!--
              --><li class="progtrckr-todo">Argument</li><!--
              --><li class="progtrckr-todo">Citations</li><!--
              --><li class="progtrckr-todo">Preview</li><!--
