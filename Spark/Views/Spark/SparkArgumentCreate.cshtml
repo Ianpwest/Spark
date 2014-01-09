@@ -47,7 +47,7 @@
         @*<input type="button" value="Next" style="margin-left:40%;"/>*@
 
         <div class="buttonPrevious" onclick="SingleTransition(false)">Previous</div>
-        <div class="buttonNext" onclick="SingleTransition(true)">Next</div>
+        <div class="buttonNext" onclick="SingleTransition(true); UpdateReview()">Next</div>
 
          <div class="navigationControlView">
             <ol class="progtrckr" data-progtrckr-steps="5">
@@ -86,12 +86,12 @@
         toolbar: "insertfile undo redo | styleselect | bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
     });
 
-    function dosomethinghere()
+    function UpdateReview()
     {
-        //Collect the string to display for review from the previous editors
-        var preview = "Add header for spark here" + $("editorConclusion").val() + "Add header for argument here" + tinyMCE.get('editorArgument').getContent() +
-        "Add header for citations here" + tinyMCE.get('editorCitations').getContent();
+        var conclusion = "Add header for spark here \r\n\r\n" + $('#editorConclusion').val();
+        var spark = "Add header for argument here" + tinyMCE.get('editorArgument').getContent();
+        var citations = "Add header for citations here" + tinyMCE.get('editorCitations').getContent();
 
-        $('previewHTML').html(preview);
+        $('#previewHTML').html(conclusion + spark + citations);
     }
 </script>
