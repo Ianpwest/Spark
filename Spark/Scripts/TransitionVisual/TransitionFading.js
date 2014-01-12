@@ -24,7 +24,7 @@ function SingleTransition(bIsNext)
 
         fadeAwayLeft("TransitionElement" + m_nTransitionIndex.toString());
         fadeInLeft("TransitionElement" + (m_nTransitionIndex + 1).toString());
-        
+        ProgressBar(m_nTransitionIndex, true);
         m_nTransitionIndex++;
     }
     else
@@ -34,24 +34,24 @@ function SingleTransition(bIsNext)
 
         fadeAwayRight("TransitionElement" + m_nTransitionIndex.toString());
         fadeInRight("TransitionElement" + (m_nTransitionIndex - 1).toString());
-
         m_nTransitionIndex--;
+        ProgressBar(m_nTransitionIndex, false);
     }
 }
 
-function TransitionTo(nIndex)
-{
-    PerformTransitionToIndex(nIndex, m_nTransitionIndex);
-    m_nTransitionIndex = nIndex;
-}
+//function TransitionTo(nIndex)
+//{
+//    PerformTransitionToIndex(nIndex, m_nTransitionIndex);
+//    m_nTransitionIndex = nIndex;
+//}
 
-function PerformTransitionToIndex(nIndex, nPreviousIndex)
-{
-    var strIdNext = "TransitionElement" + nIndex.toString();
-    var strIdPrev = "TransitionElement" + nPreviousIndex.toString();
-    fadeAway(strIdPrev);
-    fadeIn(strIdNext);
-}
+//function PerformTransitionToIndex(nIndex, nPreviousIndex)
+//{
+//    var strIdNext = "TransitionElement" + nIndex.toString();
+//    var strIdPrev = "TransitionElement" + nPreviousIndex.toString();
+//    fadeAway(strIdPrev);
+//    fadeIn(strIdNext);
+//}
 
 function fadeAwayLeft(id) {
     $(document).ready(function () {
@@ -86,9 +86,15 @@ function InitializeMaxIndex(nIndexMax)
     m_nMaxIndex = nIndexMax;
 }
 
-function SetProgressBar(nIndex)
+function ProgressBar(nIndex, bIsForward)
 {
+    var ol = document.getElementsByClassName("progtrckr")[0];
+    var children = ol.children;
 
+    if (bIsForward)
+        children[nIndex].className = "progtrckr-done";
+    else
+        children[nIndex].className = "progtrckr-todo";
 }
 
 //function InitializeContainerLeftPercent(nPixelWidth) {
