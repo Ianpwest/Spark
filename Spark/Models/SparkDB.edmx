@@ -27,14 +27,14 @@
           <Property Name="strArgument" Type="text" Nullable="false" />
           <Property Name="nFlagCount" Type="int" />
           <Property Name="strConclusion" Type="text" Nullable="false" />
-          <Property Name="strCitations" Type="text" Nullable="false" />
+          <Property Name="strCitations" Type="text" />
           <Property Name="bIsAgree" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="categories">
           <Key>
             <PropertyRef Name="PK" />
           </Key>
-          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="strName" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="strImageName" Type="varchar" MaxLength="150" />
         </EntityType>

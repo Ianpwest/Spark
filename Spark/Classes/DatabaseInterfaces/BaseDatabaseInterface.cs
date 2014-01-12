@@ -260,6 +260,7 @@ namespace Spark.Classes.DatabaseInterfaces
         {
             try
             {
+                database.GetValidationErrors();
                 database.SaveChanges();
             }
             catch

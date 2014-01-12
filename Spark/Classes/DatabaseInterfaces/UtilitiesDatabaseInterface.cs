@@ -33,59 +33,26 @@ namespace Spark.Classes
             return dictSubjectMatters;
         }
 
+        /// <summary>
+        /// Returns the subject matter image name given the subject matter's primary key.
+        /// Returns null if query fails.
+        /// </summary>
+        /// <param name="nSubjectMatterId">Primary key of the subject matter.</param>
+        /// <returns></returns>
         public static string GetSubjectMatterImageName(int nSubjectMatterId)
         {
             return (from r in m_db.subjectmatters
                     where r.PK == nSubjectMatterId
                     select r.strImageName).FirstOrDefault();
         }
-
-        public static Dictionary<int, string> GetTagIdAndNames()
-        {
-            var qryAllTags = from r in m_db.categories
-                             select r;
-            if (qryAllTags == null || qryAllTags.Count() < 1)
-            {
-                LogNonUserError("Unable to get tags from the database.", "", "", "DbUtil class", "GetTagIdAndNames", "qryAllTags");
-                return null;
-            }
-
-            Dictionary<int, string> dictIdNames = new Dictionary<int, string>();
-
-            foreach (Spark.Models.categories cat in qryAllTags)
-            {
-                if (dictIdNames.ContainsKey(cat.PK))
-                    continue;
-
-                dictIdNames.Add(cat.PK, cat.strName);
-            }
-
-            return dictIdNames;
-        }
-
-        public static Dictionary<int, string> GetTagIdAndImageNames()
-        {
-            var qryAllTags = from r in m_db.categories
-                             select r;
-            if (qryAllTags == null || qryAllTags.Count() < 1)
-            {
-                LogNonUserError("Unable to get tags from the database.", "", "", "DbUtil class", "GetTagIdAndImageNames", "qryAllTags");
-                return null;
-            }
-
-            Dictionary<int, string> dictIdImg = new Dictionary<int, string>();
-
-            foreach (Spark.Models.categories cat in qryAllTags)
-            {
-                if (dictIdImg.ContainsKey(cat.PK))
-                    continue;
-
-                dictIdImg.Add(cat.PK, cat.strImageName);
-            }
-
-            return dictIdImg;
-        }
-
+        
+        /// <summary>
+        /// Populates the TagIdAndName and TagIdAndImages dictionaries of the sparkModel that is passed in as a parameter.
+        /// Populates the data using the database categories table. For the dictionaries, key is the PK. The values will be either
+        /// the strName or strImageName for the respective dictionaries.
+        /// </summary>
+        /// <param name="sparkModel"></param>
+        /// <returns></returns>
         public static bool GenerateTagInfoForSpark(Spark.Models.SparkCreateModel sparkModel)
         {
             var qryAllTags = from r in m_db.categories

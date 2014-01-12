@@ -297,16 +297,34 @@ function popupNewTagWnd()
 
 function uploadNewTag(input)
 {
-    var imgString = input.options[input.selectedIndex].value;
+    var Image = document.getElementsByClassName("imgNewTagImage")[0].src;
+    var Name = document.getElementsByClassName("inputNewTagName")[1].value;
     $.ajax({
         type: "Post",
         datatype: 'json',
-        data: "nCategoryId=" + option,
-        url: "/Spark/GetImage",
+        data: {strName: Name, strImage: Image},
+        url: "/Spark/UploadNewTag",
         success: function (data) {
 
-            var img = document.getElementById("imgPreview");
-            img.src = data.message;
+            var split = data.message.split(",");
+            
+            var tableTags = document.getElementById("tableAvailableTags");
+            var tBody = tableTags.tBodies[0];
+            var newRow = tBody.insertRow();
+            var firstCell = newRow.insertCell();
+            firstCell.style.width = "75%";
+            firstCell.onclick = function () { testCells(firstCell) };
+            firstCell.id = "availableTag" + split[0].toString();
+            firstCell.innerHTML = split[1];
+            
+            var secondCell = newRow.insertCell();
+            var newImg = document.createElement("img");
+            newImg.style.height = "40px"; newImg.style.width = "40px";
+            newImg.src = split[2] + "," + split[3]; // Split initially removed commas, adding comma back in between data encoding and data.
+            secondCell.appendChild(newImg);
+
+            var modalCloser = document.getElementsByClassName("modal-close")[0];
+            modalCloser.click();
         }
     });
 }

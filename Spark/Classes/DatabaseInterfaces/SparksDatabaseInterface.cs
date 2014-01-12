@@ -114,18 +114,26 @@ namespace Spark.Classes
                     select r).FirstOrDefault();
         }
 
-        public static Dictionary<int, string> UploadTag(string strName, string strImgName)
+        /// <summary>
+        /// Uploads a tag to the database and returns a keyvaluepair<int,string> : key = PK, value = strName.
+        /// Returns int.MinValue, string.empty if unsuccessful in the upload.
+        /// </summary>
+        /// <param name="strName"></param>
+        /// <param name="strImgName"></param>
+        /// <returns></returns>
+        public static KeyValuePair<int,string> UploadTag(string strName, string strImgName)
         {
             sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
 
             categories cat = new categories();
             cat.strName = strName;
             cat.strImageName = strImgName;
-            SaveChanges(db);
 
-            
+            db.categories.Add(cat);
+            if (!SaveChanges(db))
+                return new KeyValuePair<int,string>(int.MinValue, string.Empty);
 
-            throw new NotImplementedException();
+            return new KeyValuePair<int,string>(cat.PK, cat.strName);
         }
     }
 }
