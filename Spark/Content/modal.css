@@ -17,10 +17,19 @@
 
 /*//Spark Argument Create CSS*/
 
+h1
+{
+    text-align: center;
+    margin-bottom: 20px; 
+    background: #1882A8; 
+    color: white; 
+    width: 100%;
+}
+
 .textAreaEditor
 {
-    height:500px;
-    min-height:200px;
+    height:600px;
+    min-height:400px;
 }
 
 .textAreaNormal
@@ -51,45 +60,24 @@
   transition: all .5s ease-in;
 }
 
-
-.argumentCreateSparkIt
-{
-    position:absolute;
-    display:block;
-    width:700px;
-    margin-left:20%;
-}
-
-.argumentCreateArgument
+.argumentCreateSparkIt, .argumentCreateArgument, .argumentCreateCitations, .argumentCreateReview
 {
     position:absolute;
     display:none;
     width:700px;
-    margin-left:20%;
+    margin-left:25%;
 }
-
-.argumentCreateCitations
-{
-    position:absolute;
-    display:none;
-    width:700px;
-    margin-left:20%;
-}
-
-.argumentCreateReview
-{
-    position:absolute;
-    display:none;
-    width:700px;
-    margin-left:20%;
-}
+    .argumentCreateSparkIt
+    {
+        display:block;
+    }
 
 .navigationControlView
 {
   width:90%;
   position:absolute;
   margin-top:700px;
-  margin-left:150px;
+  margin-left:200px;
 }
 
 .buttonPrevious

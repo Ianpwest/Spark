@@ -12,7 +12,7 @@
 
         <div class="argumentCreateSparkIt" id="TransitionElement0">
             <div class="editor-field">
-                <h1 style="text-align:center; margin-bottom:20px;">Write something here that will catch your readers interest. Conclusions to your argument really stand out.</h1>
+                <h1 style="text-align:center; margin-bottom:20px;">Write something here that will catch your readers interest.</h1>
                 <div class="inputContainer">
                     <div class="inputText">Spark It</div>
                     @Html.TextAreaFor(model => model.strConclusion, new { @id = "editorConclusion", @placeholder = "Write your spark here...", @class = "textAreaNormal" })
@@ -22,7 +22,7 @@
         </div>
 
         <div class="argumentCreateArgument" id="TransitionElement1">
-            <h1 style="text-align:center; margin-bottom:20px;">Build your argument. Be creative.</h1>
+            <h1>Build your argument. Be creative.</h1>
             <div class="editor-field">
                 @Html.TextAreaFor(model => model.strArgument, new { @id = "editorArgument", @class = "textAreaEditor" })
                 @Html.ValidationMessageFor(model => model.strArgument)
@@ -30,7 +30,7 @@
         </div>
 
         <div class="argumentCreateCitations" id="TransitionElement2">
-            <h1 style="text-align:center; margin-bottom:20px;">Cite sources to verify your claims.</h1>
+            <h1>Cite sources to verify your claims.</h1>
             <div class="editor-field">
                 @Html.TextAreaFor(model => model.strCitations, new { @id = "editorCitations", @class = "textAreaEditor" })
                 @Html.ValidationMessageFor(model => model.strCitations)
@@ -38,13 +38,11 @@
         </div>
 
         <div class="argumentCreateReview" id="TransitionElement3">
-            <h1 style="text-align:center; margin-bottom:20px;">Review your work</h1>
-            <div id="previewHTML" class="editor-field">
+            <h1>Review your work</h1>
+            <div id="previewHTML" class="editor-field" style="text-align:center; background:white; min-height:500px;">
             </div>
-            <input type="submit" value="Create" />
+            <input type="submit" value="Create" style="margin-left:40%;" />
         </div>
-
-        @*<input type="button" value="Next" style="margin-left:40%;"/>*@
 
         <div class="buttonPrevious" onclick="SingleTransition(false)">Previous</div>
         <div class="buttonNext" onclick="SingleTransition(true); UpdateReview()">Next</div>
@@ -81,6 +79,7 @@
 
     tinymce.init({
         //invalid_elements: "img",
+        height:"500",
         selector: "textarea.textAreaEditor",
         plugins: "image, textcolor",
         toolbar: "insertfile undo redo | styleselect | bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
@@ -88,10 +87,10 @@
 
     function UpdateReview()
     {
-        var conclusion = "Add header for spark here \r\n\r\n" + $('#editorConclusion').val();
-        var spark = "Add header for argument here" + tinyMCE.get('editorArgument').getContent();
-        var citations = "Add header for citations here" + tinyMCE.get('editorCitations').getContent();
+        var conclusion = "<h2>Spark</h2> <br>" + $('#editorConclusion').val();
+        var argument = "<h2>Argument</h2> <br>" + tinyMCE.get('editorArgument').getContent();
+        var citations = "<h2>Citations</h2> <br>" + tinyMCE.get('editorCitations').getContent();
 
-        $('#previewHTML').html(conclusion + spark + citations);
+        $('#previewHTML').html(conclusion + "<br>" + argument + "<br>" + citations);
     }
 </script>
