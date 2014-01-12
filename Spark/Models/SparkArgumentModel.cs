@@ -21,6 +21,7 @@ namespace Spark.Models
         public int nInfluenceScore { get; set; }
 
         [Required]
+        [StringLength(int.MaxValue, MinimumLength = 1, ErrorMessage = "Please fill out the Spark It section!")]
         public string strConclusion { get; set; }
 
         public int nArgumentScore { get; set; }
