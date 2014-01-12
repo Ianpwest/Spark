@@ -10,19 +10,6 @@ p, a
     font-size:18px;
 }
 
-.actionLink
-{   
-    text-align:center;
-    display:block;
-    margin-left:-8px;
-    padding-top:2px;
-    font-size:12px;
-
-    position:relative;
-    width:70px;
-    height:20px;
-}
-
 .NavigationBarHomeIcon:hover, selected,
 .NavigationBarQueryIcon:hover, selected,
 .NavigationBarCategoryIcon:hover, selected,
@@ -157,6 +144,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 {
   float:right;
   height:1.5em;
+  width:200px;
 }
 
 .NavigationBarLoginContainer button

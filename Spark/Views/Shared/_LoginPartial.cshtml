@@ -37,15 +37,19 @@
 else
 {
     <div class="NavigationBarLoginContainer">
-      <button style="background-color:#FF3300" type="button">
-        @Html.ActionLink("Register", "Register", "Account", null, new { @class = "actionLink" })
-      </button>
-       <div class="NavigationBarDivideRegLog">
-         &nbsp
-       </div>  
-       <button style="background-color:#1A1A1A" type="button">
-        @Html.ActionLink("Log In", "Login", "Account", null, new { @class = "actionLink" })
-       </button>
-    </div>
+        <form action="/Account/Register">
+            <button style="background-color:#FF3300" type="submit">
+                Register
+            </button>
+            </form>
+            <div class="NavigationBarDivideRegLog">
+                &nbsp
+            </div>
+        <form action="/Account/Login">
+            <button style="background-color:#1A1A1A" type="submit">
+                Login
+            </button>
+            </form>
+</div>
   
 }

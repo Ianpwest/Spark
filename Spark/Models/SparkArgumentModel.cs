@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -19,14 +20,17 @@ namespace Spark.Models
 
         public int nInfluenceScore { get; set; }
 
+        [Required]
         public string strConclusion { get; set; }
 
         public int nArgumentScore { get; set; }
 
+        [Required]
         public string strCitations { get; set; }
 
         public bool bIsAgree { get; set; }
 
+        [Required]
         public string strArgument { get; set; }
     }
 }
