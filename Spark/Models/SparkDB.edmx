@@ -982,7 +982,7 @@
           <NavigationProperty Name="comments" Relationship="Self.FK_comments_arguments" FromRole="arguments" ToRole="comments" />
           <Property Name="nFlagCount" Type="Int32" />
           <Property Name="strConclusion" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
-          <Property Name="strCitations" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="strCitations" Type="String" Nullable="true" MaxLength="65535" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="categories">
           <Key>

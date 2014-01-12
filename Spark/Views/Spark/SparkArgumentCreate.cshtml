@@ -1,6 +1,6 @@
 ﻿@model Spark.Models.arguments
 
-@using (Html.BeginForm("CreateArgument", "Spark", FormMethod.Post))
+@using (Html.BeginForm("CreateArgument", "Spark", FormMethod.Post, new { @id = "CreateArgumentForm" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -40,7 +40,7 @@
             @*<div id="previewHTML" class="editor-field" style="width:775px;background:white; min-height:500px;">
             </div>*@
             <textarea id="editorReview" class="txtAreaReview"></textarea>
-            <input type="submit" value="Create" style="margin-left:40%;" />
+            <input type="button" onclick="SubmitForm()" value="Create" style="margin-left:40%;" />
         </div>
 
         <div class="buttonPrevious" onclick="SingleTransition(false)">Previous</div>
@@ -108,5 +108,16 @@
 
         //$('#previewHTML').html(conclusion + "<br>" + argument + "<br>" + citations);
         tinyMCE.get('editorReview').setContent(conclusion + "<br>" + argument + "<br>" + citations);
+    }
+
+    function SubmitForm()
+    {
+        if ($('#editorConclusion').val() == "" || tinyMCE.get('editorArgument').getContent() == "")
+        {
+            alert("You must fill out the spark it and argument section before submitting");
+            return;
+        }
+
+        $("#CreateArgumentForm").submit();
     }
 </script>
