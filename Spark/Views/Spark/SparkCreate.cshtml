@@ -61,21 +61,24 @@
                         </thead>
                         <tbody style="overflow:auto; display:block; height:200px;">
                             @{
-                                foreach (KeyValuePair<int, string> kvp in Model.TagIdAndNames)
-                                {
-                                    <tr>
-                                        <td style="width:75%;" onclick="testCells(this)" id=@String.Concat("availableTag" + kvp.Key)>
-                                            @kvp.Value
-                                        </td>
-                                        <td><img src="@Model.TagIdAndImages[kvp.Key]" height="40" width="40" /></td>
-                                    </tr>
+                                if(Model.TagIdAndNames != null)
+                                { 
+                                    foreach (KeyValuePair<int, string> kvp in Model.TagIdAndNames)
+                                    {
+                                        <tr>
+                                            <td style="width:75%;" onclick="testCells(this)" id=@String.Concat("availableTag" + kvp.Key)>
+                                                @kvp.Value
+                                            </td>
+                                            <td><img src="@Model.TagIdAndImages[kvp.Key]" height="40" width="40" /></td>
+                                        </tr>
+                                    }
                                 }
                             }
                         </tbody>
                     </table>
                     <div id="divTagPopup" style="display:none;">
                         <div id="divNewTagName">
-                            <input id="inputNewTagName" type="text" value="Choose Name" />
+                            <input class="inputNewTagName" type="text" value="Choose Name" />
                         </div>
                         <div class="divNewTagMiddleRow">
                             <input id="inputNewTagUpload" type="file" onchange="readUrl(this)" />

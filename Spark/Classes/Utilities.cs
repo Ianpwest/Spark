@@ -165,18 +165,24 @@ namespace Spark.Classes
             if (string.IsNullOrEmpty(strFilePath))
                 // TODO - perform error logging here.
                 return false;
+
+            // Adds .jpg to the end of the filename if it does not already contain .jpg or .jpeg.
+            if (!strFileName.ToLower().EndsWith(".jpg"))
+                strFileName += ".jpg";
+
             strFilePath += strFileName;
             try
             {
                 FileStream fs = new FileStream(strFilePath, FileMode.CreateNew, FileAccess.Write);
                 fs.Write(bytes, 0, bytes.Length);
+                fs.Close();
             }
             catch (Exception ex)
             {
                 UtilitiesDatabaseInterface.LogNonUserError("Filestream write error.", ex.ToString(), ex.StackTrace, "Utilities", "WriteImageToFile", "fs");
                 return false;
             }
-            return false;
+            return true;
         }
 
         /// <summary>
@@ -236,7 +242,8 @@ namespace Spark.Classes
             byte[] byArray = new byte[0];
             FileStream fs;
             BinaryReader br;
-
+            if (!strFileName.ToLower().EndsWith(".jpg"))
+                strFileName += ".jpg";
             try
             {
                 fs = new FileStream(strFilePath + strFileName, FileMode.Open, FileAccess.Read);
@@ -244,6 +251,7 @@ namespace Spark.Classes
                 br = new BinaryReader(fs);
 
                 byArray = br.ReadBytes((int)fs.Length);
+                fs.Close();
             }
             catch (Exception ex)
             {
