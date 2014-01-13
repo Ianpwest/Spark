@@ -150,6 +150,9 @@ namespace Spark.Controllers
             List<SparkArgumentModel> lstArgumentsAgree = new List<SparkArgumentModel>();
             List<SparkArgumentModel> lstArgumentsDisagree = new List<SparkArgumentModel>();
 
+            lstReturn.Add(lstArgumentsAgree);
+            lstReturn.Add(lstArgumentsDisagree);
+
             //Begin Testing code
             List<Models.arguments> lstArguments = SparksDatabaseInterface.GetAllArgumentsForSpark(1); //hard coded id, controller method should take an id
 
@@ -157,7 +160,7 @@ namespace Spark.Controllers
             //No arguments were found
             if (lstArguments == null || lstArguments.Count == 0)
             {
-                return null;
+                return lstReturn;
             }
 
             //Run analytics and create sparkArgumentModels to return
@@ -171,10 +174,6 @@ namespace Spark.Controllers
                 else
                     lstArgumentsDisagree.Add(sam);
             }
-
-            //Prepare the lists to be returned
-            lstReturn.Add(lstArgumentsAgree);
-            lstReturn.Add(lstArgumentsDisagree);
 
             return lstReturn;
         }

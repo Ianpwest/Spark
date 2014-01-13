@@ -975,7 +975,7 @@
           <Property Name="PK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FKSparks" Type="Int32" Nullable="false" />
           <Property Name="FKAccounts" Type="Int32" Nullable="false" />
-          <Property Name="strArgument" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="strArgument" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="bIsAgree" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="accounts" Relationship="Self.FK_arguments_accounts" FromRole="arguments" ToRole="accounts" />
           <NavigationProperty Name="sparks" Relationship="Self.FK_arguments_sparks" FromRole="arguments" ToRole="sparks" />

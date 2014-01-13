@@ -263,6 +263,7 @@ ol.progtrckr li.progtrckr-todo:before {
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAEElEQVR42gEFAPr/AAAAAMwA0QDNTiUx4gAAAABJRU5ErkJggg==");
 }
 .semantic-content .modal-close:after {
+  visibility:hidden;
   content: '\00d7';
   width:50px;
   position: absolute;

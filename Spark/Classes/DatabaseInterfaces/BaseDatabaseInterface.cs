@@ -193,7 +193,7 @@ namespace Spark.Classes.DatabaseInterfaces
             db.interactionlog.Add(log);
             SaveChanges(db);
         }
-        
+
         /// <summary>
         /// Attempts to find the user identity PK from the database that is associated with the given username stored by microsoft's built in User framework.
         /// Returns the numeric Id or int.MinValue if no Id can be found.
@@ -268,6 +268,17 @@ namespace Spark.Classes.DatabaseInterfaces
                 //LogError(strUserId, "Generate Error", ex.ToString(), ex.StackTrace);
                 return false;
             }
+            //use this if you're having validation exceptions
+            //catch (DbEntityValidationException dbEx)
+            //{
+            //    foreach (var validationErrors in dbEx.EntityValidationErrors)
+            //    {
+            //        foreach (var validationError in validationErrors.ValidationErrors)
+            //        {
+            //            string str =  validationError.PropertyName + validationError.ErrorMessage;
+            //        }
+            //    }
+            //}
 
             return true;
         }

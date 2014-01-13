@@ -37,8 +37,6 @@
 
         <div class="argumentCreateReview" id="TransitionElement3">
             <h1 id="testing">Review your work</h1>
-            @*<div id="previewHTML" class="editor-field" style="width:775px;background:white; min-height:500px;">
-            </div>*@
             <textarea id="editorReview" class="txtAreaReview"></textarea>
             <input type="button" onclick="SubmitForm()" value="Create" style="margin-left:40%;" />
         </div>
@@ -81,9 +79,10 @@
         height: "500",
         width: 775,
         resize: false,
+        browser_spellcheck: true,
         content_css: "/Content/TinyMCEDefault.css",
         selector: "textarea.textAreaEditor",
-        plugins: "image, textcolor",
+        plugins: "image, textcolor, wordcount",
         toolbar: "insertfile undo redo | styleselect | bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
     });
 
@@ -112,6 +111,7 @@
 
     function SubmitForm()
     {
+        //Make sure the required fields have been filled with at least one character.
         if ($('#editorConclusion').val() == "" || tinyMCE.get('editorArgument').getContent() == "")
         {
             alert("You must fill out the spark it and argument section before submitting");
@@ -120,4 +120,5 @@
 
         $("#CreateArgumentForm").submit();
     }
+
 </script>
