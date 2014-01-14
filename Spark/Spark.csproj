@@ -289,6 +289,7 @@
     </Content>
     <Content Include="Content\ajax-loader.gif" />
     <Content Include="Content\BlankImage.gif" />
+    <Content Include="Content\images\LeftArrow.png" />
     <Content Include="Content\modal.css" />
     <Content Include="Content\NavigationBar.css" />
     <Content Include="Content\Portal.css" />
@@ -353,6 +354,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Images\gray_texture_background.png" />
+    <Content Include="Content\images\RightArrow.png" />
     <Content Include="Images\Icons\SparkIcon1.png" />
     <Content Include="Images\Icons\plus.png" />
     <Content Include="Scripts\ArgumentExpansion.js" />

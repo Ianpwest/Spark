@@ -23,7 +23,7 @@ h1
     margin-bottom: 20px; 
     background: #1882A8; 
     color: white; 
-    width: 775px;
+    width: 101.5%;
 }
 
 .textAreaEditor
@@ -57,7 +57,7 @@ h1
   color:white;
   background:#ff4500;
   text-align:center;
-  width:775px;
+  width:101.5%;
   
   transition: all .5s ease-in;
 }
@@ -76,7 +76,7 @@ h1
 
 .navigationControlView
 {
-  width:90%;
+  width:100%;
   position:absolute;
   margin-top:700px;
   margin-left:200px;
@@ -85,16 +85,26 @@ h1
 .buttonPrevious
 {
     float:left;
+    width:130px;
+    height:100px;
+    background-image: url('images/LeftArrow.png');
+    background-repeat:no-repeat;
+    cursor:pointer;
+    
 }
 
 .buttonNext
 {
     float:right;
+    width:130px;
+    height:100px;
+    background-image: url('images/RightArrow.png');
+    background-repeat:no-repeat;
+    cursor:pointer;
 }
 
 ol.progtrckr {
     margin: 0;
-    padding: 0;
     list-style-type: none;
 }
 

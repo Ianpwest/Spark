@@ -16,6 +16,8 @@
     @Scripts.Render("~/Scripts/PageLoad.js")
     @Scripts.Render("~/Scripts/tinymce/tinymce.min.js")
     @Scripts.Render("~/Scripts/TransitionVisual/TransitionFading.js")
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
     </head>
     <body>
         <header>
@@ -32,13 +34,11 @@
                  role="dialog" aria-labelledby="modal-label" aria-hidden="true">
 
             <div class="modal-inner">
-                <div class="modal-content"><img src="/Content/ajax-loader.gif" alt="Loading..." /></div>
+                <div class="modal-content"><img style="margin-left:50%; margin-top:50%;" src="/Content/ajax-loader.gif" alt="Loading..." /></div>
             </div>
 
             <a href="#!" class="modal-close" title="Close this modal" data-close="Close"
                data-dismiss="modal">×</a>
         </div>
-        @Scripts.Render("~/bundles/jquery")
-        @RenderSection("scripts", required: false)
     </body>
 </html>
