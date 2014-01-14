@@ -57,4 +57,5 @@ function addComment() {
     }
 
     document.getElementById('sparkArgumentAddComment').style.display = display;
+    $("#btnAddComment").html(btnText);
 }

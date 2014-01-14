@@ -211,7 +211,7 @@ ol.progtrckr li.progtrckr-todo:before {
 .semantic-content .modal-inner {
   position: absolute;
   top: 50px;
-  left: 30%;
+  left: 27%;
   z-index: 20;
   margin-left: -325px;
   width: 80%;

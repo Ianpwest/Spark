@@ -1,5 +1,7 @@
 ﻿@model Spark.Models.arguments
 
+@Scripts.Render("~/Scripts/ArgumentCreate.js")
+
 @using (Html.BeginForm("CreateArgument", "Spark", FormMethod.Post, new { @id = "CreateArgumentForm" }))
 {
     @Html.AntiForgeryToken()
@@ -13,7 +15,7 @@
                 <h1 style="text-align:center; margin-bottom:20px;">Spark interest.</h1>
                 <div class="inputContainer">
                     <div class="inputText">Spark It</div>
-                    @Html.TextAreaFor(model => model.strConclusion, new { @id = "editorConclusion", @placeholder = "Write your spark here...", @class = "textAreaNormal" })
+                    @Html.TextAreaFor(model => model.strConclusion, new { @id = "editorConclusion", @placeholder = "Write your spark here...", @maxlength = 1500, @class = "textAreaNormal" })
                     @Html.ValidationMessageFor(model => model.strConclusion)
                 </div>
             </div>
@@ -70,55 +72,3 @@
     </fieldset>
 }
 
-<script type="text/javascript">
-
-    InitializeMaxIndex(3);
-
-    tinymce.init({
-        //invalid_elements: "img",
-        height: "500",
-        width: 775,
-        resize: false,
-        browser_spellcheck: true,
-        content_css: "/Content/TinyMCEDefault.css",
-        selector: "textarea.textAreaEditor",
-        plugins: "image, textcolor, wordcount",
-        toolbar: "insertfile undo redo | styleselect | bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
-    });
-
-    tinymce.init({
-        height: "500",
-        width: 775,
-        resize: false,
-        readonly: 1,
-        content_css: "/Content/TinyMCEDefault.css",
-        selector: "textarea.txtAreaReview",
-        plugins: "",
-        menubar: "false",
-        statusbar: "false",
-        toolbar: "false"
-    });
-
-    function UpdateReview()
-    {
-        var conclusion = "<h2 style=\"text-align:center\">Spark</h2> <br>" + $('#editorConclusion').val();
-        var argument = "<h2 style=\"text-align:center\">Argument</h2> <br>" + tinyMCE.get('editorArgument').getContent({ format: 'html' });
-        var citations = "<h2 style=\"text-align:center\">Citations</h2> <br>" + tinyMCE.get('editorCitations').getContent({ format: 'html' });
-
-        //$('#previewHTML').html(conclusion + "<br>" + argument + "<br>" + citations);
-        tinyMCE.get('editorReview').setContent(conclusion + "<br>" + argument + "<br>" + citations);
-    }
-
-    function SubmitForm()
-    {
-        //Make sure the required fields have been filled with at least one character.
-        if ($('#editorConclusion').val() == "" || tinyMCE.get('editorArgument').getContent() == "")
-        {
-            alert("You must fill out the spark it and argument section before submitting");
-            return;
-        }
-
-        $("#CreateArgumentForm").submit();
-    }
-
-</script>
