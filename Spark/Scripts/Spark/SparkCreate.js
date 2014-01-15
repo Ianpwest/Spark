@@ -161,9 +161,9 @@ function testCells(input) {
         input.className = "";
     }
     else if (cellArray.length < 5) {
-        obj.style.backgroundColor = "#FF0000";
+        obj.style.backgroundColor = "#C0C0C0";
         obj.className = "clickedCell";
-        input.style.backgroundColor = "#FF0000";
+        input.style.backgroundColor = "#C0C0C0";
         input.className = "clickedCell";
 
         addRow(obj.innerHTML, idSelected);

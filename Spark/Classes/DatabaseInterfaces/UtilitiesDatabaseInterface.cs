@@ -21,7 +21,12 @@ namespace Spark.Classes
             var qrySubjectMatters = from r in m_db.subjectmatters
                                     select r;
 
-            
+            if (qrySubjectMatters == null || qrySubjectMatters.Count() < 1)
+            {
+                LogNonUserError("Unable to get subject matters from db.", "", "", "UtilitiesDatabaseInterface",
+                    "GetSubjectMatters", "qrySubjectMatters");
+                return dictSubjectMatters;
+            }
             foreach (Models.subjectmatters sm in qrySubjectMatters)
             {
                 if (dictSubjectMatters.ContainsKey(sm.PK))

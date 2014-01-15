@@ -356,7 +356,7 @@
     <Content Include="Images\gray_texture_background.png" />
     <Content Include="Content\images\RightArrow.png" />
     <Content Include="Images\Icons\SparkIcon1.png" />
-    <Content Include="Images\Icons\plus.png" />
+    <Content Include="Content\images\plus.png" />
     <Content Include="Scripts\ArgumentCreate.js" />
     <Content Include="Scripts\ArgumentExpansion.js" />
     <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />

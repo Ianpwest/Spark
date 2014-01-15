@@ -1,4 +1,158 @@
-﻿#divTagPopup
+﻿.divMainFirst
+{
+    position:relative;
+    height:100%;
+    width:100%;
+}
+
+.divSubjectMatterImage
+{
+    position:relative;
+    height:150px;
+    width:325px;
+    border-width:medium;
+    border-style:solid;
+}
+
+.imgPreviewSubjectMatter
+{
+    position:absolute;
+    width:100%;
+    height:100%;
+}
+
+.divTagTablesMain
+{
+    height:320px;
+    width:500px;
+    
+    border:1px solid black;
+}
+
+.tableAvailableTags
+{
+    float:left;
+    margin-top:0;
+    margin-bottom:0;
+    margin-right:20px;
+    padding:0;
+    width:250px;
+    height:320px;
+    color:white;
+}
+
+.tdHeaderAvailableTagsLeft
+{
+    
+}
+
+.tdHeaderAvailableTagsRight
+{
+    padding:0;
+}
+
+.call-modal
+{
+    display:block;
+    min-width:30px;
+    min-height:30px;
+    background-image:url("/Content/images/plus.png");
+    background-repeat:no-repeat;
+    background-size:30px 30px;
+    cursor:pointer;
+    margin-left:10px;
+}
+
+.tableAvailableTags > thead > tr > td
+{
+    text-align:left;
+    padding:3px;
+    border-bottom:1px solid black;
+}
+
+#Header
+{
+    
+}
+
+.tableAvailableTags > tbody
+{
+    overflow:auto;
+    display:block;
+    height:270px;
+}
+
+.tableAvailableTags > tbody > tr
+{
+    border-bottom:1px dashed black;
+    cursor:pointer;
+}
+    .tableAvailableTags > tbody > tr:hover
+    {
+        background:darkgray;
+    }
+
+.tdBodyAvailableTagsLeft
+{
+    width:60%;
+    padding-left:3px;
+    text-align:left;
+}
+
+.tdBodyAvailableTagsRight
+{
+}
+
+.imgAvailableTagIcons
+{
+    height:40px;
+    width:40px;
+    margin-left:50%;
+}
+
+.trHeaderAvailableTagsTable
+{
+    display:block;
+}
+
+
+.tableSelectedTags
+{
+    position:relative; 
+    width:200px; 
+    height:300px; 
+    margin-left:20px;
+}
+
+.tableSelectedTags > thead > tr > td
+{
+    vertical-align:top;
+    height:25px;
+    width:auto;
+    border-bottom:1px solid black;
+}
+    .tableSelectedTags > thead > tr > td p
+    {
+        color:white;
+        margin-left:50px;
+        margin-top:-10px;
+    }
+    .tableSelectedTags > tbody
+    {
+        display:list-item;
+        list-style:none;
+        margin-left:33%;
+        vertical-align: top;
+    }
+    .tableSelectedTags > tbody > tr > td > img
+    {
+        height:40px;
+        width:40px;
+        margin-left:20%;
+    }
+
+
+#divTagPopup
 {
   background-color:#FFFFFF;
   border:1px solid #999999;

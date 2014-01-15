@@ -1,5 +1,5 @@
 ﻿@model Spark.Models.SparkCreateModel
-
+@Styles.Render("~/Content/SparkCreate.css")
 <script type="text/javascript">
     window.onload = function()
     {
@@ -18,9 +18,9 @@
         <fieldset>
             <legend>sparks</legend>
 
-            <div id="divMainFirst" style="position:relative; height:100%; width:100%;">
-                <div style="position:relative; height: 150px; width: 325px; border-width: medium; border-style: solid;">
-                    <img id="imgPreview" style="position:absolute; width: 100%; height: 100%;" alt=""
+            <div id="divMainFirst" class="divMainFirst">
+                <div class="divSubjectMatterImage">
+                    <img id="imgPreview" class="imgPreviewSubjectMatter" alt=""
                          src="~/content/blankimage.gif" />
                 </div>
 
@@ -50,26 +50,26 @@
                 <div class="editor-field">
                     <label>Tags</label>
                 </div>
-                <div style=" height: 300px; width:auto;">
+                <div class="divTagTablesMain">
 
-                    <table id="tableAvailableTags" style=" float:left; margin-top:0; margin-bottom:0; margin-right:20px; padding:0; width:200px; height:300px; border:2px solid grey">
+                    <table id="tableAvailableTags" class="tableAvailableTags">
                         <thead>
-                            <tr style="display:block;">
-                                <td>@Html.TextBox("Header", null, new { @style = "width:160px", onkeyup = "filterResults(this.value)" })</td>
-                                <td><a href="#modal-text" class="call-modal" title="Clicking this link shows the modal" onclick="popupNewTagWnd()">+</a></td>
+                            <tr class="trHeaderAvailableTagsTable">
+                                <td class="tdHeaderAvailableTagsLeft">@Html.TextBox("Header", null, new { @style = "width:100%; height:15px;", onkeyup = "filterResults(this.value)" })</td>
+                                <td class="tdHeaderAvailableTagsRight"><a href="#modal-text" class="call-modal"  onclick="popupNewTagWnd()"></a></td>
                             </tr>
                         </thead>
-                        <tbody style="overflow:auto; display:block; height:200px;">
+                        <tbody>
                             @{
                                 if(Model.TagIdAndNames != null)
                                 { 
                                     foreach (KeyValuePair<int, string> kvp in Model.TagIdAndNames)
                                     {
                                         <tr>
-                                            <td style="width:75%;" onclick="testCells(this)" id=@String.Concat("availableTag" + kvp.Key)>
+                                            <td class="tdBodyAvailableTagsLeft" onclick="testCells(this)" id=@String.Concat("availableTag" + kvp.Key)>
                                                 @kvp.Value
                                             </td>
-                                            <td><img src="@Model.TagIdAndImages[kvp.Key]" height="40" width="40" /></td>
+                                            <td class="tdBodyAvailableTagsRight"><img class="imgAvailableTagIcons" src="@Model.TagIdAndImages[kvp.Key]" /></td>
                                         </tr>
                                     }
                                 }
@@ -90,11 +90,11 @@
                             <input id="inputNewTagSubmit" type="button" value="Submit" onclick="uploadNewTag()" />
                         </div>
                     </div>
-                    <table id="tableSelectedTags" style="position:relative; width:200px; height:300px; border:2px solid grey; margin-left:20px;">
+                    <table id="tableSelectedTags" class="tableSelectedTags">
                         <thead>
-                            <tr><td>Selected Tags</td></tr>
+                            <tr><td><p>Selected Tags</p></td></tr>
                         </thead>
-                        <tbody style="vertical-align: top; display: inline-grid;"></tbody>
+                        <tbody></tbody>
                     </table>
                 </div>
 
