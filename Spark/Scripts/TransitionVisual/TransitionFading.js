@@ -10,11 +10,19 @@
 * To transition to a specified index, use the javascript function TransitionTo(nIndex), where nIndex is the zero based index.          *
 ****************************************************************************************************************************************/
 
+// Update 4/8/2014 (Randall) - Adding functionality that similarly transitions elements vertically.
+
 // Member/Window variables used to keep track of related position of the transition.
 var m_nTransitionIndex = 0; // current selected index of the page.
 var m_nMaxIndex = 2; // Maximum index, needs to be initialized if not 2
-//var m_nPixelContainerLeftPercent = 0; // current width of containers to use for left and right animation.
 
+var m_nTransitionVertIndex = 0; // Default
+var m_nMaxVertIndex = 1; // Default
+var m_nTopStartValue = 0; // Top start value used to position the vertical transition elements at the top of the container.
+var m_nTopEndValue = 500; // Top end value that the vertical transition element travels to during a vertical fade away.
+var m_nHeightVerticalValue = 700; // Default height of the vertical transition element.
+
+// Horizontal Transitions
 function SingleTransition(bIsNext)
 {
     if (bIsNext)
@@ -38,20 +46,6 @@ function SingleTransition(bIsNext)
         ProgressBar(m_nTransitionIndex, false);
     }
 }
-
-//function TransitionTo(nIndex)
-//{
-//    PerformTransitionToIndex(nIndex, m_nTransitionIndex);
-//    m_nTransitionIndex = nIndex;
-//}
-
-//function PerformTransitionToIndex(nIndex, nPreviousIndex)
-//{
-//    var strIdNext = "TransitionElement" + nIndex.toString();
-//    var strIdPrev = "TransitionElement" + nPreviousIndex.toString();
-//    fadeAway(strIdPrev);
-//    fadeIn(strIdNext);
-//}
 
 function fadeAwayLeft(id) {
     $(document).ready(function () {
@@ -81,11 +75,65 @@ function fadeInLeft(id) {
     });
 }
 
-function InitializeMaxIndex(nIndexMax)
-{
+function InitializeMaxIndex(nIndexMax) {
     m_nMaxIndex = nIndexMax;
 }
 
+// Vertical Transitions
+
+function SingleTransitionVert(bIsNext)
+{
+    if(bIsNext)
+    {
+        if (m_nTransitionVertIndex == m_nMaxVertIndex)
+            return;
+
+        fadeAwayVertical("TransitionElementVert" + m_nTransitionVertIndex.toString());
+        fadeInVertical("TransitionElementVert" + (m_nTransitionVertIndex + 1).toString());
+        m_nTransitionVertIndex++;
+    }
+    else
+    {
+        if (m_nTransitionVertIndex == 0)
+            return;
+
+        fadeAwayVertical("TransitionElementVert" + m_nTransitionVertIndex.toString());
+        fadeInVertical("TransitionElementVert" + (m_nTransitionVertIndex - 1).toString());
+        m_nTransitionVertIndex--;
+    }
+}
+
+function fadeAwayVertical(id)
+{
+    $(document).ready(function () {
+        $("#" + id).animate({ top: m_nTopEndValue + "px", opacity: 0, height: "0px" }, 1000, function () {
+            $("#" + id).css({ visibility: "hidden" });
+            $("#" + id).css({ top: m_nTopStartValue + "px" });
+        });
+    });
+}
+
+function fadeInVertical(id)
+{
+    $(document).ready(function () {
+        $("#" + id).css({ opacity: 0.0, visibility: "visible", top: m_nTopEndValue + "px" }).animate({ top: "0px", opacity: 1.0, height: m_nHeightVerticalValue + "px" }, 1000);
+    });
+}
+
+function InitializeVerticalElements(nTopStartValue, nTopEndValue, nHeightVerticalValue)
+{
+    m_nTopStartValue = nTopStartValue;
+    m_nTopEndValue = nTopEndValue;
+    m_nHeightVerticalValue = nHeightVerticalValue;
+}
+
+function InitializeMaxVertIndex(nIndexMax)
+{
+    m_nMaxVertIndex = nIndexMax;
+}
+
+
+// Specific to the Argument Creation view
 function ProgressBar(nIndex, bIsForward)
 {
     var ol = document.getElementsByClassName("progtrckr")[0];
@@ -96,7 +144,3 @@ function ProgressBar(nIndex, bIsForward)
     else
         children[nIndex].className = "progtrckr-todo";
 }
-
-//function InitializeContainerLeftPercent(nPixelWidth) {
-//    m_nPixelContainerLeftPercent = nPixelWidth;
-//}

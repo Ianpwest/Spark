@@ -85,25 +85,12 @@ function updateModelWithTags(input)
         });
 }
 
-// Sets the visibility to visible given the id of an element.
-function setVisible(id)
-{
-    var obj = document.getElementById(id);
-    obj.style.setProperty("visibility", "visible");
-}
-
-// Sets the visibility to hidden given the id of an element.
-function setHidden(id) {
-    var obj = document.getElementById(id);
-    obj.style.setProperty("visibility", "hidden");
-}
-
 // Animates the object to the left by changing the left property to 0 for the element with the given id. Sets the label associated with this element to hidden.
 function fadeAway(id)
 {
     $(document).ready(function () {
         //$("#" + id).animate({ top: "500px", opacity: 0, visibility:"hidden" }, 1000);
-        $("#" + id).animate({ top: "400px", opacity: 0, height:"0px"}, 1000, function ()
+        $("#" + id).animate({ top: "500px", opacity: 0, height:"0px"}, 1000, function ()
         {
             $("#" + id).css({ visibility: "hidden" });
             $("#" + id).css({ top: "0px" });
@@ -119,6 +106,7 @@ function fadeCreateButtons()
         });
     });
 }
+
 function fadeIn(id)
 {
     $(document).ready(function () {
@@ -129,19 +117,14 @@ function fadeIn(id)
 
 function nextTab()
 {
-    //setVisible("divMainSecond");
     fadeAway("divMainFirst");
     fadeIn("divMainSecond");
-    //setHidden("divMainFirst");
 }
 
 function previousTab()
 {
-    //setVisible("divMainFirst");
     fadeAway("divMainSecond");
     fadeIn("divMainFirst");
-    //setHidden("divMainSecond");
-    
 }
 
 function testCells(input) {

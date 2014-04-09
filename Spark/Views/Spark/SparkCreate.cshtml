@@ -18,7 +18,7 @@
         <fieldset>
             <legend>sparks</legend>
 
-            <div id="divMainFirst" class="divMainFirst">
+            <div id="TransitionElementVert0" class="divMainFirst">
                 <div class="divSubjectMatterImage">
                     <img id="imgPreview" class="imgPreviewSubjectMatter" alt=""
                          src="~/content/blankimage.gif" />
@@ -56,21 +56,21 @@
                         <thead>
                             <tr class="trHeaderAvailableTagsTable">
                                 <td class="tdHeaderAvailableTagsLeft">@Html.TextBox("Header", null, new { @style = "width:100%; height:15px;", onkeyup = "filterResults(this.value)" })</td>
-                                <td class="tdHeaderAvailableTagsRight"><a href="#modal-text" class="call-modal"  onclick="popupNewTagWnd()"></a></td>
+                                <td class="tdHeaderAvailableTagsRight"><a href="#modal-text" class="call-modal" onclick="popupNewTagWnd()"></a></td>
                             </tr>
                         </thead>
                         <tbody>
                             @{
                                 if(Model.TagIdAndNames != null)
-                                { 
+                                {
                                     foreach (KeyValuePair<int, string> kvp in Model.TagIdAndNames)
                                     {
-                                        <tr>
-                                            <td class="tdBodyAvailableTagsLeft" onclick="testCells(this)" id=@String.Concat("availableTag" + kvp.Key)>
-                                                @kvp.Value
-                                            </td>
-                                            <td class="tdBodyAvailableTagsRight"><img class="imgAvailableTagIcons" src="@Model.TagIdAndImages[kvp.Key]" /></td>
-                                        </tr>
+                            <tr>
+                                <td class="tdBodyAvailableTagsLeft" onclick="testCells(this)" id=@String.Concat("availableTag" + kvp.Key)>
+                                    @kvp.Value
+                                </td>
+                                <td class="tdBodyAvailableTagsRight"><img class="imgAvailableTagIcons" src="@Model.TagIdAndImages[kvp.Key]" /></td>
+                            </tr>
                                     }
                                 }
                             }
@@ -106,11 +106,11 @@
                 @Html.HiddenFor(model => model.Tag4)
                 @Html.HiddenFor(model => model.Tag5)
                 <p style="position:relative">
-                    <input type="button" value="Next" onclick="nextTab()" />
+                    <input type="button" value="Next" onclick="SingleTransitionVert(true)" />
                 </p>
             </div>
 
-            <div id="divMainSecond" style=" width:100%; position:absolute; opacity:0; top:500px; visibility:hidden;">
+            <div id="TransitionElementVert1" style=" width:100%; position:absolute; opacity:0; top:500px; visibility:hidden;">
                 <p class="classSubmitButtons">Would you like to create an argument for either side?</p>
                 @Html.HiddenFor(model => model.ArgEntryType)
                 <div>
@@ -118,7 +118,7 @@
                     <input class="classSubmitButtons" type="button" value="Disagree and Create" onclick="setArgumentType('2'), getArgumentLayout()" />
                 </div>
                 <div id="divCreateBack">
-                    <input class="classSubmitButtons" type="button" value="Back" onclick="previousTab()" />
+                    <input class="classSubmitButtons" type="button" value="Back" onclick="SingleTransitionVert(false)" />
                     <input class="classSubmitButtons" type="submit" value="Just Create" />
                 </div>
             </div>
