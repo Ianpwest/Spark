@@ -62,7 +62,7 @@ h1
   transition: all .5s ease-in;
 }
 
-#CreateArgumentForm
+#ArgumentCreate
 {
     visibility:collapse;
     width:100%;

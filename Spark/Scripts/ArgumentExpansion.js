@@ -20,16 +20,16 @@ function getExpandedArgumentView(id)
 }
 
 function getCreateArgumentView(bAgree, nSparkId) {
-    //$.ajax({
-    //    type: "Get",
-    //    datatype: 'html',
-    //    data: "bAgree=" + bAgree + "&nSparkId=" + nSparkId,
-    //    url: "/Spark/CreateArgument",
-    //    success: function (data)
-    //    {
-    //        $('.modal-content').html(data);
-    //    }
-    //});
+    $.ajax({
+        type: "Get",
+        datatype: 'html',
+        data: "bAgree=" + bAgree + "&nSparkId=" + nSparkId,
+        url: "/Spark/CreateArgument",
+        success: function (data)
+        {
+            $('#ArgumentCreate').html(data);
+        }
+    });
 
     
     //if (argumentContainerVisibility == "collapse")
@@ -45,14 +45,14 @@ function getCreateArgumentView(bAgree, nSparkId) {
 
     //Find the visibility of the current forms.
     var argumentContainerVisibility = document.getElementById('ArgumentsContainer').style.visibility;
-    var argumentContainerVisibility = document.getElementById('CreateArgumentForm').style.visibility;
+    var argumentContainerVisibility = document.getElementById('ArgumentCreate').style.visibility;
 
     //Disable the agree disagree buttons
     document.getElementById('buttonAgree').onclick = "null";
     document.getElementById('buttonDisagree').onclick = "null";
 
     //Hide the container and show the argument create form.
-    document.getElementById('CreateArgumentForm').style.visibility = "visible";
+    document.getElementById('ArgumentCreate').style.visibility = "visible";
     document.getElementById('ArgumentsContainer').style.visibility = "collapse";
 }
 
