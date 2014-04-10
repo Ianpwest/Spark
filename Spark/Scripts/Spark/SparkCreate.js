@@ -127,29 +127,30 @@ function previousTab()
     fadeIn("divMainFirst");
 }
 
-function testCells(input) {
+function selectTag(input) {
     
     var row = input.parentNode;
-    var idSelected = input.id.substring(12);
-    var obj = row.cells[1];
+    var obj1 = row.cells[0]; // first cell in the row
+    var obj2 = row.cells[1]; // second cell in the row
+    var idSelected = obj1.id.substring(12);
     var cellArray = checkTableForSelection("tableAvailableTags");
 
-    if (obj.className == "clickedCell")
+    if (obj2.className == "clickedCell")
     {
-        deleteRow(input);
+        deleteRow(obj1);
 
-        obj.style.backgroundColor = "transparent";
-        obj.className = "";
-        input.style.backgroundColor = "transparent";
-        input.className = "";
+        obj2.style.backgroundColor = "transparent";
+        obj2.className = "nonClickedCells";
+        obj1.style.backgroundColor = "transparent";
+        obj1.className = "nonClickedCells";
     }
     else if (cellArray.length < 5) {
-        obj.style.backgroundColor = "#C0C0C0";
-        obj.className = "clickedCell";
-        input.style.backgroundColor = "#C0C0C0";
-        input.className = "clickedCell";
+        obj2.style.backgroundColor = "#C0C0C0";
+        obj2.className = "clickedCell";
+        obj1.style.backgroundColor = "#C0C0C0";
+        obj1.className = "clickedCell";
 
-        addRow(obj.innerHTML, idSelected);
+        addRow(obj2.innerHTML, idSelected);
     }
 }
 
@@ -257,7 +258,7 @@ function filterResults(inputString)
     if (inputString == "")
     {
         for(var j = 0; j < rows.length; j++)
-            rows[j].style.setProperty("display", "inline");
+            rows[j].style.setProperty("display", "");
         return;
     }
 
@@ -268,7 +269,7 @@ function filterResults(inputString)
         if(value.indexOf(inputString) == -1)
             rows[i].style.setProperty("display", "none");
         else
-            rows[i].style.setProperty("display", "inline");
+            rows[i].style.setProperty("display", "");
     }
 }
 
@@ -296,7 +297,7 @@ function uploadNewTag(input)
             var newRow = tBody.insertRow();
             var firstCell = newRow.insertCell();
             firstCell.style.width = "75%";
-            firstCell.onclick = function () { testCells(firstCell) };
+            firstCell.onclick = function () { selectTag(firstCell) };
             firstCell.id = "availableTag" + split[0].toString();
             firstCell.innerHTML = split[1];
             
