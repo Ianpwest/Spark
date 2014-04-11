@@ -39,7 +39,7 @@ h1
   min-height:30px;
   font-family:Century Gothic;
   width:775px;
-  height:300px;
+  height:550px;
   resize:none;
 }
 
@@ -68,30 +68,32 @@ h1
     width:100%;
     margin-top:6%;
 }
+
+.controlContainer
+{
+    display:table;
+    margin-left:auto;
+    margin-right:auto;
+}
 .argumentCreateSparkIt, .argumentCreateArgument, .argumentCreateCitations, .argumentCreateReview
 {
-    position:absolute;
     display:none;
-    width:775px;
-    margin-left:29%;
+    max-width:775px;
 }
     .argumentCreateSparkIt
     {
-        display:block;
+        display:table-cell;
     }
 
-.navigationControlView
+.innerContent
 {
-  width:100%;
-  position:absolute;
-  margin-top:700px;
-  margin-left:200px;
+    float:left;
 }
 
 .buttonPrevious
 {
     float:left;
-    margin-left:20%;
+    margin-right:15px;
     width:130px;
     height:100px;
     background-image: url('images/LeftArrow.png');
@@ -102,14 +104,23 @@ h1
 
 .buttonNext
 {
-    float:right;
+    float:left;
+    margin-left:15px;
     width:130px;
     height:100px;
-    margin-right:20%;
     background-image: url('images/RightArrow.png');
     background-repeat:no-repeat;
     cursor:pointer;
 }
+
+.navigationControlView
+{
+  width:100%;
+  position:absolute;
+  margin-left:200px;
+}
+
+
 
 ol.progtrckr {
     margin: 0;
