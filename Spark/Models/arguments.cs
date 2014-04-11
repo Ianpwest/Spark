@@ -17,6 +17,7 @@ namespace Spark.Models
         public arguments()
         {
             this.comments = new HashSet<comments>();
+            this.argumentvotes = new HashSet<argumentvotes>();
         }
     
         public int PK { get; set; }
@@ -31,5 +32,6 @@ namespace Spark.Models
         public virtual accounts accounts { get; set; }
         public virtual sparks sparks { get; set; }
         public virtual ICollection<comments> comments { get; set; }
+        public virtual ICollection<argumentvotes> argumentvotes { get; set; }
     }
 }

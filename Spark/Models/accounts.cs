@@ -28,6 +28,7 @@ namespace Spark.Models
             this.transactions = new HashSet<transactions>();
             this.profiles = new HashSet<profiles>();
             this.comments = new HashSet<comments>();
+            this.argumentvotes = new HashSet<argumentvotes>();
         }
     
         public int PK { get; set; }
@@ -50,5 +51,6 @@ namespace Spark.Models
         public virtual ICollection<transactions> transactions { get; set; }
         public virtual ICollection<profiles> profiles { get; set; }
         public virtual ICollection<comments> comments { get; set; }
+        public virtual ICollection<argumentvotes> argumentvotes { get; set; }
     }
 }

@@ -188,6 +188,9 @@
     <Compile Include="Models\arguments.cs">
       <DependentUpon>SparkDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\argumentvotes.cs">
+      <DependentUpon>SparkDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\categories.cs">
       <DependentUpon>SparkDB.tt</DependentUpon>
     </Compile>

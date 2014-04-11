@@ -68,6 +68,9 @@
         <AssociationConnector Association="sparkdbModel.FK__subjectmatters_2" ManuallyRouted="false" />
         <AssociationConnector Association="sparkdbModel.FK_transactions_transactionstates" ManuallyRouted="false" />
         <AssociationConnector Association="sparkdbModel.FK_transactions_transactiontypes" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="sparkdbModel.argumentvotes" Width="1.5" PointX="11.25" PointY="21.75" />
+        <AssociationConnector Association="sparkdbModel.FK_argumentvotes_accounts" />
+        <AssociationConnector Association="sparkdbModel.FK_argumentvotes_arguments" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
