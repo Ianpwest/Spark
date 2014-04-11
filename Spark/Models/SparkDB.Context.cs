@@ -52,5 +52,6 @@ namespace Spark.Models
         public DbSet<transactions> transactions { get; set; }
         public DbSet<transactionstates> transactionstates { get; set; }
         public DbSet<transactiontypes> transactiontypes { get; set; }
+        public DbSet<argumentvotes> argumentvotes { get; set; }
     }
 }

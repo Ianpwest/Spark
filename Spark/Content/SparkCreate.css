@@ -8,8 +8,8 @@
 .divSubjectMatterImage
 {
     position:relative;
-    height:150px;
-    width:325px;
+    height:225px;
+    width:525px;
     border-width:medium;
     border-style:solid;
 }
@@ -92,15 +92,20 @@
         background:darkgray;
     }
 
-.tdBodyAvailableTagsLeft
+.clickedCell
 {
+    background-color:#C0C0C0;
     width:60%;
     padding-left:3px;
     text-align:left;
 }
 
-.tdBodyAvailableTagsRight
+.nonClickedCells
 {
+    background-color:transparent;
+    width:60%;
+    padding-left:3px;
+    text-align:left;
 }
 
 .imgAvailableTagIcons

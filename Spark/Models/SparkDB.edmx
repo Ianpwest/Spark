@@ -30,6 +30,15 @@
           <Property Name="strCitations" Type="text" />
           <Property Name="bIsAgree" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="argumentvotes">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FKArguments" Type="int" Nullable="false" />
+          <Property Name="bIsUpvote" Type="bit" Nullable="false" />
+          <Property Name="FKAccounts" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="categories">
           <Key>
             <PropertyRef Name="PK" />
@@ -42,7 +51,7 @@
           <Key>
             <PropertyRef Name="PK" />
           </Key>
-          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FKStatesProvidences" Type="int" Nullable="false" />
           <Property Name="strName" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
@@ -50,17 +59,17 @@
           <Key>
             <PropertyRef Name="PK" />
           </Key>
-          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FKArguments" Type="int" Nullable="false" />
           <Property Name="FKAccounts" Type="int" Nullable="false" />
-          <Property Name="FKParentComment" Type="int" Nullable="false" />
+          <Property Name="FKParentComment" Type="int" />
           <Property Name="strComment" Type="varchar" MaxLength="800" />
         </EntityType>
         <EntityType Name="commentvotes">
           <Key>
             <PropertyRef Name="PK" />
           </Key>
-          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FKComments" Type="int" Nullable="false" />
           <Property Name="FKAccounts" Type="int" Nullable="false" />
           <Property Name="bIsUpVote" Type="bit" Nullable="false" />
@@ -69,7 +78,7 @@
           <Key>
             <PropertyRef Name="PK" />
           </Key>
-          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="strKey" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="strValue" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
@@ -77,14 +86,14 @@
           <Key>
             <PropertyRef Name="PK" />
           </Key>
-          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="strName" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="educationlevels">
           <Key>
             <PropertyRef Name="PK" />
           </Key>
-          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="strName" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="errorlog">
@@ -105,14 +114,14 @@
           <Key>
             <PropertyRef Name="PK" />
           </Key>
-          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="strName" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="heat">
           <Key>
             <PropertyRef Name="PK" />
           </Key>
-          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FKComments" Type="int" Nullable="false" />
           <Property Name="FKAccounts" Type="int" Nullable="false" />
           <Property Name="bIsPositive" Type="bit" Nullable="false" />
@@ -122,7 +131,7 @@
           <Key>
             <PropertyRef Name="PK" />
           </Key>
-          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="bIsPositive" Type="bit" Nullable="false" />
           <Property Name="FKAccountsContributor" Type="int" Nullable="false" />
           <Property Name="FKAccountsReceived" Type="int" Nullable="false" />
@@ -142,21 +151,21 @@
           <Key>
             <PropertyRef Name="PK" />
           </Key>
-          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="strName" Type="varchar" MaxLength="150" Nullable="false" />
         </EntityType>
         <EntityType Name="politicalideologies">
           <Key>
             <PropertyRef Name="PK" />
           </Key>
-          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="strName" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="profiles">
           <Key>
             <PropertyRef Name="PK" />
           </Key>
-          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FKAccounts" Type="int" Nullable="false" />
           <Property Name="strFirstName" Type="varchar" MaxLength="100" />
           <Property Name="strMiddleName" Type="varchar" MaxLength="100" />
@@ -175,14 +184,14 @@
           <Key>
             <PropertyRef Name="PK" />
           </Key>
-          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="strName" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="sparkinterestvotes">
           <Key>
             <PropertyRef Name="PK" />
           </Key>
-          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FKSparks" Type="int" Nullable="false" />
           <Property Name="bIsUpVote" Type="bit" Nullable="false" />
           <Property Name="FKAccounts" Type="int" Nullable="false" />
@@ -208,7 +217,7 @@
           <Key>
             <PropertyRef Name="PK" />
           </Key>
-          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FKSparks" Type="int" Nullable="false" />
           <Property Name="FKCategories1" Type="int" Nullable="false" />
           <Property Name="FKCategories2" Type="int" Nullable="false" />
@@ -218,7 +227,7 @@
           <Key>
             <PropertyRef Name="PK" />
           </Key>
-          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FKCountries" Type="int" Nullable="false" />
           <Property Name="strName" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
@@ -226,7 +235,7 @@
           <Key>
             <PropertyRef Name="PK" />
           </Key>
-          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="strName" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="strImageName" Type="varchar" MaxLength="150" />
         </EntityType>
@@ -234,7 +243,7 @@
           <Key>
             <PropertyRef Name="PK" />
           </Key>
-          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FKSubjectMattersContributor" Type="int" Nullable="false" />
           <Property Name="FKSubjectMattersSpread" Type="int" Nullable="false" />
           <Property Name="nValue" Type="int" Nullable="false" />
@@ -243,7 +252,7 @@
           <Key>
             <PropertyRef Name="PK" />
           </Key>
-          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FKAccountsBuyer" Type="int" Nullable="false" />
           <Property Name="FKTransactionTypes" Type="int" Nullable="false" />
           <Property Name="nAmount" Type="int" Nullable="false" />
@@ -255,14 +264,14 @@
           <Key>
             <PropertyRef Name="PK" />
           </Key>
-          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="strName" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="transactiontypes">
           <Key>
             <PropertyRef Name="PK" />
           </Key>
-          <Property Name="PK" Type="int" Nullable="false" />
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="strName" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <Association Name="FK__categories">
@@ -405,6 +414,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_argumentvotes_accounts">
+          <End Role="accounts" Type="Self.accounts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="argumentvotes" Type="Self.argumentvotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accounts">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="argumentvotes">
+              <PropertyRef Name="FKAccounts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_argumentvotes_arguments">
+          <End Role="arguments" Type="Self.arguments" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="argumentvotes" Type="Self.argumentvotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="arguments">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="argumentvotes">
+              <PropertyRef Name="FKArguments" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_comments_arguments">
           <End Role="arguments" Type="Self.arguments" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -420,7 +457,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_comments_comments">
-          <End Role="comments" Type="Self.comments" Multiplicity="1">
+          <End Role="comments" Type="Self.comments" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="comments1" Type="Self.comments" Multiplicity="*" />
@@ -770,6 +807,7 @@
         <EntityContainer Name="sparkdbModelStoreContainer">
           <EntitySet Name="accounts" EntityType="Self.accounts" Schema="sparkdb" store:Type="Tables" />
           <EntitySet Name="arguments" EntityType="Self.arguments" Schema="sparkdb" store:Type="Tables" />
+          <EntitySet Name="argumentvotes" EntityType="Self.argumentvotes" Schema="sparkdb" store:Type="Tables" />
           <EntitySet Name="categories" EntityType="Self.categories" Schema="sparkdb" store:Type="Tables" />
           <EntitySet Name="cities" EntityType="Self.cities" Schema="sparkdb" store:Type="Tables" />
           <EntitySet Name="comments" EntityType="Self.comments" Schema="sparkdb" store:Type="Tables" />
@@ -834,6 +872,14 @@
           <AssociationSet Name="FK_arguments_sparks" Association="Self.FK_arguments_sparks">
             <End Role="sparks" EntitySet="sparks" />
             <End Role="arguments" EntitySet="arguments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_argumentvotes_accounts" Association="Self.FK_argumentvotes_accounts">
+            <End Role="accounts" EntitySet="accounts" />
+            <End Role="argumentvotes" EntitySet="argumentvotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_argumentvotes_arguments" Association="Self.FK_argumentvotes_arguments">
+            <End Role="arguments" EntitySet="arguments" />
+            <End Role="argumentvotes" EntitySet="argumentvotes" />
           </AssociationSet>
           <AssociationSet Name="FK_comments_arguments" Association="Self.FK_comments_arguments">
             <End Role="arguments" EntitySet="arguments" />
@@ -967,6 +1013,7 @@
           <NavigationProperty Name="transactions" Relationship="Self.FK_transactions_accounts" FromRole="accounts" ToRole="transactions" />
           <NavigationProperty Name="profiles" Relationship="Self.FKAccounts" FromRole="accounts" ToRole="profiles" />
           <NavigationProperty Name="comments" Relationship="Self.FKProfiles" FromRole="accounts" ToRole="comments" />
+          <NavigationProperty Name="argumentvotes" Relationship="sparkdbModel.FK_argumentvotes_accounts" FromRole="accounts" ToRole="argumentvotes" />
         </EntityType>
         <EntityType Name="arguments">
           <Key>
@@ -983,6 +1030,7 @@
           <Property Name="nFlagCount" Type="Int32" />
           <Property Name="strConclusion" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Name="strCitations" Type="String" Nullable="true" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="argumentvotes" Relationship="sparkdbModel.FK_argumentvotes_arguments" FromRole="arguments" ToRole="argumentvotes" />
         </EntityType>
         <EntityType Name="categories">
           <Key>
@@ -1950,7 +1998,55 @@
             <End Role="transactiontypes" EntitySet="transactiontypes" />
             <End Role="transactions" EntitySet="transactions" />
           </AssociationSet>
+          <EntitySet Name="argumentvotes" EntityType="sparkdbModel.argumentvotes" />
+          <AssociationSet Name="FK_argumentvotes_accounts" Association="sparkdbModel.FK_argumentvotes_accounts">
+            <End Role="accounts" EntitySet="accounts" />
+            <End Role="argumentvotes" EntitySet="argumentvotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_argumentvotes_arguments" Association="sparkdbModel.FK_argumentvotes_arguments">
+            <End Role="arguments" EntitySet="arguments" />
+            <End Role="argumentvotes" EntitySet="argumentvotes" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="argumentvotes">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FKArguments" Type="Int32" Nullable="false" />
+          <Property Name="bIsUpvote" Type="Boolean" Nullable="false" />
+          <Property Name="FKAccounts" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="accounts" Relationship="sparkdbModel.FK_argumentvotes_accounts" FromRole="argumentvotes" ToRole="accounts" />
+          <NavigationProperty Name="arguments" Relationship="sparkdbModel.FK_argumentvotes_arguments" FromRole="argumentvotes" ToRole="arguments" />
+        </EntityType>
+        <Association Name="FK_argumentvotes_accounts">
+          <End Type="sparkdbModel.accounts" Role="accounts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="sparkdbModel.argumentvotes" Role="argumentvotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accounts">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="argumentvotes">
+              <PropertyRef Name="FKAccounts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_argumentvotes_arguments">
+          <End Type="sparkdbModel.arguments" Role="arguments" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="sparkdbModel.argumentvotes" Role="argumentvotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="arguments">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="argumentvotes">
+              <PropertyRef Name="FKArguments" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2241,6 +2337,16 @@
               <MappingFragment StoreEntitySet="transactiontypes">
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="strName" ColumnName="strName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="argumentvotes">
+            <EntityTypeMapping TypeName="sparkdbModel.argumentvotes">
+              <MappingFragment StoreEntitySet="argumentvotes">
+                <ScalarProperty Name="FKAccounts" ColumnName="FKAccounts" />
+                <ScalarProperty Name="bIsUpvote" ColumnName="bIsUpvote" />
+                <ScalarProperty Name="FKArguments" ColumnName="FKArguments" />
+                <ScalarProperty Name="PK" ColumnName="PK" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
