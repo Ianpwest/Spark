@@ -659,7 +659,9 @@
     <Content Include="Views\Spark\SparkArgumentExpanded.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Spark\SparkArgumentCreate.cshtml" />
+    <Content Include="Views\Spark\SparkArgumentCreate.cshtml">
+      <BrowseToURL>~/Spark/SparkArgumentCreate</BrowseToURL>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.woff" />

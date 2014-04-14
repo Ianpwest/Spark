@@ -15,6 +15,7 @@
 // Member/Window variables used to keep track of related position of the transition.
 var m_nTransitionIndex = 0; // current selected index of the page.
 var m_nMaxIndex = 2; // Maximum index, needs to be initialized if not 2
+var m_strLeftProperty = "50%"; // Used in the left and right fades to move the transition peice to the appropriate spot.
 
 var m_nTransitionVertIndex = 0; // Default
 var m_nMaxVertIndex = 1; // Default
@@ -65,14 +66,19 @@ function fadeAwayRight(id) {
 
 function fadeInRight(id) {
     $(document).ready(function () {
-        $("#" + id).css({ opacity: 0.0, display: "block", left: "-50%" }).animate({ opacity: 1.0, left: "0%" }, 1000);
+        $("#" + id).css({ opacity: 0.0, display: "block", left: "-50" }).animate({ opacity: 1.0, left: m_strLeftProperty }, 1000);
     });
 }
 
 function fadeInLeft(id) {
     $(document).ready(function () {
-        $("#" + id).css({ opacity: 0.0, display: "block", left: "50%" }).animate({ opacity: 1.0, left: "0%" }, 1000);
+        $("#" + id).css({ opacity: 0.0, display: "block", left: "50%" }).animate({ opacity: 1.0, left: m_strLeftProperty }, 1000);
     });
+}
+
+function InitializeHorizontalElements(strLeftValue)
+{
+    m_strLeftProperty = strLeftValue;
 }
 
 function InitializeMaxIndex(nIndexMax) {

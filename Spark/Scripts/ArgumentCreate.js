@@ -1,6 +1,7 @@
 ﻿
 //0 based index of the number of create indicators to show and use for page transition
 InitializeMaxIndex(3);
+InitializeHorizontalElements("25.5%");
 
 //Initialize the editor for argument and citation create
 tinymce.init({

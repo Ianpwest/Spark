@@ -78,6 +78,8 @@ h1
 .argumentCreateSparkIt, .argumentCreateArgument, .argumentCreateCitations, .argumentCreateReview
 {
     display:none;
+    position:absolute;
+    left:25.5%;
     max-width:775px;
 }
     .argumentCreateSparkIt
@@ -88,6 +90,8 @@ h1
 .innerContent
 {
     float:left;
+    min-height:674px;
+    min-width:775px;
 }
 
 .buttonPrevious
