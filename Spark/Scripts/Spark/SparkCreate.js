@@ -56,6 +56,8 @@ function getArgumentLayout()
         }
 
     });
+
+    InitializeMaxIndex(3);
 }
 
 function getModelString()
