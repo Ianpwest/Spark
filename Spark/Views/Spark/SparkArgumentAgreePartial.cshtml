@@ -32,10 +32,9 @@
                 <a onclick="" href="#">flag</a>
             </div>
             <div class="sparkAddComment">
-                <a @*onclick="addArgument(true, 1)"*@ href="#">Add Comment</a>
             </div>
             <div class="sparkExpandAgree">
-                <a href="#modal-text" class="call-modal" onclick="popupExpand('@Model.id')">Expand</a>
+                @Html.ActionLink("Expand", "GetExpandedArgumentView", "Spark", new { id = @Model.id }, null)
             </div>
         </div>
         
