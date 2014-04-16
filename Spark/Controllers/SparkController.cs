@@ -222,6 +222,9 @@ namespace Spark.Controllers
             //using the id build the expanded argument view to return.
             arguments argument = SparksDatabaseInterface.GetArgument(id);
 
+            if (argument == null)
+                return View("Error");
+
             //Get the rest of the extended argument properties.
             SparkArgumentModel sam = BuildSparkArgumentModel(argument);
 
