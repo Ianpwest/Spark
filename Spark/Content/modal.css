@@ -69,6 +69,13 @@ h1
     margin-top:6%;
 }
 
+#ArgumentView
+{
+    visibility:collapse;
+    width:100%;
+    margin-top:8%;
+}
+
 .controlContainer
 {
     display:table;

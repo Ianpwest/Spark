@@ -8,7 +8,7 @@
 
 <div class="sparkTopicLine">
     <div class="sparkAgree">
-        <a id="buttonAgree" @*href="#modal-text" class="call-modal"*@ title="Clicking this link shows the modal" onclick="addArgument(true, @Model.PK )">Agree</a>
+        <a id="buttonAgree" @*href="#modal-text" class="call-modal"*@ onclick="addArgument(true, @Model.PK )">Agree</a>
     </div>
 
     <div class="sparkTopic">
@@ -16,7 +16,7 @@
     </div>
 
     <div class="sparkDisagree">
-        <a id="buttonDisagree" @*href="#modal-text" class="call-modal"*@ title="Clicking this link shows the modal" onclick="addArgument(false, @Model.PK )">Disagree</a>
+        <a id="buttonDisagree" @*href="#modal-text" class="call-modal"*@ onclick="addArgument(false, @Model.PK )">Disagree</a>
     </div>
 
 </div>
@@ -47,3 +47,8 @@
 <div id="ArgumentCreate">
 
 </div>
+
+<div id="ArgumentView">
+    
+</div>
+

@@ -1,23 +1,75 @@
 ﻿function popupExpand(id)
 {
-    document.body.style.overflow = "hidden";
+   // document.body.style.overflow = "hidden";
 
     getExpandedArgumentView(id);
 }
 
-function getExpandedArgumentView(id)
+function showExpandedArgument(id)
 {
-    $.ajax({
-        type: "Post",
-        datatype: 'html',
-        data: "id=" + id,
-        url: "/Spark/GetExpandedArgumentView",
-        success: function (data)
-        {
-            $('.modal-content').html(data);
-        }
-    });
+    getExpandedArgumentView(id);
 }
+
+function ReturnToContainerView()
+{
+    //Hide the expanded and the create argument view and show the container view.
+    document.getElementById('ArgumentCreate').style.visibility = "collapse";
+    document.getElementById('ArgumentsContainer').style.visibility = "visible";
+    document.getElementById('ArgumentView').style.visibility = "collapse";
+    document.getElementById('ArgumentView').style.display = "none";
+}
+
+function GoToCreateArgumentView()
+{
+    document.getElementById('ArgumentCreate').style.visibility = "visible";
+    document.getElementById('ArgumentsContainer').style.visibility = "collapse";
+    document.getElementById('ArgumentView').style.visibility = "collapse";
+    document.getElementById('ArgumentView').style.display = "inline";
+}
+
+function GoToArgumentView()
+{
+    document.getElementById('ArgumentCreate').style.visibility = "collapse";
+    document.getElementById('ArgumentsContainer').style.visibility = "collapse";
+    document.getElementById('ArgumentView').style.visibility = "visible";
+    document.getElementById('ArgumentView').style.display = "inline";
+}
+
+//function getExpandedArgumentView(id) {
+//    $.ajax({
+//        type: "Post",
+//        datatype: 'html',
+//        data: "id=" + id,
+//        url: "/Spark/GetExpandedArgumentView",
+//        success: function (data) {
+//            $('.modal-content').html(data);
+//        }
+//    });
+//}
+//function getExpandedArgumentView(id) {
+//    $.ajax({
+//        type: "Post",
+//        datatype: 'html',
+//        data: "id=" + id,
+//        url: "/Spark/GetExpandedArgumentView",
+//        success: function (data) {
+
+//            //$('#ArgumentView').html(data);
+//            //tinymce.EditorManager.execCommand('mceRemoveControl', true, 'txtAreaReview');
+            
+//            //document.getElementById("ArgumentView").innerHTML = data;
+//            //tinyMCE.get('txtAreaReview').setContent(data);
+//            tinyMCE.get('txtAreaReview').setContent(data);
+
+           
+//            //$('#ArgumentView').html(data);
+//        }
+//    });
+
+
+//    //Hide the container and the create argument view and show the argument view.
+//    GoToArgumentView();
+//}
 
 function getCreateArgumentView(bAgree, nSparkId) {
     $.ajax({
@@ -31,29 +83,12 @@ function getCreateArgumentView(bAgree, nSparkId) {
         }
     });
 
-    
-    //if (argumentContainerVisibility == "collapse")
-    //{
-    //    document.getElementById('ArgumentsContainer').style.visibility = "visible";
-    //    document.getElementById('CreateArgumentsForm').style.visibility = "collapse";
-    //}
-    //else
-    //{
-    //    document.getElementById('CreateArgumentsForm').style.visibility = "visible";
-    //    document.getElementById('ArgumentsContainer').style.visibility = "collapse";
-    //}
-
-    //Find the visibility of the current forms.
-    var argumentContainerVisibility = document.getElementById('ArgumentsContainer').style.visibility;
-    var argumentContainerVisibility = document.getElementById('ArgumentCreate').style.visibility;
-
     //Disable the agree disagree buttons
     document.getElementById('buttonAgree').onclick = "null";
     document.getElementById('buttonDisagree').onclick = "null";
 
     //Hide the container and show the argument create form.
-    document.getElementById('ArgumentCreate').style.visibility = "visible";
-    document.getElementById('ArgumentsContainer').style.visibility = "collapse";
+    GoToCreateArgumentView();
 }
 
 function addArgument(isAgree, nSparkId)
