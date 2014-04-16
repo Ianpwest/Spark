@@ -1,4 +1,11 @@
-﻿.divMainFirst
+﻿.pageCreateSpark
+{
+    position:absolute;
+    margin-left:20%;
+    min-height:850px;
+}
+
+.divMainFirst
 {
     position:relative;
     height:100%;

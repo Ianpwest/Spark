@@ -18,6 +18,7 @@ namespace Spark.Controllers
         /// Initializes all tag elements, argument type, userid, subject matter selectlist, and tag id,name, and image information.
         /// </summary>
         /// <returns></returns>
+        [Authorize]
         public ActionResult SparkCreate()
         {
             // Need to create a new model that holds all of the subject matters.
@@ -57,7 +58,7 @@ namespace Spark.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost, Authorize]
         public ActionResult SparkCreate(SparkCreateModel model)
         {
             model.UserId = User.Identity.Name;
@@ -77,7 +78,7 @@ namespace Spark.Controllers
         /// </summary>
         /// <param name="strModelInfo"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost, Authorize]
         public ActionResult SparkCreateWithArg(string strModelInfo)
         {
             SparkCreateModel scmModel = ParseStringToModel(strModelInfo);
