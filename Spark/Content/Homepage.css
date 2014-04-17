@@ -1,0 +1,260 @@
+﻿p, a
+{
+  font-family:Century Gothic;
+  color:lightgray;
+  text-decoration:none;
+}
+
+.Sparks
+{
+  margin-top:1%;
+}
+
+.SparkCollectionTable, .FilterCollectionTable
+{
+  display:table;
+  padding-top:10px;
+
+  margin: 0 auto;
+  min-width:300px;
+}
+
+.FilterCollectionTable
+{
+  margin: 0 auto;
+}
+
+.SparkTile
+{
+  width:280px;
+  height:280px;
+  text-align:center;
+  border-bottom:1px solid darkgray;
+  padding:10px;
+  margin-top:0px;
+  margin-bottom:0px;
+  float:left;
+  background: #2B2A27;
+}
+
+  .SparkTile:hover
+  {
+    cursor:pointer;
+    background:#403f3c;
+  }
+  .SparkTile > h1, .SparkTile > p
+  {
+    color:#444;
+    line-height:20px;
+    font-family:"lato", sans-serif, arial, helvetica;
+  }
+
+  .SparkTile h1
+  {
+    background:none;
+    color:#EDE0C7;
+    font-weight:normal;
+    font-family:Century Gothic;
+    padding:0;
+    margin:0;
+    margin-bottom:20px;
+  }
+
+  .SparkTile p
+  {
+    color:#bfbfbf;
+  }
+
+.DividerSmall
+{
+  width:50px;
+  height:4px;
+  background: none repeat scroll 0% 0% #EDE0C7;
+    margin: 0 auto;
+}
+.VerticalSeparator
+{
+  float:left;
+  width:1px;
+  height: 290px;
+  background: none repeat scroll 0% 0% #EDE0C7;
+}
+
+.CategoryHeaderContainer
+{
+  display:table;
+  margin: 0 auto;
+  min-width:300px;
+}
+.CategoryHeader, .FilterHeader
+{
+  font-weight:bold;
+  font-family:Century Gothic;
+  font-size:35px;
+  color:black;
+  text-align:center;
+}
+
+@media (max-width: 400px) 
+{
+    .NavigationBarContainer
+    {
+        display: none;
+    }
+}
+
+.FilterHeader
+{
+  float:left;
+  margin:0 auto;
+  padding:5px;
+}
+
+.FilterText p
+{
+  font-size:30px;
+  font-weight:bold;
+  font-family:Century Gothic;
+  margin:0 auto;
+  color:black;
+  text-align:center;
+  padding-bottom:5px;
+}
+
+.SparkTileBottomControls
+{
+  margin-top:80px;
+  position:relative;
+}
+
+.inputContainer2
+{
+  height:50px;
+  margin-right:10px;
+  margin-top:5px;
+  float:left;
+}
+
+.inputContainer2:hover .inputText2
+{
+  background: #2B2A27;
+}
+
+.inputText2
+{
+  text-align:center;
+  height:25px;
+  font-family:Century Gothic;
+  color:white;
+  background: #2B2A27;
+  transition: all .5s ease-in;
+}
+
+.input2
+{
+  min-width:230px;
+  font-family:Century Gothic;
+  margin:0;
+  margin-bottom:20px;
+  height:20px;
+}
+
+/*Begin Generic Select (combobox)*/
+.select
+{
+  min-width:230px;
+  min-height:30px;
+  font-family:Century Gothic;
+  color:black;
+  border:2px solid #3d3d3d;
+  border-radius:0;
+  padding:5px;
+  margin-bottom:20px;
+  cursor:pointer;
+  
+  transition: all .5s ease-in;
+}
+
+.select:hover
+{
+  border:2px solid #757575;
+}
+
+.select > option:hover
+{
+  box-shadow: 0 0 10px 100px #1882A8 inset;
+}
+/*End generic select*/
+
+.button2
+{
+  float:left;
+  border:none;
+  background:#1a1a1a;
+  font-family:Century Gothic;
+  font-size:17px;
+  cursor:pointer;
+  color:white;
+  width:150px;
+  height:40px;
+  margin-top:20px;
+  transition: all .5s ease-in;
+}
+
+.button2:hover
+{
+  background:#3b3b3b;
+}
+
+.button2:active
+{
+  border:1px solid white;
+}
+
+.FilterText p
+{
+  font-size:30px;
+  font-weight:bold;
+  font-family:Century Gothic;
+  margin:0;
+  color:black;
+  text-align:center;
+  padding-bottom:5px;
+}
+
+.Tag1:hover, .Tag2:hover
+{
+   box-shadow: 0 0 10px #000;
+}
+.Tag1
+{
+  height:25px;
+  float:right;
+  margin-right:-8px;
+}
+.Tag2
+{
+  height:25px;
+  float:right;
+  margin-right:2px;
+}
+
+.UpvoteIcon
+{
+  float:left;
+  height:25px;
+  margin-left:-10px;
+}
+
+.DownvoteIcon
+{
+  float:left;
+  height:25px;
+  padding-left:5px;
+}
+
+.VoteCount
+{
+  float:left;
+  margin-top:8px;
+}

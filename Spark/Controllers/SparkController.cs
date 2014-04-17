@@ -283,6 +283,11 @@ namespace Spark.Controllers
             return RedirectToAction("SparkContainer");//remove this line
         }
 
+        /// <summary>
+        /// TODO: DIS SHIT GON BREAKKKK.
+        /// </summary>
+        /// <param name="strModelInfo"></param>
+        /// <returns></returns>
         private SparkCreateModel ParseStringToModel(string strModelInfo)
         {
             SparkCreateModel scm = new SparkCreateModel();
