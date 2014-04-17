@@ -9,7 +9,7 @@
 
 <div class="sparkTopicLine">
     <div class="sparkAgree">
-        <a id="buttonAgree" @*href="#modal-text" class="call-modal"*@ onclick="addArgument(true, @Model.PK )">Agree</a>
+        @Html.ActionLink("Agree", "CreateArgument", "Spark", new { bAgree = true, nSparkID = @Model.PK }, new { @id = "buttonAgree" })
     </div>
 
     <div class="sparkTopic">
@@ -17,7 +17,7 @@
     </div>
 
     <div class="sparkDisagree">
-        <a id="buttonDisagree" @*href="#modal-text" class="call-modal"*@ onclick="addArgument(false, @Model.PK )">Disagree</a>
+        @Html.ActionLink("Disagree", "CreateArgument", "Spark", new { bAgree = false, nSparkID = @Model.PK }, new { @id = "buttonDisagree" })
     </div>
 
 </div>

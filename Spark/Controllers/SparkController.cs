@@ -283,6 +283,7 @@ namespace Spark.Controllers
             return sam;
         }
 
+
         [HttpGet]
         public ActionResult CreateArgument(bool bAgree, int nSparkID)
         {
@@ -293,7 +294,7 @@ namespace Spark.Controllers
             argumentModel.bIsAgree = bAgree;
             argumentModel.FKSparks = nSparkID;
 
-            return PartialView("SparkArgumentCreate", argumentModel);
+            return View("SparkArgumentCreate", argumentModel);
         }
 
         [HttpPost]
