@@ -39,7 +39,10 @@ namespace Spark.Classes.DatabaseInterfaces
             int accountId = GetUserId(strUserName);
 
             if (accountId == int.MinValue)
+            { 
                 LogNonUserError(strMessage, "", "", "", "", "");
+                return;
+            }
             errorlog log = new errorlog();
             log.dDate = dtNow;
             log.FKAccounts = accountId;
@@ -282,6 +285,27 @@ namespace Spark.Classes.DatabaseInterfaces
             //}
 
             return true;
+        }
+
+        /// <summary>
+        /// Returns the primary key of the accounts table based on the given parameter for the UserName. Uses int.MinValue as a failure indicator.
+        /// </summary>
+        /// <param name="db">Database instance that is being used for this call.</param>
+        /// <param name="strUserName">String value of the username given by the application's membership.</param>
+        /// <returns>Returns the Account's UserId primary key, else returns int.MinValue.</returns>
+        protected static int GetUserId(sparkdbEntities1 db, string strUserName)
+        {
+            var qryUserId = from r in db.accounts
+                            where r.strUserName == strUserName
+                            select r.PK;
+
+            if (qryUserId == null || qryUserId.Count() != 1)
+            {
+                LogNonUserError("Unable to find username = " + strUserName + " in the database.", "", "", "SparkDatabaseInterface", "UploadArgumentData", "qryUserId");
+                return int.MinValue; // failed, returned max value.
+            }
+
+            return qryUserId.First();
         }
     }
 

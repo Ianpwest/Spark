@@ -13,6 +13,8 @@ namespace Spark.Controllers
 {
     public class SparkController : Controller
     {
+        #region Spark Create
+
         /// <summary>
         /// GET response for the SparkCreate view.
         /// Initializes all tag elements, argument type, userid, subject matter selectlist, and tag id,name, and image information.
@@ -161,6 +163,34 @@ namespace Spark.Controllers
             return Json(new { success = true, message = strMessage });
         }
 
+        private SparkCreateModel ParseStringToModel(string strModelInfo)
+        {
+            SparkCreateModel scm = new SparkCreateModel();
+
+            string[] strArray = strModelInfo.Split(',');
+            if (strArray.Length < 9)
+                return null;
+
+            scm.Topic = strArray[0];
+            scm.Description = strArray[1];
+            scm.SubjectMatterId = int.Parse(strArray[2]);
+            scm.Tag1 = int.Parse(strArray[3]);
+            scm.Tag2 = int.Parse(strArray[4]);
+            scm.Tag3 = int.Parse(strArray[5]);
+            scm.Tag4 = int.Parse(strArray[6]);
+            scm.Tag5 = int.Parse(strArray[7]);
+            if (int.Parse(strArray[8]) == 1)
+                scm.ArgEntryType = ArgumentEntryType.Agree;
+            else
+                scm.ArgEntryType = ArgumentEntryType.Disagree;
+
+            return scm;
+        }
+
+        #endregion
+
+        #region Spark Container
+
         //GET
         public ActionResult SparkContainer(/*int nSparkId*/) //Testing need to uncomment this out
         {
@@ -267,7 +297,6 @@ namespace Spark.Controllers
             return View("SparkArgumentCreate", argumentModel);
         }
 
-        
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult CreateArgument(Models.arguments argumentModel)
@@ -283,33 +312,37 @@ namespace Spark.Controllers
             return RedirectToAction("SparkContainer");//remove this line
         }
 
-        /// <summary>
-        /// TODO: DIS SHIT GON BREAKKKK.
+        [Authorize]
+        public ActionResult CastSparkVote(string strDataConcat)
         /// </summary>
         /// <param name="strModelInfo"></param>
         /// <returns></returns>
-        private SparkCreateModel ParseStringToModel(string strModelInfo)
         {
-            SparkCreateModel scm = new SparkCreateModel();
+            // do some things
+            string strId = strDataConcat.Split(',')[0].ToString();
+            string strBool = strDataConcat.Split(',')[1].ToString();
 
-            string[] strArray = strModelInfo.Split(',');
-            if (strArray.Length < 9)
-                return null;
+            int nSparkId = -1;
+            if(!int.TryParse(strId, out nSparkId))
+            {
+                SparksDatabaseInterface.LogError(User.Identity.Name,
+                    "Error converting return argument to int value from ajax call in javascript method = castSparkVote in SparkContainer.js file.");
+                return Json(new { success = false });
+            }
 
-            scm.Topic = strArray[0];
-            scm.Description = strArray[1];
-            scm.SubjectMatterId = int.Parse(strArray[2]);
-            scm.Tag1 = int.Parse(strArray[3]);
-            scm.Tag2 = int.Parse(strArray[4]);
-            scm.Tag3 = int.Parse(strArray[5]);
-            scm.Tag4 = int.Parse(strArray[6]);
-            scm.Tag5 = int.Parse(strArray[7]);
-            if (int.Parse(strArray[8]) == 1)
-                scm.ArgEntryType = ArgumentEntryType.Agree;
-            else
-                scm.ArgEntryType = ArgumentEntryType.Disagree;
+            bool bConvert = false;
+            if (!bool.TryParse(strBool, out bConvert))
+            {
+                SparksDatabaseInterface.LogError(User.Identity.Name,
+                    "Error converting return argument to boolean value from ajax call in javascript method = castSparkVote in SparkContainer.js file.");
+                return Json(new { success = false });
+            }
 
-            return scm;
+           if(!SparksDatabaseInterface.UploadArgumentData(nSparkId, bConvert, User.Identity.Name))
+               return Json(new { success = false });
+
+            return Json(new { success = true});
         }
+        #endregion
     }
 }

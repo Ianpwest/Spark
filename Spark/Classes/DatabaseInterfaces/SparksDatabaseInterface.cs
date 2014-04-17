@@ -135,5 +135,68 @@ namespace Spark.Classes
 
             return new KeyValuePair<int,string>(cat.PK, cat.strName);
         }
+
+        public static bool UploadArgumentData(int nArgumentId, bool bIsUpvote, string strUserName)
+        {
+            sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
+
+            int nUserId = GetUserId(db, strUserName);
+            if (nUserId == int.MinValue)
+                return false;
+
+            // Verify Argument exists 
+            arguments argExisting = GetExistingArgument(db, nArgumentId);
+            if(argExisting == null)
+                return false;
+
+            argumentvotes voteExisting = GetExistingArgumentVote(db, nUserId, nArgumentId);
+            // TODO - fix this later, needs to change the arg instead of make new one if it already exists.
+            if(voteExisting == null)
+            { 
+                argumentvotes vote = new argumentvotes();
+                vote.FKAccounts = nUserId;
+                vote.FKArguments = nArgumentId;
+                vote.bIsUpvote = bIsUpvote;
+
+                db.argumentvotes.Add(vote);
+            }
+            else
+            {
+                if(voteExisting.bIsUpvote && bIsUpvote)
+                    return false;  
+                else
+                {
+                    voteExisting.bIsUpvote = bIsUpvote;
+                }
+            }
+            
+            return SaveChanges(db);
+        }
+
+        private static arguments GetExistingArgument(sparkdbEntities1 db, int nArgumentId)
+        {
+            var qryArguments = from r in db.arguments
+                               where r.PK == nArgumentId
+                               select r;
+            if (qryArguments == null || qryArguments.Count() != 1)
+            {
+                LogNonUserError("Unable to find argument id = " + nArgumentId + " in the database.", "", "", "SparkDatabaseInterface", "UploadArgumentData", "qryArguments");
+                return null;
+            }
+
+            return qryArguments.First();
+        }
+
+        private static argumentvotes GetExistingArgumentVote(sparkdbEntities1 db, int nUserId, int nArgumentId)
+        {
+            var qryExistingVote = from r in db.argumentvotes
+                                  where r.FKAccounts == nUserId && r.FKArguments == nArgumentId
+                                  select r;
+
+            if (qryExistingVote == null || qryExistingVote.Count() < 1) 
+                return null; // Returning a code indicating the user has no vote yet.
+
+            return qryExistingVote.First();
+        }
     }
 }
