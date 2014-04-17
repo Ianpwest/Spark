@@ -292,6 +292,7 @@
     </Content>
     <Content Include="Content\ajax-loader.gif" />
     <Content Include="Content\BlankImage.gif" />
+    <Content Include="Content\Homepage.css" />
     <Content Include="Content\images\LeftArrow.png" />
     <Content Include="Content\modal.css" />
     <Content Include="Content\NavigationBar.css" />
@@ -362,6 +363,7 @@
     <Content Include="Content\images\plus.png" />
     <Content Include="Scripts\ArgumentCreate.js" />
     <Content Include="Scripts\ArgumentExpansion.js" />
+    <Content Include="Scripts\Homepage.js" />
     <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />

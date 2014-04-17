@@ -293,6 +293,9 @@ namespace Spark.Controllers
 
         [Authorize]
         public ActionResult CastSparkVote(string strDataConcat)
+        /// </summary>
+        /// <param name="strModelInfo"></param>
+        /// <returns></returns>
         {
             // do some things
             string strId = strDataConcat.Split(',')[0].ToString();
