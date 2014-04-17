@@ -114,6 +114,76 @@ namespace Spark.Classes
                     select r).FirstOrDefault();
         }
 
+        public static SparkArgumentModel BuildSparkArgumentModel(arguments argument)
+        {
+            sparkdbEntities1 db = GetDatabaseInstance();
+            //Need to pass this argument to the analytics engine to fill in the rest of the fields?
+            SparkArgumentModel sam = new SparkArgumentModel();
+
+            sam.id = argument.PK;
+            sam.bIsAgree = argument.bIsAgree;
+            sam.nArgumentScore = GetArgumentScore(argument.PK, db);
+            sam.nCommentCount = GetArgumentCommentCount(argument.PK, db);
+            sam.nDownVote = GetArgumentVoteCount(argument.PK, db, false); 
+            sam.nInfluenceScore = 355; //analytics result
+            sam.nUpVote = GetArgumentVoteCount(argument.PK, db, true); 
+            sam.strArgument = argument.strArgument;
+            sam.strCitations = argument.strCitations;
+            sam.strConclusion = argument.strConclusion;
+            sam.strUserName = AccountsDatabaseInterface.GetUsername(argument.FKAccounts);
+
+            return sam;
+        }
+
+        #region Spark Argument Analysis
+
+        private static int GetArgumentScore(int argId, sparkdbEntities1 db)
+        {
+            //this should come from the analytics result.
+            return 25;
+        }
+
+        private static int GetArgumentCommentCount(int argId, sparkdbEntities1 db)
+        {
+            int nCommentCount = 0;
+
+            var qryArgumentVotes = from r in db.comments
+                                   where r.FKArguments == argId
+                                   select r;
+
+            if (qryArgumentVotes != null)
+                nCommentCount = qryArgumentVotes.Count();
+
+            return nCommentCount;
+        }
+
+        private static int GetArgumentVoteCount(int argId, sparkdbEntities1 db, bool bIsUpVote)
+        {
+            int nUpVoteCount = 0;
+
+            var qryUpVotes = from r in db.argumentvotes
+                             where r.FKArguments == argId && r.bIsUpvote == bIsUpVote
+                             select r;
+
+            if (qryUpVotes != null)
+                nUpVoteCount = qryUpVotes.Count();
+
+            return nUpVoteCount;
+        }
+
+        private static int GetArgumentInfluenceCount(int argId, sparkdbEntities1 db)
+        {
+            int nInfluenceScore = 0;
+
+            var qryUsers = from r in db.argumentvotes
+                           where r.FKArguments == argId
+                           select r.FKAccounts;
+
+            return nInfluenceScore;
+        }
+
+        #endregion
+
         /// <summary>
         /// Uploads a tag to the database and returns a keyvaluepair<int,string> : key = PK, value = strName.
         /// Returns int.MinValue, string.empty if unsuccessful in the upload.

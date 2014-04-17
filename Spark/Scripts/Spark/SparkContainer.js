@@ -9,11 +9,11 @@
         success: function (data) {
             // Change UI to reflect upvote or downvote
             if (bIsTrue) {
-
+                //add 1 upvote
             }
             else
             {
-
+                //add 1 downvote
             }
         }
     });

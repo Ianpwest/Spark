@@ -236,7 +236,7 @@ namespace Spark.Controllers
             //Run analytics and create sparkArgumentModels to return
             foreach (Models.arguments argument in lstArguments)
             {
-                SparkArgumentModel sam = BuildSparkArgumentModel(argument);
+                SparkArgumentModel sam = SparksDatabaseInterface.BuildSparkArgumentModel(argument);
                 
                 //Determine which list to put the argument in (agree vs disagree)
                 if (sam.bIsAgree)
@@ -262,27 +262,6 @@ namespace Spark.Controllers
             //return PartialView("SparkArgumentExpanded", sam);
             return View("SparkArgumentExpanded", sam);
         }
-
-        private SparkArgumentModel BuildSparkArgumentModel(arguments argument)
-        {
-            //Need to pass this argument to the analytics engine to fill in the rest of the fields?
-            SparkArgumentModel sam = new SparkArgumentModel();
-
-            sam.id = argument.PK;
-            sam.bIsAgree = argument.bIsAgree;
-            sam.nArgumentScore = 25; //this should come from the analytics result.
-            sam.nCommentCount = 420; //this should come from the analytics result.
-            sam.nDownVote = 20; //analytics result
-            sam.nInfluenceScore = 355; //analytics result
-            sam.nUpVote = 300; //analytics result
-            sam.strArgument = argument.strArgument;
-            sam.strCitations = argument.strCitations;
-            sam.strConclusion = argument.strConclusion;
-            sam.strUserName = AccountsDatabaseInterface.GetUsername(argument.FKAccounts);
-
-            return sam;
-        }
-
 
         [HttpGet]
         public ActionResult CreateArgument(bool bAgree, int nSparkID)
