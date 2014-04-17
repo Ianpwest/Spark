@@ -40,8 +40,8 @@
         
     </div>
     <div class="sparkArgumentUpDownVoteAgree">
-        <div class="sparkUpVote"></div>
+        <div class="sparkUpVote" onclick="castSparkVote(@Model.id, true)"></div>
         <p style="word-wrap:break-word">@Model.nArgumentScore.ToString()</p>
-        <div class="sparkDownVote"></div>
+        <div class="sparkDownVote" onclick="castSparkVote(@Model.id, false)"></div>
     </div>
 </div>

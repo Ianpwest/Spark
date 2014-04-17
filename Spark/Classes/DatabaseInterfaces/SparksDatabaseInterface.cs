@@ -135,5 +135,53 @@ namespace Spark.Classes
 
             return new KeyValuePair<int,string>(cat.PK, cat.strName);
         }
+
+        public static bool UploadArgumentData(int nArgumentId, bool bIsUpvote, string strUserName)
+        {
+            sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
+
+            int nUserId = GetUserId(db, strUserName);
+            if (nUserId == int.MinValue)
+                return false;
+
+            // Verify Argument exists 
+            if(!VerifyArgumentExists(db, nArgumentId))
+                return false;
+
+            argumentvotes vote = new argumentvotes();
+            vote.FKAccounts = nUserId;
+            vote.FKArguments = nArgumentId;
+            vote.bIsUpvote = bIsUpvote;
+
+            db.argumentvotes.Add(vote);
+            
+            return SaveChanges(db);
+        }
+
+        private static bool VerifyArgumentExists(sparkdbEntities1 db, int nArgumentId)
+        {
+            var qryArguments = from r in db.arguments
+                               where r.PK == nArgumentId
+                               select r.PK;
+            if (qryArguments == null || qryArguments.Count() != 1)
+            {
+                LogNonUserError("Unable to find argument id = " + nArgumentId + " in the database.", "", "", "SparkDatabaseInterface", "UploadArgumentData", "qryArguments");
+                return false;
+            }
+
+            return true;
+        }
+
+        private static bool VerifyUserArgumentVoteExist(sparkdbEntities1 db, int nUserId)
+        {
+            var qryExistingVote = from r in db.argumentvotes
+                                  where r.FKAccounts == nUserId
+                                  select r;
+
+            if (qryExistingVote != null && qryExistingVote.Count() > 0) // Returning true to indicate that the query returned a vote.
+                return true;
+
+            return false; // Returning false that the user does not have an existing vote.
+        }
     }
 }
