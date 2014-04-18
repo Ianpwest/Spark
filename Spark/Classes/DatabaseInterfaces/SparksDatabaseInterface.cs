@@ -227,12 +227,18 @@ namespace Spark.Classes
 
             if(qryVotesUsers != null)
             {
-                foreach(argumentvotes vote in qryVotesUsers)
+                List<KeyValuePair<int, bool>> lstVotes = new List<KeyValuePair<int, bool>>();
+                foreach (argumentvotes vote in qryVotesUsers)
                 {
-                    if (vote.bIsUpvote)
-                        dblInfluenceScore += Calculations.Influence(vote.FKAccounts, nCategoryId);
+                    lstVotes.Add(new KeyValuePair<int, bool>(vote.FKAccounts, vote.bIsUpvote));
+                }
+
+                foreach(KeyValuePair<int, bool> kvp in lstVotes)
+                {
+                    if (kvp.Value)
+                        dblInfluenceScore += Calculations.Influence(db, kvp.Key, nCategoryId);
                     else
-                        dblInfluenceScore -= Calculations.Influence(vote.FKAccounts, nCategoryId);
+                        dblInfluenceScore -= Calculations.Influence(db, kvp.Key, nCategoryId);
                 }
             }
 

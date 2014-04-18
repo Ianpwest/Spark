@@ -291,18 +291,19 @@ namespace Spark.Controllers
             return RedirectToAction("SparkContainer");//remove this line
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="strDataConcat"></param>
+        /// <returns></returns>
         [Authorize]
         public ActionResult CastSparkVote(string strDataConcat)
-        /// </summary>
-        /// <param name="strModelInfo"></param>
-        /// <returns></returns>
         {
-            // do some things
-            string strId = strDataConcat.Split(',')[0].ToString();
-            string strBool = strDataConcat.Split(',')[1].ToString();
+            string strId = strDataConcat.Split(',')[0].ToString(); // Argument id
+            string strBool = strDataConcat.Split(',')[1].ToString(); // Upvote or downvote
 
-            int nSparkId = -1;
-            if(!int.TryParse(strId, out nSparkId))
+            int nArgumentId = -1;
+            if(!int.TryParse(strId, out nArgumentId))
             {
                 SparksDatabaseInterface.LogError(User.Identity.Name,
                     "Error converting return argument to int value from ajax call in javascript method = castSparkVote in SparkContainer.js file.");
@@ -317,7 +318,7 @@ namespace Spark.Controllers
                 return Json(new { success = false });
             }
 
-           if(!SparksDatabaseInterface.UploadArgumentData(nSparkId, bConvert, User.Identity.Name))
+           if(!SparksDatabaseInterface.UploadArgumentData(nArgumentId, bConvert, User.Identity.Name))
                return Json(new { success = false });
 
             return Json(new { success = true});
