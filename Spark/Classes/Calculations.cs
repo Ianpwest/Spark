@@ -237,6 +237,7 @@ namespace Spark.Classes
 
             // Collection of key value pairs, key = sparkId and value = interest amount.
             Dictionary<int, double> dictInterestSparks = new Dictionary<int, double>();
+            
             // Finds all of the interest votes for each spark.
             var qryForInterest = from sparkinterestvotes votes in dbEntity.sparkinterestvotes
                                  orderby votes.FKSparks
@@ -267,23 +268,36 @@ namespace Spark.Classes
                 }
             }
 
-            // Selects all sparks in the database that are contained in the popularity sorted dictionary and sorts them by their Id.
+
+            var keys = (from r in dictInterestSparks.Keys
+                        select r).ToList();
+
             var qryForSparksWithInterests = from sparks spark in dbEntity.sparks
-                                            where dictInterestSparks.ContainsKey(spark.PK)
+                                            where keys.Contains(spark.PK)
                                             orderby spark.PK
                                             select spark;
 
             // Attempts to get the constant value that is multiplied to each popularity rating.
             double nConstant = 1;
-            double.TryParse((from constants constant in dbEntity.constants
+
+            var query = (from constants constant in dbEntity.constants
                              where constant.strKey == "SortingPopularityConstant"
-                             select constant).FirstOrDefault().strValue, out nConstant);
+                             select constant).FirstOrDefault();
+
+            if(query == null || query.strKey.Count() <= 0)
+            {
+                DatabaseInterfaces.BaseDatabaseInterface.LogError("Calculations Class", "There is no key in the database with the key 'SortingPopularityConstant'");
+                return null;
+            }
+
+            double.TryParse(query.strValue.FirstOrDefault().ToString(), out nConstant);
 
             // Applies the multiplier constant to each item in the collection to modify its final value of popularity.
             foreach (sparks spark in qryForSparksWithInterests)
             {
                 if (dictSorted.ContainsKey(spark))
                     continue;
+
                 dictSorted.Add(spark, dictInterestSparks[spark.PK] * nConstant);
             }
 

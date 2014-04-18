@@ -1,0 +1,22 @@
+﻿@model Spark.Models.sparks
+
+
+<div class="SparkTile">
+    <h1>What to put here?</h1>
+    <div class="DividerSmall"></div>
+    <p>@Model.strTopic</p>
+    <div class="SparkTileBottomControls">
+        <img id="UpvoteIcon" class="UpvoteIcon" src="http://i62.tinypic.com/2yx0v47.png"
+             onclick="ImageClicked(this)"
+             onmouseover="ChangeImage(this, 'over')"
+             onmouseout="ChangeImage(this, 'out')">
+        <img id="DownvoteIcon" class="DownvoteIcon" src="http://i59.tinypic.com/igj4aa.png"
+             onclick="ImageClicked(this)"
+             onmouseover="ChangeImage(this, 'over')"
+             onmouseout="ChangeImage(this, 'out')">
+        <p class="VoteCount">(+420/ -25)</p>
+        <img class="Tag1" src="http://i62.tinypic.com/szkgh2.png">
+        <img class="Tag2" src="http://i60.tinypic.com/28gy2o3.png">
+        <img class="Tag2" src="http://i57.tinypic.com/x6mtlf.png">
+    </div>
+</div>

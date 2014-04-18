@@ -38,156 +38,19 @@
     </div>
 </section>
 
-
-<section class="Sparks">
-    <p class="CategoryHeader">Category 1</p>
-    <div class="SparkCollectionTable">
-        <div class="Row">
-            <div class="SparkTile">
-                <h1>Spark 1</h1>
-                <div class="DividerSmall"></div>
-                <p>This is the topic of spark 1. Spark 1 is really interesting and fun to look at. If you click on this spark it should take you to the spark page where you can see arguments and comments on those arguments.</p>
-                <div class="SparkTileBottomControls">
-                    <img id="UpvoteIcon" class="UpvoteIcon" src="http://i62.tinypic.com/2yx0v47.png"
-                         onclick="ImageClicked(this)"
-                         onmouseover="ChangeImage(this, 'over')"
-                         onmouseout="ChangeImage(this, 'out')">
-                    <img id="DownvoteIcon" class="DownvoteIcon" src="http://i59.tinypic.com/igj4aa.png"
-                         onclick="ImageClicked(this)"
-                         onmouseover="ChangeImage(this, 'over')"
-                         onmouseout="ChangeImage(this, 'out')">
-                    <p class="VoteCount">(+420/ -25)</p>
-                    <img class="Tag1" src="http://i62.tinypic.com/szkgh2.png">
-                    <img class="Tag2" src="http://i60.tinypic.com/28gy2o3.png">
-                    <img class="Tag2" src="http://i57.tinypic.com/x6mtlf.png">
-                </div>
-            </div>
+<p class="CategoryHeader">Trending</p>
+<div class="SparkCollectionTable">
+    <div class="Row">
+        @foreach (Spark.Models.sparks spark in ViewBag.Sparks)
+        {
+            @Html.Partial("SparkHomepageTile", spark);
             <div class="VerticalSeparator"></div>
-            <div class="SparkTile">
-                <h1>Spark 1</h1>
-                <div class="DividerSmall"></div>
-                <p>This is the topic of spark 1. Spark 1 is really interesting and fun to look at. If you click on this spark it should take you to the spark page where you can see arguments and comments on those arguments.</p>
-            </div>
-            <div class="VerticalSeparator"></div>
-            <div class="SparkTile">
-                <h1>Spark 1</h1>
-                <div class="DividerSmall"></div>
-                <p>This is the topic of spark 1. Spark 1 is really interesting and fun to look at. If you click on this spark it should take you to the spark page where you can see arguments and comments on those arguments.</p>
-            </div>
-            <div class="VerticalSeparator"></div>
-            <div class="SparkTile">
-                <h1>Spark 1</h1>
-                <div class="DividerSmall"></div>
-                <p>This is the topic of spark 1. Spark 1 is really interesting and fun to look at. If you click on this spark it should take you to the spark page where you can see arguments and comments on those arguments.</p>
-            </div>
-            <div class="VerticalSeparator"></div>
-            <div class="SparkTile">
-                <h1>Spark 1</h1>
-                <div class="DividerSmall"></div>
-                <p>This is the topic of spark 1. Spark 1 is really interesting and fun to look at. If you click on this spark it should take you to the spark page where you can see arguments and comments on those arguments.</p>
-            </div>
-            <div class="VerticalSeparator"></div>
-            <div class="Row">
-                <div class="SparkTile">
-                    <h1>Spark 1</h1>
-                    <div class="DividerSmall"></div>
-                    <p>This is the topic of spark 1. Spark 1 is really interesting and fun to look at. If you click on this spark it should take you to the spark page where you can see arguments and comments on those arguments.</p>
-                </div>
-                <div class="VerticalSeparator"></div>
-                <div class="SparkTile">
-                    <h1>Spark 1</h1>
-                    <div class="DividerSmall"></div>
-                    <p>This is the topic of spark 1. Spark 1 is really interesting and fun to look at. If you click on this spark it should take you to the spark page where you can see arguments and comments on those arguments.</p>
-                </div>
-                <div class="VerticalSeparator"></div>
-                <div class="SparkTile">
-                    <h1>Spark 1</h1>
-                    <div class="DividerSmall"></div>
-                    <p>This is the topic of spark 1. Spark 1 is really interesting and fun to look at. If you click on this spark it should take you to the spark page where you can see arguments and comments on those arguments.</p>
-                </div>
-                <div class="VerticalSeparator"></div>
-
-                <div class="SparkTile">
-                    <h1>Spark 1</h1>
-                    <div class="DividerSmall"></div>
-                    <p>This is the topic of spark 1. Spark 1 is really interesting and fun to look at. If you click on this spark it should take you to the spark page where you can see arguments and comments on those arguments.</p>
-                </div>
-                <div class="VerticalSeparator"></div>
-            </div>
-        </div>
+        }
     </div>
-</section>
+</div>
 
 
 
 
 
-<section class="Sparks">
-    <p class="CategoryHeader">Category 2</p>
-    <div class="SparkCollectionTable">
-        <div class="Row">
-            <div class="SparkTile">
-                <h1>Spark 1</h1>
-                <div class="DividerSmall"></div>
-                <p>This is the topic of spark 1. Spark 1 is really interesting and fun to look at. If you click on this spark it should take you to the spark page where you can see arguments and comments on those arguments.</p>
-            </div>
-            <div class="VerticalSeparator"></div>
-            <div class="SparkTile">
-                <h1>Spark 1</h1>
-                <div class="DividerSmall"></div>
-                <p>This is the topic of spark 1. Spark 1 is really interesting and fun to look at. If you click on this spark it should take you to the spark page where you can see arguments and comments on those arguments.</p>
-            </div>
-            <div class="VerticalSeparator"></div>
-            <div class="SparkTile">
-                <h1>Spark 1</h1>
-                <div class="DividerSmall"></div>
-                <p>This is the topic of spark 1. Spark 1 is really interesting and fun to look at. If you click on this spark it should take you to the spark page where you can see arguments and comments on those arguments.</p>
-            </div>
-            <div class="VerticalSeparator"></div>
-            <div class="SparkTile">
-                <h1>Spark 1</h1>
-                <div class="DividerSmall"></div>
-                <p>This is the topic of spark 1. Spark 1 is really interesting and fun to look at. If you click on this spark it should take you to the spark page where you can see arguments and comments on those arguments.</p>
-            </div>
-            <div class="VerticalSeparator"></div>
-            <div class="SparkTile">
-                <h1>Spark 1</h1>
-                <div class="DividerSmall"></div>
-                <p>This is the topic of spark 1. Spark 1 is really interesting and fun to look at. If you click on this spark it should take you to the spark page where you can see arguments and comments on those arguments.</p>
-            </div>
-            <div class="VerticalSeparator"></div>
-            <div class="Row">
-                <div class="SparkTile">
-                    <h1>Spark 1</h1>
-                    <div class="DividerSmall"></div>
-                    <p>This is the topic of spark 1. Spark 1 is really interesting and fun to look at. If you click on this spark it should take you to the spark page where you can see arguments and comments on those arguments.</p>
-                </div>
-                <div class="VerticalSeparator"></div>
-                <div class="SparkTile">
-                    <h1>Spark 1</h1>
-                    <div class="DividerSmall"></div>
-                    <p>This is the topic of spark 1. Spark 1 is really interesting and fun to look at. If you click on this spark it should take you to the spark page where you can see arguments and comments on those arguments.</p>
-                </div>
-                <div class="VerticalSeparator"></div>
-                <div class="SparkTile">
-                    <h1>Spark 1</h1>
-                    <div class="DividerSmall"></div>
-                    <p>This is the topic of spark 1. Spark 1 is really interesting and fun to look at. If you click on this spark it should take you to the spark page where you can see arguments and comments on those arguments.</p>
-                </div>
-                <div class="VerticalSeparator"></div>
-                <div class="SparkTile">
-                    <h1>Spark 1</h1>
-                    <div class="DividerSmall"></div>
-                    <p>This is the topic of spark 1. Spark 1 is really interesting and fun to look at. If you click on this spark it should take you to the spark page where you can see arguments and comments on those arguments.</p>
-                </div>
-                <div class="VerticalSeparator"></div>
-                <div class="SparkTile">
-                    <h1>Spark 1</h1>
-                    <div class="DividerSmall"></div>
-                    <p>This is the topic of spark 1. Spark 1 is really interesting and fun to look at. If you click on this spark it should take you to the spark page where you can see arguments and comments on those arguments.</p>
-                </div>
-                <div class="VerticalSeparator"></div>
-            </div>
-        </div>
-    </div>
-</section>
+

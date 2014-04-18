@@ -39,14 +39,38 @@ namespace Spark.Classes
             sparkModel.FKCategories4 = sparkCreateModel.Tag4;
             sparkModel.FKCategories5 = sparkCreateModel.Tag5;
 
+
             sparkModel.FKAccountsCreatedBy = nQryUserId.First();
             sparkModel.dDateCreated = DateTime.Now;
             sparkModel.dDateModified = DateTime.Now;
             db.sparks.Add(sparkModel);
-            if (SaveChanges(db))
+
+            
+            if (SaveChanges(db) && AddBaselineInterest(sparkModel.PK, nQryUserId.First()))
+            {
                 return sparkModel.PK;
+            }
+                
             else
                 return int.MinValue;
+        }
+
+        private static bool AddBaselineInterest(int nFKSpark, int nUserID)
+        {
+            sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
+
+            //Give baseline interest of one upvote from the creator.
+            sparkinterestvotes siv = new sparkinterestvotes();
+            siv.bIsUpVote = true;
+            siv.FKSparks = nFKSpark;
+            siv.FKAccounts = nUserID;
+
+            db.sparkinterestvotes.Add(siv);
+
+            if (SaveChanges(db))
+                return true;
+
+            return false;
         }
 
         /// <summary>

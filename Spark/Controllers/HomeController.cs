@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Spark.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,14 +11,30 @@ namespace Spark.Controllers
     {
         public ActionResult Homepage()
         {
-            return View();
+            //Get the most popular sparks. TODO: Need to have a method that only returns first 20 or next 20 or something so that we can click next to go to the second page.
+            List<Models.sparks> lstSparks = Calculations.SortSparksByPopularity(UtilitiesDatabaseInterface.GetDatabaseInstance());
+
+            //TODO: Make a real error page. We have no sparks to display.
+            if (lstSparks == null)
+                return View("Error");
+
+            //Put the sparks in the viewbag so that the list can be consumed by the view.
+            ViewBag.Sparks = lstSparks;
+
+            return View("Homepage");
         }
 
         public ActionResult Index()
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            if (User.Identity.IsAuthenticated)
+               return Homepage();
+            else
+                return WelcomeScreen();
+        }
 
-            return View();
+        public ActionResult WelcomeScreen()
+        {
+            return View("Index");
         }
 
         public ActionResult About()
