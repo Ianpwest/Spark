@@ -179,6 +179,22 @@ namespace Spark.Classes
                            where r.FKArguments == argId
                            select r.FKAccounts;
 
+            var qryArgumentCategory = from r in db.arguments
+                                      where r.PK == argId
+                                      select r.FKSparks;
+            if(qryArgumentCategory != null && qryArgumentCategory.Count() > 0)
+            {
+
+            }
+
+            if(qryUsers != null)
+            {
+                foreach(int nUserId in qryUsers)
+                {
+                    Calculations.Influence(nUserId, db, )
+                }
+            }
+
             return nInfluenceScore;
         }
 
