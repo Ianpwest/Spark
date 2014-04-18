@@ -124,8 +124,8 @@ namespace Spark.Classes
             sam.bIsAgree = argument.bIsAgree;
             sam.nArgumentScore = GetArgumentScore(argument.PK, db);
             sam.nCommentCount = GetArgumentCommentCount(argument.PK, db);
-            sam.nDownVote = GetArgumentVoteCount(argument.PK, db, false); 
-            sam.nInfluenceScore = 355; //analytics result
+            sam.nDownVote = GetArgumentVoteCount(argument.PK, db, false);
+            sam.nInfluenceScore = GetArgumentInfluenceCount(argument.PK, db);
             sam.nUpVote = GetArgumentVoteCount(argument.PK, db, true); 
             sam.strArgument = argument.strArgument;
             sam.strCitations = argument.strCitations;
@@ -139,7 +139,7 @@ namespace Spark.Classes
 
         private static int GetArgumentScore(int argId, sparkdbEntities1 db)
         {
-            //this should come from the analytics result.
+            //this should come from the analytics result. Haven't decided what this should be really.
             return 25;
         }
 
@@ -171,31 +171,48 @@ namespace Spark.Classes
             return nUpVoteCount;
         }
 
-        private static int GetArgumentInfluenceCount(int argId, sparkdbEntities1 db)
+        private static double GetArgumentInfluenceCount(int argId, sparkdbEntities1 db)
         {
-            int nInfluenceScore = 0;
+            double dblInfluenceScore = 0;
+            int nCategoryId = int.MinValue;
 
-            var qryUsers = from r in db.argumentvotes
+            var qryVotesUsers = from r in db.argumentvotes
                            where r.FKArguments == argId
-                           select r.FKAccounts;
+                           select r;
 
-            var qryArgumentCategory = from r in db.arguments
+            var qrySparkId = from r in db.arguments
                                       where r.PK == argId
                                       select r.FKSparks;
-            if(qryArgumentCategory != null && qryArgumentCategory.Count() > 0)
-            {
 
-            }
-
-            if(qryUsers != null)
+            if(qrySparkId != null && qrySparkId.Count() > 0)
             {
-                foreach(int nUserId in qryUsers)
+                int nSparkId = qrySparkId.First();
+
+                var qryCategory = from r in db.sparks
+                                  where r.PK == nSparkId
+                                  select r.FKSubjectMatters;
+
+                if(qryCategory != null && qryCategory.Count() > 0)
+                    nCategoryId = qryCategory.First();
+                else
                 {
-                    Calculations.Influence(nUserId, db, )
+                    // Log error here and maybe alert user?
+                    return 0;
                 }
             }
 
-            return nInfluenceScore;
+            if(qryVotesUsers != null)
+            {
+                foreach(argumentvotes vote in qryVotesUsers)
+                {
+                    if (vote.bIsUpvote)
+                        dblInfluenceScore += Calculations.Influence(vote.FKAccounts, nCategoryId);
+                    else
+                        dblInfluenceScore -= Calculations.Influence(vote.FKAccounts, nCategoryId);
+                }
+            }
+
+            return dblInfluenceScore;
         }
 
         #endregion

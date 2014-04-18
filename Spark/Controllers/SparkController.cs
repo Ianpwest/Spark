@@ -257,7 +257,7 @@ namespace Spark.Controllers
                 return View("Error");
 
             //Get the rest of the extended argument properties.
-            SparkArgumentModel sam = BuildSparkArgumentModel(argument);
+            SparkArgumentModel sam = SparksDatabaseInterface.BuildSparkArgumentModel(argument);
 
             //return PartialView("SparkArgumentExpanded", sam);
             return View("SparkArgumentExpanded", sam);

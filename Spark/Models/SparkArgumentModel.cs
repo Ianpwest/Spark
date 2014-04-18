@@ -18,7 +18,7 @@ namespace Spark.Models
 
         public int nDownVote { get; set; }
 
-        public int nInfluenceScore { get; set; }
+        public double nInfluenceScore { get; set; }
 
         [Required]
         [StringLength(int.MaxValue, MinimumLength = 1, ErrorMessage = "Please fill out the Spark It section!")]

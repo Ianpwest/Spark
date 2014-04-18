@@ -17,8 +17,10 @@ namespace Spark.Classes
         /// Used to calculate a particular user's total influence.
         /// </summary>
         /// <returns></returns>
-        public static double Influence(int nUserId, sparkdbEntities1 dbEntity, int nSubjectMatterId)
+        public static double Influence(int nUserId, int nSubjectMatterId)
         {
+            sparkdbEntities1 dbEntity = new sparkdbEntities1();
+
             double dblInfluence = 0;
 
             dblInfluence += GetBaseInfluence(nUserId, dbEntity, nSubjectMatterId);
