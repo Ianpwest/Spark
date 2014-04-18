@@ -17,15 +17,13 @@ namespace Spark.Classes
         /// Used to calculate a particular user's total influence.
         /// </summary>
         /// <returns></returns>
-        public static double Influence(int nUserId, int nSubjectMatterId)
+        public static double Influence(sparkdbEntities1 db, int nUserId, int nSubjectMatterId)
         {
-            sparkdbEntities1 dbEntity = new sparkdbEntities1();
-
             double dblInfluence = 0;
 
-            dblInfluence += GetBaseInfluence(nUserId, dbEntity, nSubjectMatterId);
-            dblInfluence += GetUserAddons(nUserId, dbEntity, nSubjectMatterId);
-            dblInfluence += GetSpread(nUserId, dbEntity, nSubjectMatterId);
+            dblInfluence += GetBaseInfluence(db, nUserId, nSubjectMatterId);
+            dblInfluence += GetUserAddons(db, nUserId, nSubjectMatterId);
+            dblInfluence += GetSpread(db, nUserId, nSubjectMatterId);
 
             return dblInfluence;
         }
@@ -37,20 +35,23 @@ namespace Spark.Classes
         /// <param name="dbEntity">Database entity.</param>
         /// <param name="nSubjectMatterId">Broad category against which to calculate.</param>
         /// <returns>Double value that represents the base influence number.</returns>
-        private static double GetBaseInfluence(int nUserId, sparkdbEntities1 dbEntity, int nSubjectMatterId)
+        private static double GetBaseInfluence(sparkdbEntities1 db, int nUserId, int nSubjectMatterId)
         {
             double dblBase = 0;
 
+            double dblGains = (from influencegains influencegain in db.influencegains
+                               where influencegain.FKAccountsReceived == nUserId && influencegain.bIsPositive == true && influencegain.FKSubjectMatters == nSubjectMatterId
+                               select influencegain).Count();
+
+            double dblLosses = (from influencegains influencegain in db.influencegains
+                                where influencegain.FKAccountsReceived == nUserId && influencegain.bIsPositive == false && influencegain.FKSubjectMatters == nSubjectMatterId
+                                select influencegain).Count();
+
             // Returns the number of positive votes minus the number of negative votes from the gains table to get the absolute scale.
-            dblBase  = (from influencegains influencegain in dbEntity.influencegains
-                        where influencegain.FKAccountsReceived == nUserId && influencegain.bIsPositive == true && influencegain.FKSubjectMatters == nSubjectMatterId
-                        select influencegain).Count() -
-                        (from influencegains influencegain in dbEntity.influencegains
-                         where influencegain.FKAccountsReceived == nUserId && influencegain.bIsPositive == false && influencegain.FKSubjectMatters == nSubjectMatterId
-                        select influencegain).Count();
+            dblBase = dblGains - dblLosses;
 
             double nConstant = 1;
-            if(double.TryParse((from constants constant in dbEntity.constants
+            if (double.TryParse((from constants constant in db.constants
                                 where constant.strKey == "InfluenceBaseConstant"
                                 select constant.strValue).FirstOrDefault(), out nConstant))
                 dblBase = dblBase * nConstant;
@@ -65,25 +66,32 @@ namespace Spark.Classes
         /// <param name="dbEntity">Database entity.</param>
         /// <param name="nSubjectMatterId">Broad category against which to calculate.</param>
         /// <returns>Double value that represents a total of all related user gained/lost influence.</returns>
-        private static double GetUserAddons(int nUserId, sparkdbEntities1 dbEntity, int nSubjectMatterId)
+        private static double GetUserAddons(sparkdbEntities1 db, int nUserId, int nSubjectMatterId)
         {
             double dblUserAddon = 0;
 
             // Queries for all of the userIds of people who contributed to the initial user's influence in the gains table.
-            IEnumerable<int> qryAllContributors = from influencegains influence in dbEntity.influencegains
+            IEnumerable<int> qryAllContributors = from influencegains influence in db.influencegains
                                                   where influence.FKAccountsReceived == nUserId
                                                   select influence.FKAccountsReceived;
             
             // Attempts to determine the constant to use for userAddon values.
             double nConstant = 1;
-            double.TryParse((from constants constant in dbEntity.constants
+            double.TryParse((from constants constant in db.constants
                             where constant.strKey == "InfluenceUserAddonConstant"
                             select constant.strValue).FirstOrDefault(), out nConstant);
-            foreach (int n in qryAllContributors)
+
+            List<int> lstContributors = new List<int>(); // Creating memory allocation of query to close the reader before executing another query. **
+            foreach(int n in qryAllContributors)
+            {
+                lstContributors.Add(n);
+            }
+
+            foreach (int n in lstContributors)
             {
                 // Finds the base influence value for each of the users who contributed to the current user's influence.
                 // Multiplies the base value found by a constant, then adds it to the running total.
-                dblUserAddon += (GetBaseInfluence(n, dbEntity, nSubjectMatterId) * nConstant) ;
+                dblUserAddon += (GetBaseInfluence(db, n, nSubjectMatterId) * nConstant);
             }
             
             return dblUserAddon;
@@ -96,11 +104,11 @@ namespace Spark.Classes
         /// <param name="dbEntity">Database entity.</param>
         /// <param name="nSubjectMatterId">Broad category against which to calculate.</param>
         /// <returns>Double value that represents a sum of all spread gains/losses for the given broad category.</returns>
-        private static double GetSpread(int nUserId, sparkdbEntities1 dbEntity, int nSubjectMatterId)
+        private static double GetSpread(sparkdbEntities1 db, int nUserId, int nSubjectMatterId)
         {
             double dblSpread = 0;
 
-            IEnumerable<int> qrySpreadValues = from subjectmatterspreads spread in dbEntity.subjectmatterspreads
+            IEnumerable<int> qrySpreadValues = from subjectmatterspreads spread in db.subjectmatterspreads
                                                where spread.FKSubjectMattersSpread == nSubjectMatterId &&
                                                spread.FKSubjectMattersContributor == nUserId
                                                select spread.nValue;
