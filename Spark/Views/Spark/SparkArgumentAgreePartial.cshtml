@@ -9,16 +9,16 @@
             <div class="sparkUsernameAgree">
                 @Model.strUserName
             </div>
-            <div class="sparkInfluenceScoreAgree">
+            <div class="sparkInfluenceScoreAgree" id="sparkInfluenceScore@(Model.id)">
                 Influence: @Model.nInfluenceScore.ToString()
             </div>
-            <div class="sparkDownvoteAgree">
-               -# @Model.nDownVote.ToString()
+            <div class="sparkDownvoteAgree" id="sparkDownvote@(Model.id)">
+                -# @Model.nDownVote.ToString()
             </div>
-            <div class="sparkUpvoteAgree">
+            <div class="sparkUpvoteAgree" id="sparkUpvote@(Model.id)">
                 +# @Model.nUpVote.ToString()
             </div>
-            <div class="sparkCommentsCountAgree">
+            <div class="sparkCommentsCountAgree" id="sparkCommentsCount@(Model.id)">
                 Comment # @Model.nCommentCount.ToString()
             </div>
         </div>
@@ -37,11 +37,16 @@
                 @Html.ActionLink("Expand", "GetExpandedArgumentView", "Spark", new { id = @Model.id }, null)
             </div>
         </div>
+
+        <div class="hidden" id="HiddenInfluenceScoreDisagree@(Model.id)">@Model.nInfluenceScore.ToString()</div>
+        <div class="hidden" id="HiddenDownvote@(Model.id)">@Model.nDownVote.ToString()</div>
+        <div class="hidden" id="HiddenUpvote@(Model.id)">@Model.nUpVote.ToString()</div>
+        <div class="hidden" id="HiddenCommentsCount@(Model.id)">@Model.nCommentCount.ToString()</div>
         
     </div>
     <div class="sparkArgumentUpDownVoteAgree">
-        <div class="sparkUpVote" onclick="castSparkVote(@Model.id, true)"></div>
+        <div class="sparkUpVote" onclick="CastArgumentVote(@Model.id, true)"></div>
         <p style="word-wrap:break-word">@Model.nArgumentScore.ToString()</p>
-        <div class="sparkDownVote" onclick="castSparkVote(@Model.id, false)"></div>
+        <div class="sparkDownVote" onclick="CastArgumentVote(@Model.id, false)"></div>
     </div>
 </div>

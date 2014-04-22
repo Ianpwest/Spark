@@ -9,16 +9,16 @@
             <div class="sparkUsernameDisagree">
                 @Model.strUserName
             </div>
-            <div class="sparkInfluenceScoreDisagree">
+            <div class="sparkInfluenceScoreDisagree" id="sparkInfluenceScore@(Model.id)">
                 Influence: @Model.nInfluenceScore.ToString()
             </div>
-            <div class="sparkDownvoteDisagree">
+            <div class="sparkDownvoteDisagree" id="sparkDownvote@(Model.id)">
                 -# @Model.nDownVote.ToString()
             </div>
-            <div class="sparkUpvoteDisagree">
+            <div class="sparkUpvoteDisagree" id="sparkUpvote@(Model.id)">
                 +# @Model.nUpVote.ToString()
             </div>
-            <div class="sparkCommentsCountDisagree">
+            <div class="sparkCommentsCountDisagree" id="sparkCommentsCount@(Model.id)">
                 Comment # @Model.nCommentCount.ToString()
             </div>
         </div>
@@ -35,11 +35,16 @@
             <div class="sparkAddComment">
             </div>
         </div>
+
+        <div class="hidden" id="HiddenInfluenceScoreDisagree@(Model.id)">@Model.nInfluenceScore.ToString()</div>
+        <div class="hidden" id="HiddenDownvote@(Model.id)">@Model.nDownVote.ToString()</div>
+        <div class="hidden" id="HiddenUpvote@(Model.id)">@Model.nUpVote.ToString()</div>
+        <div class="hidden" id="HiddenCommentsCount@(Model.id)">@Model.nCommentCount.ToString()</div>
         
     </div>
     <div class="sparkArgumentUpDownVoteDisagree">
-        <div class="sparkUpVote"></div>
+        <div class="sparkUpVote" onclick="CastArgumentVote(@Model.id, true)"></div>
         <p style="word-wrap:break-word">@Model.nArgumentScore.ToString()</p>
-        <div class="sparkDownVote"></div>
+        <div class="sparkDownVote" onclick="CastArgumentVote(@Model.id, false)"></div>
     </div>
 </div>

@@ -297,7 +297,7 @@ namespace Spark.Controllers
         /// <param name="strDataConcat"></param>
         /// <returns></returns>
         [Authorize]
-        public ActionResult CastSparkVote(string strDataConcat)
+        public ActionResult CastArgumentVote(string strDataConcat)
         {
             string strId = strDataConcat.Split(',')[0].ToString(); // Argument id
             string strBool = strDataConcat.Split(',')[1].ToString(); // Upvote or downvote
@@ -306,7 +306,7 @@ namespace Spark.Controllers
             if(!int.TryParse(strId, out nArgumentId))
             {
                 SparksDatabaseInterface.LogError(User.Identity.Name,
-                    "Error converting return argument to int value from ajax call in javascript method = castSparkVote in SparkContainer.js file.");
+                    "Error converting return argument to int value from ajax call in javascript method = CastArgumentVote in SparkContainer.js file.");
                 return Json(new { success = false });
             }
 
@@ -314,7 +314,7 @@ namespace Spark.Controllers
             if (!bool.TryParse(strBool, out bConvert))
             {
                 SparksDatabaseInterface.LogError(User.Identity.Name,
-                    "Error converting return argument to boolean value from ajax call in javascript method = castSparkVote in SparkContainer.js file.");
+                    "Error converting return argument to boolean value from ajax call in javascript method = CastArgumentVote in SparkContainer.js file.");
                 return Json(new { success = false });
             }
 
