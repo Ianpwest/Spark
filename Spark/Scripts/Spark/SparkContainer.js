@@ -8,21 +8,27 @@
         url: "/Spark/CastArgumentVote",
         success: function (data) {
             // Change UI to reflect upvote or downvote
-            if(data.success)
-                AddVoteToSpark(nArgumentId.toString(), bIsTrue);
+            if (data.success)
+            {
+                AddRemoveVoteToSpark(nArgumentId.toString(), bIsTrue, true);
+                if (!data.bIsNewVote)
+                {
+                    AddRemoveVoteToSpark(nArgumentId.toString(), !bIsTrue, false);
+                }
+            }
         }
     });
 }
 
-function AddVoteToSpark(argumentId, bIsUpvote)
+function AddRemoveVoteToSpark(argumentId, bIsUpvote, bIsAdd)
 {
     if (bIsUpvote)
-        AddUpVote(argumentId);
+        AddRemoveUpVote(argumentId, bIsAdd);
     else
-        AddDownVote(argumentId);
+        AddRemoveDownVote(argumentId, bIsAdd);
 }
 
-function AddUpVote(argumentId)
+function AddRemoveUpVote(argumentId, bIsAdd)
 {
     var obj = document.getElementById("sparkUpvote" + argumentId);
     var obj2 = document.getElementById("HiddenUpvote" + argumentId);
@@ -31,23 +37,33 @@ function AddUpVote(argumentId)
     var nValue = parseInt(strInner);
     if (nValue != "NaN")
     {
-        var nValueNext = nValue + 1;
+        var nValueNext = nValue;
+        if (bIsAdd)
+            nValueNext++;
+        else
+            nValueNext--;
+
         obj.innerHTML = "+# " + nValueNext.toString();
         obj2.innerHTML = nValueNext.toString();
     }
 
 }
 
-function AddDownVote(argumentId)
+function AddRemoveDownVote(argumentId, bIsAdd)
 {
     var obj = document.getElementById("sparkDownvote" + argumentId);
     var obj2 = document.getElementById("HiddenDownvote" + argumentId);
     var strInner = obj2.innerHTML;
 
     var nValue = parseInt(strInner);
-    if (nValue != "NaN") {
-        var nValueNext = nValue - 1;
-        obj.innerHTML = "+# " + nValueNext.toString();
+    if (nValue != "NaN")
+    {
+        var nValueNext = nValue;
+        if (bIsAdd)
+            nValueNext++;
+        else
+            nValueNext--;
+        obj.innerHTML = "-# " + nValueNext.toString();
         obj2.innerHTML = nValueNext.toString();
     }
 }

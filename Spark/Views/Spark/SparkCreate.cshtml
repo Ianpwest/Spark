@@ -26,24 +26,27 @@
                 <div class="editor-label">
                     @Html.LabelFor(model => model.SubjectMatterId)
                 </div>
-                <div class="editor-field">
-                    @Html.DropDownListFor(model => model.SubjectMatterId, Model.SubjectMattersAll, new { onchange = "getImage(this)" })
+                <div>
+                    @Html.DropDownListFor(model => model.SubjectMatterId, Model.SubjectMattersAll, new { onchange = "getImage(this)", @class ="sparkFields"})
+                    <p>&nbsp;&lt;--- Select a Spark type.</p>
                     @Html.ValidationMessageFor(model => model.SubjectMatterId)
                 </div>
 
                 <div class="editor-label">
                     @Html.LabelFor(model => model.Topic)
                 </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.Topic)
+                <div>
+                    @Html.EditorFor(model => model.Topic, new { @class ="sparkFields" })
+                    <p>&nbsp;&lt;--- Write a main topic for your spark.</p>
                     @Html.ValidationMessageFor(model => model.Topic)
                 </div>
 
                 <div class="editor-label">
                     @Html.LabelFor(model => model.Description)
                 </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.Description)
+                <div>
+                    @Html.TextAreaFor(model => model.Description, 5, 60, new object { })
+                    <p>&nbsp;&lt;--- Write a brief summary of your spark.</p>
                     @Html.ValidationMessageFor(model => model.Description)
                 </div>
 
@@ -56,7 +59,6 @@
                         <thead>
                             <tr class="trHeaderAvailableTagsTable">
                                 <td class="tdHeaderAvailableTagsLeft">@Html.TextBox("Header", null, new { @style = "width:100%; height:15px;", onkeyup = "filterResults(this.value)" })</td>
-                                @*<td class="tdHeaderAvailableTagsRight"><a href="#modal-text" class="call-modal" onclick="popupNewTagWnd()"></a></td>*@
                             </tr>
                         </thead>
                         <tbody>
@@ -76,20 +78,6 @@
                             }
                         </tbody>
                     </table>
-                    @*<div id="divTagPopup" style="display:none;">
-                            <div id="divNewTagName">
-                                <input class="inputNewTagName" type="text" value="Choose Name" />
-                            </div>
-                            <div class="divNewTagMiddleRow">
-                                <input id="inputNewTagUpload" type="file" onchange="readUrl(this)" />
-                            </div>
-                            <div class="divNewTagMiddleRow">
-                                <img style="height: 150px; width: 325px;" class="imgNewTagImage" alt="" src="~/content/blankimage.gif" />
-                            </div>
-                            <div id="divNewTagSubmit">
-                                <input id="inputNewTagSubmit" type="button" value="Submit" onclick="uploadNewTag()" />
-                            </div>
-                        </div>*@
                     <table id="tableSelectedTags" class="tableSelectedTags">
                         <thead>
                             <tr><td><p>Selected Tags</p></td></tr>

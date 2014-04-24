@@ -317,11 +317,11 @@ namespace Spark.Controllers
                     "Error converting return argument to boolean value from ajax call in javascript method = CastArgumentVote in SparkContainer.js file.");
                 return Json(new { success = false });
             }
+            int nStatus = SparksDatabaseInterface.UploadArgumentData(nArgumentId, bConvert, User.Identity.Name);
+            bool bSuccess = (nStatus >= 0) ? true : false; // non-negative statuses are success
+            bool bNewVote = (nStatus == 0) ? true : false; // a zero status is a new vote
 
-           if(!SparksDatabaseInterface.UploadArgumentData(nArgumentId, bConvert, User.Identity.Name))
-               return Json(new { success = false });
-
-            return Json(new { success = true});
+            return Json(new { success = bSuccess, bIsNewVote = bNewVote });
         }
         #endregion
     }

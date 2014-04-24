@@ -269,41 +269,46 @@ namespace Spark.Classes
             return new KeyValuePair<int,string>(cat.PK, cat.strName);
         }
 
-        public static bool UploadArgumentData(int nArgumentId, bool bIsUpvote, string strUserName)
+        public static int UploadArgumentData(int nArgumentId, bool bIsUpvote, string strUserName)
         {
+            int nStatus = 0;
             sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
 
             int nUserId = GetUserId(db, strUserName);
             if (nUserId == int.MinValue)
-                return false;
+                return -1; // failure
 
             // Verify Argument exists 
             arguments argExisting = GetExistingArgument(db, nArgumentId);
             if(argExisting == null)
-                return false;
+                return -1; // failure
 
             argumentvotes voteExisting = GetExistingArgumentVote(db, nUserId, nArgumentId);
             // TODO - fix this later, needs to change the arg instead of make new one if it already exists.
             if(voteExisting == null)
-            { 
+            {
                 argumentvotes vote = new argumentvotes();
                 vote.FKAccounts = nUserId;
                 vote.FKArguments = nArgumentId;
                 vote.bIsUpvote = bIsUpvote;
-
                 db.argumentvotes.Add(vote);
             }
             else
             {
-                if(voteExisting.bIsUpvote && bIsUpvote)
-                    return false;  
+                
+                if(voteExisting.bIsUpvote == bIsUpvote)
+                    return -1; // return failure result.
                 else
                 {
                     voteExisting.bIsUpvote = bIsUpvote;
+                    nStatus = 1; // Indicates that the vote already exists and simply switched.
                 }
             }
-            
-            return SaveChanges(db);
+
+            if (SaveChanges(db))
+                return nStatus; //return either 0 for new vote or 1 for changed vote.
+            else
+                return -1; // return failure status.
         }
 
         private static arguments GetExistingArgument(sparkdbEntities1 db, int nArgumentId)
