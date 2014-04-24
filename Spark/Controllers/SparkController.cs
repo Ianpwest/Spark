@@ -192,11 +192,8 @@ namespace Spark.Controllers
         #region Spark Container
 
         //GET
-        public ActionResult SparkContainer(/*int nSparkId*/) //Testing need to uncomment this out
+        public ActionResult SparkContainer(int nSparkId)
         {
-            //TESTING DELETE
-            int nSparkId = 1;
-
             //Get the spark
             //TODO:What if we fail?
             Models.sparks spark = SparksDatabaseInterface.GetSpark(nSparkId);
@@ -207,7 +204,7 @@ namespace Spark.Controllers
             //We failed to get a Spark for the given id
             if(spark == null)
             {
-                //We need to return an error view TODO
+                return View("Error");
             }
 
             return View(spark);

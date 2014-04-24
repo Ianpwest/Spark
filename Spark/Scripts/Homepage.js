@@ -70,3 +70,28 @@ function ToggleDownvote(image, direction) {
 
     image.src = direction == 'out' ? DownvoteImage : DownvoteHoverImage;
 }
+
+function GoToSpark(sparkID)
+{
+    //$.ajax({
+    //    url: '@Url.Action("SparkContainer", "Spark")',
+    //    type: 'GET',
+    //    dataType: 'json',
+    //    // we set cache: false because GET requests are often cached by browsers
+    //    // IE is particularly aggressive in that respect
+    //    cache: false,
+    //    data: { nSparkId: sparkID },
+    //    success: function () {
+    //    }
+    //});
+
+    //$.ajax({
+    //    type: "Get",
+    //    datatype: 'html',
+    //    data: "nSparkId=" + sparkID,
+    //    url: "/Spark/SparkContainer",
+    //    success: function (data) {
+    //       //Do nothing.
+    //    }
+    //});
+}

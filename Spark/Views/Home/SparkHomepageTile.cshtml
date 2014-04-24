@@ -2,6 +2,8 @@
 
 
 <div class="SparkTile">
+    @*!!!This link is transparent and covers most of the div so that we can link and still up / down vote.!!!*@
+    <a href="@Url.Action("SparkContainer", "Spark", new { nSparkID = @Model.PK })" class="Overlay"></a>
     <h1>What to put here?</h1>
     <div class="DividerSmall"></div>
     <p>@Model.strTopic</p>
