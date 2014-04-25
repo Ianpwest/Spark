@@ -1,6 +1,6 @@
-﻿function CastArgumentVote(nArgumentId, bIsTrue)
+﻿function CastArgumentVote(nArgumentId, bIsUpVote)
 {
-    var strInputs = nArgumentId.toString() + "," + bIsTrue.toString();
+    var strInputs = nArgumentId.toString() + "," + bIsUpVote.toString();
     $.ajax({
         type: "Post",
         datatype: 'json',
@@ -10,25 +10,34 @@
             // Change UI to reflect upvote or downvote
             if (data.success)
             {
-                AddRemoveVoteToSpark(nArgumentId.toString(), bIsTrue, true);
-                if (!data.bIsNewVote)
+                if (data.bReverseVote) // If the vote was reveresed, take off a vote on the selected vote type.
                 {
-                    AddRemoveVoteToSpark(nArgumentId.toString(), !bIsTrue, false);
+                    AddRemoveVoteToArgument(nArgumentId.toString(), bIsUpVote, false);
+                }
+                else if(data.bNewVote)
+                {
+                    AddRemoveVoteToArgument(nArgumentId.toString(), bIsUpVote, true);
+                    if (!data.bIsNewVote) {
+                        AddRemoveVoteToArgument(nArgumentId.toString(), !bIsUpVote, false);
+                    }
                 }
             }
         }
     });
 }
 
-function AddRemoveVoteToSpark(argumentId, bIsUpvote, bIsAdd)
+// Calls the functions to add or remove a vote from the interface.
+// argumentId = identity of the argument to add or remove, bIsUpVote = which type of vote to manipulate, 
+// bIsAdd = true for adding a vote and false for subtracting one.
+function AddRemoveVoteToArgument(argumentId, bIsUpvote, bIsAdd)
 {
     if (bIsUpvote)
-        AddRemoveUpVote(argumentId, bIsAdd);
+        AddRemoveArgumentUpVote(argumentId, bIsAdd);
     else
-        AddRemoveDownVote(argumentId, bIsAdd);
+        AddRemoveArgumentDownVote(argumentId, bIsAdd);
 }
 
-function AddRemoveUpVote(argumentId, bIsAdd)
+function AddRemoveArgumentUpVote(argumentId, bIsAdd)
 {
     var obj = document.getElementById("sparkUpvote" + argumentId);
     var obj2 = document.getElementById("HiddenUpvote" + argumentId);
@@ -49,7 +58,7 @@ function AddRemoveUpVote(argumentId, bIsAdd)
 
 }
 
-function AddRemoveDownVote(argumentId, bIsAdd)
+function AddRemoveArgumentDownVote(argumentId, bIsAdd)
 {
     var obj = document.getElementById("sparkDownvote" + argumentId);
     var obj2 = document.getElementById("HiddenDownvote" + argumentId);

@@ -95,3 +95,71 @@ function GoToSpark(sparkID)
     //    }
     //});
 }
+
+function CastSparkVote(nSparkId, bIsUpvote)
+{
+    var strInputs = nSparkId.toString() + "," + bIsUpvote.toString();
+    $.ajax({
+        type: "Post",
+        datatype: 'json',
+        data: "strDataConcat=" + strInputs,
+        url: "/Home/CastSparkVote",
+        success: function (data) {
+            // Change UI to reflect upvote or downvote
+            if (data.success)
+            {
+                if (data.bReverseVote)
+                {
+                    AddRemoveVoteToSpark(nSparkId.toString(), bIsUpvote, false);
+                }
+                else
+                {
+                    AddRemoveVoteToSpark(nSparkId.toString(), bIsUpvote, true);
+                    if (!data.bIsNewVote)
+                    {
+                        AddRemoveVoteToSpark(nSparkId.toString(), !bIsUpvote, false);
+                    }
+                }
+            }
+        }
+    });
+}
+
+function AddRemoveVoteToSpark(nSparkId, bIsUpvote, bIsAdd)
+{
+    var obj = document.getElementById("HiddenSparkUpvote" + nSparkId);
+    var obj2 = document.getElementById("HiddenSparkDownvote" + nSparkId);
+    var objDisplay = document.getElementById("VoteCount" + nSparkId);
+    var strInner;
+    var strInner2;
+    strInner = obj.innerHTML;
+    strInner2 = obj2.innerHTML;
+
+    var nValue = parseInt(strInner);
+    var nValue2 = parseInt(strInner2);
+    if (nValue != "NaN" && nValue2 != "NaN")
+    {
+        var nValueNext = nValue;
+        var nValueNext2 = nValue2;
+        if (bIsUpvote)
+        {
+            if (bIsAdd)
+                nValueNext++;
+            else
+                nValueNext--;
+        }
+        else
+        {
+            if (bIsAdd)
+                nValueNext2++;
+            else
+                nValueNext2--;
+        }
+
+        obj.innerHTML = nValueNext.toString();
+        obj2.innerHTML = nValueNext2.toString();
+
+        objDisplay.innerHTML = "(+" + nValueNext.toString() + "/ -" + nValueNext2.toString() + ")";
+    }
+
+}

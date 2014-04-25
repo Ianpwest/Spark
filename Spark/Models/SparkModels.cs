@@ -43,4 +43,14 @@ namespace Spark.Models
         Agree = 1,
         Disagree = 2
     }
+
+    public class SparkTileModel
+    {
+        public int PK { get; set; }
+        public string Topic { get; set; }
+        public bool UserVoted { get; set; }
+        public bool VoteIsUpvote { get; set; }
+        public int UpvoteCount { get; set; }
+        public int DownvoteCount { get; set; }
+    }
 }

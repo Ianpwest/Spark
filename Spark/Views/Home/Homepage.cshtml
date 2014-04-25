@@ -42,9 +42,9 @@
 <p class="CategoryHeader">Trending</p>
 <div class="SparkCollectionTable">
     <div class="Row">
-        @foreach (Spark.Models.sparks spark in ViewBag.Sparks)
+        @foreach (Spark.Models.SparkTileModel tile in ViewBag.SparksTiles)
         {
-            @Html.Partial("SparkHomepageTile", spark);
+            @Html.Partial("SparkHomepageTile", tile);
             <div class="VerticalSeparator"></div>
         }
     </div>
