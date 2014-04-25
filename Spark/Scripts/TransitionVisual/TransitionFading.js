@@ -15,7 +15,6 @@
 // Member/Window variables used to keep track of related position of the transition.
 var m_nTransitionIndex = 0; // current selected index of the page.
 var m_nMaxIndex = 2; // Maximum index, needs to be initialized if not 2
-var m_strLeftProperty = "50%"; // Used in the left and right fades to move the transition peice to the appropriate spot.
 
 var m_nTransitionVertIndex = 0; // Default
 var m_nMaxVertIndex = 1; // Default
@@ -24,10 +23,8 @@ var m_nTopEndValue = 500; // Top end value that the vertical transition element 
 var m_nHeightVerticalValue = 700; // Default height of the vertical transition element.
 
 // Horizontal Transitions
-function SingleTransition(bIsNext)
-{
-    if (bIsNext)
-    {
+function SingleTransition(bIsNext) {
+    if (bIsNext) {
         if (m_nTransitionIndex == m_nMaxIndex)
             return;
 
@@ -36,8 +33,7 @@ function SingleTransition(bIsNext)
         ProgressBar(m_nTransitionIndex, true);
         m_nTransitionIndex++;
     }
-    else
-    {
+    else {
         if (m_nTransitionIndex == 0)
             return;
 
@@ -66,19 +62,14 @@ function fadeAwayRight(id) {
 
 function fadeInRight(id) {
     $(document).ready(function () {
-        $("#" + id).css({ opacity: 0.0, display: "block", left: "-50" }).animate({ opacity: 1.0, left: m_strLeftProperty }, 1000);
+        $("#" + id).css({ opacity: 0.0, display: "block", left: "-50%" }).animate({ opacity: 1.0, left: "0%" }, 1000);
     });
 }
 
 function fadeInLeft(id) {
     $(document).ready(function () {
-        $("#" + id).css({ opacity: 0.0, display: "block", left: "50%" }).animate({ opacity: 1.0, left: m_strLeftProperty }, 1000);
+        $("#" + id).css({ opacity: 0.0, display: "block", left: "50%" }).animate({ opacity: 1.0, left: "0%" }, 1000);
     });
-}
-
-function InitializeHorizontalElements(strLeftValue)
-{
-    m_strLeftProperty = strLeftValue;
 }
 
 function InitializeMaxIndex(nIndexMax) {
@@ -87,10 +78,8 @@ function InitializeMaxIndex(nIndexMax) {
 
 // Vertical Transitions
 
-function SingleTransitionVert(bIsNext)
-{
-    if(bIsNext)
-    {
+function SingleTransitionVert(bIsNext) {
+    if (bIsNext) {
         if (m_nTransitionVertIndex == m_nMaxVertIndex)
             return;
 
@@ -98,8 +87,7 @@ function SingleTransitionVert(bIsNext)
         fadeInVertical("TransitionElementVert" + (m_nTransitionVertIndex + 1).toString());
         m_nTransitionVertIndex++;
     }
-    else
-    {
+    else {
         if (m_nTransitionVertIndex == 0)
             return;
 
@@ -109,8 +97,7 @@ function SingleTransitionVert(bIsNext)
     }
 }
 
-function fadeAwayVertical(id)
-{
+function fadeAwayVertical(id) {
     $(document).ready(function () {
         $("#" + id).animate({ top: m_nTopEndValue + "px", opacity: 0, height: "0px" }, 1000, function () {
             $("#" + id).css({ visibility: "hidden" });
@@ -119,29 +106,25 @@ function fadeAwayVertical(id)
     });
 }
 
-function fadeInVertical(id)
-{
+function fadeInVertical(id) {
     $(document).ready(function () {
         $("#" + id).css({ opacity: 0.0, visibility: "visible", top: m_nTopEndValue + "px" }).animate({ top: "0px", opacity: 1.0, height: m_nHeightVerticalValue + "px" }, 1000);
     });
 }
 
-function InitializeVerticalElements(nTopStartValue, nTopEndValue, nHeightVerticalValue)
-{
+function InitializeVerticalElements(nTopStartValue, nTopEndValue, nHeightVerticalValue) {
     m_nTopStartValue = nTopStartValue;
     m_nTopEndValue = nTopEndValue;
     m_nHeightVerticalValue = nHeightVerticalValue;
 }
 
-function InitializeMaxVertIndex(nIndexMax)
-{
+function InitializeMaxVertIndex(nIndexMax) {
     m_nMaxVertIndex = nIndexMax;
 }
 
 
 // Specific to the Argument Creation view
-function ProgressBar(nIndex, bIsForward)
-{
+function ProgressBar(nIndex, bIsForward) {
     var ol = document.getElementsByClassName("progtrckr")[0];
     var children = ol.children;
 

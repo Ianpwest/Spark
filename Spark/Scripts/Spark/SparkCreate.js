@@ -48,11 +48,10 @@ function getArgumentLayout()
         url: "/Spark/SparkCreateWithArg",
         success: function(data)
         {
-            var obj = document.getElementById("divArgumentContainer");
+            var obj = document.getElementById("bodyMain");
             obj.innerHTML = data;
             fadeCreateButtons();
             fadeIn("divArgumentContainer");
-
         }
 
     });

@@ -110,8 +110,7 @@ namespace Spark.Controllers
 
             argumentModel.FKSparks = sparkPK;
 
-
-            return PartialView("SparkArgumentCreate", argumentModel);
+            return View("SparkArgumentCreate", argumentModel);
         }
 
         /// <summary>

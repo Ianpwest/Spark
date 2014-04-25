@@ -9,6 +9,7 @@
     @Styles.Render("~/Content/NavigationBar.css")
     @Styles.Render("~/Content/Portal.css")
     @Styles.Render("~/Content/modal.css")
+    @Styles.Render("~/Content/TinyMCEDefault.css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js")
     @Scripts.Render("http://code.jquery.com/ui/1.8.19/jquery-ui.min.js")
@@ -19,7 +20,7 @@
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
     </head>
-    <body>
+    <body id="bodyMain">
         <header>
             @Html.Partial("_NavigationBarPartial")
         </header>
