@@ -248,6 +248,89 @@ namespace Spark.Classes
         #endregion
 
         /// <summary>
+        /// Determines the user's voting status concerning a given spark and given userId. Status 0 = no user vote, 1 = user upvote, 2 = user downvote.
+        /// </summary>
+        /// <param name="nUserId">User Id to check for a vote.</param>
+        /// <param name="nSparkId">Spark Id to check for a vote.</param>
+        /// <returns>Returns 1 for a user upvote, 2 for a user downvote, else returns 0.</returns>
+        public static int GetUserSparkVoteStatus(int nUserId, int nSparkId)
+        {
+            sparkdbEntities1 db = GetDatabaseInstance();
+
+            var qry = from r in db.sparkinterestvotes
+                      where r.FKAccounts == nUserId && r.FKSparks == nSparkId
+                      select r;
+
+            if (qry != null && qry.Count() > 0)
+            {
+                if (qry.First().bIsUpVote)
+                    return 1;
+                else
+                    return 2;
+            }
+            else
+                return 0;
+        }
+
+        public static int CastSparkVote(int nSparkId, bool bIsUpvote, string strUserName)
+        {
+            int nStatus = 0;
+            sparkdbEntities1 db = GetDatabaseInstance();
+
+            int nUserId = GetUserId(db, strUserName);
+            if (nUserId == int.MinValue)
+                return -1; // failure
+
+            sparks sparkExisting = GetExistingSpark(db, nSparkId); // Checks if a vote already exists for this user on this spark.
+            if (sparkExisting == null)
+                return -1; // failure
+
+            sparkinterestvotes voteExisting = GetExistingSparkVote(db, nUserId, nSparkId);
+            if (voteExisting == null)
+            {
+                sparkinterestvotes vote = new sparkinterestvotes();
+                vote.FKAccounts = nUserId;
+                vote.FKSparks = nSparkId;
+                vote.bIsUpVote = bIsUpvote;
+                db.sparkinterestvotes.Add(vote);
+            }
+            else
+            {
+                if (voteExisting.bIsUpVote == bIsUpvote)
+                {
+                    // Undo the vote if the user attempts to re-enter the same vote by deleting it.
+                    db.sparkinterestvotes.Remove(voteExisting);
+                    nStatus = 3; // indicating that the vote is being removed.
+                }
+                else
+                {
+                    voteExisting.bIsUpVote = bIsUpvote;
+                    nStatus = 1; // Indicates that the vote already exists but is being changed.
+                }
+            }
+
+            if (SaveChanges(db))
+                return nStatus; //return either 0 for new vote or 1 for changed vote.
+            else
+                return -1; // return failure status.
+        }
+
+        public static int GetSparkVoteCount(int nSparkId, bool bIsUpvote)
+        {
+            sparkdbEntities1 db = GetDatabaseInstance();
+            int nCount = 0;
+
+            var qryVoteCount = from r in db.sparkinterestvotes
+                               where r.FKSparks == nSparkId && r.bIsUpVote == bIsUpvote
+                               select r;
+
+            if (qryVoteCount != null && qryVoteCount.Count() > 0)
+                nCount = qryVoteCount.Count();
+
+            return nCount;
+        }
+
+        /// <summary>
         /// Uploads a tag to the database and returns a keyvaluepair<int,string> : key = PK, value = strName.
         /// Returns int.MinValue, string.empty if unsuccessful in the upload.
         /// </summary>
@@ -269,7 +352,7 @@ namespace Spark.Classes
             return new KeyValuePair<int,string>(cat.PK, cat.strName);
         }
 
-        public static int UploadArgumentData(int nArgumentId, bool bIsUpvote, string strUserName)
+        public static int CastArgumentVote(int nArgumentId, bool bIsUpvote, string strUserName)
         {
             int nStatus = 0;
             sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
@@ -295,9 +378,13 @@ namespace Spark.Classes
             }
             else
             {
-                
-                if(voteExisting.bIsUpvote == bIsUpvote)
-                    return -1; // return failure result.
+
+                if (voteExisting.bIsUpvote == bIsUpvote)
+                {
+                    // Undo the vote if the user attempts to re-enter the same vote by deleting it.
+                    db.argumentvotes.Remove(voteExisting);
+                    nStatus = 3; // indicating that the vote is being removed.
+                }
                 else
                 {
                     voteExisting.bIsUpvote = bIsUpvote;
@@ -311,6 +398,32 @@ namespace Spark.Classes
                 return -1; // return failure status.
         }
 
+        private static sparks GetExistingSpark(sparkdbEntities1 db, int nSparkId)
+        {
+            var qrySpark = from r in db.sparks
+                               where r.PK == nSparkId
+                               select r;
+            if (qrySpark == null || qrySpark.Count() != 1)
+            {
+                LogNonUserError("Unable to find spark id = " + nSparkId + " in the database.", "", "", "SparkDatabaseInterface", "GetExistingSpark", "qrySpark");
+                return null;
+            }
+
+            return qrySpark.First();
+        }
+
+        private static sparkinterestvotes GetExistingSparkVote(sparkdbEntities1 db, int nUserId, int nSparkId)
+        {
+            var qryExistingVote = from r in db.sparkinterestvotes
+                                  where r.FKAccounts == nUserId && r.FKSparks == nSparkId
+                                  select r;
+
+            if (qryExistingVote == null || qryExistingVote.Count() < 1)
+                return null; // Returning a code indicating the user has no vote yet.
+
+            return qryExistingVote.First();
+        }
+
         private static arguments GetExistingArgument(sparkdbEntities1 db, int nArgumentId)
         {
             var qryArguments = from r in db.arguments
@@ -318,7 +431,7 @@ namespace Spark.Classes
                                select r;
             if (qryArguments == null || qryArguments.Count() != 1)
             {
-                LogNonUserError("Unable to find argument id = " + nArgumentId + " in the database.", "", "", "SparkDatabaseInterface", "UploadArgumentData", "qryArguments");
+                LogNonUserError("Unable to find argument id = " + nArgumentId + " in the database.", "", "", "SparkDatabaseInterface", "GetExistingArgument", "qryArguments");
                 return null;
             }
 

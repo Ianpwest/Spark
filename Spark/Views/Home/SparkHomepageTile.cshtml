@@ -1,4 +1,4 @@
-﻿@model Spark.Models.sparks
+﻿@model Spark.Models.SparkTileModel
 
 
 <div class="SparkTile">
@@ -6,19 +6,40 @@
     <a href="@Url.Action("SparkContainer", "Spark", new { nSparkID = @Model.PK })" class="Overlay"></a>
     <h1>What to put here?</h1>
     <div class="DividerSmall"></div>
-    <p>@Model.strTopic</p>
+    <p>@Model.Topic</p>
     <div class="SparkTileBottomControls">
         <img id="UpvoteIcon" class="UpvoteIcon" src="http://i62.tinypic.com/2yx0v47.png"
-             onclick="ImageClicked(this)"
+             onclick="ImageClicked(this), CastSparkVote(@Model.PK, true)"
              onmouseover="ChangeImage(this, 'over')"
              onmouseout="ChangeImage(this, 'out')">
         <img id="DownvoteIcon" class="DownvoteIcon" src="http://i59.tinypic.com/igj4aa.png"
-             onclick="ImageClicked(this)"
+             onclick="ImageClicked(this), CastSparkVote(@Model.PK, false)"
              onmouseover="ChangeImage(this, 'over')"
              onmouseout="ChangeImage(this, 'out')">
-        <p class="VoteCount">(+420/ -25)</p>
+        <p id="VoteCount@(Model.PK)" class="VoteCount">(+@Model.UpvoteCount.ToString()/ -@Model.DownvoteCount.ToString())</p>
         <img class="Tag1" src="http://i62.tinypic.com/szkgh2.png">
         <img class="Tag2" src="http://i60.tinypic.com/28gy2o3.png">
         <img class="Tag2" src="http://i57.tinypic.com/x6mtlf.png">
     </div>
+    <div class="hidden" id="HiddenSparkDownvote@(Model.PK)">@Model.DownvoteCount.ToString()</div>
+    <div class="hidden" id="HiddenSparkUpvote@(Model.PK)">@Model.UpvoteCount.ToString()</div>
+    @{
+        if(Model.UserVoted)
+        {
+            if(Model.VoteIsUpvote)
+            {
+                <script>
+                    var obj = document.getElementById("UpvoteIcon");
+                    ImageClicked(obj);
+                </script>
+            }
+            else
+            {
+                <script>
+                    var obj = document.getElementById("DownvoteIcon");
+                    ImageClicked(obj);
+                </script>
+            }
+        }
+    }
 </div>

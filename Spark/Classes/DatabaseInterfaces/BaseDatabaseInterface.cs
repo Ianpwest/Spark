@@ -293,7 +293,7 @@ namespace Spark.Classes.DatabaseInterfaces
         /// <param name="db">Database instance that is being used for this call.</param>
         /// <param name="strUserName">String value of the username given by the application's membership.</param>
         /// <returns>Returns the Account's UserId primary key, else returns int.MinValue.</returns>
-        protected static int GetUserId(sparkdbEntities1 db, string strUserName)
+        public static int GetUserId(sparkdbEntities1 db, string strUserName)
         {
             var qryUserId = from r in db.accounts
                             where r.strUserName == strUserName
