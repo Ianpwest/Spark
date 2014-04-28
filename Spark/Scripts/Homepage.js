@@ -20,35 +20,42 @@ function ChangeImage(image, direction) {
     }
 }
 
-function ImageClicked(image) {
+function ImageClicked(nIndex, bIsUpVote) {
     //Write some code here to check to see if they are logged in maybe? Or should this just post to the server?
-    switch (image.id) {
-        case "UpvoteIcon":
+    var imageClicked = null;
+
+    if (bIsUpVote)
+        imageClicked = document.getElementById("UpvoteIcon" + nIndex.toString());
+    else
+        imageClicked = document.getElementById("DownvoteIcon" + nIndex.toString());
+
+    switch (imageClicked.id) {
+        case "UpvoteIcon" + nIndex.toString():
             {
                 //Change the image to the clicked image
-                if (image.src == UpvoteClickedImage) {
-                    image.src = UpvoteImage;
+                if (imageClicked.src == UpvoteClickedImage) {
+                    imageClicked.src = UpvoteImage;
                     break;
                 }
                 else
-                    image.src = UpvoteClickedImage;
+                    imageClicked.src = UpvoteClickedImage;
 
                 //Turn back on other arrows events in case they were previously turned off.
-                var otherArrow = document.getElementById('DownvoteIcon');
+                var otherArrow = document.getElementById('DownvoteIcon' + nIndex.toString());
                 otherArrow.src = DownvoteImage;
             }
             break;
-        case "DownvoteIcon":
+        case "DownvoteIcon" + nIndex.toString():
             {
-                if (image.src == DownvoteClickedImage) {
-                    image.src = DownvoteImage;
+                if (imageClicked.src == DownvoteClickedImage) {
+                    imageClicked.src = DownvoteImage;
                     break;
                 }
                 else
-                    image.src = DownvoteClickedImage;
+                    imageClicked.src = DownvoteClickedImage;
 
                 //Turn back on other arrows events in case they were previously turned off.
-                var otherArrow = document.getElementById('UpvoteIcon');
+                var otherArrow = document.getElementById('UpvoteIcon' + nIndex.toString());
                 otherArrow.src = UpvoteImage;
             }
             break;

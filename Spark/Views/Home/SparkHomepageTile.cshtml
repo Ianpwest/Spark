@@ -8,12 +8,12 @@
     <div class="DividerSmall"></div>
     <p>@Model.Topic</p>
     <div class="SparkTileBottomControls">
-        <img id="UpvoteIcon" class="UpvoteIcon" src="http://i62.tinypic.com/2yx0v47.png"
-             onclick="ImageClicked(this), CastSparkVote(@Model.PK, true)"
+        <img id="UpvoteIcon@(Model.PK)" class="UpvoteIcon" src="http://i62.tinypic.com/2yx0v47.png"
+             onclick="ImageClicked(@(Model.PK), true), CastSparkVote(@Model.PK, true)"
              onmouseover="ChangeImage(this, 'over')"
              onmouseout="ChangeImage(this, 'out')">
-        <img id="DownvoteIcon" class="DownvoteIcon" src="http://i59.tinypic.com/igj4aa.png"
-             onclick="ImageClicked(this), CastSparkVote(@Model.PK, false)"
+        <img id="DownvoteIcon@(Model.PK)" class="DownvoteIcon" src="http://i59.tinypic.com/igj4aa.png"
+             onclick="ImageClicked(@(Model.PK), false), CastSparkVote(@Model.PK, false)"
              onmouseover="ChangeImage(this, 'over')"
              onmouseout="ChangeImage(this, 'out')">
         <p id="VoteCount@(Model.PK)" class="VoteCount">(+@Model.UpvoteCount.ToString()/ -@Model.DownvoteCount.ToString())</p>
