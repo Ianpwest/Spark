@@ -25,10 +25,12 @@
 <div id="ArgumentsContainer">
     <div class="sparkAgreeSide">
         @{
-            //Handle the case where no one has given an argument yet.
+            //Handle the case where no one has given an argument yet. 
             if(((List<Spark.Models.SparkArgumentModel>)ViewBag.Arguments[0]).Count == 0)
             {
-                
+                <div>
+                    <h1 style="background-color:#ff3200; height:700px; padding-top:30px;">Be the first to argue your point!</h1>
+                </div>
             }
             foreach (Spark.Models.SparkArgumentModel samAgree in ViewBag.Arguments[0])
             {
@@ -42,6 +44,13 @@
 
     <div class="sparkDisagreeSide">
         @{
+            //Handle the case where no one has given an argument yet. 
+            if(((List<Spark.Models.SparkArgumentModel>)ViewBag.Arguments[0]).Count == 0)
+            {
+                <div>
+                    <h1 style="background-color: #8244d6; margin-left: 1px; height: 700px; padding-top: 30px;">Be the first to argue your point!</h1>
+                </div>
+            }
             foreach (Spark.Models.SparkArgumentModel samDisagree in ViewBag.Arguments[1])
             {
                 @Html.Partial("SparkArgumentDisagreePartial", samDisagree);
