@@ -25,6 +25,11 @@
 <div id="ArgumentsContainer">
     <div class="sparkAgreeSide">
         @{
+            //Handle the case where no one has given an argument yet.
+            if(((List<Spark.Models.SparkArgumentModel>)ViewBag.Arguments[0]).Count == 0)
+            {
+                
+            }
             foreach (Spark.Models.SparkArgumentModel samAgree in ViewBag.Arguments[0])
             {
                 @Html.Partial("SparkArgumentAgreePartial", samAgree);

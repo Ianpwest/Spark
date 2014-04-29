@@ -23,7 +23,7 @@ function SubmitForm()
     //Make sure the required fields have been filled with at least one character.
     if ($('#editorConclusion').val() == "" || tinyMCE.get('editorArgument').getContent() == "")
     {
-        alert("You must fill out the gist and argument section before submitting");
+        alert("You must fill out the Gist and Argument section before submitting");
         return;
     }
 

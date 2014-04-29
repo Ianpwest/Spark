@@ -18,7 +18,14 @@ namespace Spark.Controllers
             List<Models.SparkTileModel> lstSparkTiles = new List<Models.SparkTileModel>();
 
             //Get the categories and tags to filter on.
+            List<string> lstCategories = SparksDatabaseInterface.GetAllCategories();
+            List<string> lstTags = SparksDatabaseInterface.GetAllTags();
+            SelectList categoryList = new SelectList(lstCategories);
+            SelectList tagList = new SelectList(lstTags);
+            ViewBag.Categories = categoryList;
+            ViewBag.Tags = tagList;
 
+            
 
             // Attempts to find the current user id.
             int nCurrentUserId = AccountsDatabaseInterface.GetUserId(AccountsDatabaseInterface.GetDatabaseInstance(), User.Identity.Name);

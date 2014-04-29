@@ -457,5 +457,32 @@ namespace Spark.Classes
 
             return qryExistingVote.First();
         }
+
+        /// <summary>
+        /// Method to return the list of categories in the database. Name only.
+        /// </summary>
+        /// <returns>Category names in a list</returns>
+        public static List<string> GetAllCategories()
+        {
+            sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
+
+            return (from r in db.subjectmatters
+                    orderby r.strName
+                    select r.strName).ToList();
+        }
+
+        /// <summary>
+        /// Method to return the list of tags in the database. Name only.
+        /// </summary>
+        /// <returns>Tag names in a list</returns>
+        public static List<string> GetAllTags()
+        {
+            sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
+
+            return (from r in db.categories
+                    orderby r.strName
+                    select r.strName).ToList();
+        }
+        
     }
 }
