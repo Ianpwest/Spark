@@ -254,8 +254,14 @@ namespace Spark.Classes
             // Interates through all of the interest votes and creates a collection of sparks that holds a value of the number of votes it has.
             foreach (sparkinterestvotes siv in qryForInterest)
             {
+                // If it is a deleted vote - we still want to account for the spark being shown
+                if (siv.bIsDeleted)
+                {
+                    if (!dictInterestSparks.ContainsKey(siv.FKSparks)) // Does not need else statement, deleted votes do not increment the count.
+                        dictInterestSparks.Add(siv.FKSparks, 0);
+                }
                 // If it is a positive vote
-                if (siv.bIsUpVote)
+                else if (siv.bIsUpVote)
                 {
                     if (!dictInterestSparks.ContainsKey(siv.FKSparks))
                         dictInterestSparks.Add(siv.FKSparks, 1);
