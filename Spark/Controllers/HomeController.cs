@@ -81,7 +81,7 @@ namespace Spark.Controllers
             ViewBag.Categories = SetupCategoryFilter();
             ViewBag.Tags = SetupTagFilter();
 
-            return View("Homepage");
+            return PartialView("SparkTileContainerPartial");
         }
 
         [Authorize]
@@ -154,7 +154,8 @@ namespace Spark.Controllers
             {
                 Models.SparkTileModel tile = new Models.SparkTileModel();
                 tile.PK = spark.PK;
-                
+                tile.Topic = spark.strTopic;
+
                 if(spark.strTopic.Length > CONST_MAX_TOPIC_CHARACTERS)
                 {
                     tile.Topic = spark.strTopic.Substring(0, CONST_MAX_TOPIC_CHARACTERS - 3) + "...";

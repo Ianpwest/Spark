@@ -33,21 +33,8 @@
     </div>
 </section>
 
-<p class="CategoryHeader">Trending</p>
-<div class="SparkCollectionTable">
-    <div class="Row">
-        @foreach (Spark.Models.SparkTileModel tile in ViewBag.SparksTiles)
-        {
-            @Html.Partial("SparkHomepageTile", tile);
-            if(tile.UserVoted)
-            {
-                <script type="text/javascript">
-                    ImageClicked('@tile.PK', '@tile.VoteIsUpvote');
-                </script>
-            }
-            <div class="VerticalSeparator"></div>
-        }
-    </div>
+<div id="TileContainer">
+    @Html.Partial("SparkTileContainerPartial");
 </div>
 
 

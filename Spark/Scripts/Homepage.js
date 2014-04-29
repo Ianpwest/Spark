@@ -197,7 +197,7 @@ function Filter()
         data: "strCategory=" + SelectedCategory +  "&strTag=" + SelectedTag +"&strSearchText=" + SearchText,
         url: "/Home/GetFilterResults",
         success: function (data) {
-            document.getElementById("bodyMain").innerHTML = data;
+            document.getElementById("TileContainer").innerHTML = data;
         }
     });
 }
