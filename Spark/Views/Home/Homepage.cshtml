@@ -17,18 +17,12 @@
         <div class="Row">
             <div class="inputContainer2">
                 <div class="inputText2">Category</div>
-                <select class="select">
-                    <option>Category 1</option>
-                    <option>Category 2</option>
-                </select>
-            </div>
+                    @Html.DropDownList("Category", (SelectList)ViewBag.Categories, string.Empty, new { @class = "select" })
+                </div>
             <div class="inputContainer2">
                 <div class="inputText2">Tag</div>
-                <select class="select">
-                    <option>Tag 1</option>
-                    <option>Tag 2</option>
-                </select>
-            </div>
+                    @Html.DropDownList("Tag", (SelectList)ViewBag.Tags, string.Empty, new { @class = "select" })
+                </div>
             <div class="inputContainer2">
                 <div class="inputText2">Search</div>
                 <input class="input2" placeholder="Type here...">

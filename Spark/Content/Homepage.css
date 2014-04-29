@@ -244,11 +244,11 @@
   padding-bottom:5px;
 }
 
-.Tag1, .Tag2, .UpvoteIcon, .DownvoteIcon
+.Tag1, .Tag2,.Tag3, .UpvoteIcon, .DownvoteIcon
 {
     z-index:2;
 }
-.Tag1:hover, .Tag2:hover
+.Tag1:hover, .Tag2:hover, .Tag3:hover
 {
    box-shadow: 0 0 10px #000;
 }
@@ -264,6 +264,13 @@
   height:25px;
   float:right;
   margin-right:2px;
+}
+.Tag3
+{
+  height:25px;
+  float:right;
+  margin-right:2px;
+  margin-left:35px;
 }
 
 .UpvoteIcon
