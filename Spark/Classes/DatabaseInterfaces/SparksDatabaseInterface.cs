@@ -295,6 +295,11 @@ namespace Spark.Classes
                 vote.bIsDeleted = false;
                 db.sparkinterestvotes.Add(vote);
             }
+            else if (voteExisting.bIsDeleted == true) // VOTE EXISTS BUT IS DELETED
+            {
+                voteExisting.bIsUpVote = bIsUpvote;
+                voteExisting.bIsDeleted = false;
+            }
             else
             {
                 if (voteExisting.bIsUpVote == bIsUpvote) // UNVOTE
