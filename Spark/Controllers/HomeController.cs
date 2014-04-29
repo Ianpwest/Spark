@@ -18,51 +18,12 @@ namespace Spark.Controllers
             List<Models.SparkTileModel> lstSparkTiles = new List<Models.SparkTileModel>();
 
             //Get the categories and tags to filter on.
-            List<string> lstCategories = SparksDatabaseInterface.GetAllCategories();
-            List<string> lstTags = SparksDatabaseInterface.GetAllTags();
-            SelectList categoryList = new SelectList(lstCategories);
-            SelectList tagList = new SelectList(lstTags);
-            ViewBag.Categories = categoryList;
-            ViewBag.Tags = tagList;
+            ViewBag.Categories = SetupCategoryFilter();
+            ViewBag.Tags = SetupTagFilter();
 
-            
-
-            // Attempts to find the current user id.
-            int nCurrentUserId = AccountsDatabaseInterface.GetUserId(AccountsDatabaseInterface.GetDatabaseInstance(), User.Identity.Name);
-            
-            //Make sure the topics aren't over the max allowed characters and initialize the voting counts.
-            foreach(Models.sparks spark in lstSparks)
-            {
-                Models.SparkTileModel tile = new Models.SparkTileModel();
-                tile.PK = spark.PK;
-                
-                if(spark.strTopic.Length > CONST_MAX_TOPIC_CHARACTERS)
-                {
-                    tile.Topic = spark.strTopic.Substring(0, CONST_MAX_TOPIC_CHARACTERS - 3) + "...";
-                }
-
-                //Set the vote counts appropriately.
-                tile.UpvoteCount = SparksDatabaseInterface.GetSparkVoteCount(spark.PK, true);
-                tile.DownvoteCount = SparksDatabaseInterface.GetSparkVoteCount(spark.PK, false);
-
-                int nVoteStatus = SparksDatabaseInterface.GetUserSparkVoteStatus(nCurrentUserId, spark.PK);
-                
-                if (nVoteStatus == 1) // indicates the user has made an upvote for this spark.
-                {
-                    tile.UserVoted = true;
-                    tile.VoteIsUpvote = true;
-                }
-                else if (nVoteStatus == 2) // indicates the user has made a downvote for this spark.
-                {
-                    tile.UserVoted = true;
-                    tile.VoteIsUpvote = false;
-                }
-                else
-                    tile.UserVoted = false; // indicates the user has not yet voted on this spark or there was an error in finding the user vote.
-
-                lstSparkTiles.Add(tile);
-            }
-
+            //Get the tiles.
+            lstSparkTiles = GetSparkTiles(lstSparks);
+           
             //TODO: Make a real error page. We have no sparks to display.
             if (lstSparkTiles == null)
                 return View("Error");
@@ -100,6 +61,29 @@ namespace Spark.Controllers
             return View();
         }
 
+        public ActionResult GetFilterResults(string strCategory, string strTag, string strSearchText)
+        {
+            int nCategory = int.MinValue;
+            int nTag = int.MinValue;
+
+            //Parse out the integer values of the key.
+            if(!string.IsNullOrEmpty(strCategory)){Int32.TryParse(strCategory, out nCategory);}
+            if(!string.IsNullOrEmpty(strTag)){Int32.TryParse(strTag, out nTag);}
+
+            List<Models.sparks> lstSparks = Calculations.FilterSparksByHomeParameters(UtilitiesDatabaseInterface.GetDatabaseInstance(), nCategory, nTag, strSearchText);
+
+            List<Models.SparkTileModel> lstTiles = GetSparkTiles(lstSparks);
+
+            //Put the sparks in the viewbag so that the list can be consumed by the view.
+            ViewBag.SparksTiles = lstTiles;
+
+            //Get the categories and tags to filter on.
+            ViewBag.Categories = SetupCategoryFilter();
+            ViewBag.Tags = SetupTagFilter();
+
+            return View("Homepage");
+        }
+
         [Authorize]
         public ActionResult CastSparkVote(string strDataConcat)
         {
@@ -128,6 +112,80 @@ namespace Spark.Controllers
             bool bReverseVote = (nStatus == 3) ? true : false; // a 3 indicates the vote has been deleted.
 
             return Json(new { success = bSuccess, bIsNewVote = bNewVote, bReverseVote = bReverseVote });
+        }
+
+        private SelectList SetupCategoryFilter()
+        {
+            Dictionary<int, string> dictCategories = SparksDatabaseInterface.GetAllCategories();
+
+            List<SelectListItem> listCategories = new List<SelectListItem>();
+            foreach (KeyValuePair<int, string> kvp in dictCategories)
+            {
+                listCategories.Add(new SelectListItem { Text = kvp.Value, Value = kvp.Key.ToString() });
+            }
+
+            return new SelectList(listCategories, "Value", "Text");
+        }
+
+        private SelectList SetupTagFilter()
+        {
+            Dictionary<int, string> dictTags = SparksDatabaseInterface.GetAllTags();
+
+            List<SelectListItem> listTags = new List<SelectListItem>();
+            foreach (KeyValuePair<int, string> kvp2 in dictTags)
+            {
+                listTags.Add(new SelectListItem { Text = kvp2.Value, Value = kvp2.Key.ToString() });
+            }
+
+            return new SelectList(listTags, "Value", "Text");
+        }
+
+        /// <summary>
+        /// Method to generate tile partials given a list of sparks. Handles setting max length for the topics and the current vote counts.
+        /// </summary>
+        /// <param name="lstSparks">List of sparks to convert</param>
+        /// <returns>List of tiles.</returns>
+        private List<Models.SparkTileModel> GetSparkTiles(List<Models.sparks> lstSparks)
+        {
+            List<Models.SparkTileModel> lstReturn = new List<Models.SparkTileModel>();
+
+            //Make sure the topics aren't over the max allowed characters and initialize the voting counts.
+            foreach(Models.sparks spark in lstSparks)
+            {
+                Models.SparkTileModel tile = new Models.SparkTileModel();
+                tile.PK = spark.PK;
+                
+                if(spark.strTopic.Length > CONST_MAX_TOPIC_CHARACTERS)
+                {
+                    tile.Topic = spark.strTopic.Substring(0, CONST_MAX_TOPIC_CHARACTERS - 3) + "...";
+                }
+
+                //Set the vote counts appropriately.
+                tile.UpvoteCount = SparksDatabaseInterface.GetSparkVoteCount(spark.PK, true);
+                tile.DownvoteCount = SparksDatabaseInterface.GetSparkVoteCount(spark.PK, false);
+
+                // Attempts to find the current user id.
+                int nCurrentUserId = AccountsDatabaseInterface.GetUserId(AccountsDatabaseInterface.GetDatabaseInstance(), User.Identity.Name);
+
+                int nVoteStatus = SparksDatabaseInterface.GetUserSparkVoteStatus(nCurrentUserId, spark.PK);
+                
+                if (nVoteStatus == 1) // indicates the user has made an upvote for this spark.
+                {
+                    tile.UserVoted = true;
+                    tile.VoteIsUpvote = true;
+                }
+                else if (nVoteStatus == 2) // indicates the user has made a downvote for this spark.
+                {
+                    tile.UserVoted = true;
+                    tile.VoteIsUpvote = false;
+                }
+                else
+                    tile.UserVoted = false; // indicates the user has not yet voted on this spark or there was an error in finding the user vote.
+
+                lstReturn.Add(tile);
+            }
+
+            return lstReturn;
         }
     }
 }
