@@ -45,6 +45,12 @@
         @foreach (Spark.Models.SparkTileModel tile in ViewBag.SparksTiles)
         {
             @Html.Partial("SparkHomepageTile", tile);
+            if(tile.UserVoted)
+            {
+                <script type="text/javascript">
+                    ImageClicked('@tile.PK', '@tile.VoteIsUpvote');
+                </script>
+            }
             <div class="VerticalSeparator"></div>
         }
     </div>

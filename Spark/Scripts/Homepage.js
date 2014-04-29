@@ -29,10 +29,13 @@ function ChangeImage(nIndex, bIsUpVote, direction) {
 }
 
 function ImageClicked(nIndex, bIsUpVote) {
-    //Write some code here to check to see if they are logged in maybe? Or should this just post to the server?
-    var imageClicked = null;
+    
+    if (nIndex == null || bIsUpVote == null)
+        return;
 
-    if (bIsUpVote)
+     var imageClicked = null;
+
+     if (bIsUpVote.toString().toLowerCase() == "true")
         imageClicked = document.getElementById("UpvoteIcon" + nIndex.toString());
     else
         imageClicked = document.getElementById("DownvoteIcon" + nIndex.toString());
