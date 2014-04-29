@@ -1,16 +1,28 @@
 ﻿<p class="CategoryHeader">Trending</p>
 <div class="SparkCollectionTable">
-    <div class="Row">
-        @foreach (Spark.Models.SparkTileModel tile in ViewBag.SparksTiles)
-        {
-            @Html.Partial("SparkHomepageTile", tile);
-            if (tile.UserVoted)
+
+    @*Handle the case where there are no tiles to display*@
+    @if (((List<Spark.Models.SparkTileModel>)ViewBag.SparksTiles).Count == 0)
+    {
+        <div class="SparkCollectionTable" style="background-color: #2B2A27">
+            <p style="text-align:center">There are no Sparks here. Click on the navigation bar above to be first!</p>
+        </div>
+    }
+    else
+    {
+        <div class="Row">
+            @foreach (Spark.Models.SparkTileModel tile in ViewBag.SparksTiles)
             {
-                <script type="text/javascript">
-                    ImageClicked('@tile.PK', '@tile.VoteIsUpvote');
-                </script>
+                @Html.Partial("SparkHomepageTile", tile);
+                if (tile.UserVoted)
+                {
+                    <script type="text/javascript">
+                        ImageClicked('@tile.PK', '@tile.VoteIsUpvote');
+                    </script>
+                }
+                <div class="VerticalSeparator"></div>
             }
-            <div class="VerticalSeparator"></div>
-        }
-    </div>
+        </div>
+    }
+
 </div>
