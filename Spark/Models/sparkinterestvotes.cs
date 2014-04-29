@@ -18,6 +18,7 @@ namespace Spark.Models
         public int FKSparks { get; set; }
         public bool bIsUpVote { get; set; }
         public int FKAccounts { get; set; }
+        public Nullable<bool> bIsDeleted { get; set; }
     
         public virtual accounts accounts { get; set; }
         public virtual sparks sparks { get; set; }
