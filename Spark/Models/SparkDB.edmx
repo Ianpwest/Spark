@@ -195,6 +195,7 @@
           <Property Name="FKSparks" Type="int" Nullable="false" />
           <Property Name="bIsUpVote" Type="bit" Nullable="false" />
           <Property Name="FKAccounts" Type="int" Nullable="false" />
+          <Property Name="bIsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="sparks">
           <Key>
@@ -208,7 +209,7 @@
           <Property Name="FKCategories3" Type="int" />
           <Property Name="FKCategories4" Type="int" />
           <Property Name="FKCategories5" Type="int" />
-          <Property Name="strTopic" Type="varchar" MaxLength="250" />
+          <Property Name="strTopic" Type="varchar" MaxLength="500" />
           <Property Name="strDescription" Type="varchar" MaxLength="1500" />
           <Property Name="dDateCreated" Type="datetime" Precision="0" />
           <Property Name="dDateModified" Type="datetime" Precision="0" />
@@ -1223,6 +1224,7 @@
           <Property Name="FKAccounts" Type="Int32" Nullable="false" />
           <NavigationProperty Name="accounts" Relationship="Self.FK_sparkinterestvotes_accounts" FromRole="sparkinterestvotes" ToRole="accounts" />
           <NavigationProperty Name="sparks" Relationship="Self.FK_sparkinterestvotes_sparks" FromRole="sparkinterestvotes" ToRole="sparks" />
+          <Property Name="bIsDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="sparks">
           <Key>
@@ -2247,6 +2249,7 @@
           <EntitySetMapping Name="sparkinterestvotes">
             <EntityTypeMapping TypeName="sparkdbModel.sparkinterestvotes">
               <MappingFragment StoreEntitySet="sparkinterestvotes">
+                <ScalarProperty Name="bIsDeleted" ColumnName="bIsDeleted" />
                 <ScalarProperty Name="PK" ColumnName="PK" />
                 <ScalarProperty Name="FKSparks" ColumnName="FKSparks" />
                 <ScalarProperty Name="bIsUpVote" ColumnName="bIsUpVote" />

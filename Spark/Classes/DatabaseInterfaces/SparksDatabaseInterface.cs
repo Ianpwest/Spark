@@ -286,25 +286,32 @@ namespace Spark.Classes
                 return -1; // failure
 
             sparkinterestvotes voteExisting = GetExistingSparkVote(db, nUserId, nSparkId);
-            if (voteExisting == null)
+            if (voteExisting == null) // NEW VOTE 
             {
                 sparkinterestvotes vote = new sparkinterestvotes();
                 vote.FKAccounts = nUserId;
                 vote.FKSparks = nSparkId;
                 vote.bIsUpVote = bIsUpvote;
+                vote.bIsDeleted = false;
                 db.sparkinterestvotes.Add(vote);
+            }
+            else if (voteExisting.bIsDeleted == true) // VOTE EXISTS BUT IS DELETED
+            {
+                voteExisting.bIsUpVote = bIsUpvote;
+                voteExisting.bIsDeleted = false;
             }
             else
             {
-                if (voteExisting.bIsUpVote == bIsUpvote)
+                if (voteExisting.bIsUpVote == bIsUpvote) // UNVOTE
                 {
                     // Undo the vote if the user attempts to re-enter the same vote by deleting it.
-                    db.sparkinterestvotes.Remove(voteExisting);
+                    voteExisting.bIsDeleted = true;
                     nStatus = 3; // indicating that the vote is being removed.
                 }
-                else
+                else // CHANGE VOTE
                 {
                     voteExisting.bIsUpVote = bIsUpvote;
+                    voteExisting.bIsDeleted = false;
                     nStatus = 1; // Indicates that the vote already exists but is being changed.
                 }
             }
