@@ -308,6 +308,34 @@ namespace Spark.Classes
         }
 
         /// <summary>
+        /// Returns a list of sparks that are associated with any of the tag ids in the parameter list.
+        /// </summary>
+        /// <param name="db">Database instance to search for sparks.</param>
+        /// <param name="lstTags">List of tag IDs which is used to check against a spark's associated tags.</param>
+        /// <returns>Returns a list of sparks that are associated with the parameterized list of tags ids.</returns>
+        public static List<sparks> FilterSparksByMultipleTags(sparkdbEntities1 db, List<int> lstTags)
+        {
+            List<sparks> lstFiltered = new List<sparks>();
+
+            // Queries to pull back all sparks where one of the tags in the list passed in is associated with the spark's tag.
+            var qrySparks = from r in db.sparks
+                            where lstTags.Contains(r.FKCategories1) || lstTags.Contains(r.FKCategories2) || lstTags.Contains(r.FKCategories3) ||
+                            lstTags.Contains(r.FKCategories4) || lstTags.Contains(r.FKCategories5)
+                            select r;
+
+            if (qrySparks != null)
+            {
+                foreach (sparks spark in qrySparks)
+                {
+                    if(!lstFiltered.Contains(spark))
+                        lstFiltered.Add(spark);
+                }
+            }
+
+            return lstFiltered;
+        }
+
+        /// <summary>
         /// Applies the decaying algorithm to a sorted dictionary of sparks keyed by the spark with values of the sort position value.
         /// The algorithm has growth at 0 hours and begins to decay once (hours / 24 ) equals the database constant "SortingDecayShifter"
         /// Decays the values based on the date that the spark was created. Uses constants from the constants table to tune decay start and sensitivity.

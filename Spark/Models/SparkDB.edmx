@@ -204,11 +204,11 @@
           <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FKAccountsCreatedBy" Type="int" Nullable="false" />
           <Property Name="FKSubjectMatters" Type="int" Nullable="false" />
-          <Property Name="FKCategories1" Type="int" />
-          <Property Name="FKCategories2" Type="int" />
-          <Property Name="FKCategories3" Type="int" />
-          <Property Name="FKCategories4" Type="int" />
-          <Property Name="FKCategories5" Type="int" />
+          <Property Name="FKCategories1" Type="int" Nullable="false" />
+          <Property Name="FKCategories2" Type="int" Nullable="false" />
+          <Property Name="FKCategories3" Type="int" Nullable="false" />
+          <Property Name="FKCategories4" Type="int" Nullable="false" />
+          <Property Name="FKCategories5" Type="int" Nullable="false" />
           <Property Name="strTopic" Type="varchar" MaxLength="500" />
           <Property Name="strDescription" Type="varchar" MaxLength="1500" />
           <Property Name="dDateCreated" Type="datetime" Precision="0" />
@@ -1242,11 +1242,11 @@
           <NavigationProperty Name="sparkinterestvotes" Relationship="Self.FK_sparkinterestvotes_sparks" FromRole="sparks" ToRole="sparkinterestvotes" />
           <NavigationProperty Name="sparkscategories" Relationship="Self.FK__sparks" FromRole="sparks" ToRole="sparkscategories" />
           <NavigationProperty Name="subjectmatters" Relationship="Self.FK_sparks_subjectmatters" FromRole="sparks" ToRole="subjectmatters" />
-          <Property Name="FKCategories1" Type="Int32" Nullable="true" />
-          <Property Name="FKCategories2" Type="Int32" Nullable="true" />
-          <Property Name="FKCategories3" Type="Int32" Nullable="true" />
-          <Property Name="FKCategories4" Type="Int32" Nullable="true" />
-          <Property Name="FKCategories5" Type="Int32" Nullable="true" />
+          <Property Name="FKCategories1" Type="Int32" Nullable="false" />
+          <Property Name="FKCategories2" Type="Int32" Nullable="false" />
+          <Property Name="FKCategories3" Type="Int32" Nullable="false" />
+          <Property Name="FKCategories4" Type="Int32" Nullable="false" />
+          <Property Name="FKCategories5" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="sparkscategories">
           <Key>
