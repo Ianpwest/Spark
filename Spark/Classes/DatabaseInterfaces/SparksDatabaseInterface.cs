@@ -61,6 +61,7 @@ namespace Spark.Classes
 
             //Give baseline interest of one upvote from the creator.
             sparkinterestvotes siv = new sparkinterestvotes();
+            siv.bIsDeleted = false;
             siv.bIsUpVote = true;
             siv.FKSparks = nFKSpark;
             siv.FKAccounts = nUserID;
