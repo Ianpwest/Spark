@@ -263,13 +263,60 @@ namespace Spark.Classes
             return lstFiltered;
         }
 
-        public static List<sparks> SortSparksByUserInterest(sparkdbEntities1 dbEntity)
+        /// <summary>
+        /// Returns a complete list of sparks from the database sorted by their created date.
+        /// Setting the boolean parameter to true will sort by descending, else it will sort by ascending.
+        /// </summary>
+        /// <param name="db">Database instance in which to sort spark records.</param>
+        /// <param name="bIsDescending">True for descending sorting, else ascending sorting.</param>
+        /// <returns>Returns a collection of sparks sorted by their created date.</returns>
+        public static List<sparks> SortSparksByDate(sparkdbEntities1 db, bool bIsDescending)
         {
             List<sparks> lstSorted = new List<sparks>();
+
+            if (bIsDescending)
+            {
+                var qrySparksDescending = from r in db.sparks
+                                          orderby r.dDateCreated descending
+                                          select r;
+
+                if (qrySparksDescending != null)
+                {
+                    foreach (sparks spark in qrySparksDescending)
+                    {
+                        if (!lstSorted.Contains(spark))
+                            lstSorted.Add(spark);
+                    }
+                }
+            }
+            else
+            {
+                var qrySparksAscending = from r in db.sparks
+                                         orderby r.dDateCreated ascending
+                                         select r;
+                if (qrySparksAscending != null)
+                {
+                    foreach (sparks spark in qrySparksAscending)
+                    {
+                        if (!lstSorted.Contains(spark))
+                            lstSorted.Add(spark);
+                    }
+                }
+            }
 
             return lstSorted;
         }
 
+        /// <summary>
+        /// Applies the decaying algorithm to a sorted dictionary of sparks keyed by the spark with values of the sort position value.
+        /// The algorithm has growth at 0 hours and begins to decay once (hours / 24 ) equals the database constant "SortingDecayShifter"
+        /// Decays the values based on the date that the spark was created. Uses constants from the constants table to tune decay start and sensitivity.
+        /// Increases in SortingDecayMultiplier (C) value will cause the created date to influence the sort more dominantly instead of the spark vote.
+        /// Increases in the SortingDecayShifter (k) value will cause the decay to take more hours/days to make a significant effect on the sort.
+        /// </summary>
+        /// <param name="dictSparks">Dictionary keyed by spark and values of the sorting determined by the popularity method or some other method for determining sort values.</param>
+        /// <param name="dbEntity">Database instance in which to collect constant values for the decay algorithm.</param>
+        /// <returns>Returns the same collection as passed in as a parameter with modified values from the decay algorithm.</returns>
         private static Dictionary<sparks, double> ApplyDecayAlgorithm(Dictionary<sparks, double> dictSparks, sparkdbEntities1 dbEntity)
         {
             Dictionary<sparks, double> dictSparkValues = new Dictionary<sparks, double>();
@@ -280,11 +327,15 @@ namespace Spark.Classes
             double dblConstantMultiplier = 1;
             double dblConstantShifter = 0;
 
+            // This constant is the sensitive to the decay. C should not be negative or else we will see exponential growth instead of decay.
+            // Small values (Between 0 and 1) will put less emphasis on date created and more emphasis on spark votes, and vice versa.
             double.TryParse((from constants constant in dbEntity.constants
-                             where constant.strKey == "SortingDecayMultiplier"
+                             where constant.strKey == "SortingDecayMultiplier" // C in the equation
                              select constant.strValue).FirstOrDefault(), out dblConstantMultiplier);
+            // This constant is how we determine when we want the decay to start. When x = k, the decay is at 0%.
+            // For values of x < k, we have negative decay (growth), and the smaller or more negative k is, the earlier and stronger the decay is.
             double.TryParse((from constants constant in dbEntity.constants
-                             where constant.strKey == "SortingDecayShifter"
+                             where constant.strKey == "SortingDecayShifter" // k in the equation
                              select constant.strValue).FirstOrDefault(), out dblConstantShifter);
 
             foreach (KeyValuePair<sparks, double> kvp in dictSparks)
@@ -297,9 +348,10 @@ namespace Spark.Classes
                     continue;
 
                 TimeSpan tsToday = (TimeSpan)(DateTime.Now - kvp.Key.dDateCreated);
-                int nXValue = tsToday.Days;
+                // x is the number of hours since the creation date divided by 24. This division slows down the decay significantly for the first day.
+                double dblXValue = ((double)tsToday.Hours / (double)24); 
 
-                dblOffset = Math.Pow(Math.E, nXValue - dblConstantShifter);
+                dblOffset = Math.Pow(Math.E, dblXValue - dblConstantShifter);
                 dblOffset = 1 - dblOffset;
                 dblOffset = dblOffset * dblConstantMultiplier;
 
@@ -309,6 +361,14 @@ namespace Spark.Classes
             return dictSparkValues;
         }
 
+        /// <summary>
+        /// Gets a collection of all sparks that have sparkinterestvotes records in the database. Note - all sparks should have a vote record by default.
+        /// Assigns the spark collected as a key in the return dictionary with values that give an absolute representation of their sort order.
+        /// Higher values indicate the spark is sorted above ones with lower values. The values are influenced by user votes for the spark (up for pos, down for neg).
+        /// The database constant "SortingPopularityConstant" influences the weight of the vote sorting. Increasing the value of this will weight votes more heavily.
+        /// </summary>
+        /// <param name="dbEntity">Database instance for which we derive constants for this algorithm.</param>
+        /// <returns>Returns a dictionary with spark keys and values that indicate the sort order based on spark votes.</returns>
         private static Dictionary<sparks, double> ApplyPopularitySorting(sparkdbEntities1 dbEntity)
         {
             Dictionary<sparks, double> dictSorted = new Dictionary<sparks, double>();
