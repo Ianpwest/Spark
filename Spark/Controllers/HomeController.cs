@@ -17,9 +17,13 @@ namespace Spark.Controllers
             List<Models.sparks> lstSparks = Calculations.SortSparksByPopularity(UtilitiesDatabaseInterface.GetDatabaseInstance());
             List<Models.SparkTileModel> lstSparkTiles = new List<Models.SparkTileModel>();
 
+            //Get the categories and tags to filter on.
+
+
             // Attempts to find the current user id.
             int nCurrentUserId = AccountsDatabaseInterface.GetUserId(AccountsDatabaseInterface.GetDatabaseInstance(), User.Identity.Name);
-            //Make sure the topics aren't over the max allowed characters
+            
+            //Make sure the topics aren't over the max allowed characters and initialize the voting counts.
             foreach(Models.sparks spark in lstSparks)
             {
                 Models.SparkTileModel tile = new Models.SparkTileModel();
@@ -30,6 +34,7 @@ namespace Spark.Controllers
                     tile.Topic = spark.strTopic.Substring(0, CONST_MAX_TOPIC_CHARACTERS - 3) + "...";
                 }
 
+                //Set the vote counts appropriately.
                 tile.UpvoteCount = SparksDatabaseInterface.GetSparkVoteCount(spark.PK, true);
                 tile.DownvoteCount = SparksDatabaseInterface.GetSparkVoteCount(spark.PK, false);
 
