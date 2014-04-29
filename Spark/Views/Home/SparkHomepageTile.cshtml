@@ -10,12 +10,12 @@
     <div class="SparkTileBottomControls">
         <img id="UpvoteIcon@(Model.PK)" class="UpvoteIcon" src="http://i62.tinypic.com/2yx0v47.png"
              onclick="ImageClicked(@(Model.PK), true), CastSparkVote(@Model.PK, true)"
-             onmouseover="ChangeImage(this, 'over')"
-             onmouseout="ChangeImage(this, 'out')">
+             onmouseover="ChangeImage(@Model.PK, true, 'over')"
+             onmouseout="ChangeImage(@Model.PK, true, 'out')">
         <img id="DownvoteIcon@(Model.PK)" class="DownvoteIcon" src="http://i59.tinypic.com/igj4aa.png"
              onclick="ImageClicked(@(Model.PK), false), CastSparkVote(@Model.PK, false)"
-             onmouseover="ChangeImage(this, 'over')"
-             onmouseout="ChangeImage(this, 'out')">
+             onmouseover="ChangeImage(@Model.PK, false, 'over')"
+             onmouseout="ChangeImage(@Model.PK, false, 'out')">
         <p id="VoteCount@(Model.PK)" class="VoteCount">(+@Model.UpvoteCount.ToString()/ -@Model.DownvoteCount.ToString())</p>
         <img class="Tag1" src="http://i62.tinypic.com/szkgh2.png">
         <img class="Tag2" src="http://i60.tinypic.com/28gy2o3.png">

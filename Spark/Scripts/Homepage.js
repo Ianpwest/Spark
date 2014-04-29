@@ -5,14 +5,22 @@ var DownvoteImage = "http://i59.tinypic.com/igj4aa.png";
 var DownvoteHoverImage = "http://i60.tinypic.com/23uwjth.png";
 var DownvoteClickedImage = "http://i61.tinypic.com/155qblv.png";
 
-function ChangeImage(image, direction) {
+function ChangeImage(nIndex, bIsUpVote, direction) {
+
+    var image = null;
+
+    if (bIsUpVote)
+        image = document.getElementById("UpvoteIcon" + nIndex.toString());
+    else
+        image = document.getElementById("DownvoteIcon" + nIndex.toString());
+
     switch (image.id) {
-        case "UpvoteIcon":
+        case "UpvoteIcon" +nIndex.toString():
             {
                 ToggleUpvote(image, direction);
             }
             break;
-        case "DownvoteIcon":
+        case "DownvoteIcon" +nIndex.toString():
             {
                 ToggleDownvote(image, direction);
             }
