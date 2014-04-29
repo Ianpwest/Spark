@@ -33,21 +33,21 @@
                 </div>
 
                 <div class="editor-label">
-                    @Html.LabelFor(model => model.Topic)
+                    @Html.LabelFor(model => model.Title)
                 </div>
                 <div>
-                    @Html.EditorFor(model => model.Topic, new { @class ="sparkFields" })
-                    <p>&nbsp;&lt;--- Write a main topic for your spark.</p>
-                    @Html.ValidationMessageFor(model => model.Topic)
+                    @Html.EditorFor(model => model.Title, new { @class = "sparkFields" })
+                    <p>&nbsp;&lt;--- Write a main title for your spark.</p>
+                    @Html.ValidationMessageFor(model => model.Title)
                 </div>
 
                 <div class="editor-label">
-                    @Html.LabelFor(model => model.Description)
+                    @Html.LabelFor(model => model.Topic)
                 </div>
                 <div>
-                    @Html.TextAreaFor(model => model.Description, 5, 60, new object { })
-                    <p>&nbsp;&lt;--- Write a brief summary of your spark.</p>
-                    @Html.ValidationMessageFor(model => model.Description)
+                    @Html.TextAreaFor(model => model.Topic, 5, 60, new object { })
+                    <p>&nbsp;&lt;--- Write the topic of your spark here.</p>
+                    @Html.ValidationMessageFor(model => model.Topic)
                 </div>
 
                 <div class="editor-field">

@@ -16,12 +16,12 @@ namespace Spark.Models
         public int SubjectMatterId {get;set;}
 
         [Required]
-        [Display(Name = "Topic")]
-        public string Topic { get; set; }
+        [Display(Name = "Title")]
+        public string Title { get; set; }
 
         [Required]
-        [Display(Name = "Description")]
-        public string Description { get; set; }
+        [Display(Name = "Topic")]
+        public string Topic { get; set; }
 
         public string UserId { get; set; }
 

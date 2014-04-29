@@ -204,13 +204,13 @@
           <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FKAccountsCreatedBy" Type="int" Nullable="false" />
           <Property Name="FKSubjectMatters" Type="int" Nullable="false" />
-          <Property Name="FKCategories1" Type="int" />
-          <Property Name="FKCategories2" Type="int" />
-          <Property Name="FKCategories3" Type="int" />
-          <Property Name="FKCategories4" Type="int" />
-          <Property Name="FKCategories5" Type="int" />
+          <Property Name="FKCategories1" Type="int" Nullable="false" />
+          <Property Name="FKCategories2" Type="int" Nullable="false" />
+          <Property Name="FKCategories3" Type="int" Nullable="false" />
+          <Property Name="FKCategories4" Type="int" Nullable="false" />
+          <Property Name="FKCategories5" Type="int" Nullable="false" />
           <Property Name="strTopic" Type="varchar" MaxLength="500" />
-          <Property Name="strDescription" Type="varchar" MaxLength="1500" />
+          <Property Name="strTitle" Type="varchar" MaxLength="36" />
           <Property Name="dDateCreated" Type="datetime" Precision="0" />
           <Property Name="dDateModified" Type="datetime" Precision="0" />
         </EntityType>
@@ -1234,7 +1234,6 @@
           <Property Name="FKAccountsCreatedBy" Type="Int32" Nullable="false" />
           <Property Name="FKSubjectMatters" Type="Int32" Nullable="false" />
           <Property Name="strTopic" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="strDescription" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
           <Property Name="dDateCreated" Type="DateTime" />
           <Property Name="dDateModified" Type="DateTime" />
           <NavigationProperty Name="accounts" Relationship="Self.FK_sparks_accounts" FromRole="sparks" ToRole="accounts" />
@@ -1242,11 +1241,12 @@
           <NavigationProperty Name="sparkinterestvotes" Relationship="Self.FK_sparkinterestvotes_sparks" FromRole="sparks" ToRole="sparkinterestvotes" />
           <NavigationProperty Name="sparkscategories" Relationship="Self.FK__sparks" FromRole="sparks" ToRole="sparkscategories" />
           <NavigationProperty Name="subjectmatters" Relationship="Self.FK_sparks_subjectmatters" FromRole="sparks" ToRole="subjectmatters" />
-          <Property Name="FKCategories1" Type="Int32" Nullable="true" />
-          <Property Name="FKCategories2" Type="Int32" Nullable="true" />
-          <Property Name="FKCategories3" Type="Int32" Nullable="true" />
-          <Property Name="FKCategories4" Type="Int32" Nullable="true" />
-          <Property Name="FKCategories5" Type="Int32" Nullable="true" />
+          <Property Name="FKCategories1" Type="Int32" Nullable="false" />
+          <Property Name="FKCategories2" Type="Int32" Nullable="false" />
+          <Property Name="FKCategories3" Type="Int32" Nullable="false" />
+          <Property Name="FKCategories4" Type="Int32" Nullable="false" />
+          <Property Name="FKCategories5" Type="Int32" Nullable="false" />
+          <Property Name="strTitle" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="sparkscategories">
           <Key>
@@ -2260,6 +2260,7 @@
           <EntitySetMapping Name="sparks">
             <EntityTypeMapping TypeName="sparkdbModel.sparks">
               <MappingFragment StoreEntitySet="sparks">
+                <ScalarProperty Name="strTitle" ColumnName="strTitle" />
                 <ScalarProperty Name="FKCategories5" ColumnName="FKCategories5" />
                 <ScalarProperty Name="FKCategories4" ColumnName="FKCategories4" />
                 <ScalarProperty Name="FKCategories3" ColumnName="FKCategories3" />
@@ -2269,7 +2270,6 @@
                 <ScalarProperty Name="FKAccountsCreatedBy" ColumnName="FKAccountsCreatedBy" />
                 <ScalarProperty Name="FKSubjectMatters" ColumnName="FKSubjectMatters" />
                 <ScalarProperty Name="strTopic" ColumnName="strTopic" />
-                <ScalarProperty Name="strDescription" ColumnName="strDescription" />
                 <ScalarProperty Name="dDateCreated" ColumnName="dDateCreated" />
                 <ScalarProperty Name="dDateModified" ColumnName="dDateModified" />
               </MappingFragment>
