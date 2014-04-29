@@ -179,5 +179,25 @@ function AddRemoveVoteToSpark(nSparkId, bIsUpvote, bIsAdd)
 
         objDisplay.innerHTML = "(+" + nValueNext.toString() + "/ -" + nValueNext2.toString() + ")";
     }
+}
 
+function Filter()
+{
+    var Category = document.getElementById("Category");
+    var SelectedCategory = Category.options[Category.selectedIndex].value;
+
+    var Tag = document.getElementById("Tag");
+    var SelectedTag = Tag.options[Tag.selectedIndex].value;
+
+    var SearchText = document.getElementById('Search').value;
+
+    $.ajax({
+        type: "Get",
+        datatype: 'html',
+        data: "strCategory=" + SelectedCategory +  "&strTag=" + SelectedTag +"&strSearchText=" + SearchText,
+        url: "/Home/GetFilterResults",
+        success: function (data) {
+            document.getElementById("TileContainer").innerHTML = data;
+        }
+    });
 }

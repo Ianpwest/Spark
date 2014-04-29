@@ -245,7 +245,7 @@ namespace Spark.Classes
                 }
             }
 
-            if (string.IsNullOrEmpty(strSearch)) // int.minvalue will be used to turn off this sort piece.
+            if (!string.IsNullOrEmpty(strSearch)) // int.minvalue will be used to turn off this sort piece.
             {
                 foreach (sparks spark in qrySearchString) // goes through the search string filter to determine which pieces to remove
                 {

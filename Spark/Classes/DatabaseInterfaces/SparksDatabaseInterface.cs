@@ -462,26 +462,48 @@ namespace Spark.Classes
         /// Method to return the list of categories in the database. Name only.
         /// </summary>
         /// <returns>Category names in a list</returns>
-        public static List<string> GetAllCategories()
+        public static Dictionary<int, string> GetAllCategories()
         {
+            Dictionary<int, string> lstReturn = new Dictionary<int, string>();
             sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
 
-            return (from r in db.subjectmatters
-                    orderby r.strName
-                    select r.strName).ToList();
+            var lstSubjectMatters = from r in db.subjectmatters
+                                    orderby r.strName
+                                    select r;
+
+            if (lstSubjectMatters == null || lstSubjectMatters.Count() <= 0)
+                return null;
+
+            foreach(var x in lstSubjectMatters)
+            {
+                lstReturn.Add(x.PK, x.strName);
+            }
+
+            return lstReturn;
         }
 
         /// <summary>
         /// Method to return the list of tags in the database. Name only.
         /// </summary>
         /// <returns>Tag names in a list</returns>
-        public static List<string> GetAllTags()
+        public static Dictionary<int, string> GetAllTags()
         {
+            Dictionary<int, string> lstReturn = new Dictionary<int, string>();
             sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
 
-            return (from r in db.categories
-                    orderby r.strName
-                    select r.strName).ToList();
+            var lstCategories = from r in db.categories
+                                    orderby r.strName
+                                    select r;
+
+            if (lstCategories == null || lstCategories.Count() <= 0)
+                return null;
+
+            foreach (var x in lstCategories)
+            {
+                lstReturn.Add(x.PK, x.strName);
+            }
+
+            return lstReturn;
         }
         
     }
