@@ -88,7 +88,6 @@ namespace Spark.Controllers
             return View();
         }
 
-
         [Authorize]
         public ActionResult CastSparkVote(string strDataConcat)
         {
