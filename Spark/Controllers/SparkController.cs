@@ -229,8 +229,8 @@ namespace Spark.Controllers
             if (strArray.Length < 9)
                 return null;
 
-            scm.Topic = strArray[0];
-            scm.Description = strArray[1];
+            scm.Title = strArray[0];
+            scm.Topic = strArray[1];
             scm.SubjectMatterId = int.Parse(strArray[2]);
             scm.Tag1 = int.Parse(strArray[3]);
             scm.Tag2 = int.Parse(strArray[4]);

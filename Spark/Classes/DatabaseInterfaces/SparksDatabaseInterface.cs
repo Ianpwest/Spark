@@ -21,7 +21,7 @@ namespace Spark.Classes
             sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
 
             sparks sparkModel = new sparks();
-            sparkModel.strDescription = sparkCreateModel.Description;
+            sparkModel.strTitle = sparkCreateModel.Title;
             sparkModel.strTopic = sparkCreateModel.Topic;
             
             sparkModel.FKSubjectMatters = sparkCreateModel.SubjectMatterId;

@@ -25,7 +25,6 @@ namespace Spark.Models
         public int FKAccountsCreatedBy { get; set; }
         public int FKSubjectMatters { get; set; }
         public string strTopic { get; set; }
-        public string strDescription { get; set; }
         public Nullable<System.DateTime> dDateCreated { get; set; }
         public Nullable<System.DateTime> dDateModified { get; set; }
         public int FKCategories1 { get; set; }
@@ -33,6 +32,7 @@ namespace Spark.Models
         public int FKCategories3 { get; set; }
         public int FKCategories4 { get; set; }
         public int FKCategories5 { get; set; }
+        public string strTitle { get; set; }
     
         public virtual accounts accounts { get; set; }
         public virtual ICollection<arguments> arguments { get; set; }
