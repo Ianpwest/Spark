@@ -195,7 +195,7 @@
           <Property Name="FKSparks" Type="int" Nullable="false" />
           <Property Name="bIsUpVote" Type="bit" Nullable="false" />
           <Property Name="FKAccounts" Type="int" Nullable="false" />
-          <Property Name="bIsDeleted" Type="bit" />
+          <Property Name="bIsDeleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="sparks">
           <Key>
@@ -1224,7 +1224,7 @@
           <Property Name="FKAccounts" Type="Int32" Nullable="false" />
           <NavigationProperty Name="accounts" Relationship="Self.FK_sparkinterestvotes_accounts" FromRole="sparkinterestvotes" ToRole="accounts" />
           <NavigationProperty Name="sparks" Relationship="Self.FK_sparkinterestvotes_sparks" FromRole="sparkinterestvotes" ToRole="sparks" />
-          <Property Name="bIsDeleted" Type="Boolean" />
+          <Property Name="bIsDeleted" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="sparks">
           <Key>

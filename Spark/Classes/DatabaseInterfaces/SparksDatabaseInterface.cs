@@ -259,18 +259,18 @@ namespace Spark.Classes
             sparkdbEntities1 db = GetDatabaseInstance();
 
             var qry = from r in db.sparkinterestvotes
-                      where r.FKAccounts == nUserId && r.FKSparks == nSparkId
+                      where r.FKAccounts == nUserId && r.FKSparks == nSparkId && r.bIsDeleted == false
                       select r;
 
             if (qry != null && qry.Count() > 0)
             {
                 if (qry.First().bIsUpVote)
-                    return 1;
+                    return 1; // User has upvoted the spark
                 else
-                    return 2;
+                    return 2; // User has downvoted the spark
             }
             else
-                return 0;
+                return 0; // User has not voted on the spark
         }
 
         public static int CastSparkVote(int nSparkId, bool bIsUpvote, string strUserName)
@@ -329,7 +329,7 @@ namespace Spark.Classes
             int nCount = 0;
 
             var qryVoteCount = from r in db.sparkinterestvotes
-                               where r.FKSparks == nSparkId && r.bIsUpVote == bIsUpvote
+                               where r.FKSparks == nSparkId && r.bIsUpVote == bIsUpvote && r.bIsDeleted == false
                                select r;
 
             if (qryVoteCount != null && qryVoteCount.Count() > 0)

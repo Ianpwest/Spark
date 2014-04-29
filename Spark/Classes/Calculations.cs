@@ -155,7 +155,7 @@ namespace Spark.Classes
         {
             List<sparks> lstSorted = new List<sparks>();
 
-            Dictionary<sparks, double> dictPopularitySorted = ApplyPopularitySorting(dbEntity);
+            Dictionary<sparks, double> dictPopularitySorted = ApplyPopularitySorting(dbEntity); // collects all of the sparks with popularity values
 
             // Gets a collection of the sparks that belong to a specific broad category.
             var qrySparksBySubject = from sparks spark in dbEntity.sparks
@@ -191,6 +191,76 @@ namespace Spark.Classes
                          select kvp.Key).ToList<sparks>();
 
             return lstSorted;
+        }
+
+        /// <summary>
+        /// Returns a collection of sparks that match the input parameter filters. Sorts the sparks by popularity then filters out all sparks that do not 
+        /// match the parameters. Use int.MinValue for nCategory and nTag to not use these filters. Use string.empty to not use the strSearch filter.
+        /// Returns a simple list of all sparks sorted by populary if no parameters are used.
+        /// </summary>
+        /// <param name="db">Database instance to use to sort and filter sparks.</param>
+        /// <param name="nCategory">Selected category - only returns sparks that are in this category.</param>
+        /// <param name="nTag">Selected tag - only return sparks that are associated with this tag.</param>
+        /// <param name="strSearch">Selected search string - only returns sparks that contain this string in their topic field.</param>
+        /// <returns>Returns a list of sparks that are sorted by popularity and filtered by the input parameters.</returns>
+        public static List<sparks> FilterSparksByHomeParameters(sparkdbEntities1 db, int nCategory, int nTag, string strSearch)
+        {
+            List<sparks> lstFiltered = new List<sparks>();
+
+            lstFiltered = SortSparksByPopularity(db); // Gets the generic collection of sorted sparks.
+
+            // Query designed to find all sparks that are not the selected category.
+            var qryCategories = from r in lstFiltered
+                                where r.FKSubjectMatters != nCategory
+                                select r;
+
+            // Query designed to find all sparks that do not associate with the selected tag.
+            var qryTag = from r in lstFiltered
+                         where r.FKCategories1 != nTag && r.FKCategories2 != nTag && r.FKCategories3 != nTag &&
+                         r.FKCategories4 != nTag && r.FKCategories5 != nTag
+                         select r;
+
+            // Query designed to find all sparks that do not contain the selected search string in the topic.
+            var qrySearchString = from r in lstFiltered
+                                  where !r.strTopic.Contains(strSearch)
+                                  select r;
+
+            List<sparks> lstRemovals = new List<sparks>(); // Creates a set that will show which pieces to remove from the base collection.
+            
+            if (nCategory != int.MinValue) // int.minvalue will be used to turn off this sort piece.
+            {
+                foreach(sparks spark in qryCategories) // goes through the categories filter to determine which pieces to remove
+                {
+                    if (!lstRemovals.Contains(spark))
+                        lstRemovals.Add(spark);
+                }
+            }
+
+            if (nTag != int.MinValue) // int.minvalue will be used to turn off this sort piece.
+            {
+                foreach (sparks spark in qryTag)
+                {
+                    if (!lstRemovals.Contains(spark)) // goes through the tag filter to determine which pieces to remove
+                        lstRemovals.Add(spark);
+                }
+            }
+
+            if (string.IsNullOrEmpty(strSearch)) // int.minvalue will be used to turn off this sort piece.
+            {
+                foreach (sparks spark in qrySearchString) // goes through the search string filter to determine which pieces to remove
+                {
+                    if (!lstRemovals.Contains(spark))
+                        lstRemovals.Add(spark);
+                }
+            }
+
+            foreach (sparks spark in lstRemovals) // From all of the selected sparks from the base filtered collection.
+            {
+                if (lstFiltered.Contains(spark))
+                    lstFiltered.Remove(spark);
+            }
+
+            return lstFiltered;
         }
 
         public static List<sparks> SortSparksByUserInterest(sparkdbEntities1 dbEntity)
@@ -254,8 +324,14 @@ namespace Spark.Classes
             // Interates through all of the interest votes and creates a collection of sparks that holds a value of the number of votes it has.
             foreach (sparkinterestvotes siv in qryForInterest)
             {
+                // If it is a deleted vote - we still want to account for the spark being shown
+                if (siv.bIsDeleted)
+                {
+                    if (!dictInterestSparks.ContainsKey(siv.FKSparks)) // Does not need else statement, deleted votes do not increment the count.
+                        dictInterestSparks.Add(siv.FKSparks, 0);
+                }
                 // If it is a positive vote
-                if (siv.bIsUpVote)
+                else if (siv.bIsUpVote)
                 {
                     if (!dictInterestSparks.ContainsKey(siv.FKSparks))
                         dictInterestSparks.Add(siv.FKSparks, 1);
