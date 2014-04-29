@@ -103,12 +103,12 @@
                 <p class="classSubmitButtons">Would you like to create an argument for either side?</p>
                 @Html.HiddenFor(model => model.ArgEntryType)
                 <div>
-                    <input class="classSubmitButtons" type="button" value="Agree and Create" onclick="setArgumentType('1'), getArgumentLayout()" />
-                    <input class="classSubmitButtons" type="button" value="Disagree and Create" onclick="setArgumentType('2'), getArgumentLayout()" />
+                    <input class="classSubmitButtons" type="submit" value="Agree and Create" onclick="setArgumentType(1)"/>
+                    <input class="classSubmitButtons" type="submit" value="Disagree and Create" onclick="setArgumentType(2)" />
                 </div>
                 <div id="divCreateBack">
                     <input class="classSubmitButtons" type="button" value="Back" onclick="SingleTransitionVert(false)" />
-                    <input class="classSubmitButtons" type="submit" value="Just Create" />
+                    <input class="classSubmitButtons" type="submit" value="Just Create" onclick="setArgumentType(0)" />
                 </div>
             </div>
 

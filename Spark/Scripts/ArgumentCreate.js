@@ -30,4 +30,31 @@ function SubmitForm()
     $("#CreateArgumentForm").submit();
 }
 
-   
+function InitializeArgumentLayout() {
+    //Initialize the editor for argument and citation create
+    tinymce.init({
+        //invalid_elements: "img",
+        height: "500",
+        width: 775,
+        resize: false,
+        browser_spellcheck: true,
+        content_css: "/Content/TinyMCEDefault.css",
+        selector: "textarea.textAreaEditor",
+        plugins: "image, textcolor, wordcount",
+        toolbar: "insertfile undo redo | styleselect | bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+    });
+
+    //Initialize the editor for review
+    tinymce.init({
+        height: "500",
+        width: 775,
+        resize: false,
+        readonly: 1,
+        content_css: "/Content/TinyMCEDefault.css",
+        selector: "textarea.txtAreaReview",
+        plugins: "",
+        menubar: "false",
+        statusbar: "false",
+        toolbar: "false"
+    });
+}

@@ -63,14 +63,73 @@ namespace Spark.Controllers
         [HttpPost, Authorize]
         public ActionResult SparkCreate(SparkCreateModel model)
         {
+            if (model == null)
+                return RedirectToAction("Index", "Home"); // TODO - redirect to error page and log error.
             model.UserId = User.Identity.Name;
 
             int sparkPK = SparksDatabaseInterface.CreateSpark(model);
+
             // Spark failed to create - TODO : error log and redirect to error page.
             if (sparkPK == int.MinValue)
                 return RedirectToAction("Index", "Home");
 
-            return RedirectToAction("Index", "Home");
+
+            if (model.ArgEntryType == ArgumentEntryType.Neither)
+            {
+                // TODO- redirect to action with error page.
+            }
+
+            arguments argumentModel = new arguments();
+
+            //TODO: if this returns 0 (we have no user logged in) return a failure screen
+            argumentModel.FKAccounts = AccountsDatabaseInterface.GetAccountsPKByUsername(User.Identity.Name);
+            if (model.ArgEntryType == ArgumentEntryType.Agree)
+                argumentModel.bIsAgree = true;
+            else
+                argumentModel.bIsAgree = false;
+
+            argumentModel.FKSparks = sparkPK;
+
+            return View("SparkArgumentCreate", argumentModel);
+        }
+
+        /// <summary>
+        /// POST response to the SparkCreate view.
+        /// Attempts to create the spark in the database. Redirects to specific pages depending upon the success of the creation.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost, Authorize]
+        public ActionResult SparkCreateAndAddArgument(SparkCreateModel model, bool bAgree)
+        {
+            if (model == null)
+                return RedirectToAction("Index", "Home"); // TODO - redirect to error page and log error.
+            model.UserId = User.Identity.Name;
+
+            int sparkPK = SparksDatabaseInterface.CreateSpark(model);
+
+            // Spark failed to create - TODO : error log and redirect to error page.
+            if (sparkPK == int.MinValue)
+                return RedirectToAction("Index", "Home");
+
+
+            if (model.ArgEntryType == ArgumentEntryType.Neither)
+            {
+                // TODO- redirect to action with error page.
+            }
+
+            arguments argumentModel = new arguments();
+
+            //TODO: if this returns 0 (we have no user logged in) return a failure screen
+            argumentModel.FKAccounts = AccountsDatabaseInterface.GetAccountsPKByUsername(User.Identity.Name);
+            if (bAgree)
+                argumentModel.bIsAgree = true;
+            else
+                argumentModel.bIsAgree = false;
+
+            argumentModel.FKSparks = sparkPK;
+
+            return View("SparkArgumentCreate", argumentModel);
         }
 
         /// <summary>
