@@ -94,85 +94,6 @@ namespace Spark.Controllers
         }
 
         /// <summary>
-        /// POST response to the SparkCreate view.
-        /// Attempts to create the spark in the database. Redirects to specific pages depending upon the success of the creation.
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        [HttpPost, Authorize]
-        public ActionResult SparkCreateAndAddArgument(SparkCreateModel model, bool bAgree)
-        {
-            if (model == null)
-                return RedirectToAction("Index", "Home"); // TODO - redirect to error page and log error.
-            model.UserId = User.Identity.Name;
-
-            int sparkPK = SparksDatabaseInterface.CreateSpark(model);
-
-            // Spark failed to create - TODO : error log and redirect to error page.
-            if (sparkPK == int.MinValue)
-                return RedirectToAction("Index", "Home");
-
-
-            if (model.ArgEntryType == ArgumentEntryType.Neither)
-            {
-                // TODO- redirect to action with error page.
-            }
-
-            arguments argumentModel = new arguments();
-
-            //TODO: if this returns 0 (we have no user logged in) return a failure screen
-            argumentModel.FKAccounts = AccountsDatabaseInterface.GetAccountsPKByUsername(User.Identity.Name);
-            if (bAgree)
-                argumentModel.bIsAgree = true;
-            else
-                argumentModel.bIsAgree = false;
-
-            argumentModel.FKSparks = sparkPK;
-
-            return View("SparkArgumentCreate", argumentModel);
-        }
-
-        /// <summary>
-        /// POST response of the CreateSpark page that returns an argument creation page.
-        /// Uses the model's ArgumentEntryType enumeration to determine the return type.
-        /// Redirects to error page if unable to create the spark prior to creating the argument.
-        /// </summary>
-        /// <param name="strModelInfo"></param>
-        /// <returns></returns>
-        [HttpPost, Authorize]
-        public ActionResult SparkCreateWithArg(string strModelInfo)
-        {
-            SparkCreateModel scmModel = ParseStringToModel(strModelInfo);
-            if (scmModel == null)
-                return RedirectToAction("Index", "Home"); // TODO - redirect to error page and log error.
-            scmModel.UserId = User.Identity.Name;
-            
-            int sparkPK = SparksDatabaseInterface.CreateSpark(scmModel);
-            // Spark failed to create - TODO : error log and redirect to error page.
-            if (sparkPK == int.MinValue)
-                return RedirectToAction("Index", "Home");
-            
-            
-            if (scmModel.ArgEntryType == ArgumentEntryType.Neither)
-            {
-                // TODO- redirect to action with error page.
-            }
-
-            arguments argumentModel = new arguments();
-
-            //TODO: if this returns 0 (we have no user logged in) return a failure screen
-            argumentModel.FKAccounts = AccountsDatabaseInterface.GetAccountsPKByUsername(User.Identity.Name);
-            if (scmModel.ArgEntryType == ArgumentEntryType.Agree)
-                argumentModel.bIsAgree = true;
-            else
-                argumentModel.bIsAgree = false;
-
-            argumentModel.FKSparks = sparkPK;
-
-            return View("SparkArgumentCreate", argumentModel);
-        }
-
-        /// <summary>
         /// Returns a Json object to a javascript function containing the 64 bit encoded jpg information string given a broad category (subject matter)
         /// primary key.
         /// </summary>
@@ -339,11 +260,11 @@ namespace Spark.Controllers
             {
                 //We were successful in adding the argument
                 //TODO: Go to the right spark
-                return RedirectToAction("SparkContainer");
+                return RedirectToAction("SparkContainer", argumentModel.FKSparks);
             }
 
             //We failed TODO:What do we do when we fail
-            return RedirectToAction("SparkContainer");//remove this line
+            return RedirectToAction("Error");//remove this line
         }
 
         /// <summary>

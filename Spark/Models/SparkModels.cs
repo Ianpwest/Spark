@@ -15,7 +15,7 @@ namespace Spark.Models
         [Display(Name = "Category")]
         public int SubjectMatterId {get;set;}
 
-        [Required]
+        [Required, StringLength(23, ErrorMessage="The title is limited to 23 characters.")]
         [Display(Name = "Title")]
         public string Title { get; set; }
 
