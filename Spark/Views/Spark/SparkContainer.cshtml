@@ -29,7 +29,7 @@
             if(((List<Spark.Models.SparkArgumentModel>)ViewBag.Arguments[0]).Count == 0)
             {
                 <div>
-                    <h1 style="background-color:#ff3200; height:700px; padding-top:30px;">Be the first to argue your point!</h1>
+                    <h1 style="background-color:#ff3200; height:700px; padding-top:30px;">Be the first to agree!</h1>
                 </div>
             }
             foreach (Spark.Models.SparkArgumentModel samAgree in ViewBag.Arguments[0])
@@ -48,7 +48,7 @@
             if(((List<Spark.Models.SparkArgumentModel>)ViewBag.Arguments[0]).Count == 0)
             {
                 <div>
-                    <h1 style="background-color: #8244d6; margin-left: 1px; height: 700px; padding-top: 30px;">Be the first to argue your point!</h1>
+                    <h1 style="background-color: #8244d6; margin-left: 1px; height: 700px; padding-top: 30px;">Be the first to disagree!</h1>
                 </div>
             }
             foreach (Spark.Models.SparkArgumentModel samDisagree in ViewBag.Arguments[1])
