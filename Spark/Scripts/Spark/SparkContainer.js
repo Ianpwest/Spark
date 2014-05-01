@@ -14,10 +14,10 @@
                 {
                     AddRemoveVoteToArgument(nArgumentId.toString(), bIsUpVote, false);
                 }
-                else if(data.bNewVote)
+                else
                 {
                     AddRemoveVoteToArgument(nArgumentId.toString(), bIsUpVote, true);
-                    if (!data.bIsNewVote) {
+                    if (!data.bNewVote) {
                         AddRemoveVoteToArgument(nArgumentId.toString(), !bIsUpVote, false);
                     }
                 }

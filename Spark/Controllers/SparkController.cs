@@ -200,8 +200,7 @@ namespace Spark.Controllers
             lstReturn.Add(lstArgumentsDisagree);
 
             //Begin Testing code
-            List<Models.arguments> lstArguments = SparksDatabaseInterface.GetAllArgumentsForSpark(1); //hard coded id, controller method should take an id
-
+            List<Models.arguments> lstArguments = SparksDatabaseInterface.GetAllArgumentsForSpark(nSparkId); 
 
             //No arguments were found
             if (lstArguments == null || lstArguments.Count == 0)
@@ -260,7 +259,7 @@ namespace Spark.Controllers
             {
                 //We were successful in adding the argument
                 //TODO: Go to the right spark
-                return RedirectToAction("SparkContainer", argumentModel.FKSparks);
+                return RedirectToAction("SparkContainer", new { nSparkID = argumentModel.FKSparks });
             }
 
             //We failed TODO:What do we do when we fail
@@ -298,7 +297,7 @@ namespace Spark.Controllers
             bool bNewVote = (nStatus == 0) ? true : false; // a zero status is a new vote
             bool bReverseVote = (nStatus == 3) ? true : false; // a 3 indicates the vote has been deleted.
 
-            return Json(new { success = bSuccess, bIsNewVote = bNewVote, bReverseVote = bReverseVote });
+            return Json(new { success = bSuccess, bNewVote = bNewVote, bReverseVote = bReverseVote });
         }
         #endregion
     }

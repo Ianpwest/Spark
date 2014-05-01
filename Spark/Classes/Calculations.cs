@@ -478,5 +478,66 @@ namespace Spark.Classes
 
         #endregion
 
+        public static List<arguments> SortArgumentsByPopularity(sparkdbEntities1 db, int nSparkId)
+        {
+            List<arguments> lstSorted = new List<arguments>();
+
+            Dictionary<arguments, int> dictArgVotes = PairArgumentsWithVotes(db, nSparkId);
+
+            var qrySorted = from r in dictArgVotes
+                            orderby r.Value descending
+                            select r;
+
+            if(qrySorted == null)
+                return lstSorted;
+
+            foreach (KeyValuePair<arguments, int> kvp in qrySorted)
+            {
+                lstSorted.Add(kvp.Key);
+            }
+
+            return lstSorted;
+        }
+
+        private static Dictionary<arguments, int> PairArgumentsWithVotes(sparkdbEntities1 db, int nSparkId)
+        {
+            Dictionary<arguments, int> dictArgumentVote = new Dictionary<arguments, int>();
+            Dictionary<int, arguments> dictArguments = new Dictionary<int,arguments>();
+            List<argumentvotes> lstVotes = new List<argumentvotes>();
+
+            var qryAllArguments = from r in db.arguments
+                                  where r.FKSparks == nSparkId
+                                  select r;
+            if (qryAllArguments == null)
+                return dictArgumentVote;
+            
+            foreach (arguments argument in qryAllArguments)
+            {
+                if(!dictArguments.ContainsKey(argument.PK))
+                    dictArguments.Add(argument.PK, argument);
+                if (!dictArgumentVote.ContainsKey(argument))
+                    dictArgumentVote.Add(argument, 0);
+            }
+
+            var qryVotes = from r in db.argumentvotes
+                           where dictArguments.Keys.Contains(r.FKArguments)
+                           select r;
+            if (qryVotes == null)
+                return dictArgumentVote;
+
+            foreach (argumentvotes vote in qryVotes)
+            {
+                if (!dictArguments.ContainsKey(vote.FKArguments))
+                    continue;
+
+                if (vote.bIsUpvote)
+                    dictArgumentVote[dictArguments[vote.FKArguments]]++;
+                else
+                    dictArgumentVote[dictArguments[vote.FKArguments]]--;
+            }
+
+            return dictArgumentVote;
+        }
+
     }
 }

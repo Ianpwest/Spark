@@ -83,18 +83,7 @@ namespace Spark.Classes
         {
             sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
 
-            List<arguments> lstArguments = new List<arguments>();
-
-            var arguments = from r in db.arguments
-                            where r.FKSparks == nSparkId
-                            select r;
-
-            foreach(arguments argument in arguments)
-            {
-                lstArguments.Add(argument);
-            }
-
-            return lstArguments;
+            return Calculations.SortArgumentsByPopularity(db, nSparkId); ;
         }
 
         /// <summary>
