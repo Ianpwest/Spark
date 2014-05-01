@@ -17,36 +17,36 @@
         <fieldset>
             <legend>sparks</legend>
 
-            <div id="TransitionElementVert0" class="divMainFirst">
-                <div class="divSubjectMatterImage">
+            <div @*id="TransitionElementVert0"*@ class="divMainFirst">
+                @*<div class="divSubjectMatterImage">
                     <img id="imgPreview" class="imgPreviewSubjectMatter" alt=""
                          src="~/content/blankimage.gif" />
-                </div>
+                </div>*@
 
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.SubjectMatterId)
-                </div>
-                <div>
-                    @Html.DropDownListFor(model => model.SubjectMatterId, Model.SubjectMattersAll, new { onchange = "getImage(this)", @class ="sparkFields"})
-                    <p>&nbsp;&lt;--- Select a Spark type.</p>
-                    @Html.ValidationMessageFor(model => model.SubjectMatterId)
-                </div>
-
-                <div class="editor-label">
+                <div class="inputText">
                     @Html.LabelFor(model => model.Title)
                 </div>
+
                 <div>
-                    @Html.EditorFor(model => model.Title, new { @class = "sparkFields" })
-                    <p>&nbsp;&lt;--- Write a main title for your spark.</p>
+                    @Html.TextBoxFor(model => model.Title, new { @class = "sparkFields" })
                     @Html.ValidationMessageFor(model => model.Title)
                 </div>
 
-                <div class="editor-label">
+                <div class="inputText">
+                    @Html.LabelFor(model => model.SubjectMatterId)
+                </div>
+                <div>
+                    @Html.DropDownListFor(model => model.SubjectMatterId, Model.SubjectMattersAll, new { @*onchange = "getImage(this)",*@ @class ="select"})
+                    @Html.ValidationMessageFor(model => model.SubjectMatterId)
+                </div>
+               
+
+                <div class="inputText">
                     @Html.LabelFor(model => model.Topic)
                 </div>
                 <div>
-                    @Html.TextAreaFor(model => model.Topic, 5, 60, new object { })
-                    <p>&nbsp;&lt;--- Write the topic of your spark here.</p>
+                    @Html.TextAreaFor(model => model.Topic, 5, 60, new { onkeyup = "CharCount(this)" })
+                    <p id="CharCount">500 characters left</p>
                     @Html.ValidationMessageFor(model => model.Topic)
                 </div>
 
@@ -94,12 +94,12 @@
                 @Html.HiddenFor(model => model.Tag4)
                 @Html.HiddenFor(model => model.Tag5)
 
-                <p style="position:relative">
+                @*<p style="position:relative">
                     <input type="button" value="Next" onclick="SingleTransitionVert(true)" />
-                </p>
+                </p>*@
             </div>
 
-            <div id="TransitionElementVert1" style=" width:100%; position:absolute; opacity:0; top:500px; visibility:hidden;">
+            <div @*id="TransitionElementVert1"*@ style="width:100%; position:absolute; @*opacity:0; top:500px;*@ @*visibility:hidden;*@">
                 <p class="classSubmitButtons">Would you like to create an argument for either side?</p>
                 @Html.HiddenFor(model => model.ArgEntryType)
                 <div>
@@ -107,7 +107,7 @@
                     <input class="classSubmitButtons" type="submit" value="Disagree and Create" onclick="setArgumentType(2)" />
                 </div>
                 <div id="divCreateBack">
-                    <input class="classSubmitButtons" type="button" value="Back" onclick="SingleTransitionVert(false)" />
+                    @*<input class="classSubmitButtons" type="button" value="Back" onclick="SingleTransitionVert(false)" />*@
                     <input class="classSubmitButtons" type="submit" value="Just Create" onclick="setArgumentType(0)" />
                 </div>
             </div>

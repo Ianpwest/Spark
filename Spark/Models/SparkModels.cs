@@ -19,7 +19,7 @@ namespace Spark.Models
         [Display(Name = "Title")]
         public string Title { get; set; }
 
-        [Required]
+        [Required, StringLength(500, ErrorMessage = "The title is limited to 500 characters.")]
         [Display(Name = "Topic")]
         public string Topic { get; set; }
 

@@ -110,6 +110,18 @@ function previousTab()
     fadeIn("divMainFirst");
 }
 
+function CharCount(ta)
+{
+    var max = 500;
+    var len = $(ta).val().length;
+    if (len >= max) {
+        $('#CharCount').text('You have reached the 500 character limit');
+    } else {
+        var char = max - len;
+        $('#CharCount').text(char + ' characters left');
+    }
+}
+
 function selectTag(input) {
     
     var row = input.parentNode;
