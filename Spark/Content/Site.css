@@ -50,6 +50,7 @@ h5, h6 {
 .select
 {
   min-width:235px;
+  width:400px;
   min-height:30px;
   font-family:Century Gothic;
   color:black;
@@ -59,7 +60,6 @@ h5, h6 {
   padding:5px;
   margin-bottom:20px;
   cursor:pointer;
-  width:101.5%;
   transition: all .5s ease-in;
 }
 
@@ -127,10 +127,19 @@ label {
     padding: 5px;
     width: 300px;
 }
-
+ .inputText
+{
+  font-family:Century Gothic;
+  color:white;
+  background:#ff4500;
+  text-align:center;
+  width:43%;
+  
+  transition: all .5s ease-in;
+}
  textarea {
     font-family: inherit;
-    width: 500px;
+    width: 400px;
 }
 
  input:focus, textarea:focus {

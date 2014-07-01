@@ -62,13 +62,13 @@ function fadeAwayRight(id) {
 
 function fadeInRight(id) {
     $(document).ready(function () {
-        $("#" + id).css({ opacity: 0.0, display: "block", left: "-50%" }).animate({ opacity: 1.0, left: "0%" }, 1000);
+        $("#" + id).css({ opacity: 0.0, display: "block", left: "-50%" }).animate({ opacity: 1.0, left: "20%" }, 1000);
     });
 }
 
 function fadeInLeft(id) {
     $(document).ready(function () {
-        $("#" + id).css({ opacity: 0.0, display: "block", left: "50%" }).animate({ opacity: 1.0, left: "0%" }, 1000);
+        $("#" + id).css({ opacity: 0.0, display: "block", left: "50%" }).animate({ opacity: 1.0, left: "20%" }, 1000);
     });
 }
 

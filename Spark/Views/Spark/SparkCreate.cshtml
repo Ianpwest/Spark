@@ -23,68 +23,75 @@
                          src="~/content/blankimage.gif" />
                 </div>*@
 
-                <div class="inputText">
-                    @Html.LabelFor(model => model.Title)
-                </div>
+                <div id="OuterDiv" style="position:relative; width:1000px; height:800px; margin:0 auto;">
+                    <div class="FirstDiv" style="position:absolute; width: 500px; height:400px;">
+                        <div class="inputText">
+                            @Html.LabelFor(model => model.Title)
+                        </div>
 
-                <div>
-                    @Html.TextBoxFor(model => model.Title, new { @class = "sparkFields" })
-                    @Html.ValidationMessageFor(model => model.Title)
-                </div>
+                        <div>
+                            @Html.TextBoxFor(model => model.Title, new { @class = "sparkFields" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Title)
 
-                <div class="inputText">
-                    @Html.LabelFor(model => model.SubjectMatterId)
-                </div>
-                <div>
-                    @Html.DropDownListFor(model => model.SubjectMatterId, Model.SubjectMattersAll, new { @*onchange = "getImage(this)",*@ @class ="select"})
-                    @Html.ValidationMessageFor(model => model.SubjectMatterId)
-                </div>
-               
+                        <div class="inputText">
+                            @Html.LabelFor(model => model.SubjectMatterId)
+                        </div>
+                        <div>
+                            @Html.DropDownListFor(model => model.SubjectMatterId, Model.SubjectMattersAll, new
+                   { @*onchange = "getImage(this)",*@ @class = "select"
+                   })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.SubjectMatterId)
 
-                <div class="inputText">
-                    @Html.LabelFor(model => model.Topic)
-                </div>
-                <div>
-                    @Html.TextAreaFor(model => model.Topic, 5, 60, new { onkeyup = "CharCount(this)" })
-                    <p id="CharCount">500 characters left</p>
-                    @Html.ValidationMessageFor(model => model.Topic)
-                </div>
+                        <div class="inputText">
+                            @Html.LabelFor(model => model.Topic)
+                        </div>
+                        <div>
+                            @Html.TextAreaFor(model => model.Topic, 5, 60, new { onkeyup = "CharCount(this)", maxlength = 500 })
+                            <p id="CharCount">500 characters left</p>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Topic)
+                    </div>
 
-                <div class="editor-field">
-                    <label>Tags</label>
-                </div>
-                <div class="divTagTablesMain">
-
-                    <table id="tableAvailableTags" class="tableAvailableTags">
-                        <thead>
-                            <tr class="trHeaderAvailableTagsTable">
-                                <td class="tdHeaderAvailableTagsLeft">@Html.TextBox("Header", null, new { @style = "width:100%; height:15px;", onkeyup = "filterResults(this.value)" })</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @{
-                                if (Model.TagIdAndNames != null)
-                                {
-                                    foreach (KeyValuePair<int, string> kvp in Model.TagIdAndNames)
+                    <div class="SecondDiv" style="position: absolute; width: 500px; height:400px; left:500px;">
+                        <h3 style="text-align: center; color:white; background:#ff4500; width:502px; margin-top:1px;">Please tag your post</h3>
+                        <div class="divTagTablesMain">
+                            <table id="tableAvailableTags" class="tableAvailableTags">
+                                <thead>
+                                    <tr class="trHeaderAvailableTagsTable">
+                                        <td class="tdHeaderAvailableTagsLeft">@Html.TextBox("Header", null, new { @style = "width:100%; height:15px;", onkeyup = "filterResults(this.value)" })</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                    if (Model.TagIdAndNames != null)
                                     {
-                                        <tr>
-                                            <td class="nonClickedCells" onclick="selectTag(this)" id=@String.Concat("availableTag" + kvp.Key)>
-                                                @kvp.Value
-                                            </td>
-                                            <td class="nonClickedCells" onclick=" selectTag(this)"><img class="imgAvailableTagIcons" src="@Model.TagIdAndImages[kvp.Key]" /></td>
-                                        </tr>
+                                        foreach (KeyValuePair<int, string> kvp in Model.TagIdAndNames)
+                                        {
+                                <tr>
+                                    <td class="nonClickedCells" onclick="selectTag(this)" id=@String.Concat("availableTag" + kvp.Key)>
+                                        @kvp.Value
+                                    </td>
+                                    <td class="nonClickedCells" onclick=" selectTag(this)"><img class="imgAvailableTagIcons" src="@Model.TagIdAndImages[kvp.Key]" /></td>
+                                </tr>
+                                        }
                                     }
-                                }
-                            }
-                        </tbody>
-                    </table>
-                    <table id="tableSelectedTags" class="tableSelectedTags">
-                        <thead>
-                            <tr><td><p>Selected Tags</p></td></tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
+                                    }
+                                </tbody>
+                            </table>
+                            <table id="tableSelectedTags" class="tableSelectedTags">
+                                <thead>
+                                    <tr><td><p>Selected Tags</p></td></tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+
+                            <input class="classSubmitButtons" type="submit" value="Create" onclick="setArgumentType(0)" style="width:100%; margin:0 auto; height:72px; font-size:20px; margin-top:73px;" />
+                        </div>
+                    </div>
                 </div>
+
 
                 <div id="divHiddenTags" style="visibility:hidden">0</div>
 
@@ -97,26 +104,21 @@
                 @*<p style="position:relative">
                     <input type="button" value="Next" onclick="SingleTransitionVert(true)" />
                 </p>*@
+
+                    @*<p class="classSubmitButtons">Would you like to create an argument for either side?</p>*@
+                    @Html.HiddenFor(model => model.ArgEntryType)
+                    @*<div>
+                        <input class="classSubmitButtons" type="submit" value="Agree and Create" onclick="setArgumentType(1)" />
+                        <input class="classSubmitButtons" type="submit" value="Disagree and Create" onclick="setArgumentType(2)" />
+                    </div>*@
+                        @*<input class="classSubmitButtons" type="button" value="Back" onclick="SingleTransitionVert(false)" />*@
+                       
             </div>
 
-            <div @*id="TransitionElementVert1"*@ style="width:100%; position:absolute; @*opacity:0; top:500px;*@ @*visibility:hidden;*@">
-                <p class="classSubmitButtons">Would you like to create an argument for either side?</p>
-                @Html.HiddenFor(model => model.ArgEntryType)
-                <div>
-                    <input class="classSubmitButtons" type="submit" value="Agree and Create" onclick="setArgumentType(1)"/>
-                    <input class="classSubmitButtons" type="submit" value="Disagree and Create" onclick="setArgumentType(2)" />
-                </div>
-                <div id="divCreateBack">
-                    @*<input class="classSubmitButtons" type="button" value="Back" onclick="SingleTransitionVert(false)" />*@
-                    <input class="classSubmitButtons" type="submit" value="Just Create" onclick="setArgumentType(0)" />
-                </div>
-            </div>
+           
 
         </fieldset>
     }
-    <div id="divArgumentContainer" style="opacity: 0; position: absolute; width: 100%;">
-
-    </div>
 
 </div>
 @section Scripts {

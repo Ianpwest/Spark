@@ -10,42 +10,44 @@
     <fieldset>
         <legend>arguments</legend>
 
-        <div class="argumentCreateSparkIt" id="TransitionElement0">
-            <div class="editor-field">
-                <h1 style="text-align:center; margin-bottom:20px;">Spark interest.</h1>
-                <div class="inputContainer">
-                    <div class="inputText">Spark It</div>
-                    @Html.TextAreaFor(model => model.strConclusion, new { @id = "editorConclusion", @placeholder = "Write your spark here...", @maxlength = 1500, @class = "textAreaNormal" })
-                    @Html.ValidationMessageFor(model => model.strConclusion)
+        
+
+        <div id="ButtonPositionsDiv" style="position:relative; width:1300px; height:800px; margin:0 auto;">
+            <div class="buttonPrevious" onclick="SingleTransition(false)"></div>
+            <div class="argumentCreateSparkIt" id="TransitionElement0">
+                <div class="editor-field">
+                    <h1 style="text-align:center; margin-bottom:20px;">Spark interest.</h1>
+                    <div class="inputContainer">
+                        <div class="inputText" style="width:775px;">Spark It</div>
+                        @Html.TextAreaFor(model => model.strConclusion, new { @id = "editorConclusion", @placeholder = "Write your spark here...", @maxlength = 1500, @class = "textAreaNormal" })
+                        @Html.ValidationMessageFor(model => model.strConclusion)
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="argumentCreateArgument" id="TransitionElement1">
-            <h1>Build your argument. Be creative.</h1>
-            <div class="editor-field">
-                @Html.TextAreaFor(model => model.strArgument, new { @id = "editorArgument", @class = "textAreaEditor" })
-                @Html.ValidationMessageFor(model => model.strArgument)
+            <div class="argumentCreateArgument" id="TransitionElement1">
+                <h1>Build your argument. Be creative.</h1>
+                <div class="editor-field">
+                    @Html.TextAreaFor(model => model.strArgument, new { @id = "editorArgument", @class = "textAreaEditor" })
+                    @Html.ValidationMessageFor(model => model.strArgument)
+                </div>
             </div>
-        </div>
 
-        <div class="argumentCreateCitations" id="TransitionElement2">
-            <h1>Cite sources to verify your claims.</h1>
-            <div class="editor-field">
-                @Html.TextAreaFor(model => model.strCitations, new { @id = "editorCitations", @class = "textAreaEditor" })
-                @Html.ValidationMessageFor(model => model.strCitations)
+            <div class="argumentCreateCitations" id="TransitionElement2">
+                <h1>Cite sources to verify your claims.</h1>
+                <div class="editor-field">
+                    @Html.TextAreaFor(model => model.strCitations, new { @id = "editorCitations", @class = "textAreaEditor" })
+                    @Html.ValidationMessageFor(model => model.strCitations)
+                </div>
             </div>
+
+            <div class="argumentCreateReview" id="TransitionElement3">
+                <h1 id="testing">Review your work</h1>
+                <textarea id="editorReview" class="txtAreaReview"></textarea>
+                <input type="button" onclick="SubmitForm()" value="Create" style="margin-left:40%;" />
+            </div>
+            <div class="buttonNext" onclick="SingleTransition(true); UpdateReview()"></div>
         </div>
-
-        <div class="argumentCreateReview" id="TransitionElement3">
-            <h1 id="testing">Review your work</h1>
-            <textarea id="editorReview" class="txtAreaReview"></textarea>
-            <input type="button" onclick="SubmitForm()" value="Create" style="margin-left:40%;" />
-        </div>
-
-        <div class="buttonPrevious" onclick="SingleTransition(false)"></div>
-        <div class="buttonNext" onclick="SingleTransition(true); UpdateReview()"></div>
-
         <div class="navigationControlView">
             <ol class="progtrckr" data-progtrckr-steps="5">
                 <li class="progtrckr-todo">Spark It</li>
