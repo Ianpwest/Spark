@@ -201,3 +201,32 @@ function Filter()
         }
     });
 }
+
+function getNextPage() {
+    // gets all of the spark tiles by using the class name
+    var tiles = document.getElementsByClassName("SparkTile");
+    var strArray = "";
+
+    for (i = 0; i < tiles.length; i++) {
+        var str = tiles[i].id.toString(); // creates a string from the id
+        str = str.replace("HomePageSpark", ""); // removes the prefix to give just the spark Id
+
+        strArray += str + ","; // creates a comma delimited string to pass back through ajax.
+    }
+    // Removes the last comma in the string if it exists.
+    if (strArray.lastIndexOf(",") > -1)
+        strArray = strArray.substring(0, strArray.lastIndexOf(","));
+
+
+    $.ajax({
+        type: "Post",
+        datatype: 'json',
+        data: "strSparkIds=" + strArray,
+        url: "/Home/GetNextSparks",
+        success: function (data) {
+
+            // destringify the return data to generate models
+
+        }
+    });
+}

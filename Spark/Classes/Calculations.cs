@@ -146,6 +146,59 @@ namespace Spark.Classes
         }
 
         /// <summary>
+        /// Provides a list of sparks sorted by their popularity. This collection contains sparks started at the desired index
+        /// </summary>
+        /// <param name="dbEntity">Database entity.</param>
+        /// <param name="nIndex">Index for which to begin collecting sparks.</param>
+        /// <param name="nCount">Number of sparks to collect.</param>
+        /// <returns>Sorted list of sparks starting at the specified index and containing at most the number of sparks specified.</returns>
+        public static List<sparks> GetSparksByPopularityRange(sparkdbEntities1 dbEntity, int nIndex, int nCount)
+        {
+            List<sparks> lstReturn = new List<sparks>();
+            List<sparks> lstSorted = SortSparksByPopularity(dbEntity);
+
+            if (nIndex >= lstSorted.Count) // if the index does not exist in the collection, return an empty collection.
+                return lstReturn;
+
+            for (int i = nIndex; i < nIndex + nCount; i++) // adds each sorted element to the return list
+            {
+                if (i >= lstSorted.Count) // Break out of the loop if we are attempting to access indexes that exceed the collection
+                    break;
+
+                lstReturn.Add(lstSorted[i]);
+            }
+
+            return lstReturn;
+        }
+
+        /// <summary>
+        /// Provies a list of sparks sorted by their popularity. This collection contains sparks whose primary keys do not exist in the
+        /// parameter collection of keys. The list returned will not exceed a count of the specified count parameter.
+        /// </summary>
+        /// <param name="dbEntity">Database entity.</param>
+        /// <param name="nCount">Number of sparks to collect.</param>
+        /// <param name="lstCurrent">Collection of spark PKs which to skip over while collecting the sorted list.</param>
+        /// <returns>Sorted list of sparks whose primary keys are not contained in the parameter collection and whose count does not exceed the given parameter.</returns>
+        public static List<sparks> GetNextSetSparks(sparkdbEntities1 dbEntity, int nCount, List<int> lstCurrent)
+        {
+            List<sparks> lstReturn = new List<sparks>();
+            List<sparks> lstSorted = SortSparksByPopularity(dbEntity);
+
+            foreach (sparks spark in lstSorted)
+            {
+                if (lstReturn.Count >= nCount) // only get as many sparks as was requested
+                    break;
+
+                if (lstCurrent.Contains(spark.PK)) // skip any sparks that are given in the current sparks list
+                    continue;
+
+                lstReturn.Add(spark);
+            }
+            
+            return lstReturn;
+        }
+
+        /// <summary>
         /// Provides a list of sparks sorted by broad category given the broad category Id.
         /// </summary>
         /// <param name="dbEntity">Database entity.</param>

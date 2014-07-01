@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace Spark.Controllers
 {
@@ -14,7 +15,7 @@ namespace Spark.Controllers
         public ActionResult Homepage()
         {
             //Get the most popular sparks. TODO: Need to have a method that only returns first 20 or next 20 or something so that we can click next to go to the second page.
-            List<Models.sparks> lstSparks = Calculations.SortSparksByPopularity(UtilitiesDatabaseInterface.GetDatabaseInstance());
+            List<Models.sparks> lstSparks = Calculations.GetSparksByPopularityRange(UtilitiesDatabaseInterface.GetDatabaseInstance(), 0, 20);
             List<Models.SparkTileModel> lstSparkTiles = new List<Models.SparkTileModel>();
 
             //Get the categories and tags to filter on.
@@ -32,6 +33,33 @@ namespace Spark.Controllers
             ViewBag.SparksTiles = lstSparkTiles;
 
             return View("Homepage");
+        }
+
+        public ActionResult GetNextSparks(string strSparkIds)
+        {
+            string[] strArray = strSparkIds.Split(',');
+            List<int> lstPKs = new List<int>();
+
+            foreach (string strPK in strArray)
+            {
+                int nTest = 0;
+                if(int.TryParse(strPK, out nTest))
+                    lstPKs.Add(nTest);
+            }
+            
+            List<Models.sparks> lstSparks = Calculations.GetNextSetSparks(UtilitiesDatabaseInterface.GetDatabaseInstance(), 20, lstPKs);
+            List<Models.SparkTileModel> lstTiles = GetSparkTiles(lstSparks);
+
+            //TODO: Make a real error page. We have no sparks to display.
+            if (lstTiles == null)
+                return View("Error");
+
+            // TODO - do not use the serializer here to make the JSON using the list of tiles.
+            // Instead, generate all of the HTML (partial views) here then package as Json with some sorta location and send back to client to load into view.
+            JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
+            string strJson = jsSerializer.Serialize(lstTiles);
+
+            return Json(new {success = true, strTiles = strJson });
         }
 
         public ActionResult Index()
