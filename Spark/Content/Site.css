@@ -257,6 +257,45 @@ input[type="checkbox"].input-validation-error {
         list-style: none;
     }
 
+.btnFacebook
+{
+  width:120px;
+  height:33px;
+  background:#3B5998;
+  color:white;
+  line-height:27px;
+}
+
+.btnFacebook:before {
+display: block;
+content: "";
+width:40px;
+height:40px;
+background: url('/Images/Icons/Facebook2.png') no-repeat;
+background-size:30px 30px;
+float: left;
+margin:0;
+padding:0;
+}
+
+.btnGoogle
+{
+  width:120px;
+  height:40px;
+  background:url('/Images/Icons/GoogleSignIn.png') no-repeat;
+  padding:0;
+  margin:0;
+  border:none;
+}
+
+/*.btnGoogle:before {
+display: block;
+content: "";
+width: 60px;
+height: 60px;
+background: url('/Images/Icons/Chrome.png') no-repeat;
+float: left;
+}*/
 
 /* menu
 ----------------------------------------------------------*/

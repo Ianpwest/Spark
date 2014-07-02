@@ -1,10 +1,6 @@
 ﻿@model Spark.Models.SparkCreateModel
 @Styles.Render("~/Content/SparkCreate.css")
-<script type="text/javascript">
-    window.onload = function () {
-        document.getElementById("SubjectMatterId").selectedIndex = -1;
-    }
-</script>
+@Scripts.Render("~/bundles/jqueryval")
 
 <div class="pageCreateSpark">
 
@@ -30,7 +26,7 @@
                         </div>
 
                         <div>
-                            @Html.TextBoxFor(model => model.Title, new { @class = "sparkFields" })
+                            @Html.TextBoxFor(model => model.Title, new {@id="inputTitle", @class = "sparkFields" })
                         </div>
                         @Html.ValidationMessageFor(model => model.Title)
 
@@ -38,9 +34,7 @@
                             @Html.LabelFor(model => model.SubjectMatterId)
                         </div>
                         <div>
-                            @Html.DropDownListFor(model => model.SubjectMatterId, Model.SubjectMattersAll, new
-                   { @*onchange = "getImage(this)",*@ @class = "select"
-                   })
+                            @Html.DropDownListFor(model => model.SubjectMatterId, Model.SubjectMattersAll, new { @id="inputCategory", @class = "select"})
                         </div>
                         @Html.ValidationMessageFor(model => model.SubjectMatterId)
 
@@ -48,7 +42,7 @@
                             @Html.LabelFor(model => model.Topic)
                         </div>
                         <div>
-                            @Html.TextAreaFor(model => model.Topic, 5, 60, new { onkeyup = "CharCount(this)", maxlength = 500 })
+                            @Html.TextAreaFor(model => model.Topic, 5, 60, new { @id="inputTopic", onkeyup = "CharCount(this)", maxlength = 500 })
                             <p id="CharCount">500 characters left</p>
                         </div>
                         @Html.ValidationMessageFor(model => model.Topic)
@@ -87,9 +81,9 @@
                                 <tbody></tbody>
                             </table>
 
-                            <input class="classSubmitButtons" type="submit" value="Create" onclick="setArgumentType(0)" style="width:100%; margin:0 auto; height:40px; font-size:20px; margin-top:14px;" />
-                            <input class="classSubmitButtons" type="submit" value="Agree and Create" onclick="setArgumentType(1)" style="width: 100%; margin: 0 auto; height: 40px; font-size: 20px; margin-top: 5px; background: #FF3200;" />
-                            <input class="classSubmitButtons" type="submit" value="Disagree and Create" onclick="setArgumentType(2)" style="width: 100%; margin: 0 auto; height: 40px; font-size: 20px; margin-top: 5px; background: #8244D6;" />
+                            <input id="btnCreate" class="classSubmitButtons" type="submit" value="Create" onclick="setArgumentType(0)" style="width:100%; margin:0 auto; height:40px; font-size:20px; margin-top:14px;" />
+                            <input id="btnCreateAgree" class="classSubmitButtons" type="submit" value="Agree and Create" onclick="setArgumentType(1)" style="width: 100%; margin: 0 auto; height: 40px; font-size: 20px; margin-top: 5px; background: #FF3200;" />
+                            <input id="btnCreateDisagree" class="classSubmitButtons" type="submit" value="Disagree and Create" onclick="setArgumentType(2)" style="width: 100%; margin: 0 auto; height: 40px; font-size: 20px; margin-top: 5px; background: #8244D6;" />
                         </div>
                     </div>
                 </div>
@@ -123,6 +117,40 @@
     }
 
 </div>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+
+<script type="text/javascript">
+    window.onload = function () {
+        document.getElementById("SubjectMatterId").selectedIndex = -1;
+    }
+
+    $(document).ready(function () {
+        $('#inputTitle').qtip(
+        {
+            content: 'Title your Spark. Make it memorable!'
+        });
+        $('#inputCategory').qtip(
+       {
+           content: 'Please associate your Spark with a category so others with similar interests can find it.'
+       });
+        $('#inputTopic').qtip(
+        {
+            content: 'What is your topic for the Spark? Try to be as specific and to the point as possible.'
+        });
+        $('#tableAvailableTags').qtip(
+        {
+            content: 'Please choose three tags that are associated with your Spark. Doing so will help others find your post.'
+        });
+        $('#btnCreate').qtip(
+        {
+            content: 'Create your Spark without arguing for or against your topic.'
+        });
+        $('#btnCreateAgree').qtip(
+        {
+            content: 'Create your Spark and tell others why you agree.'
+        });
+        $('#btnCreateDisagree').qtip(
+        {
+            content: 'Create your Spark and tell others why you disagree.'
+        });
+    });
+</script>
