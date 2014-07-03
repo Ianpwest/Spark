@@ -31,6 +31,8 @@ namespace Spark.Models
 
         public bool bIsAgree { get; set; }
 
+        public bool? bUserUpvoted { get; set; }
+
         [Required]
         public string strArgument { get; set; }
     }

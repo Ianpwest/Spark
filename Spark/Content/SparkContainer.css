@@ -203,42 +203,60 @@
 
 .sparkUpVote, .sparkDownVote
 {
-  min-height: 50px;
-
-  width: 0px;
-  
-  border-style: solid;
-  
   cursor:pointer;
+  border:none;
 }
 
-.sparkUpVote:hover, .sparkDownVote:hover
+
+.sparkUpVote:hover
 {
-  border-color:darkblue transparent;
+   background:url('/Images/Icons/ArrowUpHoverClicked.png') no-repeat;
+   background-size:40px 40px;
 }
 
-.sparkUpVote:active
+.sparkDownVote:hover
 {
-  border-width: 0px 20px 19px 20px;
+   background:url('/Images/Icons/ArrowDownHoverClicked.png') no-repeat;
+   background-size:40px 40px;
 }
 
-.sparkDownVote:active
+.sparkUpVoteClicked
 {
-  border-width: 19px 19px 0px 20px;
+    border:none;
+     width:40px;
+    height:40px;
+    background:url('/Images/Icons/ArrowUpHoverClicked.png') no-repeat;
+   background-size:40px 40px;
+   margin-bottom:5px;
 }
 
+.sparkDownVoteClicked
+{
+    border:none;
+    background:url('/Images/Icons/ArrowDownHoverClicked.png') no-repeat;
+   background-size:40px 40px;
+    width:40px;
+    height:40px;
+    margin-top:5px;
+}
 .sparkUpVote
 {
-    border-color: white transparent;
-    border-width: 0px 20px 20px 20px;
-    margin-bottom:10px;
+    border:none;
+    width:40px;
+    height:40px;
+    background:url('/Images/Icons/ArrowUp.png') no-repeat;
+    background-size:40px 40px;
+    margin-bottom:5px;
 }
 
 .sparkDownVote
 {
-	  border-color: black transparent;
-	  border-width: 20px 20px 0px 20px;
-    margin-top:10px;
+    border:none;
+     width:40px;
+    height:40px;
+	 background:url('/Images/Icons/ArrowDown.png') no-repeat;
+    background-size:40px 40px;
+    margin-top:5px;
 }
 
 .sparkDisagreeSpark
@@ -270,12 +288,14 @@
     position:relative;
     float:right;
     margin-right:20px;
+    margin-top:40px;
 }
 .sparkArgumentUpDownVoteDisagree
 {
     position:relative;
     float:left;
     margin-left:20px;
+    margin-top:40px;
 }
 
 

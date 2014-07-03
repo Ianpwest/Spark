@@ -1,4 +1,4 @@
-﻿function CastArgumentVote(nArgumentId, bIsUpVote)
+﻿function CastArgumentVote(nArgumentId, bIsUpVote, btnClicked)
 {
     var strInputs = nArgumentId.toString() + "," + bIsUpVote.toString();
     $.ajax({
@@ -21,6 +21,40 @@
                         AddRemoveVoteToArgument(nArgumentId.toString(), !bIsUpVote, false);
                     }
                 }
+
+
+                //Get the other button in the current div and toggle visual vote effect
+                var btnUp = btnClicked.parentNode.firstElementChild;
+                var btnDown = btnClicked.parentNode.lastElementChild;
+                var btnOther;
+
+                if (btnUp.className === btnClicked.className)
+                {
+                    btnClicked = btnUp;
+                    btnOther = btnDown;
+                }
+                else
+                {
+                    btnClicked = btnDown;
+                    btnOther = btnUp;
+                }
+
+
+                if (btnClicked.className === "sparkUpVote")
+                {
+                    btnClicked.className = "sparkUpVoteClicked";
+                    btnOther.className = "sparkDownVote";
+                } 
+                else if (btnClicked.className === "sparkUpVoteClicked")
+                    btnClicked.className = "sparkUpVote";
+                else if (btnClicked.className === "sparkDownVote")
+                {
+                    btnClicked.className = "sparkDownVoteClicked";
+                    btnOther.className = "sparkUpVote"
+                }
+                else if (btnClicked.className === "sparkDownVoteClicked")
+                    btnClicked.className = "sparkDownVote";
+
             }
         }
     });

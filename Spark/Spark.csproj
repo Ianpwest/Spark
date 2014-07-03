@@ -312,9 +312,11 @@
     <Content Include="Images\Icons\Armchair.png" />
     <Content Include="Images\Icons\ArrowDown.png" />
     <Content Include="Images\Icons\ArrowDown2.png" />
+    <Content Include="Images\Icons\ArrowDownHoverClicked.png" />
     <Content Include="Images\Icons\ArrowDownLeft.png" />
     <Content Include="Images\Icons\ArrowUp.png" />
     <Content Include="Images\Icons\ArrowUp2.png" />
+    <Content Include="Images\Icons\ArrowUpHoverClicked.png" />
     <Content Include="Images\Icons\Asterik.png" />
     <Content Include="Images\Icons\AtSymbol.png" />
     <Content Include="Images\Icons\Audi.png" />

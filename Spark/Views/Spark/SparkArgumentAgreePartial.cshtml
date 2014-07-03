@@ -13,14 +13,14 @@
                 Influence: @Model.nInfluenceScore.ToString()
             </div>
             <div class="sparkDownvoteAgree" id="sparkDownvote@(Model.id)">
-                -# @Model.nDownVote.ToString()
+                - @Model.nDownVote.ToString()
             </div>
             <div class="sparkUpvoteAgree" id="sparkUpvote@(Model.id)">
-                +# @Model.nUpVote.ToString()
+                + @Model.nUpVote.ToString()
             </div>
-            <div class="sparkCommentsCountAgree" id="sparkCommentsCount@(Model.id)">
-                Comment # @Model.nCommentCount.ToString()
-            </div>
+            @*<div class="sparkCommentsCountAgree" id="sparkCommentsCount@(Model.id)">
+                    Comment # @Model.nCommentCount.ToString()
+                </div>*@
         </div>
         <div class="sparkConclusion">
             <p>
@@ -42,11 +42,38 @@
         <div class="hidden" id="HiddenDownvote@(Model.id)">@Model.nDownVote.ToString()</div>
         <div class="hidden" id="HiddenUpvote@(Model.id)">@Model.nUpVote.ToString()</div>
         <div class="hidden" id="HiddenCommentsCount@(Model.id)">@Model.nCommentCount.ToString()</div>
-        
+        @if (@Model.bUserUpvoted.HasValue)
+        {
+            <p class="hidden" id="bUserUpvoted">@Model.bUserUpvoted</p>
+        }
+
+
     </div>
     <div class="sparkArgumentUpDownVoteAgree">
-        <div class="sparkUpVote" onclick="CastArgumentVote(@Model.id, true)"></div>
-        <p style="word-wrap:break-word">@Model.nArgumentScore.ToString()</p>
-        <div class="sparkDownVote" onclick="CastArgumentVote(@Model.id, false)"></div>
+        @if (@Model.bUserUpvoted.HasValue)
+        {
+            //User has previously voted agree on this argument
+            if (@Model.bUserUpvoted == true)
+            {
+                <button id="sparkUpVote" class="sparkUpVoteClicked" onclick="CastArgumentVote(@Model.id, true, this)"></button>
+                <p style="word-wrap:break-word">@Model.nArgumentScore.ToString()</p>
+                <button id="sparkDownVote" class="sparkDownVote" onclick="CastArgumentVote(@Model.id, false, this)"></button>
+            }
+            //User has previously voted disagree on this argument
+            else
+            {
+                <button id="sparkUpVote" class="sparkUpVote" onclick="CastArgumentVote(@Model.id, true, this)"></button>
+                <p style="word-wrap:break-word">@Model.nArgumentScore.ToString()</p>
+                <button id="sparkDownVote" class="sparkDownVoteClicked" onclick="CastArgumentVote(@Model.id, false, this)"></button>
+            }
+        }
+        //User has not previously voted on this argument
+        else
+        {
+            <button id="sparkUpVote" class="sparkUpVote" onclick="CastArgumentVote(@Model.id, true, this)"></button>
+            <p style="word-wrap:break-word">@Model.nArgumentScore.ToString()</p>
+            <button id="sparkDownVote" class="sparkDownVote" onclick="CastArgumentVote(@Model.id, false, this)"></button>
+        }
+
     </div>
 </div>

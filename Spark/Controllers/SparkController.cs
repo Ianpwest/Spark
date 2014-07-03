@@ -200,7 +200,6 @@ namespace Spark.Controllers
             lstReturn.Add(lstArgumentsAgree);
             lstReturn.Add(lstArgumentsDisagree);
 
-            //Begin Testing code
             List<Models.arguments> lstArguments = SparksDatabaseInterface.GetAllArgumentsForSpark(nSparkId); 
 
             //No arguments were found
@@ -213,6 +212,9 @@ namespace Spark.Controllers
             foreach (Models.arguments argument in lstArguments)
             {
                 SparkArgumentModel sam = SparksDatabaseInterface.BuildSparkArgumentModel(argument);
+                
+                //Get the users previous vote (if any) null if none.
+                 sam.bUserUpvoted = SparksDatabaseInterface.GetUserVoteForArgument(argument);
                 
                 //Determine which list to put the argument in (agree vs disagree)
                 if (sam.bIsAgree)

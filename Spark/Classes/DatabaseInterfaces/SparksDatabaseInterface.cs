@@ -448,6 +448,26 @@ namespace Spark.Classes
         }
 
         /// <summary>
+        /// Get the users previous vote (if any) for the given argument.
+        /// </summary>
+        /// <param name="argument"></param>
+        /// <returns></returns>
+        public static bool? GetUserVoteForArgument(arguments argument)
+        {
+            sparkdbEntities1 db = GetDatabaseInstance();
+
+            var vote = from r in db.argumentvotes
+                       where r.FKAccounts == argument.FKAccounts
+                       && r.FKArguments == argument.PK
+                       select r.bIsUpvote;
+
+            if (vote.Count() == 0)
+                return null;
+
+            return vote.FirstOrDefault();
+        }
+
+        /// <summary>
         /// Method to return the list of categories in the database. Name only.
         /// </summary>
         /// <returns>Category names in a list</returns>
@@ -494,6 +514,8 @@ namespace Spark.Classes
 
             return lstReturn;
         }
-        
+
+
+      
     }
 }
