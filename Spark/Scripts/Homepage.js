@@ -5,6 +5,10 @@ var DownvoteImage = "http://i59.tinypic.com/igj4aa.png";
 var DownvoteHoverImage = "http://i60.tinypic.com/23uwjth.png";
 var DownvoteClickedImage = "http://i61.tinypic.com/155qblv.png";
 
+var m_nCurrentSparkPageIndex = 0;
+var m_nTotalSparkPages = 1;
+var m_bNoRemainingSparks = false;
+
 function ChangeImage(nIndex, bIsUpVote, direction) {
 
     var image = null;
@@ -202,7 +206,71 @@ function Filter()
     });
 }
 
-function getNextPage() {
+function NextPageButton()
+{
+    document.getElementById("btnHomePrevSparkPage").disabled = false;
+    // index should be 1 less than total pages else we don't create a new page.
+    if (m_nCurrentSparkPageIndex != (m_nTotalSparkPages - 1))
+    {
+        // transitionto next page then correct to the new index
+        TransitionElement(true);
+        HandlePageIndex(true); // true for next
+        return;
+    }
+
+    if (m_bNoRemainingSparks) // disables button if we know we should not be creating a new page.
+    {
+        document.getElementById("btnHomeNextSparkPage").disabled = true;
+        return;
+    }
+    CreateNextPage();
+    
+}
+
+function CallBackCreateNextPage()
+{
+    TransitionElement(true);
+    HandlePageIndex(true);
+}
+
+function PrevPageButton()
+{
+    // Do nothing if we are not past the first page, no negative indexes allowed
+    if (m_nCurrentSparkPageIndex < 1)
+        return;
+
+    TransitionElement(false);
+    HandlePageIndex(false);
+    // enable the next button
+    document.getElementById("btnHomeNextSparkPage").disabled = false;
+}
+
+function HandlePageIndex(bIsNextIndex)
+{
+    if (bIsNextIndex)
+    {
+        m_nCurrentSparkPageIndex++;
+
+        // if the index has reached the page count, we increment the page count so indiciate there is an additional page
+        if (m_nCurrentSparkPageIndex == m_nTotalSparkPages)
+            m_nTotalSparkPages++;
+    }
+    else
+    {   // only non-negative indexes allowed
+        if(m_nCurrentSparkPageIndex >  0)
+            m_nCurrentSparkPageIndex--;
+        
+        if(m_nCurrentSparkPageIndex <= 0)
+            document.getElementById("btnHomePrevSparkPage").disabled = true;
+    }
+
+    if (m_bNoRemainingSparks)
+        document.getElementById("btnHomeNextSparkPage").disabled = true;
+}
+
+function CreateNextPage()
+{
+    m_bSuccessfulCreateNextPage = false;
     // gets all of the spark tiles by using the class name
     var tiles = document.getElementsByClassName("SparkTile");
     var strArray = "";
@@ -226,7 +294,40 @@ function getNextPage() {
         success: function (data) {
 
             // destringify the return data to generate models
+            if (data.strTiles != "")
+            {
+                var container = document.getElementById("TileContainer");
+                container.innerHTML += data.strTiles; // adds the partial view html code to the tile container div
+                var containers = document.getElementsByClassName("SparkCollectionTable"); // gets the collection including the one just added
+                var nextIndexContainer = containers[m_nCurrentSparkPageIndex + 1]; // gets the index of the tile container we just added
 
+                $(nextIndexContainer).css({ display: "none", opacity: 0.0 }); // sets the display and opacity to none and 0 respectively
+                if (!data.bIsMore)
+                    m_bNoRemainingSparks = true;
+                CallBackCreateNextPage();
+            }
         }
+    });
+
+    return m_bSuccessfulCreateNextPage;
+}
+
+function TransitionElement(bIsNext)
+{
+    var containers = document.getElementsByClassName("SparkCollectionTable");
+
+    var currentContainer = containers[m_nCurrentSparkPageIndex];
+    var nextIndexContainer = null;
+    if(bIsNext)
+        nextIndexContainer = containers[m_nCurrentSparkPageIndex + 1];
+    else
+        nextIndexContainer = containers[m_nCurrentSparkPageIndex - 1];
+
+    $(currentContainer).animate({ opacity: 0.0 }, 1000, function () // fades out the current div
+    {
+        $(currentContainer).css({ display: "none" }); // sets the current div to have no display
+
+        // sets the next div to be displayed and increase to 100% opacity.
+        $(nextIndexContainer).css({ display: "block" }).animate({ opacity: 1.0 }, 1000);
     });
 }

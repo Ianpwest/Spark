@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using System.IO;
 
 namespace Spark.Controllers
 {
@@ -48,6 +49,12 @@ namespace Spark.Controllers
             }
             
             List<Models.sparks> lstSparks = Calculations.GetNextSetSparks(UtilitiesDatabaseInterface.GetDatabaseInstance(), 20, lstPKs);
+            foreach(Models.sparks spark in lstSparks)
+            {
+                lstPKs.Add(spark.PK);
+            }
+            int nRemainingSparks = Calculations.GetRemainingSparkCount(UtilitiesDatabaseInterface.GetDatabaseInstance(), lstPKs);
+            
             List<Models.SparkTileModel> lstTiles = GetSparkTiles(lstSparks);
 
             //TODO: Make a real error page. We have no sparks to display.
@@ -56,10 +63,29 @@ namespace Spark.Controllers
 
             // TODO - do not use the serializer here to make the JSON using the list of tiles.
             // Instead, generate all of the HTML (partial views) here then package as Json with some sorta location and send back to client to load into view.
-            JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
-            string strJson = jsSerializer.Serialize(lstTiles);
+            //JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
+            //string strJson = jsSerializer.Serialize(lstTiles);
 
-            return Json(new {success = true, strTiles = strJson });
+            string strPartial = string.Empty;
+
+            using (StringWriter sw = new StringWriter())
+            {
+                ViewEngineResult result = ViewEngines.Engines.FindPartialView(ControllerContext, "SparkTileContainerPartial");
+                ViewContext context = new ViewContext(ControllerContext, result.View, ViewData, TempData, sw);
+                context.ViewBag.SparksTiles = lstTiles;
+
+                result.View.Render(context, sw);
+                result.ViewEngine.ReleaseView(ControllerContext, result.View);
+
+                strPartial = sw.GetStringBuilder().ToString();
+
+            }
+
+            bool bIsRemainingSparks = false; // indicates if more sparks are remaining.
+            if (nRemainingSparks > 0)
+                bIsRemainingSparks = true;
+
+            return Json(new { success = true, strTiles = strPartial, bIsMore = bIsRemainingSparks });
         }
 
         public ActionResult Index()

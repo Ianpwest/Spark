@@ -30,11 +30,15 @@
             <button class="button2" onclick="Filter()">Go!</button>
         </div>
     </div>
-    <button class="button" onclick="getNextPage()" >Next!</button>
 </section>
 
 <div id="TileContainer">
-    @Html.Partial("SparkTileContainerPartial");
+    <div>
+        <button class="button" onclick="PrevPageButton()" id="btnHomePrevSparkPage" disabled>Previous!</button>
+        <button class="button" onclick="NextPageButton()" id="btnHomeNextSparkPage">Next!</button>
+    </div>
+    <p class="CategoryHeader">Trending</p>
+    @Html.Partial("SparkTileContainerPartial")
 </div>
 
 

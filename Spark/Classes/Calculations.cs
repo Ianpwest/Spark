@@ -199,6 +199,27 @@ namespace Spark.Classes
         }
 
         /// <summary>
+        /// Returns the number of sparks remaining when filtering out all sparks given the parameter collection of spark Ids.
+        /// </summary>
+        /// <param name="dbEntity">Database entity.</param>
+        /// <param name="lstCurrent">Collection of integers representing each spark Id which to filter out remaining sparks.</param>
+        /// <returns>Integer value representing the number of remaining sparks not listed in the parameter collection of primary keys.</returns>
+        public static int GetRemainingSparkCount(sparkdbEntities1 dbEntity, List<int> lstCurrent)
+        {
+            List<sparks> lstSorted = SortSparksByPopularity(dbEntity);
+
+            // Queries the collection of sorted sparks for any sparks whose id's are not contained in the given list of spark ids.
+            var qryRemaining = from r in lstSorted
+                               where !lstCurrent.Contains(r.PK)
+                               select r;
+
+            if (qryRemaining != null)
+                return qryRemaining.Count(); // return the count
+
+            return 0; // if the linq query returned null, return 0s
+        }
+
+        /// <summary>
         /// Provides a list of sparks sorted by broad category given the broad category Id.
         /// </summary>
         /// <param name="dbEntity">Database entity.</param>

@@ -122,8 +122,8 @@ function CharCount(ta)
     }
 }
 
-function selectTag(input) {
-    
+function selectTag(input)
+{
     var row = input.parentNode;
     var obj1 = row.cells[0]; // first cell in the row
     var obj2 = row.cells[1]; // second cell in the row
