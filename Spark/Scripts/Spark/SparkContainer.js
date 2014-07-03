@@ -86,7 +86,7 @@ function AddRemoveArgumentUpVote(argumentId, bIsAdd)
         else
             nValueNext--;
 
-        obj.innerHTML = "+# " + nValueNext.toString();
+        obj.innerHTML = "+ " + nValueNext.toString();
         obj2.innerHTML = nValueNext.toString();
     }
 
@@ -106,7 +106,7 @@ function AddRemoveArgumentDownVote(argumentId, bIsAdd)
             nValueNext++;
         else
             nValueNext--;
-        obj.innerHTML = "-# " + nValueNext.toString();
+        obj.innerHTML = "- " + nValueNext.toString();
         obj2.innerHTML = nValueNext.toString();
     }
 }
