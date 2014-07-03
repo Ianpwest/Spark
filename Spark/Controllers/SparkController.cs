@@ -76,7 +76,8 @@ namespace Spark.Controllers
 
             if (model.ArgEntryType == ArgumentEntryType.Neither)
             {
-                // TODO- redirect to action with error page.
+                //Show the spark container
+                return RedirectToAction("SparkContainer", "Spark", new { nSparkId = sparkPK });
             }
 
             arguments argumentModel = new arguments();
