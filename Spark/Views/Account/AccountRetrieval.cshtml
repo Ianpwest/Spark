@@ -1,54 +1,57 @@
 ﻿@model Spark.Models.AccountRetrieval
 
 @{
-    ViewBag.Title = "AccountRetrieval";
+    ViewBag.Title = "Account Retrieval";
 }
 
-<h2>Account Retrieval</h2>
+<div style="position:relative; width:50%; margin:0 auto;">
+    <p class="title" style="display:none;">@ViewBag.Title</p>
+    <h2>Account Retrieval</h2>
 
-@if(ViewBag.Status == "Success")
-{
-    <p>
-        Password has been reset!
-    </p>
-}
-else if (ViewBag.Status == "Failure")
-{
-    <p>
-        Failed to retrieve account.
-    </p>
-}
-else if (ViewBag.Status == "Failure-AccountDoesNotExist")
-{
-    <p>
-        No account is associated with the e-mail address given.
-    </p>
-}
-else if (ViewBag.Status == "Email Sent")
-{
-    <p>
-        E-mail has been sent to the address provided.
-    </p>
-}
-else
-{
-    using (Html.BeginForm())
+    @if (ViewBag.Status == "Success")
     {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true)
-
-        <fieldset>
-            <legend>Log in Form</legend>
-            <ol>
-                <li>
-                    @Html.LabelFor(m => m.Email)
-                    @Html.TextBoxFor(m => m.Email)
-                    @Html.ValidationMessageFor(m => m.Email)
-                </li>
-           
-            </ol>
-            <input type="submit" value="Retrieve" />
-        </fieldset>
+        <p>
+            Password has been reset!
+        </p>
     }
-}
-    
+    else if (ViewBag.Status == "Failure")
+    {
+        <p>
+            Failed to retrieve account.
+        </p>
+    }
+    else if (ViewBag.Status == "Failure-AccountDoesNotExist")
+    {
+        <p>
+            No SparkIt account is associated with the e-mail address given. Is it possible that your account is through Facebook or Google? If so please use their services to recover
+            your account. Thank you.
+        </p>
+    }
+    else if (ViewBag.Status == "Email Sent")
+    {
+        <p>
+            E-mail has been sent to the address provided.
+        </p>
+    }
+    else
+    {
+        using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <fieldset>
+                <legend>Log in Form</legend>
+                <ol>
+                    <li>
+                        @Html.LabelFor(m => m.Email)
+                        @Html.TextBoxFor(m => m.Email)
+                        @Html.ValidationMessageFor(m => m.Email)
+                    </li>
+
+                </ol>
+                <input type="submit" value="Retrieve" />
+            </fieldset>
+        }
+    }
+</div>

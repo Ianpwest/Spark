@@ -26,7 +26,7 @@
                         </div>
 
                         <div>
-                            @Html.TextBoxFor(model => model.Title, new {@id="inputTitle", @class = "sparkFields" })
+                            @Html.TextBoxFor(model => model.Title, new {@id="inputTitle", @class = "sparkFields", maxlength = 45 })
                         </div>
                         @Html.ValidationMessageFor(model => model.Title)
 
@@ -42,14 +42,14 @@
                             @Html.LabelFor(model => model.Topic)
                         </div>
                         <div>
-                            @Html.TextAreaFor(model => model.Topic, 5, 60, new { @id="inputTopic", onkeyup = "CharCount(this)", maxlength = 500 })
+                            @Html.TextAreaFor(model => model.Topic, 5, 60, new { @id="inputTopic", onkeyup = "CharCount(this)", maxlength = 500, resize = "none" })
                             <p id="CharCount">500 characters left</p>
                         </div>
                         @Html.ValidationMessageFor(model => model.Topic)
                     </div>
 
                     <div class="SecondDiv" style="position: absolute; width: 500px; height:400px; left:500px;">
-                        <h3 style="text-align: center; color:white; background:#ff4500; width:502px; margin-top:1px;">Please tag your post</h3>
+                        <h3 style="text-align: center; color: white; background:#2B2A27; width: 502px; margin-top: 1px;">Please tag your post</h3>
                         <div class="divTagTablesMain">
                             <table id="tableAvailableTags" class="tableAvailableTags">
                                 <thead>

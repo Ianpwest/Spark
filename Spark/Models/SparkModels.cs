@@ -15,11 +15,11 @@ namespace Spark.Models
         [Display(Name = "Category")]
         public int SubjectMatterId {get;set;}
 
-        [Required, StringLength(23, ErrorMessage="The title is limited to 23 characters.")]
+        [Required, StringLength(45, ErrorMessage="The title is limited to 45 characters.")]
         [Display(Name = "Title")]
         public string Title { get; set; }
 
-        [Required, StringLength(500, ErrorMessage = "The title is limited to 500 characters.")]
+        [Required, StringLength(500, ErrorMessage = "The topic is limited to 500 characters.")]
         [Display(Name = "Topic")]
         public string Topic { get; set; }
 
@@ -48,6 +48,7 @@ namespace Spark.Models
     {
         public int PK { get; set; }
         public string Topic { get; set; }
+        public string Title { get; set; }
         public bool UserVoted { get; set; }
         public bool VoteIsUpvote { get; set; }
         public int UpvoteCount { get; set; }

@@ -209,6 +209,7 @@ namespace Spark.Controllers
                 Models.SparkTileModel tile = new Models.SparkTileModel();
                 tile.PK = spark.PK;
                 tile.Topic = spark.strTopic;
+                tile.Title = spark.strTitle;
 
                 if(spark.strTopic.Length > CONST_MAX_TOPIC_CHARACTERS)
                 {
