@@ -236,7 +236,7 @@ namespace Spark.Classes
                                where r.Attribute("name").Value == strRootFolder
                                select r.Attribute("value").Value).FirstOrDefault();
 
-            if (string.IsNullOrEmpty(strFilePath))
+            if (string.IsNullOrEmpty(strFilePath) || string.IsNullOrEmpty(strFileName))
                 return string.Empty;
 
             byte[] byArray = new byte[0];

@@ -503,7 +503,7 @@ namespace Spark.Classes
                                 select r;
 
             if (lstTags == null || lstTags.Count() <= 0)
-                return null;
+                return lstReturn;
 
             foreach (var x in lstTags)
             {

@@ -266,12 +266,6 @@ namespace Spark.Classes.DatabaseInterfaces
                 database.GetValidationErrors();
                 database.SaveChanges();
             }
-            //catch
-            //{
-            //    // Avoiding for now to prevent recursion on errors.
-            //    //LogError(strUserId, "Generate Error", ex.ToString(), ex.StackTrace);
-            //    return false;
-            //}
             //use this if you're having validation exceptions
             catch (DbEntityValidationException dbEx)
             {
@@ -282,6 +276,12 @@ namespace Spark.Classes.DatabaseInterfaces
                         string str =  validationError.PropertyName + validationError.ErrorMessage;
                     }
                 }
+            }
+            catch
+            {
+                // Avoiding for now to prevent recursion on errors.
+                //LogError(strUserId, "Generate Error", ex.ToString(), ex.StackTrace);
+                return false;
             }
 
             return true;
