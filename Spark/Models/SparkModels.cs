@@ -32,8 +32,6 @@ namespace Spark.Models
         public int Tag1 { get; set; }
         public int Tag2 { get; set; }
         public int Tag3 { get; set; }
-        public int Tag4 { get; set; }
-        public int Tag5 { get; set; }
 
         public ArgumentEntryType ArgEntryType { get; set; }
     }
