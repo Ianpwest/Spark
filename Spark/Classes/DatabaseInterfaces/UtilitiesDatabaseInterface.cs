@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Spark.Classes.DatabaseInterfaces;
+using Spark.Models;
 
 namespace Spark.Classes
 {
@@ -84,6 +85,17 @@ namespace Spark.Classes
             sparkModel.TagIdAndImages = dictIdImg;
 
             return false;
+        }
+
+        public static void AddTag(string strFriendlyFileName, string strFileName)
+        {
+            sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
+
+            tags tag = new tags();
+            tag.strImageName = strFileName;
+            tag.strName = strFriendlyFileName;
+            db.tags.Add(tag);
+            db.SaveChanges();
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Net;
 using System.IO;
 using System.Drawing;
 using System.Xml.Linq;
+using System.Text.RegularExpressions;
 
 namespace Spark.Classes
 {
@@ -242,8 +243,8 @@ namespace Spark.Classes
             byte[] byArray = new byte[0];
             FileStream fs;
             BinaryReader br;
-            if (!strFileName.ToLower().EndsWith(".jpg"))
-                strFileName += ".jpg";
+            if (!strFileName.ToLower().EndsWith(".png"))
+                strFileName += ".png";
             try
             {
                 fs = new FileStream(strFilePath + strFileName, FileMode.Open, FileAccess.Read);
@@ -260,6 +261,27 @@ namespace Spark.Classes
             }
 
             return String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(byArray)); ;
+        }
+
+        public static void UpdateDatabaseTagsFromFolder(HttpServerUtilityBase Server)
+        {
+            XDocument xDoc = XDocument.Load(Server.MapPath("~/App_Data/Config.xml"));
+            IEnumerable<XElement> configuration = xDoc.Elements();
+
+            var strFilePath = (from r in xDoc.Elements().FirstOrDefault().Elements()
+                               where r.Attribute("name").Value == "Tag"
+                               select r.Attribute("value").Value).FirstOrDefault();
+
+            if (string.IsNullOrEmpty(strFilePath))
+                return;
+
+            string[] filePaths = Directory.GetFiles(strFilePath);
+
+            foreach(string strFile in filePaths)
+            {
+                string strShortFileName = Path.GetFileName(strFile);
+                UtilitiesDatabaseInterface.AddTag(Regex.Replace(strShortFileName.Substring(0, strShortFileName.IndexOf('.')), "(\\B[A-Z])", " $1"), strShortFileName);
+            }
         }
     }
 
