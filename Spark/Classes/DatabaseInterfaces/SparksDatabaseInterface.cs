@@ -515,7 +515,31 @@ namespace Spark.Classes
             return lstReturn;
         }
 
+        /// <summary>
+        /// Returns a List of categories objects that contain information about the requested tags.
+        /// The tags are requested by a List of integers representing the database primary keys.
+        /// </summary>
+        /// <param name="lstPKs"></param>
+        /// <returns></returns>
+        public static List<categories> GetTagFileName(List<int> lstPKs)
+        {
+            List<categories> lstTags = new List<categories>();
+            sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
 
+            var qryTags = from r in db.categories
+                          where lstPKs.Contains(r.PK)
+                          select r;
+
+            if (qryTags == null || qryTags.Count() < 1)
+                return lstTags;
+
+            foreach (categories tag in qryTags)
+            {
+                lstTags.Add(tag);
+            }
+
+            return lstTags;
+        }
       
     }
 }

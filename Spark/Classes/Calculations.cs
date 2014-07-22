@@ -172,7 +172,7 @@ namespace Spark.Classes
         }
 
         /// <summary>
-        /// Provies a list of sparks sorted by their popularity. This collection contains sparks whose primary keys do not exist in the
+        /// Provides a list of sparks sorted by their popularity. This collection contains sparks whose primary keys do not exist in the
         /// parameter collection of keys. The list returned will not exceed a count of the specified count parameter.
         /// </summary>
         /// <param name="dbEntity">Database entity.</param>
@@ -199,14 +199,42 @@ namespace Spark.Classes
         }
 
         /// <summary>
+        /// Provides a list of sparks sorted by their popularity. This collection contains sparks whose primary keys do not exist in the
+        /// parameter collection of keys. The list returned will not exceed a count of the specified count parameter.
+        /// This has additionally been filtered using the category, tag, and search filter parameters.
+        /// </summary>
+        /// <param name="dbEntity">Database entity.</param>
+        /// <param name="nCount">Number of sparks to collect.</param>
+        /// <param name="lstCurrent">Collection of spark PKs which to skip over while collecting the sorted list.</param>
+        /// <returns>Sorted list of sparks whose primary keys are not contained in the parameter collection and whose count does not exceed the given parameter.</returns>
+        public static List<sparks> GetNextSetSparks(sparkdbEntities1 dbEntity, int nCount, List<int> lstCurrent, int nCategory, int nTag, string strSearch)
+        {
+            List<sparks> lstReturn = new List<sparks>();
+            List<sparks> lstSorted = FilterSparksByHomeParameters(dbEntity, nCategory, nTag, strSearch);
+
+            foreach (sparks spark in lstSorted)
+            {
+                if (lstReturn.Count >= nCount) // only get as many sparks as was requested
+                    break;
+
+                if (lstCurrent.Contains(spark.PK)) // skip any sparks that are given in the current sparks list
+                    continue;
+
+                lstReturn.Add(spark);
+            }
+
+            return lstReturn;
+        }
+
+        /// <summary>
         /// Returns the number of sparks remaining when filtering out all sparks given the parameter collection of spark Ids.
         /// </summary>
         /// <param name="dbEntity">Database entity.</param>
         /// <param name="lstCurrent">Collection of integers representing each spark Id which to filter out remaining sparks.</param>
         /// <returns>Integer value representing the number of remaining sparks not listed in the parameter collection of primary keys.</returns>
-        public static int GetRemainingSparkCount(sparkdbEntities1 dbEntity, List<int> lstCurrent)
+        public static int GetRemainingSparkCount(sparkdbEntities1 dbEntity, List<int> lstCurrent, int nCategory, int nTag, string strSearch)
         {
-            List<sparks> lstSorted = SortSparksByPopularity(dbEntity);
+            List<sparks> lstSorted = FilterSparksByHomeParameters(dbEntity, nCategory, nTag, strSearch);
 
             // Queries the collection of sorted sparks for any sparks whose id's are not contained in the given list of spark ids.
             var qryRemaining = from r in lstSorted

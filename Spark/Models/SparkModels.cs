@@ -53,5 +53,8 @@ namespace Spark.Models
         public bool VoteIsUpvote { get; set; }
         public int UpvoteCount { get; set; }
         public int DownvoteCount { get; set; }
+        public string Tag1 { get; set; }
+        public string Tag2 { get; set; }
+        public string Tag3 { get; set; }
     }
 }

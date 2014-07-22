@@ -36,7 +36,7 @@ namespace Spark.Controllers
             return View("Homepage");
         }
 
-        public ActionResult GetNextSparks(string strSparkIds)
+        public ActionResult GetNextSparks(string strSparkIds, string strCategory, string strTag, string strSearchText)
         {
             string[] strArray = strSparkIds.Split(',');
             List<int> lstPKs = new List<int>();
@@ -47,13 +47,20 @@ namespace Spark.Controllers
                 if(int.TryParse(strPK, out nTest))
                     lstPKs.Add(nTest);
             }
+
+            int nCategory = int.MinValue;
+            int nTag = int.MinValue;
+
+            //Parse out the integer values of the key.
+            if (!string.IsNullOrEmpty(strCategory)) { Int32.TryParse(strCategory, out nCategory); }
+            if (!string.IsNullOrEmpty(strTag)) { Int32.TryParse(strTag, out nTag); }
             
-            List<Models.sparks> lstSparks = Calculations.GetNextSetSparks(UtilitiesDatabaseInterface.GetDatabaseInstance(), 20, lstPKs);
+            List<Models.sparks> lstSparks = Calculations.GetNextSetSparks(UtilitiesDatabaseInterface.GetDatabaseInstance(), 20, lstPKs, nCategory, nTag, strSearchText);
             foreach(Models.sparks spark in lstSparks)
             {
                 lstPKs.Add(spark.PK);
             }
-            int nRemainingSparks = Calculations.GetRemainingSparkCount(UtilitiesDatabaseInterface.GetDatabaseInstance(), lstPKs);
+            int nRemainingSparks = Calculations.GetRemainingSparkCount(UtilitiesDatabaseInterface.GetDatabaseInstance(), lstPKs, nCategory, nTag, strSearchText);
             
             List<Models.SparkTileModel> lstTiles = GetSparkTiles(lstSparks);
 
@@ -237,6 +244,29 @@ namespace Spark.Controllers
                 }
                 else
                     tile.UserVoted = false; // indicates the user has not yet voted on this spark or there was an error in finding the user vote.
+
+                tile.Tag1 = ""; tile.Tag2 = ""; tile.Tag3 = ""; // initialize all of the tags to empty strings
+                List<int> lstTagPks = new List<int>() { spark.FKCategories1, spark.FKCategories2, spark.FKCategories3 };
+                List<Models.categories> lstTags = SparksDatabaseInterface.GetTagFileName(lstTagPks);
+                int nCount = 1;
+                foreach (Models.categories tag in lstTags)
+                {
+                    switch (nCount)
+                    {
+                        case 1:
+                            tile.Tag1 = Utilities.GenerateImageString(tag.strImageName, ImageLocation.Tag, Server);
+                            break;
+                        case 2:
+                            tile.Tag2 = Utilities.GenerateImageString(tag.strImageName, ImageLocation.Tag, Server);
+                            break;
+                        case 3:
+                            tile.Tag3  = Utilities.GenerateImageString(tag.strImageName, ImageLocation.Tag, Server);
+                            break;
+                        default:
+                            break;
+                    }
+                    nCount++;
+                }
 
                 lstReturn.Add(tile);
             }

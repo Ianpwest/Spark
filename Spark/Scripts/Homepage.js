@@ -201,7 +201,31 @@ function Filter()
         data: "strCategory=" + SelectedCategory +  "&strTag=" + SelectedTag +"&strSearchText=" + SearchText,
         url: "/Home/GetFilterResults",
         success: function (data) {
-            document.getElementById("TileContainer").innerHTML = data;
+            // Gets the collection of spark tile containers and removes them because we are applying a filter to return different results.
+            var containers = document.getElementsByClassName("SparkCollectionTable");
+            while (containers[0])
+            {
+                containers[0].parentNode.removeChild(containers[0]);
+            }
+            var strHeader = "";
+            var strCategory = "";
+            var strTag = "";
+            strCategory = Category.options[Category.selectedIndex].innerHTML;
+            strTag = Tag.options[Tag.selectedIndex].innerHTML;
+            if (strCategory == "" && strTag == "" && SearchText == "")
+                strHeader = "Trending";
+            if (strCategory != "")
+                strHeader += "Category : " + strCategory + " ";
+            if (strTag != "")
+                strHeader += "Tag : " + strTag + " ";
+            if(SearchText != "")
+                strHeader += "Search : " + SearchText;
+
+            var catHeader = document.getElementsByClassName("CategoryHeader");
+            if (catHeader[0])
+                catHeader[0].innerHTML = strHeader;
+
+            document.getElementById("TileContainer").innerHTML += data;
         }
     });
 }
@@ -271,6 +295,15 @@ function HandlePageIndex(bIsNextIndex)
 function CreateNextPage()
 {
     m_bSuccessfulCreateNextPage = false;
+
+    var Category = document.getElementById("Category");
+    var SelectedCategory = Category.options[Category.selectedIndex].value;
+
+    var Tag = document.getElementById("Tag");
+    var SelectedTag = Tag.options[Tag.selectedIndex].value;
+
+    var SearchText = document.getElementById('Search').value;
+
     // gets all of the spark tiles by using the class name
     var tiles = document.getElementsByClassName("SparkTile");
     var strArray = "";
@@ -289,7 +322,7 @@ function CreateNextPage()
     $.ajax({
         type: "Post",
         datatype: 'json',
-        data: "strSparkIds=" + strArray,
+        data: "strSparkIds=" + strArray + "&strCategory=" + SelectedCategory +  "&strTag=" + SelectedTag +"&strSearchText=" + SearchText,
         url: "/Home/GetNextSparks",
         success: function (data) {
 
@@ -323,11 +356,10 @@ function TransitionElement(bIsNext)
     else
         nextIndexContainer = containers[m_nCurrentSparkPageIndex - 1];
 
-    $(currentContainer).animate({ opacity: 0.0 }, 1000, function () // fades out the current div
+    $(currentContainer).animate({ opacity: 0.0 }, 500, function () // fades out the current div
     {
         $(currentContainer).css({ display: "none" }); // sets the current div to have no display
-
         // sets the next div to be displayed and increase to 100% opacity.
-        $(nextIndexContainer).css({ display: "block" }).animate({ opacity: 1.0 }, 1000);
+        $(nextIndexContainer).css({ display: "block" }).animate({ opacity: 1.0 }, 500);
     });
 }
