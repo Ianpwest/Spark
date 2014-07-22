@@ -33,10 +33,11 @@
 </section>
 
 <div id="TileContainer">
-    <div>
-        <button class="button" onclick="PrevPageButton()" id="btnHomePrevSparkPage" disabled>Previous!</button>
-        <button class="button" onclick="NextPageButton()" id="btnHomeNextSparkPage">Next!</button>
+    <div style="margin-bottom:10px;">
+        <button style="position: absolute; left: 160px; background: url('/Images/Icons/LeftArrow2.png'); border:none; width: 70px; height: 70px; margin-bottom: 10px;"  onclick="PrevPageButton()" id="btnHomePrevSparkPage" disabled></button>
+        <button style="position: absolute; left: 1600px; background: url('/Images/Icons/RightArrow2.png'); border:none; width: 70px; height: 70px; margin-bottom: 10px;"  onclick="NextPageButton()" id="btnHomeNextSparkPage"></button>
     </div>
+
     <p class="CategoryHeader">Trending</p>
     @Html.Partial("SparkTileContainerPartial")
 </div>
