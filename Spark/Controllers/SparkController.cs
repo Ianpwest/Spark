@@ -25,7 +25,7 @@ namespace Spark.Controllers
         {
             // Need to create a new model that holds all of the subject matters.
             SparkCreateModel scModel = new SparkCreateModel();
-            scModel.Tag1 = -1; scModel.Tag2 = -1; scModel.Tag3 = -1; scModel.Tag4 = -1; scModel.Tag5 = -1;
+            scModel.Tag1 = -1; scModel.Tag2 = -1; scModel.Tag3 = -1;
             scModel.ArgEntryType = ArgumentEntryType.Neither;
             scModel.UserId = User.Identity.Name;
             List<SelectListItem> lstItems = new List<SelectListItem>();
@@ -148,7 +148,7 @@ namespace Spark.Controllers
             SparkCreateModel scm = new SparkCreateModel();
 
             string[] strArray = strModelInfo.Split(',');
-            if (strArray.Length < 9)
+            if (strArray.Length < 7)
                 return null;
 
             scm.Title = strArray[0];
@@ -157,9 +157,7 @@ namespace Spark.Controllers
             scm.Tag1 = int.Parse(strArray[3]);
             scm.Tag2 = int.Parse(strArray[4]);
             scm.Tag3 = int.Parse(strArray[5]);
-            scm.Tag4 = int.Parse(strArray[6]);
-            scm.Tag5 = int.Parse(strArray[7]);
-            if (int.Parse(strArray[8]) == 1)
+            if (int.Parse(strArray[6]) == 1)
                 scm.ArgEntryType = ArgumentEntryType.Agree;
             else
                 scm.ArgEntryType = ArgumentEntryType.Disagree;

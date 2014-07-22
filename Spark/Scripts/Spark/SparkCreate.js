@@ -49,10 +49,8 @@ function getModelString()
     var tag1 = document.getElementById("Tag1").getAttribute("value");
     var tag2 = document.getElementById("Tag2").getAttribute("value");
     var tag3 = document.getElementById("Tag3").getAttribute("value");
-    var tag4 = document.getElementById("Tag4").getAttribute("value");
-    var tag5 = document.getElementById("Tag5").getAttribute("value");
     var argentrytype = document.getElementById("ArgEntryType").getAttribute("value");
-    var strConcat = topic + ", " + description + ", " + subjectmatterid + ", " + tag1 + ", " + tag2 + ", " + tag3 + ", " + tag4 + ", " + tag5 + ", " + argentrytype;
+    var strConcat = topic + ", " + description + ", " + subjectmatterid + ", " + tag1 + ", " + tag2 + ", " + tag3 + ", " + argentrytype;
     return strConcat;
 }
 
@@ -139,7 +137,7 @@ function selectTag(input)
         obj1.style.backgroundColor = "transparent";
         obj1.className = "nonClickedCells";
     }
-    else if (cellArray.length < 5) {
+    else if (cellArray.length < 3) {
         obj2.style.backgroundColor = "#C0C0C0";
         obj2.className = "clickedCell";
         obj1.style.backgroundColor = "#C0C0C0";
@@ -230,10 +228,6 @@ function changeTagValues()
             document.getElementById("Tag2").setAttribute("value", index);
         if (i == 2)
             document.getElementById("Tag3").setAttribute("value", index);
-        if (i == 3)
-            document.getElementById("Tag4").setAttribute("value", index);
-        if (i == 4)
-            document.getElementById("Tag5").setAttribute("value", index);
     }
 }
 
@@ -242,8 +236,6 @@ function clearTagValues()
     document.getElementById("Tag1").setAttribute("value", "-1");
     document.getElementById("Tag2").setAttribute("value", "-1");
     document.getElementById("Tag3").setAttribute("value", "-1");
-    document.getElementById("Tag4").setAttribute("value", "-1");
-    document.getElementById("Tag5").setAttribute("value", "-1");
 }
 
 function filterResults(inputString)
