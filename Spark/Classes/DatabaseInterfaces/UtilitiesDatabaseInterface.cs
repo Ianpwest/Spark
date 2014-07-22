@@ -60,7 +60,7 @@ namespace Spark.Classes
         /// <returns></returns>
         public static bool GenerateTagInfoForSpark(Spark.Models.SparkCreateModel sparkModel)
         {
-            var qryAllTags = from r in m_db.categories
+            var qryAllTags = from r in m_db.tags
                              where r.PK >= 0
                              select r;
             if(qryAllTags == null || qryAllTags.Count() < 1)
@@ -71,7 +71,7 @@ namespace Spark.Classes
             Dictionary<int, string> dictIdNames = new Dictionary<int, string>();
             Dictionary<int, string> dictIdImg = new Dictionary<int, string>();
 
-            foreach(Spark.Models.categories cat in qryAllTags)
+            foreach (Spark.Models.tags cat in qryAllTags)
             {
                 if(dictIdImg.ContainsKey(cat.PK) || dictIdNames.ContainsKey(cat.PK))
                     continue;

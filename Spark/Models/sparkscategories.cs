@@ -20,9 +20,9 @@ namespace Spark.Models
         public int FKCategories2 { get; set; }
         public int FKCategories3 { get; set; }
     
-        public virtual categories categories { get; set; }
-        public virtual categories categories1 { get; set; }
-        public virtual categories categories2 { get; set; }
         public virtual sparks sparks { get; set; }
+        public virtual tags tags { get; set; }
+        public virtual tags tags1 { get; set; }
+        public virtual tags tags2 { get; set; }
     }
 }

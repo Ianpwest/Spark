@@ -7,7 +7,6 @@
       <Diagram DiagramId="cae45a84c1b14514b4616dd3b607f354" Name="Diagram1">
         <EntityTypeShape EntityType="sparkdbModel.accounts" Width="1.5" PointX="0.75" PointY="16.375" IsExpanded="true" />
         <EntityTypeShape EntityType="sparkdbModel.arguments" Width="1.5" PointX="3" PointY="17.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="sparkdbModel.categories" Width="1.5" PointX="9" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="sparkdbModel.cities" Width="1.5" PointX="3.75" PointY="8" IsExpanded="true" />
         <EntityTypeShape EntityType="sparkdbModel.comments" Width="1.5" PointX="11.25" PointY="17.125" IsExpanded="true" />
         <EntityTypeShape EntityType="sparkdbModel.commentvotes" Width="1.5" PointX="6" PointY="17.625" IsExpanded="true" />
@@ -46,9 +45,6 @@
         <AssociationConnector Association="sparkdbModel.FKProfiles" ManuallyRouted="false" />
         <AssociationConnector Association="sparkdbModel.FK_arguments_sparks" ManuallyRouted="false" />
         <AssociationConnector Association="sparkdbModel.FK_comments_arguments" ManuallyRouted="false" />
-        <AssociationConnector Association="sparkdbModel.FK__categories" ManuallyRouted="false" />
-        <AssociationConnector Association="sparkdbModel.FK__categories_2" ManuallyRouted="false" />
-        <AssociationConnector Association="sparkdbModel.FK__categories_3" ManuallyRouted="false" />
         <AssociationConnector Association="sparkdbModel.FKCities" ManuallyRouted="false" />
         <AssociationConnector Association="sparkdbModel.FKStatesProvidences" ManuallyRouted="false" />
         <AssociationConnector Association="sparkdbModel.FK__comments" ManuallyRouted="false" />
@@ -71,6 +67,10 @@
         <EntityTypeShape EntityType="sparkdbModel.argumentvotes" Width="1.5" PointX="11.25" PointY="21.75" />
         <AssociationConnector Association="sparkdbModel.FK_argumentvotes_accounts" />
         <AssociationConnector Association="sparkdbModel.FK_argumentvotes_arguments" />
+        <EntityTypeShape EntityType="sparkdbModel.tags" Width="1.5" PointX="5.375" PointY="0.875" />
+        <AssociationConnector Association="sparkdbModel.FK__categories1" />
+        <AssociationConnector Association="sparkdbModel.FK__categories_21" />
+        <AssociationConnector Association="sparkdbModel.FK__categories_31" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

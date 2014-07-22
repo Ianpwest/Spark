@@ -192,9 +192,6 @@
     <Compile Include="Models\argumentvotes.cs">
       <DependentUpon>SparkDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\categories.cs">
-      <DependentUpon>SparkDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\cities.cs">
       <DependentUpon>SparkDB.tt</DependentUpon>
     </Compile>
@@ -274,6 +271,9 @@
       <DependentUpon>SparkDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\subjectmatterspreads.cs">
+      <DependentUpon>SparkDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tags.cs">
       <DependentUpon>SparkDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\transactions.cs">

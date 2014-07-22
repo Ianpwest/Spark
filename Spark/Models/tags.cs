@@ -12,9 +12,9 @@ namespace Spark.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class categories
+    public partial class tags
     {
-        public categories()
+        public tags()
         {
             this.sparkscategories = new HashSet<sparkscategories>();
             this.sparkscategories1 = new HashSet<sparkscategories>();

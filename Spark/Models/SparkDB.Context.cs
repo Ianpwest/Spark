@@ -27,7 +27,6 @@ namespace Spark.Models
     
         public DbSet<accounts> accounts { get; set; }
         public DbSet<arguments> arguments { get; set; }
-        public DbSet<categories> categories { get; set; }
         public DbSet<cities> cities { get; set; }
         public DbSet<comments> comments { get; set; }
         public DbSet<commentvotes> commentvotes { get; set; }
@@ -53,5 +52,6 @@ namespace Spark.Models
         public DbSet<transactionstates> transactionstates { get; set; }
         public DbSet<transactiontypes> transactiontypes { get; set; }
         public DbSet<argumentvotes> argumentvotes { get; set; }
+        public DbSet<tags> tags { get; set; }
     }
 }
