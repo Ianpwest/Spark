@@ -39,14 +39,6 @@
           <Property Name="bIsUpvote" Type="bit" Nullable="false" />
           <Property Name="FKAccounts" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="categories">
-          <Key>
-            <PropertyRef Name="PK" />
-          </Key>
-          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="strName" Type="varchar" MaxLength="150" Nullable="false" />
-          <Property Name="strImageName" Type="varchar" MaxLength="150" />
-        </EntityType>
         <EntityType Name="cities">
           <Key>
             <PropertyRef Name="PK" />
@@ -249,6 +241,14 @@
           <Property Name="FKSubjectMattersSpread" Type="int" Nullable="false" />
           <Property Name="nValue" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="tags">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="strName" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="strImageName" Type="varchar" MaxLength="150" />
+        </EntityType>
         <EntityType Name="transactions">
           <Key>
             <PropertyRef Name="PK" />
@@ -276,12 +276,12 @@
           <Property Name="strName" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <Association Name="FK__categories">
-          <End Role="categories" Type="Self.categories" Multiplicity="1">
+          <End Role="tags" Type="Self.tags" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="sparkscategories" Type="Self.sparkscategories" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="categories">
+            <Principal Role="tags">
               <PropertyRef Name="PK" />
             </Principal>
             <Dependent Role="sparkscategories">
@@ -290,12 +290,12 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__categories_2">
-          <End Role="categories" Type="Self.categories" Multiplicity="1">
+          <End Role="tags" Type="Self.tags" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="sparkscategories" Type="Self.sparkscategories" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="categories">
+            <Principal Role="tags">
               <PropertyRef Name="PK" />
             </Principal>
             <Dependent Role="sparkscategories">
@@ -304,12 +304,12 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__categories_3">
-          <End Role="categories" Type="Self.categories" Multiplicity="1">
+          <End Role="tags" Type="Self.tags" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="sparkscategories" Type="Self.sparkscategories" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="categories">
+            <Principal Role="tags">
               <PropertyRef Name="PK" />
             </Principal>
             <Dependent Role="sparkscategories">
@@ -809,7 +809,6 @@
           <EntitySet Name="accounts" EntityType="Self.accounts" Schema="sparkdb" store:Type="Tables" />
           <EntitySet Name="arguments" EntityType="Self.arguments" Schema="sparkdb" store:Type="Tables" />
           <EntitySet Name="argumentvotes" EntityType="Self.argumentvotes" Schema="sparkdb" store:Type="Tables" />
-          <EntitySet Name="categories" EntityType="Self.categories" Schema="sparkdb" store:Type="Tables" />
           <EntitySet Name="cities" EntityType="Self.cities" Schema="sparkdb" store:Type="Tables" />
           <EntitySet Name="comments" EntityType="Self.comments" Schema="sparkdb" store:Type="Tables" />
           <EntitySet Name="commentvotes" EntityType="Self.commentvotes" Schema="sparkdb" store:Type="Tables" />
@@ -831,19 +830,20 @@
           <EntitySet Name="statesprovidences" EntityType="Self.statesprovidences" Schema="sparkdb" store:Type="Tables" />
           <EntitySet Name="subjectmatters" EntityType="Self.subjectmatters" Schema="sparkdb" store:Type="Tables" />
           <EntitySet Name="subjectmatterspreads" EntityType="Self.subjectmatterspreads" Schema="sparkdb" store:Type="Tables" />
+          <EntitySet Name="tags" EntityType="Self.tags" Schema="sparkdb" store:Type="Tables" />
           <EntitySet Name="transactions" EntityType="Self.transactions" Schema="sparkdb" store:Type="Tables" />
           <EntitySet Name="transactionstates" EntityType="Self.transactionstates" Schema="sparkdb" store:Type="Tables" />
           <EntitySet Name="transactiontypes" EntityType="Self.transactiontypes" Schema="sparkdb" store:Type="Tables" />
           <AssociationSet Name="FK__categories" Association="Self.FK__categories">
-            <End Role="categories" EntitySet="categories" />
+            <End Role="tags" EntitySet="tags" />
             <End Role="sparkscategories" EntitySet="sparkscategories" />
           </AssociationSet>
           <AssociationSet Name="FK__categories_2" Association="Self.FK__categories_2">
-            <End Role="categories" EntitySet="categories" />
+            <End Role="tags" EntitySet="tags" />
             <End Role="sparkscategories" EntitySet="sparkscategories" />
           </AssociationSet>
           <AssociationSet Name="FK__categories_3" Association="Self.FK__categories_3">
-            <End Role="categories" EntitySet="categories" />
+            <End Role="tags" EntitySet="tags" />
             <End Role="sparkscategories" EntitySet="sparkscategories" />
           </AssociationSet>
           <AssociationSet Name="FK__comments" Association="Self.FK__comments">
@@ -1032,17 +1032,6 @@
           <Property Name="strConclusion" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Name="strCitations" Type="String" Nullable="true" MaxLength="65535" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="argumentvotes" Relationship="sparkdbModel.FK_argumentvotes_arguments" FromRole="arguments" ToRole="argumentvotes" />
-        </EntityType>
-        <EntityType Name="categories">
-          <Key>
-            <PropertyRef Name="PK" />
-          </Key>
-          <Property Name="PK" Type="Int32" Nullable="false" />
-          <Property Name="strName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="sparkscategories" Relationship="Self.FK__categories" FromRole="categories" ToRole="sparkscategories" />
-          <NavigationProperty Name="sparkscategories1" Relationship="Self.FK__categories_2" FromRole="categories" ToRole="sparkscategories" />
-          <NavigationProperty Name="sparkscategories2" Relationship="Self.FK__categories_3" FromRole="categories" ToRole="sparkscategories" />
-          <Property Name="strImageName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="cities">
           <Key>
@@ -1257,10 +1246,10 @@
           <Property Name="FKCategories1" Type="Int32" Nullable="false" />
           <Property Name="FKCategories2" Type="Int32" Nullable="false" />
           <Property Name="FKCategories3" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="categories" Relationship="Self.FK__categories" FromRole="sparkscategories" ToRole="categories" />
-          <NavigationProperty Name="categories1" Relationship="Self.FK__categories_2" FromRole="sparkscategories" ToRole="categories" />
-          <NavigationProperty Name="categories2" Relationship="Self.FK__categories_3" FromRole="sparkscategories" ToRole="categories" />
           <NavigationProperty Name="sparks" Relationship="Self.FK__sparks" FromRole="sparkscategories" ToRole="sparks" />
+          <NavigationProperty Name="tags" Relationship="sparkdbModel.FK__categories1" FromRole="sparkscategories" ToRole="tags" />
+          <NavigationProperty Name="tags1" Relationship="sparkdbModel.FK__categories_21" FromRole="sparkscategories" ToRole="tags" />
+          <NavigationProperty Name="tags2" Relationship="sparkdbModel.FK__categories_31" FromRole="sparkscategories" ToRole="tags" />
         </EntityType>
         <EntityType Name="statesprovidences">
           <Key>
@@ -1519,48 +1508,6 @@
             </Principal>
             <Dependent Role="comments">
               <PropertyRef Name="FKArguments" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__categories">
-          <End Role="categories" Type="Self.categories" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="sparkscategories" Type="Self.sparkscategories" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="categories">
-              <PropertyRef Name="PK" />
-            </Principal>
-            <Dependent Role="sparkscategories">
-              <PropertyRef Name="FKCategories1" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__categories_2">
-          <End Role="categories" Type="Self.categories" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="sparkscategories" Type="Self.sparkscategories" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="categories">
-              <PropertyRef Name="PK" />
-            </Principal>
-            <Dependent Role="sparkscategories">
-              <PropertyRef Name="FKCategories2" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__categories_3">
-          <End Role="categories" Type="Self.categories" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="sparkscategories" Type="Self.sparkscategories" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="categories">
-              <PropertyRef Name="PK" />
-            </Principal>
-            <Dependent Role="sparkscategories">
-              <PropertyRef Name="FKCategories3" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1831,7 +1778,6 @@
         <EntityContainer Name="sparkdbEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="accounts" EntityType="Self.accounts" />
           <EntitySet Name="arguments" EntityType="Self.arguments" />
-          <EntitySet Name="categories" EntityType="Self.categories" />
           <EntitySet Name="cities" EntityType="Self.cities" />
           <EntitySet Name="comments" EntityType="Self.comments" />
           <EntitySet Name="commentvotes" EntityType="Self.commentvotes" />
@@ -1911,18 +1857,6 @@
           <AssociationSet Name="FK_comments_arguments" Association="Self.FK_comments_arguments">
             <End Role="arguments" EntitySet="arguments" />
             <End Role="comments" EntitySet="comments" />
-          </AssociationSet>
-          <AssociationSet Name="FK__categories" Association="Self.FK__categories">
-            <End Role="categories" EntitySet="categories" />
-            <End Role="sparkscategories" EntitySet="sparkscategories" />
-          </AssociationSet>
-          <AssociationSet Name="FK__categories_2" Association="Self.FK__categories_2">
-            <End Role="categories" EntitySet="categories" />
-            <End Role="sparkscategories" EntitySet="sparkscategories" />
-          </AssociationSet>
-          <AssociationSet Name="FK__categories_3" Association="Self.FK__categories_3">
-            <End Role="categories" EntitySet="categories" />
-            <End Role="sparkscategories" EntitySet="sparkscategories" />
           </AssociationSet>
           <AssociationSet Name="FKCities" Association="Self.FKCities">
             <End Role="cities" EntitySet="cities" />
@@ -2009,6 +1943,19 @@
             <End Role="arguments" EntitySet="arguments" />
             <End Role="argumentvotes" EntitySet="argumentvotes" />
           </AssociationSet>
+          <EntitySet Name="tags" EntityType="sparkdbModel.tags" />
+          <AssociationSet Name="FK__categories1" Association="sparkdbModel.FK__categories1">
+            <End Role="tags" EntitySet="tags" />
+            <End Role="sparkscategories" EntitySet="sparkscategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__categories_21" Association="sparkdbModel.FK__categories_21">
+            <End Role="tags" EntitySet="tags" />
+            <End Role="sparkscategories" EntitySet="sparkscategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__categories_31" Association="sparkdbModel.FK__categories_31">
+            <End Role="tags" EntitySet="tags" />
+            <End Role="sparkscategories" EntitySet="sparkscategories" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="argumentvotes">
           <Key>
@@ -2049,6 +1996,59 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tags">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="strImageName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="sparkscategories" Relationship="sparkdbModel.FK__categories1" FromRole="tags" ToRole="sparkscategories" />
+          <NavigationProperty Name="sparkscategories1" Relationship="sparkdbModel.FK__categories_21" FromRole="tags" ToRole="sparkscategories" />
+          <NavigationProperty Name="sparkscategories2" Relationship="sparkdbModel.FK__categories_31" FromRole="tags" ToRole="sparkscategories" />
+        </EntityType>
+        <Association Name="FK__categories1">
+          <End Type="sparkdbModel.tags" Role="tags" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="sparkdbModel.sparkscategories" Role="sparkscategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tags">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="sparkscategories">
+              <PropertyRef Name="FKCategories1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__categories_21">
+          <End Type="sparkdbModel.tags" Role="tags" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="sparkdbModel.sparkscategories" Role="sparkscategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tags">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="sparkscategories">
+              <PropertyRef Name="FKCategories2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__categories_31">
+          <End Type="sparkdbModel.tags" Role="tags" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="sparkdbModel.sparkscategories" Role="sparkscategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tags">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="sparkscategories">
+              <PropertyRef Name="FKCategories3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2079,15 +2079,6 @@
                 <ScalarProperty Name="FKAccounts" ColumnName="FKAccounts" />
                 <ScalarProperty Name="strArgument" ColumnName="strArgument" />
                 <ScalarProperty Name="bIsAgree" ColumnName="bIsAgree" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="categories">
-            <EntityTypeMapping TypeName="sparkdbModel.categories">
-              <MappingFragment StoreEntitySet="categories">
-                <ScalarProperty Name="strImageName" ColumnName="strImageName" />
-                <ScalarProperty Name="PK" ColumnName="PK" />
-                <ScalarProperty Name="strName" ColumnName="strName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2349,6 +2340,15 @@
                 <ScalarProperty Name="FKAccounts" ColumnName="FKAccounts" />
                 <ScalarProperty Name="bIsUpvote" ColumnName="bIsUpvote" />
                 <ScalarProperty Name="FKArguments" ColumnName="FKArguments" />
+                <ScalarProperty Name="PK" ColumnName="PK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tags">
+            <EntityTypeMapping TypeName="sparkdbModel.tags">
+              <MappingFragment StoreEntitySet="tags">
+                <ScalarProperty Name="strImageName" ColumnName="strImageName" />
+                <ScalarProperty Name="strName" ColumnName="strName" />
                 <ScalarProperty Name="PK" ColumnName="PK" />
               </MappingFragment>
             </EntityTypeMapping>

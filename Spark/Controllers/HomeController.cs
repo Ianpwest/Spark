@@ -247,9 +247,9 @@ namespace Spark.Controllers
 
                 tile.Tag1 = ""; tile.Tag2 = ""; tile.Tag3 = ""; // initialize all of the tags to empty strings
                 List<int> lstTagPks = new List<int>() { spark.FKCategories1, spark.FKCategories2, spark.FKCategories3 };
-                List<Models.categories> lstTags = SparksDatabaseInterface.GetTagFileName(lstTagPks);
+                List<Models.tags> lstTags = SparksDatabaseInterface.GetTagFileName(lstTagPks);
                 int nCount = 1;
-                foreach (Models.categories tag in lstTags)
+                foreach (Models.tags tag in lstTags)
                 {
                     switch (nCount)
                     {

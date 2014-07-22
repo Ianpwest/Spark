@@ -338,11 +338,11 @@ namespace Spark.Classes
         {
             sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
 
-            categories cat = new categories();
+            tags cat = new tags();
             cat.strName = strName;
             cat.strImageName = strImgName;
 
-            db.categories.Add(cat);
+            db.tags.Add(cat);
             if (!SaveChanges(db))
                 return new KeyValuePair<int,string>(int.MinValue, string.Empty);
 
@@ -500,14 +500,14 @@ namespace Spark.Classes
             Dictionary<int, string> lstReturn = new Dictionary<int, string>();
             sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
 
-            var lstCategories = from r in db.categories
+            var lstTags = from r in db.tags
                                     orderby r.strName
                                     select r;
 
-            if (lstCategories == null || lstCategories.Count() <= 0)
+            if (lstTags == null || lstTags.Count() <= 0)
                 return null;
 
-            foreach (var x in lstCategories)
+            foreach (var x in lstTags)
             {
                 lstReturn.Add(x.PK, x.strName);
             }
@@ -521,19 +521,19 @@ namespace Spark.Classes
         /// </summary>
         /// <param name="lstPKs"></param>
         /// <returns></returns>
-        public static List<categories> GetTagFileName(List<int> lstPKs)
+        public static List<tags> GetTagFileName(List<int> lstPKs)
         {
-            List<categories> lstTags = new List<categories>();
+            List<tags> lstTags = new List<tags>();
             sparkdbEntities1 db = BaseDatabaseInterface.GetDatabaseInstance();
 
-            var qryTags = from r in db.categories
+            var qryTags = from r in db.tags
                           where lstPKs.Contains(r.PK)
                           select r;
 
             if (qryTags == null || qryTags.Count() < 1)
                 return lstTags;
 
-            foreach (categories tag in qryTags)
+            foreach (tags tag in qryTags)
             {
                 lstTags.Add(tag);
             }
