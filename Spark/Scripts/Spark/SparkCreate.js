@@ -242,6 +242,7 @@ function filterResults(inputString)
 {
     var tBody = document.getElementById("tableAvailableTags").tBodies[0];
     var rows = tBody.rows;
+    inputString = inputString.toLowerCase();
     if (inputString == "")
     {
         for(var j = 0; j < rows.length; j++)
@@ -252,7 +253,7 @@ function filterResults(inputString)
     for(var i = 0; i < rows.length ; i++)
     {
         var cell = rows[i].cells[0];
-        var value = cell.innerHTML;
+        var value = cell.innerHTML.toLowerCase();
         if(value.indexOf(inputString) == -1)
             rows[i].style.setProperty("display", "none");
         else
