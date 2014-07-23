@@ -35,5 +35,7 @@ namespace Spark.Models
 
         [Required]
         public string strArgument { get; set; }
+
+        public bool bIsErrored { get; set; }
     }
 }
