@@ -196,10 +196,10 @@ function Filter()
     var SearchText = document.getElementById('Search').value;
 
     $.ajax({
-        type: "Get",
-        datatype: 'html',
-        data: "strCategory=" + SelectedCategory +  "&strTag=" + SelectedTag +"&strSearchText=" + SearchText,
-        url: "/Home/GetFilterResults",
+        type: "Post",
+        datatype: 'json',
+        data: "strSparkIds=" + "" + "&strCategory=" + SelectedCategory + "&strTag=" + SelectedTag + "&strSearchText=" + SearchText,
+        url: "/Home/GetNextSparks",
         success: function (data) {
             // Gets the collection of spark tile containers and removes them because we are applying a filter to return different results.
             var containers = document.getElementsByClassName("SparkCollectionTable");
@@ -225,7 +225,10 @@ function Filter()
             if (catHeader[0])
                 catHeader[0].innerHTML = strHeader;
 
-            document.getElementById("TileContainer").innerHTML += data;
+            document.getElementById("TileContainer").innerHTML += data.strTiles;
+            m_nCurrentSparkPageIndex = 0;
+            m_nTotalSparkPages = 1;
+            HandlePageIndex(false);
         }
     });
 }
@@ -241,11 +244,17 @@ function NextPageButton()
         HandlePageIndex(true); // true for next
         return;
     }
-
-    if (m_bNoRemainingSparks) // disables button if we know we should not be creating a new page.
+    // Get container collection to check if the last container has no sparks in it.
+    var containers = document.getElementsByClassName("SparkCollectionTable");
+    if (containers.length > 0)
     {
-        document.getElementById("btnHomeNextSparkPage").disabled = true;
-        return;
+        var currElement = containers[m_nCurrentSparkPageIndex]; // gets last container
+        var tiles = currElement.getElementsByClassName("SparkTile");
+        if (tiles.length == 0) // only disable the button if there are no tiles
+        {
+            document.getElementById("btnHomeNextSparkPage").disabled = true;
+            return;
+        }
     }
     CreateNextPage();
     
@@ -288,14 +297,22 @@ function HandlePageIndex(bIsNextIndex)
             document.getElementById("btnHomePrevSparkPage").disabled = true;
     }
 
-    if (m_bNoRemainingSparks)
-        document.getElementById("btnHomeNextSparkPage").disabled = true;
+    // Get container collection to check if the last container has no sparks in it.
+    var containers = document.getElementsByClassName("SparkCollectionTable");
+    if (containers.length > 0)
+    {
+        var currElement = containers[m_nCurrentSparkPageIndex]; // gets last container
+        var tiles = currElement.getElementsByClassName("SparkTile");
+        if (tiles.length == 0) // only disable the button if there are no tiles
+        {
+            document.getElementById("btnHomeNextSparkPage").disabled = true;
+            return;
+        }
+    }
 }
 
 function CreateNextPage()
 {
-    m_bSuccessfulCreateNextPage = false;
-
     var Category = document.getElementById("Category");
     var SelectedCategory = Category.options[Category.selectedIndex].value;
 
@@ -335,14 +352,10 @@ function CreateNextPage()
                 var nextIndexContainer = containers[m_nCurrentSparkPageIndex + 1]; // gets the index of the tile container we just added
 
                 $(nextIndexContainer).css({ display: "none", opacity: 0.0 }); // sets the display and opacity to none and 0 respectively
-                if (!data.bIsMore)
-                    m_bNoRemainingSparks = true;
                 CallBackCreateNextPage();
             }
         }
     });
-
-    return m_bSuccessfulCreateNextPage;
 }
 
 function TransitionElement(bIsNext)

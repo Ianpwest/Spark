@@ -542,12 +542,7 @@ namespace Spark.Classes
                 }
             }
 
-
-            var keys = (from r in dictInterestSparks.Keys
-                        select r).ToList();
-
             var qryForSparksWithInterests = from sparks spark in dbEntity.sparks
-                                            where keys.Contains(spark.PK)
                                             orderby spark.PK
                                             select spark;
 
@@ -572,7 +567,10 @@ namespace Spark.Classes
                 if (dictSorted.ContainsKey(spark))
                     continue;
 
-                dictSorted.Add(spark, dictInterestSparks[spark.PK] * nConstant);
+                if (dictInterestSparks.ContainsKey(spark.PK))
+                    dictSorted.Add(spark, dictInterestSparks[spark.PK] * nConstant);
+                else
+                    dictSorted.Add(spark, 0); // adding this so that sparks without votes still get collected.
             }
 
             return dictSorted;

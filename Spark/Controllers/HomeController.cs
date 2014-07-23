@@ -131,18 +131,19 @@ namespace Spark.Controllers
             if(!string.IsNullOrEmpty(strCategory)){Int32.TryParse(strCategory, out nCategory);}
             if(!string.IsNullOrEmpty(strTag)){Int32.TryParse(strTag, out nTag);}
 
-            List<Models.sparks> lstSparks = Calculations.FilterSparksByHomeParameters(UtilitiesDatabaseInterface.GetDatabaseInstance(), nCategory, nTag, strSearchText);
+            //List<Models.sparks> lstSparks = Calculations.FilterSparksByHomeParameters(UtilitiesDatabaseInterface.GetDatabaseInstance(), nCategory, nTag, strSearchText);
 
-            List<Models.SparkTileModel> lstTiles = GetSparkTiles(lstSparks);
+            //List<Models.SparkTileModel> lstTiles = GetSparkTiles(lstSparks);
 
-            //Put the sparks in the viewbag so that the list can be consumed by the view.
-            ViewBag.SparksTiles = lstTiles;
+            ////Put the sparks in the viewbag so that the list can be consumed by the view.
+            //ViewBag.SparksTiles = lstTiles;
 
-            //Get the categories and tags to filter on.
-            ViewBag.Categories = SetupCategoryFilter();
-            ViewBag.Tags = SetupTagFilter();
+            ////Get the categories and tags to filter on.
+            //ViewBag.Categories = SetupCategoryFilter();
+            //ViewBag.Tags = SetupTagFilter();
 
-            return PartialView("SparkTileContainerPartial");
+            //return PartialView("SparkTileContainerPartial");
+            return GetNextSparks(string.Empty, strCategory, strTag, strSearchText);
         }
 
         [Authorize]

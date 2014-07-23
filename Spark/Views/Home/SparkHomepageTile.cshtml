@@ -23,23 +23,4 @@
     </div>
     <div class="hidden" id="HiddenSparkDownvote@(Model.PK)">@Model.DownvoteCount.ToString()</div>
     <div class="hidden" id="HiddenSparkUpvote@(Model.PK)">@Model.UpvoteCount.ToString()</div>
-    @{
-        if(Model.UserVoted)
-        {
-            if(Model.VoteIsUpvote)
-            {
-                <script>
-                    var obj = document.getElementById("UpvoteIcon");
-                    ImageClicked(obj);
-                </script>
-            }
-            else
-            {
-                <script>
-                    var obj = document.getElementById("DownvoteIcon");
-                    ImageClicked(obj);
-                </script>
-            }
-        }
-    }
 </div>
