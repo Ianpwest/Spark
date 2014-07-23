@@ -29,6 +29,8 @@
           <Property Name="strConclusion" Type="text" Nullable="false" />
           <Property Name="strCitations" Type="text" />
           <Property Name="bIsAgree" Type="bit" Nullable="false" />
+          <Property Name="dDateCreated" Type="datetime" Precision="0" />
+          <Property Name="dDateModified" Type="datetime" Precision="0" />
         </EntityType>
         <EntityType Name="argumentvotes">
           <Key>
@@ -1032,6 +1034,8 @@
           <Property Name="strConclusion" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Name="strCitations" Type="String" Nullable="true" MaxLength="65535" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="argumentvotes" Relationship="sparkdbModel.FK_argumentvotes_arguments" FromRole="arguments" ToRole="argumentvotes" />
+          <Property Name="dDateCreated" Type="DateTime" />
+          <Property Name="dDateModified" Type="DateTime" />
         </EntityType>
         <EntityType Name="cities">
           <Key>
@@ -2071,6 +2075,8 @@
           <EntitySetMapping Name="arguments">
             <EntityTypeMapping TypeName="sparkdbModel.arguments">
               <MappingFragment StoreEntitySet="arguments">
+                <ScalarProperty Name="dDateModified" ColumnName="dDateModified" />
+                <ScalarProperty Name="dDateCreated" ColumnName="dDateCreated" />
                 <ScalarProperty Name="strCitations" ColumnName="strCitations" />
                 <ScalarProperty Name="strConclusion" ColumnName="strConclusion" />
                 <ScalarProperty Name="nFlagCount" ColumnName="nFlagCount" />

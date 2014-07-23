@@ -28,6 +28,8 @@ namespace Spark.Models
         public Nullable<int> nFlagCount { get; set; }
         public string strConclusion { get; set; }
         public string strCitations { get; set; }
+        public Nullable<System.DateTime> dDateCreated { get; set; }
+        public Nullable<System.DateTime> dDateModified { get; set; }
     
         public virtual accounts accounts { get; set; }
         public virtual sparks sparks { get; set; }
