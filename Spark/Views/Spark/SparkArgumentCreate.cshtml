@@ -2,6 +2,14 @@
 
 @Scripts.Render("~/Scripts/ArgumentCreate.js")
 
+<p id="bIsErrored">
+   @if(ViewBag.bIsErrored)
+   {
+       <p>An error occurred processing your argument. Please try again.</p>
+   }
+</p>
+
+
 @using (Html.BeginForm("CreateArgument", "Spark", FormMethod.Post, new { @id = "CreateArgumentForm" }))
 {
     @Html.AntiForgeryToken()
@@ -9,8 +17,6 @@
 
     <fieldset>
         <legend>arguments</legend>
-
-        
 
         <div id="ButtonPositionsDiv" style="position:relative; width:1300px; height:800px; margin:0 auto;">
             <div class="buttonPrevious" onclick="SingleTransition(false)"></div>
@@ -86,6 +92,9 @@
     $(document).ready(function () {
         //Set up the tiny mce. TODO: What do we do if there is no javascript?
         InitializeArgumentLayout();
+
+        if (document.getElementById('bIsErrored').innerHTML === "True")
+            alert('There was an error adding your argument. Please try again.');
     })
 
 </script>

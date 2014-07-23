@@ -5,7 +5,6 @@
 
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
-    <h2>Associate your @ViewBag.ProviderDisplayName account.</h2>
 </hgroup>
 
 @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl })) {
@@ -13,6 +12,8 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
+
+        <h2>Associate your @ViewBag.ProviderDisplayName account.</h2>
         <legend>Association Form</legend>
         <p>
             You've successfully authenticated with <strong>@ViewBag.ProviderDisplayName</strong>.

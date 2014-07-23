@@ -248,6 +248,25 @@ namespace Spark.Controllers
             argumentModel.FKAccounts = AccountsDatabaseInterface.GetAccountsPKByUsername(User.Identity.Name);
             argumentModel.bIsAgree = bAgree;
             argumentModel.FKSparks = nSparkID;
+            ViewBag.bIsErrored = false;
+
+            return View("SparkArgumentCreate", argumentModel);
+        }
+
+        //Used for fail, try again.
+        public ActionResult CreateArgumentErrored(string strSpark, string strArgument, string strCitations, bool bAgree, int nSparkID, bool bIsErrored)
+        {
+            arguments argumentModel = new arguments();
+
+            //TODO: if this returns 0 (we have no user logged in) return a failure screen
+            argumentModel.FKAccounts = AccountsDatabaseInterface.GetAccountsPKByUsername(User.Identity.Name);
+            argumentModel.bIsAgree = bAgree;
+            argumentModel.FKSparks = nSparkID;
+            argumentModel.strArgument = strArgument;
+            argumentModel.strConclusion = strSpark;
+            argumentModel.strCitations = strCitations;
+
+            ViewBag.bIsErrored = bIsErrored;
 
             return View("SparkArgumentCreate", argumentModel);
         }
@@ -264,7 +283,8 @@ namespace Spark.Controllers
             }
 
             //We failed TODO:What do we do when we fail
-            return RedirectToAction("Error");//remove this line
+            return CreateArgumentErrored(argumentModel.strConclusion, argumentModel.strArgument, argumentModel.strCitations, argumentModel.bIsAgree, argumentModel.FKSparks, true);
+            //return RedirectToAction("CreateArgumentErrored", new { strSpark = argumentModel.strConclusion, strArgument = argumentModel.strArgument, strCitations = argumentModel.strCitations, bAgree = argumentModel.bIsAgree, nSparkID = argumentModel.FKSparks, bIsErrored = true });
         }
 
         /// <summary>
