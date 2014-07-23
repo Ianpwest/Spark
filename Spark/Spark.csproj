@@ -302,6 +302,8 @@
     <Content Include="Images\Icons\ArrowUp.png" />
     <Content Include="Images\Icons\ArrowUp2.png" />
     <Content Include="Images\Icons\ArrowUpHoverClicked.png" />
+    <Content Include="Images\Icons\Facebook2.png" />
+    <Content Include="Images\Icons\GoogleSignIn.png" />
     <Content Include="Images\Icons\LeftArrow2.png" />
     <Content Include="Images\Icons\RightArrow2.png" />
     <Content Include="Images\Icons\SparkIcon1.png" />

@@ -276,6 +276,7 @@ namespace Spark.Classes.DatabaseInterfaces
                         string str =  validationError.PropertyName + validationError.ErrorMessage;
                     }
                 }
+                return false;
             }
             catch
             {

@@ -264,7 +264,7 @@ namespace Spark.Controllers
             }
 
             //We failed TODO:What do we do when we fail
-            return RedirectToAction("Error");//remove this line
+            return View(argumentModel);//remove this line
         }
 
         /// <summary>
