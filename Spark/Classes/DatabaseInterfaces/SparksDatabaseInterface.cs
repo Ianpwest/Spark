@@ -96,6 +96,8 @@ namespace Spark.Classes
 
             try
             {
+                argumentModel.dDateCreated = DateTime.Now;
+                argumentModel.dDateCreated = DateTime.Now;
                 db.arguments.Add(argumentModel);
                 bSuccess =  SaveChanges(db);
             }
