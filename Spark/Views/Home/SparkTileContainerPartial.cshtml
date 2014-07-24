@@ -12,7 +12,7 @@
         <div class="Row">
             @foreach (Spark.Models.SparkTileModel tile in ViewBag.SparksTiles)
             {
-                @Html.Partial("SparkHomepageTile", tile);
+                @Html.Partial("/Views/Home/SparkHomepageTile.cshtml", tile);
                 if (tile.UserVoted)
                 {
                     <script type="text/javascript">

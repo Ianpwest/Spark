@@ -335,6 +335,33 @@ namespace Spark.Classes
             return nCount;
         }
 
+        public static List<sparks> GetSparksForUser(string strUserName, int nIndex, int nCount)
+        {
+            List<sparks> lstReturn = new List<sparks>();
+            List<sparks> lstAllSparks = new List<sparks>();
+            sparkdbEntities1 db = GetDatabaseInstance();
+            int nUserID = GetUserId(db,strUserName);
+            var sparks = from r in db.sparks
+                         where r.FKAccountsCreatedBy == nUserID
+                         orderby r.dDateCreated
+                         select r;
+
+            
+            foreach(sparks spark in sparks)
+            {
+                lstAllSparks.Add(spark);
+            }
+
+            for(int i = nIndex; i <= nCount; i++)
+            {
+                if (lstAllSparks.Count == 0 || lstAllSparks.Count <= i)
+                    break;
+                lstReturn.Add(lstAllSparks[i]);
+            }
+
+            return lstReturn;
+        }
+
         /// <summary>
         /// Uploads a tag to the database and returns a keyvaluepair<int,string> : key = PK, value = strName.
         /// Returns int.MinValue, string.empty if unsuccessful in the upload.

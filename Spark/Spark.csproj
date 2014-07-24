@@ -296,6 +296,7 @@
     <Content Include="Content\BlankImage.gif" />
     <Content Include="Content\Homepage.css" />
     <Content Include="Content\images\LeftArrow.png" />
+    <Content Include="Content\MyActivity.css" />
     <Content Include="Images\Icons\ArrowDown.png" />
     <Content Include="Images\Icons\ArrowDown2.png" />
     <Content Include="Images\Icons\ArrowDownHoverClicked.png" />

@@ -1,5 +1,31 @@
-﻿@{
+﻿@Scripts.Render("~/Scripts/Homepage.js")
+@Styles.Render("~/Content/Homepage.css")
+
+@{
     ViewBag.Title = "My Activity";
 }
 
-<h2>My Activity</h2>
+<div id="MainDiv" style=" background:yellow;">
+    <div id="MySparks" style="background:red;">
+       
+        <div id="MySparksHeading" style="text-align:center;">
+            <p style="font-size:32px; margin-bottom:-40px;">My Sparks</p>
+        </div>
+        <div style="margin-bottom:10px; height:70px;">
+            <button style="position: absolute; left: 160px; background: url('/Images/Icons/LeftArrow2.png'); border:none; width: 70px; height: 70px; margin-bottom: 10px;" onclick="PrevPageButton()" id="btnHomePrevSparkPage" disabled></button>
+            <button style="position: absolute; left: 1600px; background: url('/Images/Icons/RightArrow2.png'); border:none; width: 70px; height: 70px; margin-bottom: 10px;" onclick="NextPageButton()" id="btnHomeNextSparkPage"></button>
+        </div>
+        <div id="MySparksTiles" style="" >
+            @Html.Partial("~/Views/Home/SparkTileContainerPartial.cshtml")
+        </div>
+    </div>
+    <div id="MyArguments" style="background:green; margin-top:20px;">
+        <div id="MySparksHeading" style="text-align:center;">
+            <p style="font-size:32px; margin-bottom:-40px;">My Arguments</p>
+        </div>
+        <div style="margin-bottom:10px; height:70px;">
+            <button style="position: absolute; left: 160px; background: url('/Images/Icons/LeftArrow2.png'); border:none; width: 70px; height: 70px; margin-bottom: 10px;" onclick="PrevPageButton()" id="btnHomePrevSparkPage" disabled></button>
+            <button style="position: absolute; left: 1600px; background: url('/Images/Icons/RightArrow2.png'); border:none; width: 70px; height: 70px; margin-bottom: 10px;" onclick="NextPageButton()" id="btnHomeNextSparkPage"></button>
+        </div>
+    </div>
+</div>

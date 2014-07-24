@@ -283,6 +283,80 @@ namespace Spark.Classes
                 UtilitiesDatabaseInterface.AddTag(Regex.Replace(strShortFileName.Substring(0, strShortFileName.IndexOf('.')), "(\\B[A-Z])", " $1"), strShortFileName);
             }
         }
+
+        /// <summary>
+        /// Method to generate tile partials given a list of sparks. Handles setting max length for the topics and the current vote counts.
+        /// </summary>
+        /// <param name="lstSparks">List of sparks to convert</param>
+        /// <returns>List of tiles.</returns>
+        public static List<Models.SparkTileModel> GetSparkTiles(List<Models.sparks> lstSparks, System.Security.Principal.IPrincipal User, HttpServerUtilityBase Server)
+        {
+            List<Models.SparkTileModel> lstReturn = new List<Models.SparkTileModel>();
+            int CONST_MAX_TOPIC_CHARACTERS = 325;
+
+            //Make sure the topics aren't over the max allowed characters and initialize the voting counts.
+            foreach (Models.sparks spark in lstSparks)
+            {
+                Models.SparkTileModel tile = new Models.SparkTileModel();
+                tile.PK = spark.PK;
+                tile.Topic = spark.strTopic;
+                tile.Title = spark.strTitle;
+
+                if (spark.strTopic.Length > CONST_MAX_TOPIC_CHARACTERS)
+                {
+                    tile.Topic = spark.strTopic.Substring(0, CONST_MAX_TOPIC_CHARACTERS - 3) + "...";
+                }
+
+                //Set the vote counts appropriately.
+                tile.UpvoteCount = SparksDatabaseInterface.GetSparkVoteCount(spark.PK, true);
+                tile.DownvoteCount = SparksDatabaseInterface.GetSparkVoteCount(spark.PK, false);
+
+                // Attempts to find the current user id.
+                int nCurrentUserId = AccountsDatabaseInterface.GetUserId(AccountsDatabaseInterface.GetDatabaseInstance(), User.Identity.Name);
+
+                int nVoteStatus = SparksDatabaseInterface.GetUserSparkVoteStatus(nCurrentUserId, spark.PK);
+
+                if (nVoteStatus == 1) // indicates the user has made an upvote for this spark.
+                {
+                    tile.UserVoted = true;
+                    tile.VoteIsUpvote = true;
+                }
+                else if (nVoteStatus == 2) // indicates the user has made a downvote for this spark.
+                {
+                    tile.UserVoted = true;
+                    tile.VoteIsUpvote = false;
+                }
+                else
+                    tile.UserVoted = false; // indicates the user has not yet voted on this spark or there was an error in finding the user vote.
+
+                tile.Tag1 = ""; tile.Tag2 = ""; tile.Tag3 = ""; // initialize all of the tags to empty strings
+                List<int> lstTagPks = new List<int>() { spark.FKCategories1, spark.FKCategories2, spark.FKCategories3 };
+                List<Models.tags> lstTags = SparksDatabaseInterface.GetTagFileName(lstTagPks);
+                int nCount = 1;
+                foreach (Models.tags tag in lstTags)
+                {
+                    switch (nCount)
+                    {
+                        case 1:
+                            tile.Tag1 = Utilities.GenerateImageString(tag.strImageName, ImageLocation.Tag, Server);
+                            break;
+                        case 2:
+                            tile.Tag2 = Utilities.GenerateImageString(tag.strImageName, ImageLocation.Tag, Server);
+                            break;
+                        case 3:
+                            tile.Tag3 = Utilities.GenerateImageString(tag.strImageName, ImageLocation.Tag, Server);
+                            break;
+                        default:
+                            break;
+                    }
+                    nCount++;
+                }
+
+                lstReturn.Add(tile);
+            }
+
+            return lstReturn;
+        }
     }
 
     public enum ImageLocation
